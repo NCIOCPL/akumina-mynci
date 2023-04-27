@@ -1,0 +1,35 @@
+{
+  "Options": {
+    "js": false,
+    "css": false,
+    "lists": false,
+    "widgets": false,
+    "groups": false,
+    "contentfiles": false,
+    "imagefiles": false,
+    "updatelists": false,
+    "fonts": false,
+    "virtualpages": false,
+    "virtuallayouts": false
+  },
+  "Args": [
+    "version",
+    "envdir",
+    "assetdirectory",
+    "options",
+    "ml",
+    "langid",
+    "spdirectory",
+    "spurl",
+    "spuser",
+    "sppassword",
+    "clientid",
+    "clientsecret",
+    "azurestorageaccountname",
+    "azurestoragecontainer",
+    "azurestorageaccountkey",
+    "cdnprefix",
+    "multideployment",
+    "centralspurl"
+  ]
+}

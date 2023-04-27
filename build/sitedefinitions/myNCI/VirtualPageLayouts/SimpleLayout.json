@@ -1,0 +1,24 @@
+{
+    "Name": "Simple 2 Column Layout",
+    "PageLayoutId": "Simple 2 Column Layout",
+    "SharepointLayoutId": 2210,
+    "Containers": [
+        {
+            "id": "container1",
+            "layoutid": "2 Column",
+            "zones": [
+                {
+                    "id": "zone1",
+                    "widgets": [],
+                    "widgettype": [
+                        "AnnouncementItemsWidget", "BannerWidget"
+                    ]
+                },
+                {
+                    "id": "zone2",
+                    "widgets": []
+                }
+            ]
+        }
+    ]
+}

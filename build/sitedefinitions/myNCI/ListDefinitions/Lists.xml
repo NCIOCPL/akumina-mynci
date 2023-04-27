@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<lists>
+  <list name="SampleList_AK" contentType="TrainingContent" noCrawl="TRUE">
+    <Data>
+      <Rows>
+        <Row>
+          <Field Name="Title">Akumina Sample</Field>
+          <Field Name="SampleChoice">Lime</Field>
+          <Field Name="SampleLink">http://akumina.com/</Field>
+          <Field Name="SampleNumber">1030</Field>
+          <Field Name="SampleText">Akumina</Field>
+          <Field Name="SampleNote">InterChange</Field>
+          <Field Name="SampleBool">true</Field>
+        </Row>
+        <Row>
+          <Field Name="Title">Digital Workplace Sample</Field>
+          <Field Name="SampleChoice">Purple</Field>
+          <Field Name="SampleLink">http://akumina.com/products/interchange/digitalworkplace/</Field>
+          <Field Name="SampleNumber">50</Field>
+          <Field Name="SampleText">Office 365</Field>
+          <Field Name="SampleNote">Digital Workplace</Field>
+          <Field Name="SampleBool">false</Field>
+        </Row>
+      </Rows>
+    </Data>
+  </list>
+</lists>

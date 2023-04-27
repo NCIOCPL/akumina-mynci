@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<lists>
+  <ContentType Name="TrainingContent" Group="Training Content Types" Description="Training Content Type" Inherits="TRUE" Version="0" >
+    <FieldRefs>
+      <Field Name="Title" DisplayName="Title" Type="Text"/>
+      <Field Name="SampleText" DisplayName="SampleText" Type="Text" />
+      <Field Name="SampleNote" DisplayName="SampleNote" Type="Note" />
+      <Field Name="SampleChoice" DisplayName="SampleChoice" Type="Choice">
+        <CHOICES>
+          <CHOICE>Lime</CHOICE>
+          <CHOICE>Forest</CHOICE>
+          <CHOICE>Purple</CHOICE>
+        </CHOICES>
+        <Default>Lime</Default>
+      </Field>
+      <Field Name="SampleLink"  DisplayName="SampleLink" Type="URL" />
+      <Field Name="SampleNumber"  DisplayName="SampleNumber" Type="Number"  Decimals="0"/>
+      <Field Name="SampleBool" DisplayName="SampleBool" Type="Boolean">
+        <Default>1</Default>
+      </Field>
+      <Field Name="Person" DisplayName="Person" Type="UserMulti" UserSelectionMode="PeopleAndGroups" UserSelectionScope="0" Mult="TRUE" />
+    </FieldRefs>
+  </ContentType>
+</lists>
