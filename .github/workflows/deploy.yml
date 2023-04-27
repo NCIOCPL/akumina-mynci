@@ -1,27 +1,57 @@
 name: Deploy Site
 on:
-  push:
   workflow_dispatch:
     inputs:
       deploymentType: 
         type: choice
         description: Which Akumina code to deploy
         options:
-        - CSS
-        - JS
-        - All
+        - all
+        - js
+        - css
+        - lists
+        - widgets
+        - groups
+        - contentfiles
+        - imagefiles
+        - updatelists
+        - fonts
+        - virtualpages
+        - virtuallayouts
       environment:
         type: environment
 
 jobs:
-  build:
-    name: Deploy Site
+  deploy:
+    name: Deploy to SharePoint
     runs-on: windows-latest
+    environment: ${{inputs.environment}}
+      
     steps:
 
       ## Checkout the code
       - name: Checkout branch
         uses: actions/checkout@v3
+
+      ## Configure the deployment type based on workflow input
+      - name: Install jq
+        run: |
+          Invoke-WebRequest -Uri "https://github.com/stedolan/jq/releases/download/jq-1.6/jq-win64.exe" -OutFile "jq.exe"
+          New-Item -ItemType Directory -Force $env:USERPROFILE\Documents\PowerShell
+          New-Item -ItemType File -Force $env:USERPROFILE\Documents\PowerShell\profile.ps1
+          Add-Content $Profile.CurrentUserAllHosts 'Set-Alias jq "${pwd}\jq.exe"'
+      - name: Modify deployment type
+        shell: pwsh
+        run: |
+          $deployment_type = $env:DEPLOYMENT_TYPE
+          if ($deployment_type -eq "all") {
+            jq '.Options |= map_values(true)' akumina.sitedeployer.config.json > tmpfile ; Move-Item -Path tmpfile -Destination akumina.sitedeployer.config.json -Force
+          } else {
+            jq --arg dt $deployment_type '.Options[$dt] = true' akumina.sitedeployer.config.json > tmpfile ; Move-Item -Path tmpfile -Destination akumina.sitedeployer.config.json -Force
+          }
+          
+        env:
+          DEPLOYMENT_TYPE: ${{ inputs.deploymentType }}
 
       ## Setup node and npm caching
       - name: Setup Node
@@ -41,7 +71,8 @@ jobs:
           centralspurl: ${{ secrets.centralspurl }}
           spdirectory: DigitalWorkplace
           assetdirectory: myNCI
-          envdir: ${{ github.workspace }}/build/
+          envdir: ${{ github.workspace }}\build\
           ml: false
           clientid: ${{ secrets.clientid }}
           clientsecret: ${{ secrets.clientsecret }}
+          environment2:  ${{github.events.inputs.environment}}
