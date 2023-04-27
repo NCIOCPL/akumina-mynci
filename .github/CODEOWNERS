@@ -1,0 +1,4 @@
+# One of the Configuration Management team members must approve modifications to GitHub settings or workflows
+.github/ @nciocpl/config-mgmt
+/tools/ @nciocpl/config-mgmt
+akumin.sitedeployer.config.json @nciocpl/config-mgmt
