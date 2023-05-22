@@ -278,3 +278,4 @@ function GetDepartmentNewsErrorhandler(listRequest, def) {
 };
 */
 /* END SAMPLES */
+// added comment
