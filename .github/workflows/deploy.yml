@@ -2,33 +2,22 @@ name: Deploy Site
 on:
   workflow_dispatch:
     inputs:
-      deploymentType: 
-        type: choice
-        description: Which Akumina code to deploy
-        options:
-        - all
-        - js
-        - css
-        - lists
-        - widgets
-        - groups
-        - contentfiles
-        - imagefiles
-        - updatelists
-        - fonts
-        - virtualpages
-        - virtuallayouts
+      deploymentType:
+        type: string
+        description: Which Akumina code to deploy (default is all)
       environment:
         type: environment
+      central:
+        type: boolean
+        description: Deploy to the central site instead of delivery?
 
 jobs:
   deploy:
     name: Deploy to SharePoint
     runs-on: windows-latest
     environment: ${{inputs.environment}}
-      
-    steps:
 
+    steps:
       ## Checkout the code
       - name: Checkout branch
         uses: actions/checkout@v3
@@ -44,12 +33,16 @@ jobs:
         shell: pwsh
         run: |
           $deployment_type = $env:DEPLOYMENT_TYPE
-          if ($deployment_type -eq "all") {
+          if ([string]::IsNullOrWhiteSpace($deployment_type)) {
+            # If no string is provided, assume "all" and set everything to true
             jq '.Options |= map_values(true)' akumina.sitedeployer.config.json > tmpfile ; Move-Item -Path tmpfile -Destination akumina.sitedeployer.config.json -Force
           } else {
-            jq --arg dt $deployment_type '.Options[$dt] = true' akumina.sitedeployer.config.json > tmpfile ; Move-Item -Path tmpfile -Destination akumina.sitedeployer.config.json -Force
+            # Split the string on commas and update the JSON file accordingly
+            $deployment_types = $deployment_type -split ","
+            foreach ($dt in $deployment_types) {
+              jq --arg dt $dt '.Options[$dt] = true' akumina.sitedeployer.config.json > tmpfile ; Move-Item -Path tmpfile -Destination akumina.sitedeployer.config.json -Force
+            }
           }
-          
         env:
           DEPLOYMENT_TYPE: ${{ inputs.deploymentType }}
 
@@ -67,7 +60,7 @@ jobs:
       - name: Deploy Akumina
         run: npm run deploy
         env:
-          spurl: ${{ secrets.spurl }}
+          spurl: ${{ inputs.central && secrets.centralspurl || secrets.spurl }}
           centralspurl: ${{ secrets.centralspurl }}
           spdirectory: DigitalWorkplace
           assetdirectory: myNCI
@@ -75,4 +68,3 @@ jobs:
           ml: false
           clientid: ${{ secrets.clientid }}
           clientsecret: ${{ secrets.clientsecret }}
-          environment2:  ${{github.events.inputs.environment}}
