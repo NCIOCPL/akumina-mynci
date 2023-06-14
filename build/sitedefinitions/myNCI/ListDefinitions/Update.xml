@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<lists>  
+  <list name="DigispaceConfigurationIDS_AK">
+    <Data>
+      <Rows>
+        <Row Update="TRUE">
+          <Field Name="Title">SiteLogoURL</Field>
+          <Field Name="Value">{"default": "/Akumina Library/DigitalWorkPlace/Images/myNCI_Logo_COLOR.svg"}</Field>          
+        </Row>
+      </Rows>
+    </Data>
+  </list>
+  
+</lists>

@@ -6,8 +6,8 @@
     "widgets": false,
     "groups": false,
     "contentfiles": false,
-    "imagefiles": true,
-    "updatelists": false,
+    "imagefiles": false,
+    "updatelists": true,
     "fonts": false,
     "virtualpages": false,
     "virtuallayouts": false
