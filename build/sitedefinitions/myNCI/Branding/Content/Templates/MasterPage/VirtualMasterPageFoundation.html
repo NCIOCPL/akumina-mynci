@@ -1,0 +1,140 @@
+<div id="ak-master" class="rootsite-page" role="main" aria-label={Akumina.Digispace.Language.TryGetText('hub.master.mainheader')}>
+    <h1 id="main-header" class="main-landmark--header sr-only" role="heading" aria-level="1">{Akumina.Digispace.Language.TryGetText('hub.master.rootsitetitle')}</h1>
+    <a href="#content" id="skip" class="skip" role="button">{Akumina.Digispace.Language.TryGetText('hub.master.skiptomain')}</a>
+    <div id="s4-bodyContainer">
+        <div id="s4-workspace">
+            <div class="ak-page-outer">
+                <header class="ak-foundation-header aksearchexclude">
+                    <div class="wrapper">
+                        <div class="myapps-toggle--container">
+                            <button id="toggleMyApps" class="my-links-toggle" aria-label={Akumina.Digispace.Language.TryGetText('hub.master.toggleapps')} tabindex="0">
+                                <i class="fa fa-th sp-bar-toggle" aria-hidden="true"></i>
+                            </button>
+                        </div>
+                        <div class="ak-site-logo-container">
+                            <div class="ak-site-logo">
+                                <a class="ak-spalink" data-interception="off" href={LogoUrl}>
+                                    <img src="" alt="Company logo." />
+                                </a>
+                            </div>
+                        </div>
+                        <div class="flex-1 respSearch">
+                            <div class="interAction">
+                                <div class="ia-search-combo">
+                                    <input type="text" id="siteSearch" class="ia-search-combo-box form-control ak-dw-searchlistbox" placeholder="Search" autocomplete="off" aria-label="{Akumina.Digispace.Language.TryGetText('hub.master.searchsite')}" />
+                                    <span class="ia-search-combo-site-name">
+                                        Entire System
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="ak-search-typeahead-container ak-widget-wrapper">
+                            </div>
+                        </div>
+                        <div class="action-items ak-widget-wrapper">
+                            <div id="setSearch" class="show-for-small-only">
+                                <button id="expandSearch" type="button">
+                                    <i class="fa fa-search" aria-hidden="true"></i>
+                                </button>
+                            </div>
+                            <div id="setMyLinksTop">
+                                <button id="myLinksButton" type="button" aria-label={Akumina.Digispace.Language.TryGetText('hub.mylinkswidget.mylinks')} title={Akumina.Digispace.Language.TryGetText("hub.mylinkswidget.mylinks")}>
+                                    <i class="fa fa-bookmark" aria-hidden="true"></i>
+                                </button>
+                            </div>
+                            <div id="setNotificationTop">
+                                <button id="userNotificationButton" type="button" aria-label={Akumina.Digispace.Language.TryGetText('hub.master.togglenotification')} title={Akumina.Digispace.Language.TryGetText('hub.master.notifications')}>
+                                    <i class="fa fa-bell" aria-hidden="true"></i>
+                                </button>
+                                <div class="unseenNotificationCounter"></div>
+                            </div>
+                            <div id="setMeTop" class="user-profile-dropdown">
+                                <ul>
+                                    <li>
+                                        <button id="userDisplayButton" type="button" aria-label={Akumina.Digispace.Language.TryGetText('hub.master.notifications')}>
+                                            <img class="userImageDisplay" src="" alt={Akumina.Digispace.Language.TryGetText('hub.master.profilepicalt')} />
+                                        </button>
+                                        <ul id="userDropdown">
+                                            <li class="liProfile">
+                                                <a id="masterProfile" href="#">
+                                                </a>
+                                            </li>
+                                            <li class="li-Signout">
+                                                <a id="masterSignout" href="#">
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div rel="Language Picker" class="ak-widget u-padLeft" id="e17dd2f4-a030-4920-8451-6dc463de75a4"></div>
+                        </div>
+                    </div>
+                </header>
+                <nav class="ak-foundation-main-nav-wrapper ak-widget-wrapper">
+                    <div rel="Top Navigation" class="ak-widget" id="b3190df7-e6f8-4f0b-83c7-192e6500563e"></div>
+                </nav>
+                
+                <div class="ak-foundation-page-wrapper">
+                    <div class="ak-site-alert-wrapper ak-widget-wrapper">
+                        <div rel="Site Alerts - Modern" class="ak-widget" id="9118a818-b44f-47f3-a0d1-914fdfb7f5a1"></div>
+                    </div>
+                    <div id="content">
+                        <div class="container">
+                            <div class="row">
+                                <div class="ak-breadcrumb-wrapper ak-widget-wrapper">                                    
+                                    <div  rel="FoundationBreadcrumbsWidget" class="ak-widget" id="950413ec-bcee-45f4-b6c0-7021b118be7f"></div>
+                                </div>
+                                <div class="ak-page-wrapper">
+                                    {pageComponent}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <footer class="ia-site-footer aksearchexclude">
+                    <div class="ia-footer-main">
+                        <div class="ia-top-footer wrapper">
+                            <div class="ia-footer-logo ak-site-logo">
+                                <a class="ak-spalink" data-interception="off" href={LogoUrl}>
+                                    <img src="" alt="Site Logo" alt="Company Logo." />
+                                </a>
+                            </div>
+                            <div class="ia-footer-links ak-widget-wrapper">
+                                <div  rel="Foundation3-FooterLinks" class="ak-widget" id="5854ed59-d211-4bea-9205-14b4c75a5b97"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ia-footer-secondary">
+                        <div class="ia-world-clock-container ak-widget-wrapper">
+                            <div rel="WorldClock Foundation Widget instance" class="ak-widget" id="aa11eb15-0132-dc35-c33c-9678c836a689"></div>
+                        </div>
+                    </div>
+                    <div class="ia-footer-copyright container">
+                        <div class="row">
+                            <div class="columns small-12">
+                                <div class="ia-footer-copyright-text">
+                                    <div class="ia-social">
+                                        <a href="https://www.facebook.com/akumina.inc/" target="_blank" class="ia-social-logo">
+                                            <img alt="Facebook Logo" class='ak-foundation-footer-logo-facebook' src={configurationContext.TemplateURLPrefix + '/' + configurationContext.AssetLibraryName + "/DigitalWorkPlace/img/social_images_placeholder.png" } />
+                                        </a>
+                                        <a href="https://mobile.twitter.com/akuminaInc?lang=en" target="_blank" class="ia-social-logo">
+                                            <img alt="Twitter Logo" class="ak-foundation-footer-logo-twitter" src={configurationContext.TemplateURLPrefix + '/' + configurationContext.AssetLibraryName + "/DigitalWorkPlace/img/social_images_placeholder.png" } />
+                                        </a>
+                                        <a href="https://www.linkedin.com/company/akumina/" target="_blank" class="ia-social-logo">
+                                            <img class="ak-foundation-footer-logo-linkedin" alt="Linkedin Logo" src={configurationContext.TemplateURLPrefix + '/' + configurationContext.AssetLibraryName + "/DigitalWorkPlace/img/social_images_placeholder.png" } />
+                                        </a>
+                                        <a href="https://instagram.com/akumina/" target="_blank" class="ia-social-logo">
+                                            <img  class="ak-foundation-footer-logo-instagram" alt="Instagram Logo" src={configurationContext.TemplateURLPrefix + '/' + configurationContext.AssetLibraryName + "/DigitalWorkPlace/img/social_images_placeholder.png" } />
+                                        </a>
+                                    </div>
+                                    <p>Copyright 2020 Akumina. All rights reserved.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </footer>
+            </div>
+        </div>
+    </div>
+</div>

@@ -2,11 +2,11 @@
   "Options": {
     "js": false,
     "css": false,
-    "lists": true,
+    "lists": false,
     "widgets": false,
     "groups": false,
     "contentfiles": false,
-    "imagefiles": false,
+    "imagefiles": true,
     "updatelists": false,
     "fonts": false,
     "virtualpages": false,
