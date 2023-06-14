@@ -2,7 +2,7 @@
   "Options": {
     "js": false,
     "css": false,
-    "lists": false,
+    "lists": true,
     "widgets": false,
     "groups": false,
     "contentfiles": false,

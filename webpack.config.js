@@ -5,7 +5,7 @@ var fs = require('fs');
 var widgetSrcDir = "./src/js/widgets";
 //Make sure this value matches the 'Class' section of the config.json of your widgets
 //If jsClientName is 'MyNamespace' then your 'Class' should be 'MyNamespace.Widgets'
-var jsClientName = "myNCI"; //[ClientName].Widgets.WidgetName
+var jsClientName = "NCI.Widgets";
 var useTypeScript = false;
 
 var genWidgetsConfig = function (widgetName) {
