@@ -12,4 +12,5 @@
       </Rows>
     </Data>
   </list>
+  <list name="TipsOfTheWeek_AK" contentType="AkuminaSearch,Announcement,AkuminaNewsExperience" noCrawl="TRUE"></list>  
 </lists>

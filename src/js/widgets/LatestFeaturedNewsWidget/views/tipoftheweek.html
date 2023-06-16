@@ -1,0 +1,41 @@
+<!-- //Initial view added - needs to be adjusted -->
+<div class="interAction foundation-widget corporate-news--modern ia-modern-card">    
+    <div class="corporate-news">        
+        {{#if ShowHeader}}
+        <div class="ia-header ia-header__modern">
+            {{#if Icon}}
+            <i class="fa fa-{{Icon}}-o" aria-hidden="true"></i>
+            {{/if}}
+            <h3 class="ia-header--title">{{WidgetTitle}}</h3>
+        </div>
+        {{/if}}
+        <div class="sub-corporate-news">
+            <div class="corporate-news--container ia-modern-card--inner">
+                {{#Items}}
+                <div class="one-element tab ak-item" ak-item="{{ID}}">
+                    <a class="newsitem {{IsSPALink}}" href="{{AddSPALink FriendlyUrl}}">
+                        <span class="newsitem--container">
+                            <!-- <span class="background-image background-image__overlay" style="background-image:url({{Image}})" aria-label="{{#if ImageAlt}}{{ImageAlt}}{{else}}{{translate 'hub.common.noimagedescription'}}{{/if}}"></span> -->
+                            <span class="extra-info">                                
+                                <p class="color-title name ellipsis" data-ellipsis="2">
+                                    {{AnnouncementTitle}}
+                                </p>
+                                <span class="description">{{{Summary}}}</span>
+                                <span class="">{{akdateformat Modified "monthanddate"}}</span>
+                            </span>
+                        </span>
+                    </a>
+                </div>
+                {{/Items}}
+            </div>
+        </div>
+    </div>
+    {{#if ShowViewAllButton}}
+    <div class="view-more">        
+        <a href="{{AddSPALink ViewMore}}" class="ia-button {{IsSPALink}}">
+            {{ViewAllButtonText}}
+            <i class="fa fa-chevron-right ia-chevron" aria-hidden="true"></i>
+        </a>
+    </div>
+    {{/if}}
+</div>
