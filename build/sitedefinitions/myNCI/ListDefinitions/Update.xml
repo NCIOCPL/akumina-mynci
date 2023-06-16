@@ -10,5 +10,48 @@
       </Rows>
     </Data>
   </list>
-  
+
+  <list name="MeBarManager_AK">
+    <Data>
+      <Rows>
+        <Row Update="TRUE">        
+          <Field Name="Title">Current Weather</Field>
+          <Field Name="ItemActive">0</Field>          
+        </Row>
+        <Row Update="TRUE">        
+          <Field Name="Title">My Links</Field>
+          <Field Name="ItemActive">1</Field>                    
+          <!-- <Field Name="Title">TO BE DEFINED</Field>                     -->
+        </Row>
+        <Row Update="TRUE">        
+          <Field Name="Title">My Outlook Meetings</Field>
+          <Field Name="ItemActive">0</Field>          
+        </Row>
+        <Row Update="TRUE">        
+          <Field Name="Title">My Emails</Field>
+          <Field Name="ItemActive">0</Field>          
+        </Row>
+        <Row Update="TRUE">        
+          <Field Name="Title">My Org Tree</Field>
+          <Field Name="ItemActive">0</Field>          
+        </Row>
+        <Row Update="TRUE">        
+          <Field Name="Title">My Sites</Field>
+          <Field Name="ItemActive">0</Field>          
+        </Row>
+        <Row Update="TRUE">        
+          <Field Name="Title">My Recent Files</Field>
+          <Field Name="ItemActive">0</Field>          
+        </Row>
+        <Row Update="TRUE">        
+          <Field Name="Title">My Teams</Field>
+          <Field Name="ItemActive">0</Field>          
+        </Row>
+        <Row Update="TRUE">        
+          <Field Name="Title">Workplace Tools</Field>
+          <Field Name="ItemActive">0</Field>          
+        </Row>      
+      </Rows>
+    </Data>
+  </list>
 </lists>
