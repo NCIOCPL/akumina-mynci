@@ -2,7 +2,7 @@
 /dist
 # never commit your secrets
 .env
-
+/tools/logs/*.log
 /build/sitedefinitions/myNCI/widgetpackages
 # === Rule for dotfiles ===
 # Ignore all dotfiles.
