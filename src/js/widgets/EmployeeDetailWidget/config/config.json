@@ -92,12 +92,12 @@
         "Views": [{
                 "Name": "NCIEmployeeDetail",
                 "Path": "/{AssetLibraryName}/DigitalWorkPlace/Content/Templates/EmployeeDetailWidget/NCIEmployeeDetail.html",
-                "Id": "103e0ac4-cca4-408f-ba1c-8d36f9a19b45"
+                "Id": "f6a67cd2-beb6-44e1-9d84-2c7d543ec4b6"
             },
             {
                 "Name": "NCIEmployeeDetailWithEdit",
                 "Path": "/{AssetLibraryName}/DigitalWorkPlace/Content/Templates/EmployeeDetailWidget/NCIEmployeeDetailWithEdit.html",
-                "Id": "0f2309d1-5f7c-44ff-a455-a8fcc5cf80e1"
+                "Id": "3284feca-c92a-4858-b0cd-966af57a3e48"
             }
         ],
         "JS": {
@@ -107,7 +107,7 @@
     "Instances": [
         {
             "Name": "NCI Employee Detail Widget",
-            "Id": "a589ed06-f0e9-486e-b299-e0d196daa5f4",
+            "Id": "1c7800ee-ac1c-4110-88a4-0fda42371f6b",
             "Description": "Displays the detailed profile information for a user found in the People Directory",
             "Icon": "fa fa-user",
             "SelectedView": "NCIEmployeeDetail",
