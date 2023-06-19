@@ -1,0 +1,140 @@
+{
+    "Definition": {
+        "Name": "PeopleDirectoryWidget",
+        "Description": "Provides a keyword search (after 3 characters of input) or last name/first name search.  Requires Azure AD and Akumina people sync to be configured for the site.",
+        "Class": "Akumina.AddIn.PeopleDirectoryWidget",
+        "Version": "{CurrentBuildVersion}",
+        "Properties": [
+            {
+                "name": "title",
+                "friendlyname": "{propertyfriendlynames.friendlyname_title}",
+                "value": "",
+                "type": "string"
+            },
+            {
+                "name": "searchtype",
+                "friendlyname": "{peopledirectory.friendlyname_sortby}",
+                "value": {
+                    "First Name": "first",
+                    "Last Name": "last"
+                },
+                "type": "choice"
+            },
+            {
+                "name": "facets",
+                "friendlyname": "{peopledirectory.friendlyname_facets}",
+                "value": [
+                    {
+                        "facetName": "department",
+                        "facetDisplayName": "Department"
+                    },
+                    {
+                        "facetName": "officelocation",
+                        "facetDisplayName": "Office Location"
+                    }
+                ],
+                "type": "json"
+            },
+            {
+                "name": "fetchphotofromad",
+                "friendlyname": "{peopledirectory.friendlyname_fetchphotofromad}",
+                "value": "true",
+                "type": "bool"
+            },
+            {
+                "name": "searchlistingdisplay",
+                "friendlyname": "{peopledirectory.friendlyname_searchlistingdisplay}",
+                "value": {
+                    "First, Last": "FL",
+                    "Last, First": "LF"
+                },
+                "type": "choice"
+            },
+            {
+                "name": "enableazselector",
+                "friendlyname": "{peopledirectory.friendlyname_enableazselector}",
+                "value": "true",
+                "type": "bool"
+            },
+            {
+                "name": "displayview",
+                "friendlyname": "{peopledirectory.friendlyname_displayview}",
+                "value": {
+                    "Tile": "tile",
+                    "List": "list"
+                },
+                "type": "choice"
+            },
+            {
+              "name": "uicallbackmethod",
+              "friendlyname": "{propertyfriendlynames.friendlyname_uicallbackmethod}",
+              "value": "",
+              "type": "string"
+            },
+            {
+              "name": "callbackmethod",
+              "friendlyname": "{propertyfriendlynames.friendlyname_callbackmethod}",
+              "value": "",
+              "type": "string"
+            },
+            {
+                "name": "propcallbackmethod",
+                "friendlyname": "propcallbackmethod",
+                "value": "",
+                "type": "string"
+            }
+              
+        ],
+        "Views": [
+            {
+                "Name": "NCIPeopleDirectory",
+                "Path": "/{AssetLibraryName}/DigitalWorkPlace/Content/Templates/PeopleDirectoryWidget/ncipeopledirectory.html",
+                "Id": "a2021934-a88a-4a8b-b2fb-6f46f81c1ab1"
+            }
+        ],
+        "JS": {
+            "Default": "/{AssetLibraryName}/DigitalWorkPlace/JS/widgets/digitalworkplace.core.peopledirectorywidget.min.js"
+        }
+    },
+    "Instances": [
+        {
+            "Name": "NCI PeopleDirectory",
+            "Id": "420f35bb-994f-4523-8f21-557f32e3c2c5",
+            "Description": "Displays searchable list of people with filters from AzureAD synchronization",
+            "Icon": "fa fa-sitemap",
+            "SelectedView": "PeopleDirectory",
+            "AvailableViews": [],
+            "HiddenFields": [],
+            "Properties": [
+                {
+                    "name": "title",
+                    "value": "{peopledirectory.title}"
+                },
+                {
+                    "name": "searchtype",
+                    "value": ""
+                },
+                {
+                    "name": "facets",
+                    "value": [
+                        {
+                            "facetName": "department",
+                            "facetDisplayName": "{peopledirectory.userdepartment}"
+                        },
+                        {
+                            "facetName": "officelocation",
+                            "facetDisplayName": "{peopledirectory.officelocation}"
+                        }
+                    ]
+                },
+                {
+                    "name": "fetchphotofromad",
+                    "value": "true"
+                }
+            ]
+        }
+    ],
+    "Options": {
+        "IsPartialDefinition": true
+    }
+}

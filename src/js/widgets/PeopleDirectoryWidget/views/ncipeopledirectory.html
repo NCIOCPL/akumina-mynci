@@ -1,0 +1,355 @@
+﻿<div class="interAction">
+    <div class="ia-people-directory">
+        <div class="ia-people-search">
+            <div class="row">
+                <div class="small-3 columns">
+                    <select id="searchoption" name="searchoption" type="text" style="width:95%;margin-bottom:0;"
+                        class="ia-searchOptionSelect">
+                        <option value="keywordsearch" selected="selected">
+                            {{translate "peopledirectory.keywordsearch"}}</option>
+                        <option value="namesearch">{{translate "peopledirectory.namesearch"}}</option>
+                    </select>
+                </div>
+                <div class="small-9 columns">
+                    <div class="row searchoptionHolder" id="namesearch">
+                        <div class="small-6 columns">
+                            <input id="firstName" placeholder="{{translate "peopledirectory.firstnameplaceholder"}}"
+                                type="text" style="width:95%;" class="ia-firstNameSearchBox" />
+                        </div>
+                        <div class="small-6 columns">
+                            <input id="lastName" placeholder="{{translate "peopledirectory.lastnameplaceholder"}}"
+                                type="text" style="width:95%;" class="ia-lastNameSearchBox" />
+                        </div>
+                    </div>
+                    <div class="row searchoptionHolder ia-search-option-holder" id="keywordsearch">
+                        <div class="small-12 columns ia-keyword-search">
+                            <input id="keywordSearch"
+                                placeholder="{{translate "peopledirectory.keywordsearchplaceholder"}}" type="text"
+                                class="ia-keywordSearchBox" />
+                            <a href="#" class="searchKeywordIcon ia-search-icon">
+                                <span class="ia-search-icon fa fa-search"></span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {{#if DisplayAZSelector}}
+        <div class="ia-people-az">
+            <ul class="ia-people-az-list">
+                <li class="ak-selected"><a data-selector="All" href="javascript:void(0)">{{translate "peopledirectory.all"}}</a></li>
+                {{#each Alphabets}}
+                <li><a href="javascript:void(0)">{{this}}</a></li>
+                {{/each}}
+            </ul>
+        </div>
+        {{/if}}
+        {{#unless FilterAsProperty}}
+        <div class="ia-people-filters">
+            <div class="ia-people-filter-trigger"><span class="ia-filter-toggle"></span>
+                {{translate "peopledirectory.filters"}}</div>
+            <div class="ia-people-filter-wrapper">
+                {{#each RefinementFilters}}
+                <div class="ia-people-filter ia-filter-department">
+                    <h3 class="ia-people-filter-header" data-filtername="{{FilterName}}">{{FilterHeader}}</h3>
+                    <div class="ia-people-filter-options rail-ie-fallout">
+                        {{#if this.FilterOptions}}
+                        {{#each this.FilterOptions}}
+                        <ul>
+                            <li>
+                                <input type="checkbox" id="{{this.id}}" value="{{this.value}}" />
+                                <label for="{{this.id}}">{{this.value}}</label>
+                            </li>
+                        </ul>
+                        {{/each}}
+                        {{else}}
+                        <ul>
+                            <li><span>{{translate "peopledirectory.datanotavailable"}}.</span></li>
+                        </ul>
+                        {{/if}}
+                    </div>
+                </div>
+                {{/each}}
+            </div>
+        </div>
+        {{/unless}}
+
+        {{#if FilterAsProperty}}
+        <div class="ia-people-results  ia-people-no-filter">
+            <div class="ia-people-results-view">
+                <span class="ia-people-results-byList fa fa-list"
+                    title="{{translate 'peopledirectory.listview'}}"></span>
+                <span class="ia-people-results-byGrid fa fa-th-large ia-active"
+                    title="{{translate 'peopledirectory.gridview'}}"></span>
+            </div>
+            <div class="ia-people-results-infotext">
+                {{#if SelectedLetter}}
+                <p>{{translate "peopledirectory.peoplewith"}} {{SearchType}}
+                    {{translate "peopledirectory.matchingnames"}} {{SelectedLetter}}</p>
+                {{/if}}
+            </div>
+            <div class="ia-loading-panel ia-hide">
+                <!-- change class to ia-show to show this loading panel -->
+                <div class="ia-loader"></div>
+            </div>
+            <div class="ia-people-results-list">
+                <table class="ia-people-results-table tablesaw tablesaw-stack" data-mode="stack">
+                    <colgroup>
+                        <col class="ia-col-width-40">
+                        <col class="ia-col-width-40">
+                        <col class="ia-col-width-20">
+                    </colgroup>
+                    <thead>
+                        <tr>
+                            <th>{{translate "peopledirectory.namecolumn"}}</th>
+                            <th>{{translate "peopledirectory.titlecolumn"}}</th>
+                            <th>{{translate "peopledirectory.emailcolumn"}}</th>
+                            <th>{{translate "peopledirectory.officecolumn"}}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!--{{#each People}}-->
+
+                        <tr>
+                            <td>
+
+                                {{#if ../DisplayFL}}
+                                <a data-id="{{Id}}" class="ia-profile-detail-link ia-modal-inline-trigger"><img
+                                        class="ia-people-list-avatar ed-user-image" src="{{pictureurl}}"
+                                        data-user="{{userprincipalname}}" alt="User Name" />{{givenname}}
+                                    {{surname}}</a>
+                                {{else}}
+                                <a data-id="{{Id}}" class="ia-profile-detail-link ia-modal-inline-trigger"><img
+                                        class="ia-people-list-avatar ed-user-image" src="{{pictureurl}}"
+                                        data-user="{{userprincipalname}}" alt="User Name" />{{surname}},
+                                    {{givenname}}</a>
+                                {{/if}}
+                            </td>
+                            <td>{{jobtitle}}</td>
+                            <td>
+                                {{#if mail}}
+                                <a href="mailto:{{mail}}">{{translate "peopledirectory.emailcolumn"}}</a>
+                                {{else}}
+                                <a href="mailto:{{userprincipalname}}">{{translate "peopledirectory.emailcolumn"}}</a>
+                                {{/if}}
+                            </td>
+                            <td>{{officelocation}}</td>
+                        </tr>
+                        <!--{{/each}}-->
+                    </tbody>
+                </table>
+            </div>
+            <ul class="ia-people-results-grid">
+                {{#each People}}
+                <li>
+                    <div class="ia-profile-avatar">
+                        <a data-id="{{Id}}" class="ia-modal-inline-trigger"><img src="{{pictureurl}}"
+                                data-user="{{userprincipalname}}" alt="User Name" class="ed-user-image" /></a>
+                    </div>
+                    <div class="ia-profile-details">
+                        <a data-id="{{Id}}" class="ia-profile-detail-link ia-modal-inline-trigger">
+                            {{#if ../DisplayFL}}
+                            <h2 class="ia-profile-name">{{givenname}} {{surname}}</h2>
+                            {{else}}
+                            <h2 class="ia-profile-name">{{surname}}, {{givenname}}</h2>
+                            {{/if}}
+                            {{#if jobtitle}}
+                            <h3 class="ia-profile-title">{{jobtitle}}</h3>
+                            {{/if}}
+                            {{#if department}}
+                            <p class="ia-profile-dept">{{translate "peopledirectory.userdepartment"}}: {{department}}
+                            </p>
+                            {{/if}}
+                            {{#if officelocation}}
+                            <p class="ia-profile-office">{{translate "peopledirectory.useroffice"}}: {{officelocation}}
+                            </p>
+                            {{/if}}
+                            {{#if usageLocation}}
+                            <p class="ia-profile-location">{{translate "peopledirectory.userlocation"}}:
+                                {{usageLocation}}</p>
+                            {{/if}}
+                            {{#if businessphones}}
+                            <p class="ia-profile-workPhone">{{translate "peopledirectory.userphone"}}:
+                                {{businessphones}}</p>
+                            {{/if}}
+                            {{#if mail}}
+                            <p class="ia-profile-email"><a href="mailto:{{mail}}">{{mail}}</a></p>
+                            {{else}}
+                            <p class="ia-profile-email"><a href="mailto:{{userprincipalname}}">{{userprincipalname}}</a>
+                            </p>
+                            {{/if}}
+                        </a>
+                    </div>
+                </li>
+                {{/each}}
+            </ul>
+            {{#if People.length}}
+            <div class="showMoreResults" style="text-align: center;"><a href="#"
+                    style="font-size:14px;">{{translate "common.showmoreresults"}}...</a></div>
+            {{else}}
+            <div style="text-align: center;"><span
+                    style="font-size:14px;">{{translate "common.noresultsfound"}}...</span></div>
+            {{/if}}
+        </div>
+        {{else}}
+        <div class="ia-people-results">
+            <div class="ia-people-results-view">
+                <span class="ia-people-results-byList fa fa-list"
+                    title="{{translate 'peopledirectory.listview'}}"></span>
+                <span class="ia-people-results-byGrid fa fa-th-large ia-active"
+                    title="{{translate 'peopledirectory.gridview'}}"></span>
+            </div>
+            <div class="ia-people-results-infotext">
+                {{#if SelectedLetter}}
+                <p>{{translate "peopledirectory.peoplematchingnames"}}</p>
+                {{/if}}
+            </div>
+            <div class="ia-loading-panel ia-hide">
+                <!-- change class to ia-show to show this loading panel -->
+                <div class="ia-loader"></div>
+            </div>
+            <div class="ia-people-results-list">
+                <table class="ia-people-results-table tablesaw tablesaw-stack" data-mode="stack">
+                    <colgroup>
+                        <col class="ia-col-width-40">
+                        <col class="ia-col-width-40">
+                        <col class="ia-col-width-20">
+                    </colgroup>
+                    <thead>
+                        <tr>
+                            <th>{{translate "peopledirectory.namecolumn"}}</th>
+                            <th>{{translate "peopledirectory.titlecolumn"}}</th>
+                            <th>{{translate "peopledirectory.emailcolumn"}}</th>
+                            <th>{{translate "peopledirectory.officecolumn"}}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!--{{#each People}}-->
+                        <tr>
+                            <td>
+                                {{#if ../DisplayFL}}
+                                <a data-id="{{Id}}" class="ia-profile-detail-link ia-modal-inline-trigger"><img
+                                        class="ia-people-list-avatar ed-user-image" src="{{pictureurl}}"
+                                        data-user="{{userprincipalname}}" alt="User Name" />{{givenname}}
+                                    {{surname}}</a>
+                                {{else}}
+                                <a data-id="{{Id}}" class="ia-profile-detail-link ia-modal-inline-trigger"><img
+                                        class="ia-people-list-avatar ed-user-image" src="{{pictureurl}}"
+                                        data-user="{{userprincipalname}}" alt="User Name" />{{surname}},
+                                    {{givenname}}</a>
+                                {{/if}}
+                            </td>
+                            <td>{{jobtitle}}</td>
+                            <td>
+                                {{#if mail}}
+                                <a href="mailto:{{mail}}">{{translate "peopledirectory.emailcolumn"}}</a>
+                                {{else}}
+                                <a href="mailto:{{userprincipalname}}">{{translate "peopledirectory.emailcolumn"}}</a>
+                                {{/if}}
+                            </td>
+                            <td>{{officelocation}}</td>
+                        </tr>
+                        <!--{{/each}}-->
+                    </tbody>
+                </table>
+            </div>
+            <ul class="ia-people-results-grid">
+                {{#each People}}
+                <li>
+                    <div class="ia-profile-avatar">
+                        <a data-id="{{Id}}" class="ia-modal-inline-trigger"><img src="{{pictureurl}}"
+                                data-user="{{userprincipalname}}" alt="User Name" class="ed-user-image" /></a>
+                    </div>
+                    <div class="ia-profile-details">
+                        <a data-id="{{Id}}" class="ia-profile-detail-link ia-modal-inline-trigger">
+                            {{#if ../DisplayFL}}
+                            <h2 class="ia-profile-name">{{givenname}} {{surname}}</h2>
+                            {{else}}
+                            <h2 class="ia-profile-name">{{surname}}, {{givenname}}</h2>
+                            {{/if}}
+                            {{#if jobtitle}}
+                            <h3 class="ia-profile-title">{{jobtitle}}</h3>
+                            {{/if}}
+                            {{#if department}}
+                            <p class="ia-profile-dept">{{translate "peopledirectory.userdepartment"}}: {{department}}
+                            </p>
+                            {{/if}}
+                            {{#if officelocation}}
+                            <p class="ia-profile-office">{{translate "peopledirectory.useroffice"}}: {{officelocation}}
+                            </p>
+                            {{/if}}
+                            {{#if usageLocation}}
+                            <p class="ia-profile-location">{{translate "peopledirectory.userlocation"}}:
+                                {{usageLocation}}</p>
+                            {{/if}}
+                            {{#if businessphones}}
+                            <p class="ia-profile-workPhone">{{translate "peopledirectory.userphone"}}:
+                                {{businessphones}}</p>
+                            {{/if}}
+                            {{#if mail}}
+                            <p class="ia-profile-email"><a href="mailto:{{mail}}">{{mail}}</a></p>
+                            {{else}}
+                            <p class="ia-profile-email"><a href="mailto:{{userprincipalname}}">{{userprincipalname}}</a>
+                            </p>
+                            {{/if}}
+                        </a>
+                    </div>
+                </li>
+                {{/each}}
+            </ul>
+            {{#if People.length}}
+            <div class="showMoreResults" style="text-align: center;"><a href="#"
+                    style="font-size:14px;">{{translate "common.showmoreresults"}}...</a></div>
+            {{else}}
+            <div style="text-align: center;"><span
+                    style="font-size:14px;">{{translate "common.noresultsfound"}}...</span></div>
+            {{/if}}
+        </div>
+        {{/if}}
+    </div>
+
+
+    <script id="template-userpopup" type="text/html">
+        <div class="ia-profile-popup">
+            <div class="ia-profile-summary">
+                <div class="ia-profile-avatar">
+                    <img src="{ {pictureurl} }" alt="User Name" />
+                </div>
+                { {#if DisplayFL} }
+                <h2 class="ia-profile-name">{ {givenname} } { {surname} }</h2>
+                { {else} }
+                <h2 class="ia-profile-name">{ {surname} }, { {givenname} }</h2>
+                { {/if} }
+                { {#if jobtitle} }
+                <h3 class="ia-profile-title">{ {jobtitle} }</h3>
+                { {/if} }
+            </div>
+            <div class="ia-profile-full">
+                <!--{ {#if department} }--><p class="ia-profile-dept"><span class="ia-label">{{translate "peopledirectory.userdepartment"}}:</span><span class="ia-data">{ {department} }</span></p><!--{ {/if} }-->
+                <!--{ {#if officelocation} }--><p class="ia-profile-office"><span class="ia-label">{{translate "peopledirectory.useroffice"}}:</span><span class="ia-data">{ {officelocation} }</span></p><!--{ {/if} }-->
+                <!--{ {#if usageLocation} }--><p class="ia-profile-location"><span class="ia-label">{{translate "peopledirectory.userlocation"}}:</span><span class="ia-data">{ {usageLocation} }</span></p><!--{ {/if} }-->
+                <!--{ {#if businessphones} }--><p class="ia-profile-workPhone"><span class="ia-label">{{translate "peopledirectory.userphone"}}:</span><span class="ia-data">{ {businessphones} }</span></p><!--{ {/if} }-->
+                <!--{ {#if mobilephone} }--><p class="ia-profile-cellPhone"><span class="ia-label">{{translate "peopledirectory.usermobile"}}:</span><span class="ia-data">{ {mobilephone} }</span></p><!--{ {/if} }-->
+                <!--{ {#if facsimiletelephonenumber} }--><p class="ia-profile-fax"><span class="ia-label">{{translate "peopledirectory.userfax"}}:</span><span class="ia-data">{ {facsimiletelephonenumber} }</span></p><!--{ {/if} }-->
+                <!--{ {#if mail} }--><p class="ia-profile-email"><span class="ia-label">{{translate "peopledirectory.emailcolumn"}}:</span><span class="ia-data"><a href="mailto:{ {mail} }">{ {mail} }</a></p><!--{ {else} }--><p class="ia-profile-email"><span class="ia-label">{{translate "peopledirectory.emailcolumn"}}:</span><span class="ia-data"><a href="mailto:{ {userprincipalname} }">{ {userprincipalname} }</a></p><!--{ {/if} }-->
+                <p class="ia-profile-email"><span class="ia-data enc-emp-link" data-member="{ {profileid} }">{{translate "peopledirectory.profiledetail"}}</span></p>
+            </div>
+        </div>
+    </script>
+
+    <div id="user-popup" class="mfp-hide interAction ia-modal user-popup">
+
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $(".ia-people-filter-trigger").click(function () {
+            if ($('.ia-people-filter-wrapper').css('display') === 'none') {
+                $('.ia-people-filter-wrapper').css('display', 'block');
+            } else {
+                $('.ia-people-filter-wrapper').css('display', 'none');
+            }
+        });
+    });
+</script>
