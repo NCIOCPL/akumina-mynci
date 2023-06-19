@@ -433,15 +433,17 @@
                 <!--{ {#if officelocation} }--><p>{{translate "peopledirectory.useroffice"}}: { {officelocation} }</p><!--{ {/if} }-->
                 <!--{ {#if usageLocation} }--><p>{{translate "peopledirectory.userlocation"}}: { {usageLocation} }</p><!--{ {/if} }-->
                 <!--{ {#if facsimiletelephonenumber} }--><p>{{translate "peopledirectory.userfax"}}: { {facsimiletelephonenumber} }</p><!--{ {/if} }-->
+                <!--{ {#if businessphones} }--><p>{{translate "hub.ncidirectory.phonenumber"}}: { {businessphones} }</p><!--{ {/if} }-->
+                <!--{ {#if mail} }--><p>{{translate "hub.ncidirectory.email"}}: { {mail} }</p><!--{ {/if} }-->
                 <ul class="ia-contact-links">
                     <!--{ {#if businessphones} }-->
-                    <li><a href="tel: { {businessphones} }" aria-label="{{translate 'common.call'}} {{givenname}} {{surname}}."><i class="fa fa-phone"></i></a></li>
+                    <!-- <li><a href="tel: { {businessphones} }" aria-label="{{translate 'common.call'}} {{givenname}} {{surname}}."><i class="fa fa-phone"></i></a></li> -->
                     <!--{ {/if} }-->
                     <!--{ {#if mobilephone} }-->
                     <li><a href="tel: { {mobilephone} }" aria-label="{{translate 'common.call'}} {{givenname}} {{surname}}."><i class="fa fa-mobile"></i></a></li>
                     <!--{ {/if} }-->
                     <!--{ {#if mail} }-->
-                    <li><a href="mailto:{ {mail} }" aria-label="{{translate 'peoplelist.email'}} {{givenname}} {{surname}}."><i class="fa fa-envelope-o"></i></a></li>
+                    <!-- <li><a href="mailto:{ {mail} }" aria-label="{{translate 'peoplelist.email'}} {{givenname}} {{surname}}."><i class="fa fa-envelope-o"></i></a></li> -->
                     <!--{ {else} }-->
                     <li><a href="mailto:{ {userprincipalname} }" aria-label="{{translate 'peoplelist.email'}} {{givenname}} {{surname}}"><i class="fa fa-envelope-o"></i></a></li>
                     <!--{ {/if} }-->
