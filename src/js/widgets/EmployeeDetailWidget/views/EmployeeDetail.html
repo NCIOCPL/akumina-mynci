@@ -1,0 +1,64 @@
+<div class="ak-template-home">
+    <div class="row">
+        <div class="template-profile">
+            <section class="header" role="banner" id="ed-banner" style="background-image: url('http://ak7.picdn.net/shutterstock/videos/9760607/thumb/1.jpg');background-repeat: no-repeat; background-size: 100% 100%;">
+                <div class="name-box">
+                    <div class="white-bkg op9">&nbsp;</div>
+                    <h1 id="ed-fullname">{{givenname}} {{surname}}</h1>
+                    <h5 id="ed-titlepractice">
+                        {{jobtitle}}
+                    </h5>
+                </div>
+                <div style="position:relative;margin-top:60px;">
+                    <img class="profile-photo" id="ed-photo" src="{{pictureurl}}">
+                </div>
+            </section>
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <div class="medium-8 columns medium-push-4">
+            <div class="template-profile">
+                <section class="row small-pr-lg small-pl-lg">
+                    <div class="large-6 columns large-push-6">
+                        <h2 class="ia-profile-name">{{translate "peoplelist.certifications"}}</h2>
+                        <p id="ed-certs">{{certifications}}</p>
+                        <h2 class="ia-profile-name">{{translate "peoplelist.techskills"}}</h2>
+                        <p id="ed-skills">{{skills}}</p>
+                    </div>
+                    <div class="large-6 columns large-pull-6">
+                        <h2 class="ia-profile-name">{{translate "peoplelist.aboutme"}}</h2>
+                        <p id="ed-aboutme">{{{aboutme}}}</p>
+                        <h2 class="ia-profile-name">{{translate "peoplelist.hobbies"}}</h2>
+                        <p id="ed-hobbies">{{hobbies}}</p>
+                    </div>
+                </section>
+            </div>
+        </div>
+        <div class="medium-4 columns medium-pull-8">
+            <div class="template-profile">
+                <section class="widget-container widget-dark mb-md">
+                    <p class="widget-title dark-bg border-blueBright">
+                        <span class="icon" aria-hidden="true"></span>{{translate "peoplelist.contactme"}}
+                    </p>
+                    <div class="widget-content">
+                        <table class="unformatted white" _moz_resizing="true">
+                            <tbody>
+                                <tr>
+                                    <td class="bold" width="120">{{translate "peoplelist.email"}}</td>
+                                    <td id="ed-email">{{mail}}</td>
+                                </tr>
+                                <tr>
+                                    <td class="bold">{{translate "peoplelist.phone"}}</td>
+                                    <td id="ed-phone">
+                                        <br type="_moz">{{mobilephone}}
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+</div>

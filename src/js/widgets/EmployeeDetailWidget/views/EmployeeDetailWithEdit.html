@@ -1,0 +1,259 @@
+<div class="ak-template-home">
+    <div class="row">
+        <div class="columns small-12">
+            <div class="template-profile">
+                <section class="header" role="banner" id="ed-banner">
+                    <div class="profile-photo-container">
+                        <img class="profile-photo" id="ed-photo" src="{{pictureurl}}">
+                    </div>
+                    <div class="name-box">
+                        <h1 id="ed-fullname">{{givenname}} {{surname}}</h1>
+                        <h5 id="ed-titlepractice">
+                            {{jobtitle}}
+                        </h5>
+                        <h5 id="ed-location">
+                            {{office}}
+                        </h5>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="small-12 medium-4 columns">
+            <div class="template-profile">
+                <section class="widget-container white-bg">
+                    <h2 class="ia-profile-name">
+                        <span class="icon" aria-hidden="true"></span>{{translate "peoplelist.contactme"}}
+                    </h2>
+                    <div class="widget-content">
+                        <table class="unformatted white" _moz_resizing="true">
+                            <tbody>
+                                <tr>
+                                    <td class="bold" width="120">{{translate "peoplelist.email"}}</td>
+                                    <td id="ed-email">{{mail}}</td>
+                                </tr>
+                                <tr>
+                                    <td class="bold">{{translate "peoplelist.phone"}}</td>
+                                    <td id="ed-phone">
+                                        <div class="value-action-row">
+                                            <span id="ed-mobile">{{mobilephone}}</span>
+                                            {{#if CanEditData}}
+                                            <span class="btn-action" id="MobilePhoneEditButton"><i class="fa fa-pencil fa-lg" aria-hidden="true"></i></span>
+                                            {{/if}}
+                                        </div>
+                                        <br />
+                                        {{#if CanEditData}}
+                                        <div id="edit-area-mobile" class="value-action-edit-row" style="display:none">
+                                            <input type="text" id="MobilePhoneEdit" size="15" name="MobilePhone" />
+                                            <span class="d_inline btn-action" id="MobilePhoneButton" onclick="updateDelve('MobilePhone')" title="submit changes">
+                                                <i class="fa fa-save fa-lg" aria-hidden="true"></i>
+                                            </span>
+                                        </div>
+                                        {{/if}}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="bold" width="120">{{translate "peopledirectory.userdepartment"}}</td>
+                                    <td id="ed-department">{{department}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+            </div>
+        </div>
+        <div class="small-12 medium-4 columns">
+            <div class="template-profile">
+                <section class="widget-container white-bg">
+                    <h2 class="ia-profile-name">{{translate "peoplelist.certifications"}}</h2>
+                    <div class="value-action-row">
+                        <p id="ed-certs">{{certifications}}</p>
+                        {{#if CanEditData}}
+                        <span class="profile-edit-link btn-action" id="CertsEditButton"><i class="fa fa-pencil fa-lg" aria-hidden="true"></i></span>
+                        {{/if}}
+                    </div>
+                    {{#if CanEditData}}
+                    <div id="edit-area-certification" style="display:none" class="value-action-edit-row">
+                        <textarea id="CertsEdit" cols="30" rows="4" name="Certs"></textarea>
+                        <span class=" btn-action d_inline" id="CertsButton" onclick="updateDelve('Certs')" title="submit changes">
+                            <i class="fa fa-save fa-lg" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    {{/if}}
+
+                    <h2 class="ia-profile-name">{{translate "peoplelist.techskills"}}</h2>
+                    <div class="value-action-row">
+                        <p id="ed-skills">{{skills}}</p>
+                        {{#if CanEditData}}
+                        <span class="profile-edit-link btn-action" id="SkillsEditButton"><i class="fa fa-pencil fa-lg" aria-hidden="true"></i></span>
+                        {{/if}}
+                    </div>
+                    {{#if CanEditData}}
+                    <div id="edit-area-skills" style="display:none" class="value-action-edit-row">
+                        <textarea id="SkillsEdit" cols="30" rows="4" name="Skills"></textarea>
+                        <span class="btn-action d_inline" id="SkillsButton" onclick="updateDelve('Skills')" title="submit changes">
+                            <i class="fa fa-save fa-lg" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    {{/if}}
+                </section>
+            </div>
+        </div>
+        <div class="small-12 medium-4 columns">
+            <div class="template-profile">
+                <section class="widget-container white-bg">
+                    <h2 class="ia-profile-name">{{translate "peoplelist.aboutme"}}</h2>
+                    <div class="value-action-row">
+                        <p id="ed-aboutme">{{{aboutme}}}</p>
+                        {{#if CanEditData}}
+                        <span class="profile-edit-link btn-action" id="AboutMeEditButton"><i class="fa fa-pencil fa-lg" aria-hidden="true"></i></span>
+                        {{/if}}
+                    </div>
+                    {{#if CanEditData}}
+                    <div id="edit-area-aboutme" style="display:none" class="value-action-edit-row">
+                        <textarea id="AboutMeEdit" size="15" name="AboutMe" cols="30" rows="4"></textarea>
+                        <span class="btn-action d_inline" id="AboutMeButton" onclick="updateDelve('AboutMe')" title="submit changes">
+                            <i class="fa fa-save fa-lg" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    {{/if}}
+
+                    <h2 class="ia-profile-name">{{translate "peoplelist.hobbies"}}</h2>
+                    <div class="value-action-row">
+                        <p id="ed-hobbies">{{hobbies}}</p>
+                        {{#if CanEditData}}
+                        <span class="profile-edit-link btn-action" id="HobbiesEditButton"><i class="fa fa-pencil fa-lg" aria-hidden="true"></i></span>
+                        {{/if}}
+                    </div>
+                    {{#if CanEditData}}
+
+                    <div id="edit-area-hobbies" style="display:none" class="value-action-edit-row">
+                        <textarea id="HobbiesEdit" cols="30" rows="4" name="Hobbies"></textarea>
+                        <span class="btn-action d_inline" id="HobbiesButton" onclick="updateDelve('Hobbies')" title="submit changes">
+                            <i class="fa fa-save fa-lg" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    {{/if}}
+
+                </section>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+
+    $("#AboutMeEditButton").click(function () {
+        var myAboutMe = $("#ed-aboutme").text();
+        $("#AboutMeEdit").val(myAboutMe);
+        $("#edit-area-aboutme").toggle();
+    });
+    $("#MobilePhoneEditButton").click(function () {
+        var myMobile = $("#ed-mobile").text();
+        $("#edit-area-mobile").toggle();
+        $("#MobilePhoneEdit").val(myMobile);
+    });
+    $("#HobbiesEditButton").click(function () {
+        var myHobbies = $("#ed-hobbies").text();
+        $("#edit-area-hobbies").toggle();
+        $("#HobbiesEdit").val(myHobbies);
+    });
+    $("#SkillsEditButton").click(function () {
+        var mySkills = $("#ed-skills").text();
+        $("#edit-area-skills").toggle();
+        $("#SkillsEdit").val(mySkills);
+    });
+    $("#CertsEditButton").click(function () {
+        var myCerts = $("#ed-certs").text();
+        $("#edit-area-certification").toggle();
+        $("#CertsEdit").val(myCerts);
+    });
+
+    function updateDelve(elem) {
+        SP.SOD.executeFunc("sp.js", "SP.ClientContext", function () {
+            SP.SOD.registerSod("sp.userprofiles.js", SP.Utilities.Utility.getLayoutsPageUrl(
+                "sp.userprofiles.js"));
+            SP.SOD.executeFunc("sp.userprofiles.js", "SP.UserProfiles.PeopleManager", SetCurrentUserProperties);
+        });
+        var userProfileProperties;
+
+        function SetCurrentUserProperties() {
+            //Get Current Context
+            var clientContext = SP.ClientContext.get_current();
+
+            //Get Instance of People Manager Class
+            var peopleManager = new SP.UserProfiles.PeopleManager(clientContext);
+
+            //Get properties of the current user
+            userProfileProperties = peopleManager.getMyProperties();
+
+            //Get only the accountname instead of all the properties.
+            clientContext.load(userProfileProperties, "AccountName");
+
+            //Execute the Query.
+            clientContext.executeQueryAsync(function () {
+
+                //Get the account name of the current user. It will be in the following format: "i:0#.f|membership|username@yoursite.onmicrosoft.com"
+                var currentUserAccountName = userProfileProperties.get_accountName();
+                var multipleValues = [];
+                switch (elem) {
+                    case "AboutMe":
+                        myAboutMe = $("#AboutMeEdit").val();
+                        peopleManager.setSingleValueProfileProperty(currentUserAccountName, "AboutMe", myAboutMe);
+
+                        $("#ed-aboutme").text(myAboutMe);
+                        $("#edit-area-aboutme").toggle();
+                        break;
+                    case "Skills":
+                        newSkills = $("#SkillsEdit").val();
+                        peopleManager.setSingleValueProfileProperty(currentUserAccountName, "SPS-Skills", newSkills);
+
+                        $("#ed-skills").text(newSkills);
+                        $("#edit-area-skills").toggle();
+                        break;
+                    case "Hobbies":
+                        newHobbies = $("#HobbiesEdit").val();
+                        peopleManager.setSingleValueProfileProperty(currentUserAccountName, "SPS-Interests", newHobbies);
+
+                        $("#ed-hobbies").text(newHobbies);
+                        $("#edit-area-hobbies").toggle();
+                        break;
+                    case "Certs":
+                        newCerts = $("#CertsEdit").val();
+                        peopleManager.setSingleValueProfileProperty(currentUserAccountName, "SPS-School", newCerts);
+
+                        $("#ed-certs").text(newCerts);
+                        $("#edit-area-certification").toggle();
+                        break;
+                    case "MobilePhone":
+                        newMobile = $("#MobilePhoneEdit").val();
+                        peopleManager.setSingleValueProfileProperty(currentUserAccountName, "CellPhone", newMobile);
+
+                        $("#ed-mobile").text(newMobile);
+                        $("#edit-area-mobile").toggle();
+                        break;
+                }
+
+                //Execute the Query.
+                clientContext.executeQueryAsync(function () {
+                    Akumina.AddIn.Logger.WriteInfoLog('Updated User Properties Successfully !');
+                },
+                    function (sender, args) {
+                        //On Error
+                        Akumina.AddIn.Logger.WriteErrorLog('UpdateUserProperties Request failed. ' + args.get_message());
+                    });
+            }, function (sender, args) {
+                //On Error
+                Akumina.AddIn.Logger.WriteErrorLog('UpdateUserProperties Request failed. ' + args.get_message());
+            });
+        };
+    }
+
+    function SetMultipleValues(container, multipleValues) {
+        var labels = "";
+        for (var i = 0; i < multipleValues.length; i++) {
+            labels += '<label class="rounded-tag">' + multipleValues[i] + '</label>';
+        }
+        $(container).html(labels);
+    }
+</script>

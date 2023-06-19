@@ -1,0 +1,122 @@
+{
+    "Definition": {
+        "Name": "EmployeeDetailWidget",
+        "Description": "Displays the detailed profile information for a user from the People directory",
+        "Class": "Akumina.AddIn.EmployeeDetailWidget",
+        "Version": "{CurrentBuildVersion}",
+        "Properties": [{
+                "name": "selectfields",
+                "friendlyname": "{propertyfriendlynames.friendlyname_selectfields}",
+                "value": "",
+                "type": "string"
+            },
+            {
+                "name": "libraryname",
+                "friendlyname": "{propertyfriendlynames.friendlyname_libraryname}",
+                "value": "",
+                "type": "string"
+            },
+            {
+                "name": "allowchangebackground",
+                "friendlyname": "{myprofile.propertyfriendlynames.friendlyname_allowchangebackground}",
+                "value": "true",
+                "type": "bool"
+            },
+            {
+                "name": "allowchangemobilephone",
+                "friendlyname": "{myprofile.propertyfriendlynames.friendlyname_allowchangemobilephone}",
+                "value": "true",
+                "type": "bool"
+            },
+            {
+                "name": "allowchangefax",
+                "friendlyname": "{myprofile.propertyfriendlynames.friendlyname_allowchangefax}",
+                "value": "true",
+                "type": "bool"
+            },
+            {
+                "name": "allowchangeschool",
+                "friendlyname": "{myprofile.propertyfriendlynames.friendlyname_allowchangeschool}",
+                "value": "true",
+                "type": "bool"
+            },
+            {
+                "name": "allowchangeskills",
+                "friendlyname": "{myprofile.propertyfriendlynames.friendlyname_allowchangeskills}",
+                "value": "true",
+                "type": "bool"
+            },
+            {
+                "name": "allowchangeaboutme",
+                "friendlyname": "{myprofile.propertyfriendlynames.friendlyname_allowchangeaboutme}",
+                "value": "true",
+                "type": "bool"
+            },
+            {
+                "name": "allowchangeinterests",
+                "friendlyname": "{myprofile.propertyfriendlynames.friendlyname_allowchangeinterests}",
+                "value": "true",
+                "type": "bool"
+            },
+            {
+                "name": "viewxml",
+                "friendlyname": "{propertyfriendlynames.friendlyname_viewxml}",
+                "value": "",
+                "type": "string"
+            },
+            {
+                "name": "isroot",
+                "friendlyname": "{propertyfriendlynames.friendlyname_isroot}",
+                "value": "true  ",
+                "type": "bool"
+            },
+            {
+                "name": "sitecollectionurl",
+                "friendlyname": "{propertyfriendlynames.friendlyname_sitecollectionurl}",
+                "value": "",
+                "type": "siteselector"
+            },
+            {
+                "name": "uicallbackmethod",
+                "friendlyname": "{propertyfriendlynames.friendlyname_uicallbackmethod}",
+                "value": "",
+                "type": "string"
+            },
+            {
+                "name": "callbackmethod",
+                "friendlyname": "{propertyfriendlynames.friendlyname_callbackmethod}",
+                "value": "",
+                "type": "string"
+            }
+        ],
+        "Views": [{
+                "Name": "NCIEmployeeDetail",
+                "Path": "/{AssetLibraryName}/DigitalWorkPlace/Content/Templates/EmployeeDetailWidget/NCIEmployeeDetail.html",
+                "Id": "103e0ac4-cca4-408f-ba1c-8d36f9a19b45"
+            },
+            {
+                "Name": "NCIEmployeeDetailWithEdit",
+                "Path": "/{AssetLibraryName}/DigitalWorkPlace/Content/Templates/EmployeeDetailWidget/NCIEmployeeDetailWithEdit.html",
+                "Id": "0f2309d1-5f7c-44ff-a455-a8fcc5cf80e1"
+            }
+        ],
+        "JS": {
+            "Default": "/{AssetLibraryName}/DigitalWorkPlace/JS/widgets/employeedetailwidget.js"
+        }
+    },
+    "Instances": [
+        {
+            "Name": "NCI Employee Detail Widget",
+            "Id": "a589ed06-f0e9-486e-b299-e0d196daa5f4",
+            "Description": "Displays the detailed profile information for a user found in the People Directory",
+            "Icon": "fa fa-user",
+            "SelectedView": "NCIEmployeeDetail",
+            "AvailableViews": [],
+            "HiddenFields": [],
+            "Properties": []
+        }
+],
+"Options": {
+    "IsPartialDefinition": true
+}
+}
