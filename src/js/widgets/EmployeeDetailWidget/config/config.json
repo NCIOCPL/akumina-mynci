@@ -111,7 +111,7 @@
             "Description": "Displays the detailed profile information for a user found in the People Directory",
             "Icon": "fa fa-user",
             "SelectedView": "NCIEmployeeDetail",
-            "AvailableViews": [],
+            "AvailableViews": ["NCIEmployeeDetail"],
             "HiddenFields": [],
             "Properties": []
         }
