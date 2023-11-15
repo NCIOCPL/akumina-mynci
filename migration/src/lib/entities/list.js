@@ -85,7 +85,32 @@ class SPList extends SPBase {
    * @param {string} itemId The SharePoint item ID.
    */
   async deleteItem(listName, itemId) {
-    console.log('Stubbed out');
+    try {
+      //const SPClient = await this.client;
+      const headers = {
+        'Accept': 'application/json;odata=verbose',
+        'Content-Type': 'application/json',
+        'If-Match': '"1"',
+        'X-HTTP-Method': 'DELETE'
+      };
+
+      let url = `${this.siteURL}_api/web/lists/GetByTitle('${listName}')/items(${itemId})`;
+      
+      //console.log(url);
+      //await this.axios.delete(url);
+
+      let item = await this.axios ({
+        method: 'post',
+        url: url,
+        headers: headers,
+        data: {},
+      });
+
+    //this.axios.delete(item);
+    console.log('successfully deleted:' + item);
+    } catch (error) {
+      this.handleSPerror(error);
+    }
   }
 
   /**

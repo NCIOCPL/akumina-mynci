@@ -10,7 +10,8 @@ const spConfig = {
 
 var SPClient = new SharePointClient(spConfig);
 
-const itemsList = await SPClient.list.listItems('Blogs_AK');
+await SPClient.list.deleteItem('TEST_data_migration', '499182be-7793-49b5-a2e4-dd8cf81eea4d')
+const itemsList = await SPClient.list.listItems('TEST_data_migration');
 console.log(JSON.stringify(itemsList));
 
 //await SPClient.list.addItem();
