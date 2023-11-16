@@ -26,7 +26,7 @@ class SPList extends SPBase {
       const headers = SPClient.headers;
       headers['Accept'] = 'application/json;odata=verbose';
 
-      let url = `${this.siteURL}_api/web/lists/getbytitle('${listName}')/items?$select=Title&$top=100`;
+      let url = `${this.siteURL}_api/web/lists/getbytitle('${listName}')/items?$select=Title,Id&$top=100`;
 
       let allItems = [];
 
@@ -86,13 +86,17 @@ class SPList extends SPBase {
    */
   async deleteItem(listName, itemId) {
     try {
-      //const SPClient = await this.client;
-      const headers = {
-        'Accept': 'application/json;odata=verbose',
-        'Content-Type': 'application/json',
-        'If-Match': '"1"',
-        'X-HTTP-Method': 'DELETE'
-      };
+
+      const formDigestValue = await this.getFormDigestValue();
+      console.log(formDigestValue);
+
+      const SPClient = await this.client;
+      const headers = SPClient.headers;
+      headers['Accept'] = 'application/json;odata=verbose';
+      headers['Content-Type'] = 'application/json';
+      headers['If-Match'] = '*';
+      headers['X-HTTP-Method'] = 'DELETE';
+      headers['X-RequestDigest'] = formDigestValue;
 
       let url = `${this.siteURL}_api/web/lists/GetByTitle('${listName}')/items(${itemId})`;
       

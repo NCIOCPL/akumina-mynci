@@ -16,6 +16,27 @@ class SPBase {
     this.axios = axios;
   }
 
+  // standard method to get form digests for POST requests
+  async getFormDigestValue() {
+    try {
+      const SPClient = await this.client;
+      const headers = SPClient.headers;
+      headers['Accept'] = 'application/json;odata=verbose';
+
+      let response = await this.axios({
+        method: 'post',
+        url: `${this.siteURL}_api/contextinfo`,
+        headers: headers,
+        data: {},
+      });
+
+      // Return just the internal digest value
+      return response.data.d.GetContextWebInformation.FormDigestValue;
+    } catch (error) {
+      throw new Error('Error getting form digest value');
+    }
+  }
+
   // Method for handling errors
   handleSPerror(error) {
     if (error.response && error.response.data) {
