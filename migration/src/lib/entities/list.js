@@ -1,4 +1,5 @@
 import SPBase from '../base.js';
+import { v4 as uuidv4 } from 'uuid';
 
 /**
  * Items
@@ -9,24 +10,51 @@ class SPList extends SPBase {
    *
    * @param {SPClient} client A SharePoint client from node-sp-auth.
    * @param {string} siteURL The base SharePoint URL.
+   * @param {string} listName A SharePoint list title.
    */
 
-  constructor(client, siteURL) {
+  constructor(client, siteURL, listName) {
     super(client, siteURL); // Call the constructor of the parent class (SPBase)
+    this.listName = listName;
+    this.listContentType = null;
+  }
+
+  // Get list item content type for use in other requests
+  async getListContentType() {
+    if (this.listContentType === null) {
+      try {
+        const SPClient = await this.client;
+        const headers = SPClient.headers;
+        headers['Accept'] = 'application/json;odata=verbose';
+
+        let response = await this.axios({
+          method: 'get',
+          url: `${this.siteURL}/_api/web/lists/GetByTitle('${this.listName}')?$select=ListItemEntityTypeFullName`,
+          headers: headers,
+        });
+
+        // Return just the content type value
+        console.log('Retrieved content type value');
+        this.listContentType = response.data.d.ListItemEntityTypeFullName;
+      } catch (error) {
+        this.handleSPerror(error, 'Error getting list content type.');
+      }
+    } else {
+      console.log('Used cached content type value');
+    }
+    return this.listContentType;
   }
 
   /**
    * Lists the items in the list.
-   *
-   * @param {string} listName A SharePoint list title.
    */
-  async listItems(listName) {
+  async listItems() {
     try {
       const SPClient = await this.client;
       const headers = SPClient.headers;
       headers['Accept'] = 'application/json;odata=verbose';
 
-      let url = `${this.siteURL}_api/web/lists/getbytitle('${listName}')/items?$select=Title,Id&$top=100`;
+      let url = `${this.siteURL}/_api/web/lists/getbytitle('${this.listName}')/items?$select=Title,Id&$top=100`;
 
       let allItems = [];
 
@@ -52,43 +80,143 @@ class SPList extends SPBase {
 
       return allItems;
     } catch (error) {
-      this.handleSPerror(error);
+      this.handleSPerror(error, 'Error listing SharePoint items.');
     }
   }
 
   /**
    * Adds an item to a list.
    *
-   * @param {string} listName A SharePoint list title.
-   * @param {string} type A SharePoint ListItemEntityTypeFullName.
    * @param {object} itemData The SharePoint item data.
    */
-  async addItem(listName, type, itemData) {
-    console.log('Stubbed out');
+  async addItem(itemData) {
+    let contentType = await this.getListContentType();
+    let formDigestValue = await this.getFormDigestValue();
+
+    const SPClient = await this.client;
+    const headers = SPClient.headers;
+    headers['Accept'] = 'application/json;odata=verbose';
+    headers['Content-Type'] = 'application/json;odata=verbose';
+    headers['X-RequestDigest'] = formDigestValue;
+
+    let url = `${this.siteURL}/_api/web/lists/GetByTitle('${this.listName}')/items`;
+
+    var body = {
+      __metadata: {
+        type: contentType,
+      },
+    };
+
+    Object.keys(itemData).forEach((key) => {
+      body[key] = itemData[key];
+    });
+    let bodyString = JSON.stringify(body);
+
+    console.log(bodyString);
+
+    headers['Content-Length'] = bodyString.length;
+
+    let response = await this.axios({
+      method: 'post',
+      url: url,
+      headers: headers,
+      data: bodyString,
+    });
+
+    console.log(response);
+    return response;
   }
 
   /**
    * Add items to a list.
    *
-   * @param {string} listName A SharePoint list title.
-   * @param {string} type A SharePoint ListItemEntityTypeFullName.
    * @param {Array<Object>} items An array of SharePoint item data objects.
    */
-  async addItems(listName, type, items) {
-    console.log('Stubbed out');
+  async addItems(items) {
+    let contentType = await this.getListContentType();
+    let formDigestValue = await this.getFormDigestValue();
+    let batchGuid = uuidv4();
+    let changesetGuid = uuidv4();
+    let batchUrl = `${this.siteURL}/_api/$batch`;
+    let url = `${this.siteURL}/_api/web/lists/GetByTitle('${this.listName}')/items`;
+
+    const SPClient = await this.client;
+    const headers = SPClient.headers;
+
+    // creating the body
+    var batchContents = new Array();
+    items.forEach((item) => {
+      var body = {
+        __metadata: {
+          type: contentType,
+        },
+      };
+
+      Object.keys(item).forEach((key) => {
+        body[key] = item[key];
+      });
+      let bodyString = JSON.stringify(body);
+
+      // create the batch
+      batchContents.push('--changeset_' + changesetGuid);
+      batchContents.push('Content-Type: application/http');
+      batchContents.push('Content-Transfer-Encoding: binary');
+      batchContents.push('');
+      batchContents.push('POST ' + url + ' HTTP/1.1');
+      //batchContents.push('Content-Type: application/json;odata=nometadata');
+      batchContents.push('Content-Type: application/json;odata=verbose');
+      batchContents.push('');
+      batchContents.push(bodyString);
+      //batchContents.push('{"Title":"My Test Batch"}');
+      batchContents.push('');
+    });
+    batchContents.push('--changeset_' + changesetGuid + '--');
+
+    // generate the body of the batch
+    var batchBody = batchContents.join('\r\n');
+
+    // start with a clean array
+    batchContents = new Array();
+
+    // create batch for creating items
+    batchContents.push('--batch_' + batchGuid);
+    batchContents.push(
+      `Content-Type: multipart/mixed; boundary="changeset_${changesetGuid}"`
+    );
+    batchContents.push('Host: nih.sharepoint.com');
+    batchContents.push('Content-Transfer-Encoding: binary');
+    batchContents.push('');
+    batchContents.push(batchBody);
+    batchContents.push('--batch_' + batchGuid + '--');
+
+    batchBody = batchContents.join('\r\n');
+
+    console.debug(batchBody);
+
+    headers['Content-Type'] = `multipart/mixed; boundary=batch_${batchGuid}`;
+    headers['Host'] = 'nih.sharepoint.com';
+    headers['X-RequestDigest'] = formDigestValue;
+    headers['Content-Length'] = batchBody.length;
+
+    let response = await this.axios({
+      method: 'post',
+      url: batchUrl,
+      headers: headers,
+      data: batchBody,
+    });
+
+    console.log(response);
+    return response;
   }
 
   /**
    * Deletes an item to a list.
    *
-   * @param {string} listName A SharePoint list title.
    * @param {string} itemId The SharePoint item ID.
    */
-  async deleteItem(listName, itemId) {
+  async deleteItem(itemId) {
     try {
-
       const formDigestValue = await this.getFormDigestValue();
-      console.log(formDigestValue);
 
       const SPClient = await this.client;
       const headers = SPClient.headers;
@@ -98,32 +226,28 @@ class SPList extends SPBase {
       headers['X-HTTP-Method'] = 'DELETE';
       headers['X-RequestDigest'] = formDigestValue;
 
-      let url = `${this.siteURL}_api/web/lists/GetByTitle('${listName}')/items(${itemId})`;
-      
-      //console.log(url);
-      //await this.axios.delete(url);
+      let url = `${this.siteURL}/_api/web/lists/GetByTitle('${this.listName}')/items(${itemId})`;
 
-      let item = await this.axios ({
+      let item = await this.axios({
         method: 'post',
         url: url,
         headers: headers,
         data: {},
       });
 
-    //this.axios.delete(item);
-    console.log('successfully deleted:' + item);
+      console.log('Successfully deleted: ' + item);
+      return;
     } catch (error) {
-      this.handleSPerror(error);
+      this.handleSPerror(error, 'Error deleting SharePoint item.');
     }
   }
 
   /**
    * Delete items to a list.
    *
-   * @param {string} listName A SharePoint list title.
    * @param {Array<String>} items An array of SharePoint item IDs.
    */
-  async deleteItems(listName, items) {
+  async deleteItems(items) {
     console.log('Stubbed out');
   }
 }

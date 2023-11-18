@@ -14,31 +14,38 @@ class SPBase {
     this.client = client;
     this.siteURL = siteURL;
     this.axios = axios;
+    this.FormDigestValue = null;
   }
 
   // standard method to get form digests for POST requests
   async getFormDigestValue() {
-    try {
-      const SPClient = await this.client;
-      const headers = SPClient.headers;
-      headers['Accept'] = 'application/json;odata=verbose';
+    if (this.FormDigestValue === null) {
+      try {
+        const SPClient = await this.client;
+        const headers = SPClient.headers;
+        headers['Accept'] = 'application/json;odata=verbose';
 
-      let response = await this.axios({
-        method: 'post',
-        url: `${this.siteURL}_api/contextinfo`,
-        headers: headers,
-        data: {},
-      });
+        let response = await this.axios({
+          method: 'post',
+          url: `${this.siteURL}/_api/contextinfo`,
+          headers: headers,
+          data: {},
+        });
 
-      // Return just the internal digest value
-      return response.data.d.GetContextWebInformation.FormDigestValue;
-    } catch (error) {
-      throw new Error('Error getting form digest value');
+        // Return just the internal digest value
+        this.FormDigestValue =
+          response.data.d.GetContextWebInformation.FormDigestValue;
+      } catch (error) {
+        this.handleSPerror(error, 'Error getting form digest value');
+      }
+    } else {
+      console.log("Used cached form digest value;");
     }
+    return this.FormDigestValue;
   }
 
   // Method for handling errors
-  handleSPerror(error) {
+  handleSPerror(error, errorMessage) {
     if (error.response && error.response.data) {
       const statusCode = error.response.status || 'Unknown status';
       const statusText = error.response.statusText || '';
@@ -51,7 +58,7 @@ class SPBase {
     } else {
       // Handle other types of errors or Axios errors without a response
       console.error('Error:', error);
-      throw new Error('An error occurred while communicating with SharePoint');
+      throw new Error(errorMessage);
     }
   }
 }

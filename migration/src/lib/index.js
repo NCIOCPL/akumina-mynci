@@ -35,9 +35,11 @@ class SharePointClient {
 
   /**
    * Gets the sites category.
+   *
+   * @param {string} listName A SharePoint list title.
    */
-  get list() {
-    return new SPList(this.client, this.siteURL);
+  getList(listName) {
+    return new SPList(this.client, this.siteURL, listName);
   }
 }
 
