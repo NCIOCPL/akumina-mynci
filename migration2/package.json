@@ -1,0 +1,25 @@
+{
+  "name": "migration2",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@pnp/common": "^2.15.0",
+    "@pnp/logging": "^3.20.0",
+    "@pnp/nodejs-commonjs": "^2.15.0",
+    "@pnp/odata": "^2.15.0",
+    "@pnp/sp": "^3.20.0",
+    "@pnp/sp-commonjs": "^2.15.0",
+    "dotenv": "^16.3.1",
+    "pnp-auth": "^2.0.0"
+  },
+  "type": "module",
+  "devDependencies": {
+    "typescript": "^5.2.2"
+  }
+}
