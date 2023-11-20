@@ -14,14 +14,14 @@ var TEST_data_migration = SPClient.getList('TEST_data_migration');
 //const itemsListBefore = await SPClient.list.listItems('TEST_data_migration');
 //console.log(JSON.stringify(itemsListBefore));
 
-await TEST_data_migration.addItem({
-  Title: 'My Test Non-Batch',
-});
+// await TEST_data_migration.addItem({
+//   Title: 'My Test',
+// });
 
 await TEST_data_migration.addItems([{
-  Title: "My Test Batch"
+  Title: "My Test"
 },{
-  Title: "My Test Batch 2"
+  Title: "My Test"
 }]);
 
 //await SPClient.list.deleteItem('TEST_data_migration', '1');
