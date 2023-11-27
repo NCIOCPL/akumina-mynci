@@ -1,6 +1,6 @@
 import { bootstrap } from 'pnp-auth';
 import { sp } from '@pnp/sp-commonjs';
-import URLConverter from './url-converter.js';
+import URLConverter from './url-converter';
 
 /**
  * Represents an Akumina SharePoint site
