@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<nodes>
+  <node>
+    <Title>&lt;a href="/topics/request-express-service"&gt; Request Express Service&lt;/a&gt;</Title>
+    <Body><![CDATA[<h3> </h3>
+<p style="text-align:center"><a href="https://planon.nci.nih.gov/case/bp/SR001"><img alt="Express Services" src="/sites/mynci.cancer.gov/files/images/ExpSvcs-V2.jpg" style="width:236px; height:128px" /></a>  <a href="https://planon.nci.nih.gov/case/bp/SR002"><img alt="Furniture Requests" src="/sites/mynci.cancer.gov/files/images/FurnReqs-V2.jpg" style="width:236px; height:128px" /></a>  <a href="https://planon.nci.nih.gov/case/bp/SR003"></a><br />                                                               <br /> </p>
+<p style="text-align:center"> <a href="https://planon.nci.nih.gov/case/bp/MW"><img alt="Move Request" src="/sites/mynci.cancer.gov/files/images/Moves-V2_0.jpg" style="width:236px; height:128px" /></a>  <a href="https://planon.nci.nih.gov/case/bp/ML001"></a><br /> </p>
+<hr /><h3> </h3>
+<div>
+<h3>Express Services Instructions</h3>
+<div>
+<ul><li>Select Express Services to access request form (shown below)</li>
+<li>Your name will automatically populate</li>
+<li>You may add information in the "on behalf of" row if needed</li>
+<li>Select your issue from the "Request Type" drop down</li>
+<li>After selecting "Request Type", select a "Type of Work" from the drop down</li>
+<li>Your building location will automatically populate </li>
+<li>You may modify the "building" and "space" drop down if the work requested is other than your work location</li>
+<li>You may add additional comments necessary for your request in the "Comments" section</li>
+<li>You may add documents that may pertain to your request</li>
+<li>Once complete, click "Submit"</li>
+<li>You will receive a confirmation with a ticket number </li>
+<li>If you have any questions once your ticket has been submitted, please contact Archie Pitt-Adabie with Express Services, <span>pittadabiea@mail.nih.gov</span></li>
+</ul><h3></h3>
+</div>
+</div>
+<p> </p>
+]]></Body>
+    <Short-Description>Express Services, Furniture Request and Move Requests.</Short-Description>
+    <Image></Image>
+    <Content-Owner--Organization->&lt;a href="/nciataglance/organization/directory/nci/od/om/osfm"
+      typeof="skos:Concept" property="rdfs:label skos:prefLabel" datatype=""&gt;OFFICE OF SPACE
+      &amp; FACILITY MANAGEMENT&lt;/a&gt;</Content-Owner--Organization->
+    <Contact-for-this-Content>PERSON PERSON</Contact-for-this-Content>
+    <For-More-Information></For-More-Information>
+    <Topics>&lt;a href="/topics/space-and-facilities-old" typeof="skos:Concept" property="rdfs:label
+      skos:prefLabel" datatype=""&gt;Space and Facilities&lt;/a&gt;</Topics>
+    <Date-Posted>Wednesday, March 22, 2023</Date-Posted>
+    <Date-Updated>Wednesday, March 22, 2023</Date-Updated>
+  </node>
+  <node>
+    <Title>&lt;a
+      href="/topics/dccps-fellow-dr-Jane-Doe-named-2020-fellows-award-research-excellence-nih"&gt;
+      DCCPS fellow, Dr. Jane Doe, Named a 2020 Fellows Award for Research Excellence by
+      NIH&lt;/a&gt;</Title>
+    <Body><![CDATA[
+<p>Congratulations are in order for Jane Doe, Ph.D., M.A., a Cancer Research Training Award Fellow in DCCPS, for being chosen as a 2020 Fellows Award for Research Excellence (FARE). FARE fellows are recognized by NIH for their outstanding scientific research as intramural postdoctoral fellows.</p>
+<p><span>Within DCCPS Dr. Doe works in the  </span><a href="http://cancercontrol.cancer.gov/brp/bbpsb/" target="_blank">Basic Biobehavioral and Psychological Sciences Branch</a><span>, which works to advance research in biobehavioral mechanisms and psychological processes to reduce cancer risk and improve outcomes. Dr. Doe’s research interests include attention, memory, medical imaging interpretation, and cancer survivorship.</span></p>
+<p><a href="https://www.training.nih.gov/felcom/fare" rel="nofollow">To be chosen as a FARE fellow,</a> Dr. Doe submitted an abstract on her research that was peer reviewed in a blind study section, and furthermore recognized as being a part of the top 25% of submitted abstracts. As a FARE fellow, she will receive a travel stipend to attend and present on her chosen abstract, serve as judge for the 2021 FARE fellow competition, and provided the opportunity to speak about her work at upcoming research festivals.</p>
+<p>Congratulations again Dr. Doe, being chosen as FARE fellow is an NIH-wide honor!</p>
+<p> </p>
+]]></Body>
+    <Short-Description>Jane Doe, Ph.D., M.A., a Cancer Research Training Award Fellow in
+      DCCPS, recognized as a fellow in the 2020 Fellows Award for Research Excellence (FARE) class. </Short-Description>
+    <Image></Image>
+    <Content-Owner--Organization->&lt;a href="/nciataglance/organization/directory/nci/od/ocpl"
+      typeof="skos:Concept" property="rdfs:label skos:prefLabel" datatype=""&gt;OFFICE OF
+      COMMUNICATIONS &amp; PUBLIC LIAISON&lt;/a&gt;</Content-Owner--Organization->
+    <Contact-for-this-Content>PERSON, PERSON</Contact-for-this-Content>
+    <For-More-Information></For-More-Information>
+    <Topics>&lt;a href="/topics/communications-branding" typeof="skos:Concept" property="rdfs:label
+      skos:prefLabel" datatype=""&gt;Communications and Branding&lt;/a&gt;</Topics>
+    <Date-Posted>Tuesday, October 15, 2019</Date-Posted>
+    <Date-Updated>Tuesday, October 15, 2019</Date-Updated>
+  </node>
+</nodes>

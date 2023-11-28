@@ -14,4 +14,7 @@ const spConfig = {
   clientSecret: process.env.CLIENT_SECRET,
 };
 
+var content = new DrupalContent();
+content.loadContent(/* filename */);
 var site = new AkuminaSite(spConfig);
+site.truncateList('test');
