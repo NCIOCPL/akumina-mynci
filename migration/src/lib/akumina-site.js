@@ -1,6 +1,6 @@
 import { bootstrap } from 'pnp-auth';
 import { sp } from '@pnp/sp-commonjs';
-import URLConverter from './url-converter';
+import URLConverter from './url-converter.js';
 
 /**
  * Represents an Akumina SharePoint site
@@ -43,14 +43,42 @@ class AkuminaSite {
   }
 
   /**
-   * Delete all content from a SharePoint list.
+   * Convert URLs
    *
-   * @param {string} listName A SharePoint list name.
-   * @param {integer} batchSize Size of batches when looping
-   * @param {Array<integer>} exclude A list of IDs to exclude
    */
-  async truncateList(listName) {
-    console.log('truncated!');
+  async getURLConverter() {
+    return new URLConverter();
+  }
+
+  /**
+   * Import files to SharePoint library
+   *
+   * @param {string} listName SharePoint list name
+   * @param {Array<object>} items An array of items to import
+   * @param {string} items[n].filePath Path to the file to upload
+   * @param {object} items[n].metadata Metadata to be added to the file
+   */
+  async importFiles(listName, items, batchSize = 100) {
+    // Loop through the files provided
+    // Upload each item
+    // Update each uploaded item with the metadata
+    console.log('uploaded!');
+  }
+
+  /**
+   * Import list items to SharePoint list
+   *
+   * @param {string} listName SharePoint list name
+   * @param {Array<object>} items An array of items to import, each item containing only the appropriately named columns
+   * @param {integer} batchSize Size of batches when looping
+   */
+  async importList(listName, items, batchSize = 100) {
+    // Loop through the items provided
+    // Construct batches of the batchSize
+    // For each batch, add the items to the list in batch
+    // Commit the batch
+    // Continue to the next batch until done
+    console.log('imported!');
   }
 
   /**
@@ -65,11 +93,14 @@ class AkuminaSite {
   }
 
   /**
-   * Convert URLs
+   * Delete all content from a SharePoint list.
    *
+   * @param {string} listName A SharePoint list name.
+   * @param {Array<integer>} exclude A list of IDs to exclude
+   * @param {integer} batchSize Size of batches when looping
    */
-  async getURLConverter() {
-    return new URLConverter();
+  async truncateList(listName, exclude = [], batchSize = 100) {
+    console.log('truncated!');
   }
 }
 
