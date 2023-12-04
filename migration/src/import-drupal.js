@@ -45,3 +45,6 @@ await site.importList('TEST_data_migration', drupalExport.events); // will proba
 
 // Import pages
 await site.importList('TEST_data_migration', drupalExport.pages); // will probably need to convert drupalExport.pages to the correct format before importing;
+
+let exclude = [3, 4, 6, 7, 8, 10, 12, 14, 15, 18, 19, 20, 23, 25, 26, 30, 31, 32, 33, 35, 37, 38, 39, 40, 41, 42, 43, 57, 58, 59, 60, 61, 62, 63, 70, 71, 72, 75, 76, 78]
+await site.truncateList('TEST_data_migration', exclude);
