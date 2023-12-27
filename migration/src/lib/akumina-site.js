@@ -86,6 +86,10 @@ class AkuminaSite {
    *
    */
   async reset(listName) {
+
+    for (let item of listName) {
+      this.truncateList(item);
+    }
     // truncateList("a");
     // truncateList("b");
     // truncateList("c");
