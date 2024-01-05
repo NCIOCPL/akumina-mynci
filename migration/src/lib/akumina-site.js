@@ -78,6 +78,20 @@ class AkuminaSite {
     // For each batch, add the items to the list in batch
     // Commit the batch
     // Continue to the next batch until done
+    const list = sp.web.lists.getByTitle(listName);
+    let itemsImported = 0;
+
+    while (itemsImported < items.length) {
+      const batch = sp.createBatch();
+
+      for (let i = 0; i < batchSize && itemsImported < items.length; i++) {
+        list.items.inBatch(batch).add(items[itemsImported]);
+        itemsImported++;
+      }
+
+      await batch.execute();
+    }
+    
     console.log('imported!');
   }
 

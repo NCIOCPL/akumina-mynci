@@ -45,6 +45,16 @@ await site.importFiles('LIST_NAME', images); // will probably need to convert im
 var files = drupalExport.findLinkedFiles();
 await site.importFiles('LIST_NAME', files); // will probably need to convert files to the correct format before importing;
 
+// const importTest = [
+//   {
+//     Title: 'Batch Test 1'
+//   },
+//   {
+//     Title: 'Batch Test 2'
+//   },
+//   {
+//     Title: 'Batch Test 3'
+//   }];
 // Import blogs
 await site.importList('TEST_data_migration', drupalExport.blogs); // will probably need to convert drupalExport.blogs to the correct format before importing;
 
