@@ -1,0 +1,1 @@
+This directory holds migration related files we don't want to check into the repository.

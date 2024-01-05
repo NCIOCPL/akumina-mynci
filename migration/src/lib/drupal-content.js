@@ -13,31 +13,37 @@ class DrupalContent {
   constructor() {
     this.images = new Array();
     this.files = new Array();
-    this.blogs = new Array();
-    this.events = new Array();
-    this.pages = new Array();
+      this.about = new Array();
+      this.announcements = new Array();
+      this.blogs = new Array();
+      this.coreContent = new Array();
+      this.events = new Array();
+      this.file = new Array();
+      this.forms = new Array();
+      this.holidayEvents = new Array();
+      this.organizationDetails = new Array();
+      this.policy = new Array();
   }
 
   /**
    * Load content from XML export.
    *
-   *
    * @param {object} exports Export file paths by key.
-   * @param {string} exports.blogs API site URL.
    */
-  async loadContent({ blogs = null, events = null } = {}) {
-    try {
-      // TBD: Reference actual files, maybe in a loop?
-      const filePath = './__mocks/export_content.xml';
-      const xmlData = await fsPromises.readFile(filePath);
+  async loadContent(exports) {
 
-      const parser = new xml2js.Parser();
-      const results = await parser.parseStringPromise(xmlData);
-
-      // TBD: Point to results of files above
-      this.blogs = results.nodes.node;
-      this.events = results.nodes.node;
-      this.pages = results.nodes.node;
+      try {
+          const exportMap = new Map(Object.entries(exports));
+          for await (const key of exportMap.keys()){
+              let filePath = '';
+              if(exportMap.has(key)){
+                  filePath = exportMap.get(key);
+              }
+              const xmlData = await fsPromises.readFile(filePath);
+              const parser = new xml2js.Parser();
+              const results = await parser.parseStringPromise(xmlData);
+              this[key] = results.nodes.node;
+          }
     } catch (err) {
       console.error('Error:', err);
     }
