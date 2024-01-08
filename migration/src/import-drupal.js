@@ -10,8 +10,16 @@ dotenv.config({ path: `${__dirname}/../.env` });
 
 // Define our content export location
 const drupalExports = {
-  blogs: 'path/to/blogs.xml',
-  events: 'path/to/events.xml',
+  about: '../content/about.xml',
+  announcements: '../content/announcements.xml',
+  blogs: '../content/blogs.xml',
+  coreContent: '../content/core-content.xml',
+  events: '../content/events.xml',
+  file: '../content/file.xml',
+  forms: '../content/forms.xml',
+  holidayEvents: '../content/holiday-events.xml',
+  organizationDetails: '../content/organization-details.xml',
+  policy: '../content/policy.xml',
 };
 
 // Set up the export data
