@@ -25,6 +25,7 @@ const drupalExports = {
 // Set up the export data
 var drupalExport = new DrupalContent();
 await drupalExport.loadContent(drupalExports);
+await drupalExport.prepareContent();
 
 // Set up the SharePoint connection
 const spConfig = {
