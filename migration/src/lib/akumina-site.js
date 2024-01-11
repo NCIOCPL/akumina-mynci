@@ -1,6 +1,7 @@
 import { bootstrap } from 'pnp-auth';
 import { sp } from '@pnp/sp-commonjs';
 import URLConverter from './url-converter.js';
+import { promises as fs } from 'fs';
 
 /**
  * Represents an Akumina SharePoint site
@@ -53,16 +54,30 @@ class AkuminaSite {
   /**
    * Import files to SharePoint library
    *
-   * @param {string} listName SharePoint list name
+   * @param {string} listPath Path to SharePoint list
    * @param {Array<object>} items An array of items to import
-   * @param {string} items[n].filePath Path to the file to upload
-   * @param {object} items[n].metadata Metadata to be added to the file
+   * @param {string} items[n].path Path to the file to upload
+   * @param {string} items[n].name Name of file being uploaded
+   * @param {object} items[n].data Metadata to be added to the file
    */
-  async importFiles(listName, items, batchSize = 100) {
-    // Loop through the files provided
-    // Upload each item
-    // Update each uploaded item with the metadata
-    console.log('uploaded!');
+  async importFiles(listPath, items) {
+    try {
+      // Loop through files provided
+      for (let i = 0; i < items.length; i++) {
+        const fileContents = await fs.readFile(items[i].path, { encoding: null });
+
+        // Upload each item to SharePoint
+        const file = await sp.web
+          .getFolderByServerRelativeUrl(listPath)
+          .files.add(items[i].name, fileContents, true);
+    
+        // get item and update the uploaded file with the metadata
+        const item = await file.file.getItem();
+        await item.update(items[i].data);
+      }
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   /**

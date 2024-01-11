@@ -38,6 +38,15 @@ var site = new AkuminaSite(spConfig);
 // Reset the site, deleting all the old content
 await site.reset();
 
+// const importTest = [
+//   {
+//     path: '',
+//     name: "",
+//     data: {
+//       Description: ""
+//     }
+//   }
+// ];
 // Import images
 var images = drupalExport.findUsedImages();
 await site.importFiles('LIST_NAME', images); // will probably need to convert images to the correct format before importing;
