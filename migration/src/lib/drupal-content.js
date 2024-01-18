@@ -1,6 +1,16 @@
 import xml2js from 'xml2js';
 import { promises as fsPromises } from 'fs';
-import { blogMap } from "./maps.js";
+import { aboutMap } from "./maps/maps-about.js";
+import { announcementsMap } from "./maps/maps-announcements.js";
+import { blogsMap } from "./maps/maps-blogs.js";
+import { coreContentMap } from "./maps/maps-core-content.js";
+import { eventsMap } from "./maps/maps-events.js";
+import { fileMap } from "./maps/maps-file.js";
+import { formsMap } from "./maps/maps-forms.js";
+import { holidayEventsMap } from "./maps/maps-holiday-events.js";
+import { organizationDetailsMap } from "./maps/maps-organization-details.js";
+import { policyMap } from "./maps/maps-policy.js";
+
 
 
 /**
@@ -137,10 +147,38 @@ class DrupalContent {
         });
         return convertedItem;
     }
-
+    //Cycles through all of the Drupal export objects and builds Akumina variants applying the
+    //mapping between Drupal and Akumina fields and any transformations
+    this.about.forEach((element) => {
+        this.akumina_about.push(applyContentMap(element, aboutMap));
+    })
+    this.announcements.forEach((element) => {
+        this.akumina_announcements.push(applyContentMap(element, announcementsMap));
+    })
     this.blogs.forEach((element) => {
-        this.akumina_blogs.push(applyContentMap(element, blogMap));
+        this.akumina_blogs.push(applyContentMap(element, blogsMap));
       })
+    this.coreContent.forEach((element) => {
+        this.akumina_coreContent.push(applyContentMap(element, coreContentMap));
+    })
+    this.events.forEach((element) => {
+        this.akumina_events.push(applyContentMap(element, eventsMap));
+    })
+    this.file.forEach((element) => {
+        this.akumina_file.push(applyContentMap(element, fileMap));
+    })
+    this.forms.forEach((element) => {
+        this.akumina_forms.push(applyContentMap(element, formsMap));
+    })
+    this.holidayEvents.forEach((element) => {
+        this.akumina_holidayEvents.push(applyContentMap(element, holidayEventsMap));
+    })
+    this.organizationDetails.forEach((element) => {
+        this.akumina_organizationDetails.push(applyContentMap(element, organizationDetailsMap));
+    })
+    this.policy.forEach((element) => {
+        this.akumina_policy.push(applyContentMap(element, policyMap));
+    })
   }
 
   /**
