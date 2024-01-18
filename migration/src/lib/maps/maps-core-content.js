@@ -1,5 +1,5 @@
 
-export const blogMap = [
+export const coreContentMap = [
     {
         'SharePointColumn': 'Title',
         'ContentPaths': [
@@ -16,9 +16,7 @@ export const blogMap = [
                     'Paths': ['Body']
                 },
                 {
-                    'Paths': [
-                        'For-More-Information',
-                    ],
+                    'Paths': ['For-More-Information'],
                     'Transformation': 'convertLink'
                 }
             ],
@@ -44,16 +42,6 @@ export const blogMap = [
         ]
     },
     {
-        'SharePointColumn': 'Tags',
-            'ContentPaths':
-            [
-                {
-                    'Paths': ['Blog-Series'],
-                    'Transformation': 'convertTags'
-                }
-            ]
-    },
-    {
         'SharePointColumn': 'Department',
             'ContentPaths':
             [
@@ -74,25 +62,17 @@ export const blogMap = [
         ]
     },
     {
-        'SharePointColumn': 'StaticURL',
+        'SharePointColumn': 'Tags',
             'ContentPaths':
         [
             {
-                'Paths': ['Path']
+                'Paths': ['Topics'],
+                'Transformation': 'convertTags'
             }
         ]
     },
     {
-        'SharePointColumn': 'Topics',
-            'ContentPaths':
-        [
-            {
-                'Paths': ['Topics']
-            }
-        ]
-    },
-    {
-        'SharePointColumn': 'Date Posted',
+        'SharePointColumn': 'Publish Date',
             'ContentPaths':
         [
             {
@@ -101,14 +81,24 @@ export const blogMap = [
         ]
     },
     {
-        'SharePointColumn': 'Date Updated',
+        'SharePointColumn': 'Modified',
             'ContentPaths':
         [
             {
                 'Paths': ['Date-Updated']
             }
         ]
-    }
+    },
+    {
+        'SharePointColumn': 'StaticURL',
+        'ContentPaths':
+            [
+                {
+                    'Paths': ['Path']
+                }
+            ]
+    },
+
 ];
 
 
