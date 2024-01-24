@@ -3,6 +3,7 @@ import { dirname } from 'path';
 import dotenv from 'dotenv';
 import AkuminaSite from './lib/akumina-site.js';
 import DrupalContent from './lib/drupal-content.js';
+import URLConverter from './lib/url-converter.js';
 
 // Retrieve our secrets
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -26,7 +27,17 @@ const drupalExports = {
 var drupalExport = new DrupalContent();
 await drupalExport.loadContent(drupalExports);
 await drupalExport.prepareContent();
-
+//Create the map of old to new urls
+var urlsConverted = new URLConverter();
+await urlsConverted.loadURLs(drupalExport.akumina_about,'StaticURL','/Inside/en-us/');
+await urlsConverted.loadURLs(drupalExport.akumina_announcements,'StaticURL','/FoundationNews/en-us/');
+await urlsConverted.loadURLs(drupalExport.akumina_blogs,'StaticURL','/Blogs/en-us/');
+await urlsConverted.loadURLs(drupalExport.akumina_coreContent,'StaticURL','/Inside/en-us/');
+await urlsConverted.loadURLs(drupalExport.akumina_events,'StaticURL','/Events/en-us/');
+await urlsConverted.loadURLs(drupalExport.akumina_file,'StaticURL','/Inside/en-us/');
+await urlsConverted.loadURLs(drupalExport.akumina_holidayEvents,'StaticURL','/Events/en-us/');
+await urlsConverted.loadURLs(drupalExport.akumina_organizationDetails,'StaticURL','/Inside/en-us/');
+await urlsConverted.loadURLs(drupalExport.akumina_policy,'StaticURL','/Inside/en-us/');
 // Set up the SharePoint connection
 const spConfig = {
   siteURL: process.env.SITE_URL,
