@@ -1,5 +1,6 @@
 import xml2js from 'xml2js';
 import { promises as fsPromises } from 'fs';
+import { DOMParser } from "@xmldom/xmldom";
 import { aboutMap } from "./maps/maps-about.js";
 import { announcementsMap } from "./maps/maps-announcements.js";
 import { blogsMap } from "./maps/maps-blogs.js";
@@ -76,33 +77,89 @@ class DrupalContent {
 
 /**
  *
+ * @param {object} urlsConverted
  * @returns {Promise<void>}
  */
-  async prepareContent() {
+  async prepareContent(urlsConverted) {
       //TODO Build functions to transform content
       let transformContent = {
-          convertLink: function (content) {
+          convertLink: async function (content) {
               let transformedContent = content;
               return transformedContent;
           },
-          convertImage: function (content) {
+          convertImage: async function (content) {
               let transformedContent = content;
               return transformedContent;
           },
-          convertTags: function (content) {
+          convertTags: async function (content) {
               //Intended to illustrate that transformations are being applied
            let transformedContent = content.toUpperCase();
               return transformedContent;
           },
-          convertDepartments: function (content) {
+          convertDepartments: async function (content) {
               let transformedContent = content;
               return transformedContent;
           },
-          convertPerson: function (content) {
+          convertPerson: async function (content) {
               let transformedContent = content;
               return transformedContent;
-          }
+          },
+          convertText: async function (content) {
+              content = '<body>' + content + '</body>';
+              const parser = new DOMParser();
+              let htmlDoc = parser.parseFromString(content, "text/html");
+              htmlDoc = await replaceLinks(htmlDoc,'a');
+              htmlDoc = await replaceLinks(htmlDoc,'img');
+              return htmlDoc
+                  .toString()
+                  .replace('<body xmlns="http://www.w3.org/1999/xhtml">','')
+                  .replace('</body>','');
+          },
       }
+
+    /**
+     *  @param {Document} htmlDoc
+     *  @param {string} tagType
+     *  @returns {Promise<Document>}
+     *  Loops through set of links and replaces drupal links with
+     *  sharepoint links using url-converter
+     */
+    async function replaceLinks(htmlDoc, tagType) {
+        const htmlTags = htmlDoc.getElementsByTagName(tagType);
+        Array.prototype.forEach.call (htmlTags, async function (tag) {
+            let tagHref = tag.getAttribute('href');
+            //Remove domain
+            if (tagHref.startsWith('https://mynci.cancer.gov')){
+                tagHref.replace('https://mynci.cancer.gov','');
+            }
+            if (tagHref.startsWith('http://mynci.cancer.gov')){
+                tagHref.replace('http://mynci.cancer.gov','');
+            }
+
+            //Check for anchors
+            let hash = '';
+            if(tagHref.includes('#')){
+                let tagHrefHashParts = tagHref.split('#');
+                hash = '#' + tagHrefHashParts.pop();
+                tagHref = tagHrefHashParts.join('');
+            }
+            //Check for Node/NID links
+            let newHref = '';
+            let NID = '';
+            if (tagHref.startsWith('/node/')){
+                let tagHrefParts = tagHref.split('/');
+                NID = tagHrefParts.pop();
+                newHref = await urlsConverted.lookupNID(NID);
+            } else {
+                newHref = await urlsConverted.lookup(tagHref);
+            }
+
+            if ((newHref !== '') && (newHref !== 'Not Found')){
+                tag.setAttribute('href', newHref + hash);
+            }
+        } );
+        return htmlDoc;
+    }
 
     /**
      * Loops through a content map such as blogMap and copies data from export JSON
@@ -112,25 +169,26 @@ class DrupalContent {
      * @param {object} element
      * @param {array} map
      *
-     * @returns {object}
+     * @returns {Promise<object>}
      */
-    function applyContentMap(element, map) {
+    async function applyContentMap(element, map) {
         let convertedItem = {};
-        map.forEach((mapElement) => {
+        for (const mapElement of map) {
             let newData = '';
-            mapElement.ContentPaths.forEach((contentPath, index)=>{
+            for (const contentPath of mapElement.ContentPaths) {
+                const index = mapElement.ContentPaths.indexOf(contentPath);
                 let transform = false;
                 if(contentPath.Transformation){
                     transform = true;
                 }
-                contentPath.Paths.forEach((path)=> {
+                for (const path of contentPath.Paths) {
                    let elementData = element[path];
                     if (transform) {
                         let transformedElement = '';
-                        element[path].forEach((elementPath) => {
-                            transformedElement += transformContent[contentPath.Transformation](elementPath)
-                        })
-                      elementData = transformedElement;
+                        for (const elementPath of element[path]) {
+                            transformedElement += await transformContent[contentPath.Transformation](elementPath)
+                        }
+                        elementData = transformedElement;
                    }
                     if(mapElement.Separator) {
                         if(index === 0) {
@@ -141,44 +199,44 @@ class DrupalContent {
                     } else {
                         newData += elementData;
                     }
-                })
-            })
+                }
+            }
             convertedItem[mapElement.SharePointColumn] = newData;
-        });
+        }
         return convertedItem;
     }
     //Cycles through all of the Drupal export objects and builds Akumina variants applying the
     //mapping between Drupal and Akumina fields and any transformations
-    this.about.forEach((element) => {
-        this.akumina_about.push(applyContentMap(element, aboutMap));
-    })
-    this.announcements.forEach((element) => {
-        this.akumina_announcements.push(applyContentMap(element, announcementsMap));
-    })
-    this.blogs.forEach((element) => {
-        this.akumina_blogs.push(applyContentMap(element, blogsMap));
-      })
-    this.coreContent.forEach((element) => {
-        this.akumina_coreContent.push(applyContentMap(element, coreContentMap));
-    })
-    this.events.forEach((element) => {
-        this.akumina_events.push(applyContentMap(element, eventsMap));
-    })
-    this.file.forEach((element) => {
-        this.akumina_file.push(applyContentMap(element, fileMap));
-    })
-    this.forms.forEach((element) => {
-        this.akumina_forms.push(applyContentMap(element, formsMap));
-    })
-    this.holidayEvents.forEach((element) => {
-        this.akumina_holidayEvents.push(applyContentMap(element, holidayEventsMap));
-    })
-    this.organizationDetails.forEach((element) => {
-        this.akumina_organizationDetails.push(applyContentMap(element, organizationDetailsMap));
-    })
-    this.policy.forEach((element) => {
-        this.akumina_policy.push(applyContentMap(element, policyMap));
-    })
+    for (const element of this.about) {
+        this.akumina_about.push(await applyContentMap(element, aboutMap));
+    }
+    for (const element of this.announcements) {
+        this.akumina_announcements.push(await applyContentMap(element, announcementsMap));
+    }
+    for (const element of this.blogs) {
+        this.akumina_blogs.push(await applyContentMap(element, blogsMap));
+    }
+    for (const element of this.coreContent) {
+        this.akumina_coreContent.push(await applyContentMap(element, coreContentMap));
+    }
+    for (const element of this.events) {
+        this.akumina_events.push(await applyContentMap(element, eventsMap));
+    }
+    for (const element of this.file) {
+        this.akumina_file.push(await applyContentMap(element, fileMap));
+    }
+    for (const element of this.forms) {
+        this.akumina_forms.push(await applyContentMap(element, formsMap));
+    }
+    for (const element of this.holidayEvents) {
+        this.akumina_holidayEvents.push(await applyContentMap(element, holidayEventsMap));
+    }
+    for (const element of this.organizationDetails) {
+        this.akumina_organizationDetails.push(await applyContentMap(element, organizationDetailsMap));
+    }
+    for (const element of this.policy) {
+        this.akumina_policy.push(await applyContentMap(element, policyMap));
+    }
   }
 
   /**

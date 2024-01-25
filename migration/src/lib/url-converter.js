@@ -11,6 +11,7 @@ class URLConverter {
   constructor() {
     //super(); // Call the constructor of the parent class
     this.urls = new Map();
+    this.urlNIDs = new Map();
   }
 
   /**
@@ -24,6 +25,15 @@ class URLConverter {
   }
 
   /**
+   * Adds a URL to be converted
+   *
+   * @param {string} oldNID The drupal NID to use for reference
+   * @param {string} newURL The new URL to replace the old URL
+   */
+  async addNID(oldNID, newURL) {
+    this.urlNIDs.set(oldNID, newURL);
+  }
+  /**
    * Retrieves a URL to be converted
    *
    * @param {string} oldURL The old URL to use for reference
@@ -36,7 +46,19 @@ class URLConverter {
       return 'Not Found';
     }
   }
-
+  /**
+   * Retrieves a URL to be converted from drupal NID
+   *
+   * @param {string} NID The old URL to use for reference
+   * @returns {Promise<string>} The new URL
+   */
+  async lookupNID(NID) {
+    if(this.urlNIDs.has(NID)){
+      return this.urlNIDs.get(NID);
+    } else {
+      return 'Not Found';
+    }
+  }
   /**
    * Loops through array of objects and adds contents to list of urls for conversion
    *
@@ -48,9 +70,20 @@ class URLConverter {
   async loadURLs(items, urlAlias,newPath){
     items.forEach((item) => {
       let oldURL = item[urlAlias];
+      if (Array.isArray(item[urlAlias])) {
+        oldURL = item[urlAlias][0];
+      }
+      let NID = oldURL;
+      if(item['Nid']){
+        NID = item['Nid'];
+      }
+      if (Array.isArray(item['Nid'])) {
+        NID = item['Nid'][0];
+      }
       let slug = oldURL.split('/').pop();
       let newURL = newPath + slug;
       this.add(oldURL,newURL);
+      this.addNID(NID,newURL);
     })
   }
 }

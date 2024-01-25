@@ -13,7 +13,8 @@ export const fileMap = [
         'ContentPaths':
             [
                 {
-                    'Paths': ['Body']
+                    'Paths': ['Body'],
+                    'Transformation': 'convertText'
                 },
                 {
                     'Paths': ['For-More-Information'],

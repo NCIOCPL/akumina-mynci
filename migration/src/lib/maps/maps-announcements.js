@@ -29,7 +29,8 @@ export const announcementsMap = [
         'ContentPaths':
             [
                 {
-                    'Paths': ['Body']
+                    'Paths': ['Body'],
+                    'Transformation': 'convertText'
                 },
                 {
                     'Paths': ['For-More-Information'],

@@ -13,7 +13,8 @@ export const organizationDetailsMap = [
         'ContentPaths':
             [
                 {
-                    'Paths': ['Body']
+                    'Paths': ['Body'],
+                    'Transformation': 'convertText'
                 },
                 {
                     'Paths': ['Phone']
