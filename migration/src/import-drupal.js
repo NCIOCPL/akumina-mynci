@@ -26,18 +26,21 @@ const drupalExports = {
 // Set up the export data
 var drupalExport = new DrupalContent();
 await drupalExport.loadContent(drupalExports);
-await drupalExport.prepareContent();
+
 //Create the map of old to new urls
 var urlsConverted = new URLConverter();
-await urlsConverted.loadURLs(drupalExport.akumina_about,'StaticURL','/Inside/en-us/');
-await urlsConverted.loadURLs(drupalExport.akumina_announcements,'StaticURL','/FoundationNews/en-us/');
-await urlsConverted.loadURLs(drupalExport.akumina_blogs,'StaticURL','/Blogs/en-us/');
-await urlsConverted.loadURLs(drupalExport.akumina_coreContent,'StaticURL','/Inside/en-us/');
-await urlsConverted.loadURLs(drupalExport.akumina_events,'StaticURL','/Events/en-us/');
-await urlsConverted.loadURLs(drupalExport.akumina_file,'StaticURL','/Inside/en-us/');
-await urlsConverted.loadURLs(drupalExport.akumina_holidayEvents,'StaticURL','/Events/en-us/');
-await urlsConverted.loadURLs(drupalExport.akumina_organizationDetails,'StaticURL','/Inside/en-us/');
-await urlsConverted.loadURLs(drupalExport.akumina_policy,'StaticURL','/Inside/en-us/');
+await urlsConverted.loadURLs(drupalExport.about,'Path','/Inside/en-us/');
+await urlsConverted.loadURLs(drupalExport.announcements,'Path','/FoundationNews/en-us/');
+await urlsConverted.loadURLs(drupalExport.blogs,'Path','/Blogs/en-us/');
+await urlsConverted.loadURLs(drupalExport.coreContent,'Path','/Inside/en-us/');
+await urlsConverted.loadURLs(drupalExport.events,'Path','/Events/en-us/');
+await urlsConverted.loadURLs(drupalExport.file,'Path','/Inside/en-us/');
+await urlsConverted.loadURLs(drupalExport.holidayEvents,'Path','/Events/en-us/');
+await urlsConverted.loadURLs(drupalExport.organizationDetails,'Path','/Inside/en-us/');
+await urlsConverted.loadURLs(drupalExport.policy,'Path','/Inside/en-us/');
+
+await drupalExport.prepareContent(urlsConverted);
+
 // Set up the SharePoint connection
 const spConfig = {
   siteURL: process.env.SITE_URL,

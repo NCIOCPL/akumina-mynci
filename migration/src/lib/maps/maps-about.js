@@ -13,7 +13,8 @@ export const aboutMap = [
         'ContentPaths':
             [
                 {
-                    'Paths': ['Body']
+                    'Paths': ['Body'],
+                    'Transformation': 'convertText'
                 },
                 {
                     'Paths': [

@@ -46,7 +46,8 @@ export const eventsMap = [
                     'Paths': ['Event-Sponsor--Outside-NCI-']
                 },
                 {
-                    'Paths': ['Body']
+                    'Paths': ['Body'],
+                    'Transformation': 'convertText'
                 },
                 {
                     'Paths': ['Videocast-or-Webinar-Link'],
