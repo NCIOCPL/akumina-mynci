@@ -51,7 +51,7 @@ export const eventsMap = [
                 },
                 {
                     'Paths': ['Videocast-or-Webinar-Link'],
-                    'Transformation': 'convertLink'
+                    'Transformation': 'convertLinksForBody'
                 },
                 {
                     'Paths': ['Special-Instructions-for-Videocast-or-Webinar']

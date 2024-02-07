@@ -27,19 +27,19 @@ export const organizationDetailsMap = [
                 },
                 {
                     'Paths': ['For-More-Information'],
-                    'Transformation': 'convertLink'
+                    'Transformation': 'convertLinksForBody'
                 },
                 {
                     'Paths': ['Twitter'],
-                    'Transformation': 'convertLink'
+                    'Transformation': 'convertLinksForBody'
                 },
                 {
                     'Paths': ['Facebook'],
-                    'Transformation': 'convertLink'
+                    'Transformation': 'convertLinksForBody'
                 },
                 {
                     'Paths': ['LinkedIn'],
-                    'Transformation': 'convertLink'
+                    'Transformation': 'convertLinksForBody'
                 }
 
             ],

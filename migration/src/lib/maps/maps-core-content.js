@@ -18,7 +18,7 @@ export const coreContentMap = [
                 },
                 {
                     'Paths': ['For-More-Information'],
-                    'Transformation': 'convertLink'
+                    'Transformation': 'convertLinksForBody'
                 }
             ],
             'Separator':'<br />'
