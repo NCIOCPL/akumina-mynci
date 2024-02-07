@@ -18,7 +18,7 @@ export const blogsMap = [
                 },
                 {
                     'Paths': ['For-More-Information'],
-                    'Transformation': 'convertLink'
+                    'Transformation': 'convertLinksForBody'
                 }
             ],
             'Separator':'<br />'

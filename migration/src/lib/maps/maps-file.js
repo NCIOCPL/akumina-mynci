@@ -18,7 +18,7 @@ export const fileMap = [
                 },
                 {
                     'Paths': ['For-More-Information'],
-                    'Transformation': 'convertLink'
+                    'Transformation': 'convertLinksForBody'
                 }
             ],
             'Separator':'<br />'

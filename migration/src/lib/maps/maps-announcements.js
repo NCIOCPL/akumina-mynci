@@ -34,7 +34,7 @@ export const announcementsMap = [
                 },
                 {
                     'Paths': ['For-More-Information'],
-                    'Transformation': 'convertLink'
+                    'Transformation': 'convertLinksForBody'
                 }
             ],
         'Separator':'<br />'

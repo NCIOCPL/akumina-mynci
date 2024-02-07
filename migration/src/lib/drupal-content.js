@@ -84,12 +84,28 @@ class DrupalContent {
       //TODO Build functions to transform content
       let transformContent = {
           convertLink: async function (content) {
-              let transformedContent = content;
-              return transformedContent;
+              if(content && (content !== '')){
+                  return await convertLinks(content, 'a')
+              }
+              return content;
+          },
+          convertLinksForBody: async function (content) {
+              if(content && (content !== '')){
+                  let transformedContent = await convertLinks(content,'a');
+                  let links = '<ul>';
+                  for (const link of transformedContent) {
+                      links += "<li><a href='" + link.URL + "'>" + link.Description + "</a></li>";
+                  }
+                  links += '</ul>';
+                  return links;
+              }
+              return content;
           },
           convertImage: async function (content) {
-              let transformedContent = content;
-              return transformedContent;
+              if(content && (content !== '')){
+                  return await convertLinks(content, 'img')
+              }
+              return content;
           },
           convertTags: async function (content) {
               //Intended to illustrate that transformations are being applied
@@ -118,6 +134,103 @@ class DrupalContent {
       }
 
     /**
+     *  @param {Element} link
+     *  @returns {Promise<string>}
+     *  Loops through childnodes of href and returns text
+     */
+    async function getLinkText(link) {
+        let text = "";
+        for (let i = 0; i < link.childNodes.length; i++){
+            const n = link.childNodes[i];
+            if (n && n.nodeValue){
+                text += n.nodeValue;
+            }
+        }
+        return text;
+    }
+
+    /**
+     *  @param {Element} tag
+     *  @returns {Promise<Element>}
+     *  Loops through childnodes of href and returns text
+     */
+    async function updateLinkSource(tag) {
+        let tagHref;
+        if (tag.tagName === 'img'){
+            tagHref = tag.getAttribute('src');
+        } else {
+            tagHref = tag.getAttribute('href');
+        }
+        //Remove domain
+        if (tagHref.startsWith('https://mynci.cancer.gov')){
+            tagHref = tagHref.replace('https://mynci.cancer.gov','');
+        }
+        if (tagHref.startsWith('http://mynci.cancer.gov')){
+            tagHref = tagHref.replace('http://mynci.cancer.gov','');
+        }
+
+        //Check for anchors
+        let hash = '';
+        if(tagHref.includes('#')){
+            let tagHrefHashParts = tagHref.split('#');
+            hash = '#' + tagHrefHashParts.pop();
+            tagHref = tagHrefHashParts.join('');
+        }
+        //Check for Node/NID links
+        let newHref;
+        let NID = '';
+        if (tagHref.startsWith('/node/')){
+            let tagHrefParts = tagHref.split('/');
+            NID = tagHrefParts.pop();
+            newHref = await urlsConverted.lookupNID(NID);
+        } else {
+            newHref = await urlsConverted.lookup(tagHref);
+        }
+        if ((newHref !== '') && (newHref !== 'Not Found')){
+            if (tag.tagName === 'img'){
+                tag.setAttribute('src', newHref + hash);
+            } else {
+                tag.setAttribute('href', newHref + hash);
+            }
+        }
+        return tag;
+    }
+
+    /**
+     *  @param {string} content
+     *  @param {string} tagType
+     *  @returns {Promise<array>}
+     *  Loops through set of links and replaces drupal links with
+     *  sharepoint links using url-converter
+     */
+    async function convertLinks(content,tagType) {
+        let links = [];
+        let link = {};
+        content = '<body>' + content + '</body>';
+        const parser = new DOMParser();
+        let htmlDoc = parser.parseFromString(content, "text/html");
+        const htmlTags = htmlDoc.getElementsByTagName(tagType);
+        let thisURL = '';
+        let thisDescription = '';
+        for (let i=0; i< htmlTags.length; i++) {
+            let tag = htmlTags[i];
+            let myTag = await updateLinkSource(tag);
+            if (tagType === 'img') {
+                thisURL = myTag.getAttribute('src');
+                thisDescription = myTag.getAttribute('alt');
+            } else {
+                thisURL = myTag.getAttribute('href');
+                thisDescription = await getLinkText(myTag);
+            }
+            link = {
+                URL: thisURL,
+                Description: thisDescription
+            }
+            links.push(link);
+        }
+        return links;
+    }
+    /**
      *  @param {Document} htmlDoc
      *  @param {string} tagType
      *  @returns {Promise<Document>}
@@ -126,38 +239,10 @@ class DrupalContent {
      */
     async function replaceLinks(htmlDoc, tagType) {
         const htmlTags = htmlDoc.getElementsByTagName(tagType);
-        Array.prototype.forEach.call (htmlTags, async function (tag) {
-            let tagHref = tag.getAttribute('href');
-            //Remove domain
-            if (tagHref.startsWith('https://mynci.cancer.gov')){
-                tagHref.replace('https://mynci.cancer.gov','');
-            }
-            if (tagHref.startsWith('http://mynci.cancer.gov')){
-                tagHref.replace('http://mynci.cancer.gov','');
-            }
-
-            //Check for anchors
-            let hash = '';
-            if(tagHref.includes('#')){
-                let tagHrefHashParts = tagHref.split('#');
-                hash = '#' + tagHrefHashParts.pop();
-                tagHref = tagHrefHashParts.join('');
-            }
-            //Check for Node/NID links
-            let newHref = '';
-            let NID = '';
-            if (tagHref.startsWith('/node/')){
-                let tagHrefParts = tagHref.split('/');
-                NID = tagHrefParts.pop();
-                newHref = await urlsConverted.lookupNID(NID);
-            } else {
-                newHref = await urlsConverted.lookup(tagHref);
-            }
-
-            if ((newHref !== '') && (newHref !== 'Not Found')){
-                tag.setAttribute('href', newHref + hash);
-            }
-        } );
+        for (let i=0; i< htmlTags.length; i++) {
+            let tag = htmlTags[i];
+            await updateLinkSource(tag);
+        }
         return htmlDoc;
     }
 
@@ -174,7 +259,7 @@ class DrupalContent {
     async function applyContentMap(element, map) {
         let convertedItem = {};
         for (const mapElement of map) {
-            let newData = '';
+            let newData = [];
             for (const contentPath of mapElement.ContentPaths) {
                 const index = mapElement.ContentPaths.indexOf(contentPath);
                 let transform = false;
@@ -183,21 +268,25 @@ class DrupalContent {
                 }
                 for (const path of contentPath.Paths) {
                    let elementData = element[path];
-                    if (transform) {
-                        let transformedElement = '';
-                        for (const elementPath of element[path]) {
-                            transformedElement += await transformContent[contentPath.Transformation](elementPath)
+                   if (transform ) {
+                       let transformedElement = [];
+                        if(element[path] && (element[path].length>1)) {
+                            for (const elementPath of element[path]) {
+                                transformedElement.push(await transformContent[contentPath.Transformation](elementPath));
+                            }
+                        } else {
+                            transformedElement = await transformContent[contentPath.Transformation](element[path][0]);
                         }
                         elementData = transformedElement;
                    }
                     if(mapElement.Separator) {
                         if(index === 0) {
-                            newData += elementData;
+                            newData.push(elementData);
                         } else {
-                            newData +=  mapElement.Separator + elementData;
+                            newData.push(mapElement.Separator + elementData);
                         }
                     } else {
-                        newData += elementData;
+                        newData.push(elementData);
                     }
                 }
             }

@@ -18,7 +18,7 @@ export const policyMap = [
                 },
                 {
                     'Paths': ['For-More-Information'],
-                    'Transformation': 'convertLink'
+                    'Transformation': 'convertLinksForBody'
                 }
             ],
         'Separator':'<br />'
