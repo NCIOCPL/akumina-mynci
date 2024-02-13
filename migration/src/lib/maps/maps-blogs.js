@@ -99,7 +99,8 @@ export const blogsMap = [
         'ContentPaths':
             [
                 {
-                    'Paths': ['Path']
+                    'Paths': ['Path'],
+                    'Transformation': 'convertURL'
                 }
             ]
     }

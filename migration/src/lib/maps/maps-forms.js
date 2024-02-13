@@ -104,7 +104,8 @@ export const formsMap = [
         'ContentPaths':
             [
                 {
-                    'Paths': ['Path']
+                    'Paths': ['Path'],
+                    'Transformation': 'convertURL'
                 }
             ]
     }

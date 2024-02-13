@@ -95,7 +95,8 @@ export const coreContentMap = [
         'ContentPaths':
             [
                 {
-                    'Paths': ['Path']
+                    'Paths': ['Path'],
+                    'Transformation': 'convertURL'
                 }
             ]
     },

@@ -24,31 +24,35 @@ class DrupalContent {
    * Creates a new instance of a Drupal Content client.
    */
   constructor() {
-    this.images = [];
-    this.files = [];
-      this.about = [];
-      this.announcements = [];
-      this.blogs = [];
-      this.coreContent = [];
-      this.events = [];
-      this.file = [];
-      this.forms = [];
-      this.holidayEvents = [];
-      this.organizationDetails = [];
-      this.policy = [];
+      this.drupal = {
+          images: [],
+          files: [],
+          about: [],
+          announcements: [],
+          blogs: [],
+          coreContent: [],
+          events: [],
+          file: [],
+          forms: [],
+          holidayEvents: [],
+          organizationDetails: [],
+          policy: []
+      };
 
-      this.akumina_images = [];
-      this.akumina_files = [];
-      this.akumina_about = [];
-      this.akumina_announcements = [];
-      this.akumina_blogs = [];
-      this.akumina_coreContent = [];
-      this.akumina_events = [];
-      this.akumina_file = [];
-      this.akumina_forms = [];
-      this.akumina_holidayEvents = [];
-      this.akumina_organizationDetails = [];
-      this.akumina_policy = [];
+      this.akumina = {
+          images: [],
+          files: [],
+          about: [],
+          announcements: [],
+          blogs: [],
+          coreContent: [],
+          events: [],
+          file: [],
+          forms: [],
+          holidayEvents: [],
+          organizationDetails: [],
+          policy: []
+      };
   }
 
   /**
@@ -57,7 +61,6 @@ class DrupalContent {
    * @param {object} exports Export file paths by key.
    */
   async loadContent(exports) {
-
       try {
           const exportMap = new Map(Object.entries(exports));
           for await (const key of exportMap.keys()){
@@ -68,7 +71,7 @@ class DrupalContent {
               const xmlData = await fsPromises.readFile(filePath);
               const parser = new xml2js.Parser();
               const results = await parser.parseStringPromise(xmlData);
-              this[key] = results.nodes.node;
+              this.drupal[key] = results.nodes.node;
           }
     } catch (err) {
       console.error('Error:', err);
@@ -78,47 +81,85 @@ class DrupalContent {
 /**
  *
  * @param {object} urlsConverted
+ * @param {array} users
+ * @param {object} drupalUsers
+ * @param {object} taxonomyList
  * @returns {Promise<void>}
  */
-  async prepareContent(urlsConverted) {
+  async prepareContent(urlsConverted, users, drupalUsers, taxonomyList) {
       //TODO Build functions to transform content
       let transformContent = {
           convertLink: async function (content) {
               if(content && (content !== '')){
-                  return await convertLinks(content, 'a')
+                  return await convertLinks(content, 'a'); //Object
               }
               return content;
           },
           convertLinksForBody: async function (content) {
               if(content && (content !== '')){
                   let transformedContent = await convertLinks(content,'a');
-                  let links = '<ul>';
-                  for (const link of transformedContent) {
-                      links += "<li><a href='" + link.URL + "'>" + link.Description + "</a></li>";
+                  let links = '';
+                  if(transformedContent && transformedContent.hasOwnProperty('links')){
+                      links = '<ul>';
+                      for (const link of transformedContent.links) {
+                          links += "<li><a href='" + link.URL + "'>" + link.Description + "</a></li>";
+                      }
+                      links += '</ul>';
                   }
-                  links += '</ul>';
-                  return links;
+                  return links; //String
               }
               return content;
           },
           convertImage: async function (content) {
               if(content && (content !== '')){
-                  return await convertLinks(content, 'img')
+                  return await convertLinks(content, 'img'); //object
               }
               return content;
           },
           convertTags: async function (content) {
-              //Intended to illustrate that transformations are being applied
-           let transformedContent = content.toUpperCase();
-              return transformedContent;
+              if(content && (content !== '')) {
+                  let termList = content.split('|');
+                  let termObject = {terms: []};
+                  let termGuid = '';
+                  if (termList && termList.length > 1) {
+                      for (const term of termList) {
+                          termGuid = await taxonomyList.lookup('topics', term);
+                          termObject.terms.push({'Label': term, 'TermGuid': termGuid});
+                      }
+                  } else {
+                      termGuid = await taxonomyList.lookup('topics', content);
+                      termObject.terms.push({'Label': content, 'TermGuid': termGuid});
+                  }
+                  return termObject; //Object
+              }
+              return content; //String
           },
           convertDepartments: async function (content) {
-              let transformedContent = content;
-              return transformedContent;
+              return content; //String
           },
           convertPerson: async function (content) {
-              let transformedContent = content;
-              return transformedContent;
+              let emailList = content.split('|');
+              let sharepointUsers = {sharepointList:[]};
+              let sharepointUser = {};
+              if(emailList && emailList.length>1) {
+                  for(const email of emailList) {
+                      sharepointUser = await getSharepointUser(email);
+                      await drupalUsers.add(email,sharepointUser);
+                      if(sharepointUser.hasOwnProperty('person_columnID') && sharepointUser.person_columnID !== ''){
+                          sharepointUsers.sharepointList.push(sharepointUser);
+                      }
+                  }
+              } else {
+                  sharepointUser = await getSharepointUser(content);
+                  await drupalUsers.add(content,sharepointUser);
+                  if(sharepointUser.hasOwnProperty('person_columnID') && sharepointUser.person_columnID !== '') {
+                      sharepointUsers.sharepointList.push(sharepointUser);
+                  }
+              }
+              if((sharepointUsers.sharepointList.length>0)){
+                  return sharepointUsers; //Object
+              }
+              return content; //String
           },
           convertText: async function (content) {
               content = '<body>' + content + '</body>';
@@ -129,9 +170,36 @@ class DrupalContent {
               return htmlDoc
                   .toString()
                   .replace('<body xmlns="http://www.w3.org/1999/xhtml">','')
-                  .replace('</body>','');
+                  .replace('</body>',''); //String
+          },
+          convertURL: async function (content) {
+              let slug = content.split('/').pop();
+              if(slug){
+                  return slug;
+              }
+              return content; //String
           },
       }
+
+    /**
+     *  @param {string} email
+     *  @returns {Promise<object>}
+     *  Loops through childnodes of href and returns text
+     */
+    async function getSharepointUser(email) {
+        let sharepointUser = {Title:'',person_columnID:''}
+        for (const element of users) {
+            if(element.hasOwnProperty('EMail') && (element.EMail === email)) {
+                if(element.hasOwnProperty('Id')) {
+                   sharepointUser.person_columnID = element.Id;
+                }
+                if(element.hasOwnProperty('Title')) {
+                    sharepointUser.Title = element.Title;
+                }
+            }
+        }
+        return sharepointUser;
+    }
 
     /**
      *  @param {Element} link
@@ -199,12 +267,12 @@ class DrupalContent {
     /**
      *  @param {string} content
      *  @param {string} tagType
-     *  @returns {Promise<array>}
+     *  @returns {Promise<object>}
      *  Loops through set of links and replaces drupal links with
      *  sharepoint links using url-converter
      */
     async function convertLinks(content,tagType) {
-        let links = [];
+        let linkList = {links:[]};
         let link = {};
         content = '<body>' + content + '</body>';
         const parser = new DOMParser();
@@ -226,9 +294,9 @@ class DrupalContent {
                 URL: thisURL,
                 Description: thisDescription
             }
-            links.push(link);
+            linkList.links.push(link);
         }
-        return links;
+        return linkList;
     }
     /**
      *  @param {Document} htmlDoc
@@ -259,7 +327,8 @@ class DrupalContent {
     async function applyContentMap(element, map) {
         let convertedItem = {};
         for (const mapElement of map) {
-            let newData = [];
+            let newData = '';
+            let newObjectData = {};
             for (const contentPath of mapElement.ContentPaths) {
                 const index = mapElement.ContentPaths.indexOf(contentPath);
                 let transform = false;
@@ -267,64 +336,73 @@ class DrupalContent {
                     transform = true;
                 }
                 for (const path of contentPath.Paths) {
-                   let elementData = element[path];
-                   if (transform ) {
-                       let transformedElement = [];
-                        if(element[path] && (element[path].length>1)) {
-                            for (const elementPath of element[path]) {
-                                transformedElement.push(await transformContent[contentPath.Transformation](elementPath));
+                    if(element[path]){
+                        let elementData = element[path].toString();
+                        if (transform && elementData && (elementData !== '')) {
+                           elementData = await transformContent[contentPath.Transformation](elementData);
+                       }
+                        if(elementData){
+                            if((typeof elementData) === 'string'){
+                                if(mapElement.Separator && (index > 0) ) {
+                                    newData += mapElement.Separator + elementData;
+                                } else {
+                                    newData = elementData;
+                                }
+                            } else { //elementData is object
+                                if (Object.keys(newObjectData).length === 0){
+                                    newObjectData = elementData;
+                                } else {
+                                    //We will always be looking for the first key here
+                                    let newObjectDataKey = Object.keys(newObjectData)[0];
+                                    let elementDataKey = Object.keys(elementData)[0];
+                                    newObjectData[newObjectDataKey].push(...elementData[elementDataKey]);
+                                }
                             }
-                        } else {
-                            transformedElement = await transformContent[contentPath.Transformation](element[path][0]);
                         }
-                        elementData = transformedElement;
-                   }
-                    if(mapElement.Separator) {
-                        if(index === 0) {
-                            newData.push(elementData);
-                        } else {
-                            newData.push(mapElement.Separator + elementData);
-                        }
-                    } else {
-                        newData.push(elementData);
                     }
                 }
             }
-            convertedItem[mapElement.SharePointColumn] = newData;
+            if (Object.keys(newObjectData).length !== 0){
+                convertedItem[mapElement.SharePointColumn] = newObjectData;
+            } else {
+                convertedItem[mapElement.SharePointColumn] = newData;
+            }
         }
         return convertedItem;
     }
+
+    /**
+     * Loops through a content object such as akumina_blogs, checks whether node has been linked
+     * to and logs active status
+     *
+     * @param {object} element
+     *
+     * @returns {Promise<object>}
+     */
+    async function logIfContentIsActive(element) {
+        let isActive;
+        if(element.hasOwnProperty('StaticURL') && (element.StaticURL[0])){
+            isActive = await urlsConverted.lookupActive(element.StaticURL[0]);
+        }
+        if(isActive !== 'Not Found') {
+            element.isActive = isActive;
+        }
+        return element;
+    }
+
     //Cycles through all of the Drupal export objects and builds Akumina variants applying the
     //mapping between Drupal and Akumina fields and any transformations
-    for (const element of this.about) {
-        this.akumina_about.push(await applyContentMap(element, aboutMap));
+    for (const [key, value] of Object.entries(this.drupal)) {
+        for (const element of this.drupal[key]) {
+            this.akumina[key].push(await applyContentMap(element, eval(key + 'Map')));
+        }
     }
-    for (const element of this.announcements) {
-        this.akumina_announcements.push(await applyContentMap(element, announcementsMap));
-    }
-    for (const element of this.blogs) {
-        this.akumina_blogs.push(await applyContentMap(element, blogsMap));
-    }
-    for (const element of this.coreContent) {
-        this.akumina_coreContent.push(await applyContentMap(element, coreContentMap));
-    }
-    for (const element of this.events) {
-        this.akumina_events.push(await applyContentMap(element, eventsMap));
-    }
-    for (const element of this.file) {
-        this.akumina_file.push(await applyContentMap(element, fileMap));
-    }
-    for (const element of this.forms) {
-        this.akumina_forms.push(await applyContentMap(element, formsMap));
-    }
-    for (const element of this.holidayEvents) {
-        this.akumina_holidayEvents.push(await applyContentMap(element, holidayEventsMap));
-    }
-    for (const element of this.organizationDetails) {
-        this.akumina_organizationDetails.push(await applyContentMap(element, organizationDetailsMap));
-    }
-    for (const element of this.policy) {
-        this.akumina_policy.push(await applyContentMap(element, policyMap));
+
+    //Cycles through all of the Akumina objects,logs which are linked to (active)
+    for (const [key, value] of Object.entries(this.akumina)) {
+        for (const element of this.akumina[key]) {
+            await logIfContentIsActive(element);
+        }
     }
   }
 

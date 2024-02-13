@@ -118,7 +118,8 @@ export const eventsMap = [
         'ContentPaths':
             [
                 {
-                    'Paths': ['Path']
+                    'Paths': ['Path'],
+                    'Transformation': 'convertURL'
                 }
             ]
     }
