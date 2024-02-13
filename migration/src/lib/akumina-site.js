@@ -61,16 +61,19 @@ class AkuminaSite {
    * @param {object} items[n].data Metadata to be added to the file
    */
   async importFiles(listPath, items) {
+    console.log('Importing ' + items.length + ' files to ' + listPath + '...')
     try {
       // Loop through files provided
       for (let i = 0; i < items.length; i++) {
-        const fileContents = await fs.readFile(items[i].path, { encoding: null });
+        const fileContents = await fs.readFile(items[i].path, {
+          encoding: null,
+        });
 
         // Upload each item to SharePoint
         const file = await sp.web
           .getFolderByServerRelativeUrl(listPath)
           .files.add(items[i].name, fileContents, true);
-    
+
         // get item and update the uploaded file with the metadata
         const item = await file.file.getItem();
         await item.update(items[i].data);
@@ -93,6 +96,9 @@ class AkuminaSite {
     // For each batch, add the items to the list in batch
     // Commit the batch
     // Continue to the next batch until done
+
+    console.log('Importing ' + items.length + ' items to ' + listName + '...');
+
     const list = sp.web.lists.getByTitle(listName);
     let itemsImported = 0;
 
@@ -106,23 +112,17 @@ class AkuminaSite {
 
       await batch.execute();
     }
-    
-    console.log('imported!');
   }
 
   /**
    * Delete relevant content from the Akumina site
    *
    */
-  async reset(listName) {
-
-    for (let item of listName) {
-      this.truncateList(item);
-    }
-    // truncateList("a");
-    // truncateList("b");
-    // truncateList("c");
-    console.log('reset!');
+  async reset() {
+    await this.truncateList('Blogs_AK');
+    await this.truncateList('Calendar_AK');
+    await this.truncateList('InternalPages_AK')
+    /* To do: files deletion */
   }
 
   /**
@@ -133,22 +133,21 @@ class AkuminaSite {
    * @param {integer} batchSize Size of batches when looping
    */
   async truncateList(listName, exclude = [], batchSize = 100) {
+    console.log('Truncating list ' + listName + '...');
     const list = sp.web.lists.getByTitle(listName);
     const allItems = (await list.items.select('Id').getAll())
-      .filter(item => !exclude.includes(item.Id))
-      .map(item => item.Id);
-    
-      while (allItems.length > 0) {
-        const batch = sp.createBatch();
-    
-        for (let i = 0; i < batchSize && allItems.length > 0; i++) {
-          list.items.getById(allItems.pop()).inBatch(batch).delete();
-        }
-    
-        await batch.execute();
+      .filter((item) => !exclude.includes(item.Id))
+      .map((item) => item.Id);
+
+    while (allItems.length > 0) {
+      const batch = sp.createBatch();
+
+      for (let i = 0; i < batchSize && allItems.length > 0; i++) {
+        list.items.getById(allItems.pop()).inBatch(batch).delete();
       }
-    
-    console.log('truncated!');
+
+      await batch.execute();
+    }
   }
 }
 
