@@ -101,7 +101,8 @@ export const announcementsMap = [
         'ContentPaths':
             [
                 {
-                    'Paths': ['Path']
+                    'Paths': ['Path'],
+                    'Transformation': 'convertURL'
                 }
             ]
     }

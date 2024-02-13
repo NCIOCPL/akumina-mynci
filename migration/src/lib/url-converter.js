@@ -11,27 +11,19 @@ class URLConverter {
   constructor() {
     //super(); // Call the constructor of the parent class
     this.urls = new Map();
-    this.urlNIDs = new Map();
   }
 
   /**
    * Adds a URL to be converted
    *
    * @param {string} oldURL The old URL to use for reference
-   * @param {string} newURL The new URL to replace the old URL
-   */
-  async add(oldURL, newURL) {
-    this.urls.set(oldURL, newURL);
-  }
-
-  /**
-   * Adds a URL to be converted
-   *
    * @param {string} oldNID The drupal NID to use for reference
    * @param {string} newURL The new URL to replace the old URL
    */
-  async addNID(oldNID, newURL) {
-    this.urlNIDs.set(oldNID, newURL);
+  async add(oldURL, oldNID, newURL) {
+    if(!this.urls.has(oldURL)) {
+      this.urls.set(oldURL, {url: newURL, nid: oldNID, isActive: false});
+    }
   }
   /**
    * Retrieves a URL to be converted
@@ -41,6 +33,7 @@ class URLConverter {
    */
   async lookup(oldURL) {
     if(this.urls.has(oldURL)){
+      this.urls.get(oldURL).isActive = true;
       return this.urls.get(oldURL);
     } else {
       return 'Not Found';
@@ -49,16 +42,47 @@ class URLConverter {
   /**
    * Retrieves a URL to be converted from drupal NID
    *
-   * @param {string} NID The old URL to use for reference
+   * @param {string} NID The old NID to use for reference
    * @returns {Promise<string>} The new URL
    */
   async lookupNID(NID) {
-    if(this.urlNIDs.has(NID)){
-      return this.urlNIDs.get(NID);
+    for (let [key, value] of this.urls.entries()) {
+      if (value.nid === NID){
+        this.urls.get(key).isActive = true;
+        return this.urls.get(key);
+      }
+    }
+    return 'Not Found';
+  }
+
+  /**
+   * Retrieves the active status of a URL to be converted
+   *
+   * @param {string} oldURL The old URL to use for reference
+   * @returns {Promise<boolean>|Promise<string>} The active status of URL
+   */
+  async lookupActive(oldURL) {
+    if(this.urls.has(oldURL)){
+      return this.urls.get(oldURL).isActive;
     } else {
       return 'Not Found';
     }
   }
+  /**
+   * Retrieves the active status of a URL to be converted converted from drupal NID
+   *
+   * @param {string} NID The old NID to use for reference
+   * @returns {Promise<boolean>|Promise<string>} The active status of URL
+   */
+  async lookupActiveNID(NID) {
+    for (let [key, value] of this.urls.entries()) {
+      if (value.nid === NID){
+        return this.urls.get(key).isActive;
+      }
+    }
+    return 'Not Found';
+  }
+
   /**
    * Loops through array of objects and adds contents to list of urls for conversion
    *
@@ -82,8 +106,7 @@ class URLConverter {
       }
       let slug = oldURL.split('/').pop();
       let newURL = newPath + slug;
-      this.add(oldURL,newURL);
-      this.addNID(NID,newURL);
+      this.add(oldURL,NID,newURL);
     })
   }
 }
