@@ -9,7 +9,7 @@ export const eventsMap = [
         ]
     },
     {
-        'SharePointColumn': 'Event Date',
+        'SharePointColumn': 'EventDate',
         'ContentPaths': [
             {
                 'Paths': ['Event-Date']
@@ -17,7 +17,7 @@ export const eventsMap = [
         ]
     },
     {
-        'SharePointColumn': 'Campus',
+        'SharePointColumn': 'Region',
         'ContentPaths': [
             {
                 'Paths': ['Campus']
@@ -66,7 +66,7 @@ export const eventsMap = [
         'Separator':'<br />'
     },
     {
-        'SharePointColumn': 'Search Description',
+        'SharePointColumn': 'Search_x0020_Description',
         'ContentPaths':
             [
                 {
@@ -85,7 +85,7 @@ export const eventsMap = [
             ]
     },
     {
-        'SharePointColumn': 'Department',
+        'SharePointColumn': 'Departments',
         'ContentPaths':
             [
                 {
@@ -105,15 +105,6 @@ export const eventsMap = [
             ]
     },
     {
-        'SharePointColumn': 'Publish Date',
-        'ContentPaths':
-            [
-                {
-                    'Paths': ['Date-Posted']
-                }
-            ]
-    },
-    {
         'SharePointColumn': 'Modified',
         'ContentPaths':
             [
@@ -123,7 +114,7 @@ export const eventsMap = [
             ]
     },
     {
-        'SharePointColumn': 'StaticURL',
+        'SharePointColumn': 'StaticUrl',
         'ContentPaths':
             [
                 {

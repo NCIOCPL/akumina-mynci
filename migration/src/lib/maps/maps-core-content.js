@@ -24,7 +24,7 @@ export const coreContentMap = [
             'Separator':'<br />'
     },
     {
-        'SharePointColumn': 'Search Description',
+        'SharePointColumn': 'Search_x0020_Description',
             'ContentPaths':
         [
             {
@@ -43,7 +43,7 @@ export const coreContentMap = [
         ]
     },
     {
-        'SharePointColumn': 'Department',
+        'SharePointColumn': 'Departments',
             'ContentPaths':
             [
                 {
@@ -73,7 +73,7 @@ export const coreContentMap = [
         ]
     },
     {
-        'SharePointColumn': 'Publish Date',
+        'SharePointColumn': 'Publish_x0020_Date',
             'ContentPaths':
         [
             {
@@ -91,7 +91,7 @@ export const coreContentMap = [
         ]
     },
     {
-        'SharePointColumn': 'StaticURL',
+        'SharePointColumn': 'StaticUrl',
         'ContentPaths':
             [
                 {
