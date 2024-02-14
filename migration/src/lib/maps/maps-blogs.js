@@ -24,7 +24,7 @@ export const blogsMap = [
             'Separator':'<br />'
     },
     {
-        'SharePointColumn': 'Search Description',
+        'SharePointColumn': 'Search_x0020_Description',
             'ContentPaths':
         [
             {
@@ -57,7 +57,7 @@ export const blogsMap = [
             ]
     },
     {
-        'SharePointColumn': 'Department',
+        'SharePointColumn': 'Departments',
             'ContentPaths':
             [
                 {
@@ -77,7 +77,7 @@ export const blogsMap = [
         ]
     },
     {
-        'SharePointColumn': 'Publish Date',
+        'SharePointColumn': 'Publish_x0020_Date',
         'ContentPaths':
             [
                 {
@@ -95,7 +95,7 @@ export const blogsMap = [
             ]
     },
     {
-        'SharePointColumn': 'StaticURL',
+        'SharePointColumn': 'StaticUrl',
         'ContentPaths':
             [
                 {
