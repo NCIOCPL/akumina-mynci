@@ -90,13 +90,16 @@ await site.importFiles('LIST_NAME', files); // will probably need to convert fil
 //     Title: 'Batch Test 3'
 //   }];
 // Import blogs
-await site.importList('TEST_data_migration', drupalExport.akumina.blogs); // will probably need to convert drupalExport.blogs to the correct format before importing;
+await site.importList('Blogs_AK', drupalExport.blogs); // will probably need to convert drupalExport.blogs to the correct format before importing;
 
 // Import events
-await site.importList('TEST_data_migration', drupalExport.akumina.events); // will probably need to convert drupalExport.events to the correct format before importing;
+await site.importList('Calendar_AK', drupalExport.events); // will probably need to convert drupalExport.events to the correct format before importing;
 
 // Import pages
-//await site.importList('TEST_data_migration', drupalExport.pages); // will probably need to convert drupalExport.pages to the correct format before importing;
+await site.importList('InternalPages_AK', drupalExport.coreContent); // will probably need to convert drupalExport.pages to the correct format before importing;
+
+// Import holiday events
+await site.importList('Calendar_AK', drupalExport.holidayEvents); // will probably need to convert drupalExport.pages to the correct format before importing;
 
 let exclude = [3, 4, 6, 7, 8, 10, 12, 14, 15, 18, 19, 20, 23, 25, 26, 30, 31, 32, 33, 35, 37, 38, 39, 40, 41, 42, 43, 57, 58, 59, 60, 61, 62, 63, 70, 71, 72, 75, 76, 78]
 await site.truncateList('TEST_data_migration', exclude);
