@@ -73,6 +73,23 @@ export const organizationDetailsMap = [
                     'Transformation': 'convertURL'
                 }
             ]
+    },
+    {
+        'Metadata': 'OldPath',
+        'ContentPaths':
+            [
+                {
+                    'Paths': ['Path']
+                }
+            ]
+    },
+    {
+        'SharePointColumn': 'AkLanguageCode',
+        'HardcodedData': 'en-US'
+    },
+    {
+        'SharePointColumn': 'AkLanguageId',
+        'HardcodedData': '1033'
     }
 ];
 

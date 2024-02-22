@@ -315,41 +315,35 @@ class DrupalContent {
     }
 
     /**
-     * Loops through a content map such as blogMap and copies data from export JSON
-     * into corresponding JSON formatted for import into sharepoint, applying any
-     * transformations to that data
-     *
-     * @param {object} element
-     * @param {array} map
-     *
-     * @returns {Promise<object>}
+     *  @param {object} element
+     *  @param {object} mapElement
+     *  @returns {Promise<object>|Promise<string>}
+     *  Loops through contentPaths in map and applies any tranformations before copying data
      */
-    async function applyContentMap(element, map) {
-        let convertedItem = {};
-        for (const mapElement of map) {
-            let newData = '';
-            let newObjectData = {};
-            for (const contentPath of mapElement.ContentPaths) {
+    async function readContentPaths(element, mapElement) {
+        let newData = '';
+        let newObjectData = {};
+          for (const contentPath of mapElement.ContentPaths) {
                 const index = mapElement.ContentPaths.indexOf(contentPath);
                 let transform = false;
-                if(contentPath.Transformation){
+                if (contentPath.Transformation) {
                     transform = true;
                 }
                 for (const path of contentPath.Paths) {
-                    if(element[path]){
+                    if (element[path]) {
                         let elementData = element[path].toString();
                         if (transform && elementData && (elementData !== '')) {
-                           elementData = await transformContent[contentPath.Transformation](elementData);
-                       }
-                        if(elementData){
-                            if((typeof elementData) === 'string'){
-                                if(mapElement.Separator && (index > 0) ) {
+                            elementData = await transformContent[contentPath.Transformation](elementData);
+                        }
+                        if (elementData) {
+                            if ((typeof elementData) === 'string') {
+                                if (mapElement.Separator && (index > 0)) {
                                     newData += mapElement.Separator + elementData;
                                 } else {
                                     newData = elementData;
                                 }
                             } else { //elementData is object
-                                if (Object.keys(newObjectData).length === 0){
+                                if (Object.keys(newObjectData).length === 0) {
                                     newObjectData = elementData;
                                 } else {
                                     //We will always be looking for the first key here
@@ -362,17 +356,49 @@ class DrupalContent {
                     }
                 }
             }
-            if (Object.keys(newObjectData).length !== 0){
-                convertedItem[mapElement.SharePointColumn] = newObjectData;
+        if (Object.keys(newObjectData).length !== 0) {
+           return newObjectData; //Data is object
+        } else {
+            return newData; //Data is string
+        }
+    }
+    /**
+     * Loops through a content map such as blogMap and copies data from export JSON
+     * into corresponding JSON formatted for import into sharepoint, applying any
+     * transformations to that data
+     *
+     * @param {object} element
+     * @param {array} map
+     *
+     * @returns {Promise<object>}
+     */
+    async function applyContentMap(element, map) {
+        let convertedItem = {columns: {}, metadata: {}};
+        for (const mapElement of map) {
+            let newData;
+            //Iterate over ContentPaths
+            if(mapElement.hasOwnProperty('ContentPaths')){
+                newData = await readContentPaths(element, mapElement);
             } else {
-                convertedItem[mapElement.SharePointColumn] = newData;
+                //Import hardcoded data if found
+                if(mapElement.hasOwnProperty('HardcodedData')){
+                    newData = mapElement.HardcodedData.toString();
+                }
+            }
+
+            if(mapElement.hasOwnProperty('Metadata')){
+                convertedItem.metadata[mapElement.Metadata] = newData;
+            }
+            if(mapElement.hasOwnProperty('SharePointColumn')){
+                convertedItem.columns[mapElement.SharePointColumn] = newData;
             }
         }
+        convertedItem.metadata.migrate = true;
         return convertedItem;
     }
 
     /**
-     * Loops through a content object such as akumina_blogs, checks whether node has been linked
+     * Checks whether node has been linked
      * to and logs active status
      *
      * @param {object} element
@@ -381,11 +407,17 @@ class DrupalContent {
      */
     async function logIfContentIsActive(element) {
         let isActive;
-        if(element.hasOwnProperty('StaticURL') && (element.StaticURL[0])){
-            isActive = await urlsConverted.lookupActive(element.StaticURL[0]);
+        if(element.hasOwnProperty('metadata') && element.metadata.hasOwnProperty('OldPath')){
+            if(element.metadata.OldPath.charAt(0)!=='/'){
+                isActive = await urlsConverted.lookupActive('/' + element.metadata.OldPath);
+            } else {
+                isActive = await urlsConverted.lookupActive(element.metadata.OldPath);
+            }
         }
-        if(isActive !== 'Not Found') {
-            element.isActive = isActive;
+        //sets isActive to true by default
+        element.metadata.isActive = true;
+        if((isActive !== 'Not Found') && (isActive!==null)) {
+            element.metadata.isActive = isActive;
         }
         return element;
     }
@@ -403,6 +435,14 @@ class DrupalContent {
         for (const element of this.akumina[key]) {
             await logIfContentIsActive(element);
         }
+    }
+    //Cycles through images and files and sets migrate to false for
+    // inactive items (items not linked anywhere)
+    for (const element of this.akumina.file) {
+        element.metadata.migrate = element.metadata.isActive;
+    }
+    for (const element of this.akumina.images) {
+        element.metadata.migrate = element.metadata.isActive;
     }
   }
 
