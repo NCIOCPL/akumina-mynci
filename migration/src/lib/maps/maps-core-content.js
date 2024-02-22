@@ -91,7 +91,7 @@ export const coreContentMap = [
         ]
     },
     {
-        'SharePointColumn': 'StaticUrl',
+        'SharePointColumn': 'StaticURL',
         'ContentPaths':
             [
                 {
@@ -100,7 +100,23 @@ export const coreContentMap = [
                 }
             ]
     },
-
+    {
+        'Metadata': 'OldPath',
+        'ContentPaths':
+            [
+                {
+                    'Paths': ['Path']
+                }
+            ]
+    },
+    {
+        'SharePointColumn': 'AkLanguageCode',
+        'HardcodedData': 'en-US'
+    },
+    {
+        'SharePointColumn': 'AkLanguageId',
+        'HardcodedData': '1033'
+    }
 ];
 
 

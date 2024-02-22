@@ -114,7 +114,7 @@ export const eventsMap = [
             ]
     },
     {
-        'SharePointColumn': 'StaticUrl',
+        'SharePointColumn': 'StaticURL',
         'ContentPaths':
             [
                 {
@@ -122,6 +122,23 @@ export const eventsMap = [
                     'Transformation': 'convertURL'
                 }
             ]
+    },
+    {
+        'Metadata': 'OldPath',
+        'ContentPaths':
+            [
+                {
+                    'Paths': ['Path']
+                }
+            ]
+    },
+    {
+        'SharePointColumn': 'AkLanguageCode',
+        'HardcodedData': 'en-US'
+    },
+    {
+        'SharePointColumn': 'AkLanguageId',
+        'HardcodedData': '1033'
     }
 ];
 
