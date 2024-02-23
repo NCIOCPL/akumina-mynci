@@ -149,6 +149,21 @@ class AkuminaSite {
       await batch.execute();
     }
   }
+
+  async updateListIds(listName, batchSize = 100) {
+    let list = sp.web.lists.getByTitle(listName);
+    let allItems = (await list.items.select('Id', 'Title').getAll());
+    let numItems = allItems.length
+
+    while (numItems > 0) {
+      const batch = sp.createBatch();
+      for (let i = 0; i < batchSize && numItems > 0; i++) {
+        list.items.getById(allItems[i].Id).update({ AkId: allItems[i].Id });
+        numItems--;
+      }
+      await batch.execute();
+    }
+  }
 }
 
 export default AkuminaSite;
