@@ -106,7 +106,7 @@ class AkuminaSite {
       const batch = sp.createBatch();
 
       for (let i = 0; i < batchSize && itemsImported < items.length; i++) {
-        list.items.inBatch(batch).add(items[itemsImported]);
+        list.items.inBatch(batch).add(items[itemsImported].columns);
         itemsImported++;
       }
 
@@ -158,7 +158,12 @@ class AkuminaSite {
     while (numItems > 0) {
       const batch = sp.createBatch();
       for (let i = 0; i < batchSize && numItems > 0; i++) {
-        list.items.getById(allItems[i].Id).update({ AkId: allItems[i].Id });
+        list.items.getById(allItems[i].Id).update({
+          AkId: allItems[i].Id,
+          //// May need to re-set this to re-publish again
+          //'OData__ModerationStatus': 0,
+          //'OData__ModerationComments': 'Imported from Drupal'
+        });
         numItems--;
       }
       await batch.execute();

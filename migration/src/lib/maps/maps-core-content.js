@@ -32,66 +32,66 @@ export const coreContentMap = [
             }
         ]
     },
+    //{
+    //    'SharePointColumn': 'Image',
+    //        'ContentPaths':
+    //    [
+    //        {
+    //            'Paths': ['Image'],
+    //            'Transformation': 'convertImage'
+    //        }
+    //    ]
+    //},
+    //{
+    //    'SharePointColumn': 'Departments',
+    //        'ContentPaths':
+    //        [
+    //            {
+    //                'Paths': ['Content-Owner--Organization-'],
+    //                'Transformation': 'convertDepartments'
+    //            }
+    //        ]
+    //},
+    //{
+    //    'SharePointColumn': 'Publisher',
+    //        'ContentPaths':
+    //    [
+    //        {
+    //            'Paths': ['Contact-for-this-Content'],
+    //            'Transformation': 'convertPerson'
+    //        }
+    //    ]
+    //},
+    //{
+    //    'SharePointColumn': 'Tags',
+    //        'ContentPaths':
+    //    [
+    //        {
+    //            'Paths': ['Topics'],
+    //            'Transformation': 'convertTags'
+    //        }
+    //    ]
+    //},
+    //{
+    //    'SharePointColumn': 'Publish_x0020_Date',
+    //        'ContentPaths':
+    //    [
+    //        {
+    //            'Paths': ['Date-Posted']
+    //        }
+    //    ]
+    //},
+    //{
+    //    'SharePointColumn': 'Modified',
+    //        'ContentPaths':
+    //    [
+    //        {
+    //            'Paths': ['Date-Updated']
+    //        }
+    //    ]
+    //},
     {
-        'SharePointColumn': 'Image',
-            'ContentPaths':
-        [
-            {
-                'Paths': ['Image'],
-                'Transformation': 'convertImage'
-            }
-        ]
-    },
-    {
-        'SharePointColumn': 'Departments',
-            'ContentPaths':
-            [
-                {
-                    'Paths': ['Content-Owner--Organization-'],
-                    'Transformation': 'convertDepartments'
-                }
-            ]
-    },
-    {
-        'SharePointColumn': 'Publisher',
-            'ContentPaths':
-        [
-            {
-                'Paths': ['Contact-for-this-Content'],
-                'Transformation': 'convertPerson'
-            }
-        ]
-    },
-    {
-        'SharePointColumn': 'Tags',
-            'ContentPaths':
-        [
-            {
-                'Paths': ['Topics'],
-                'Transformation': 'convertTags'
-            }
-        ]
-    },
-    {
-        'SharePointColumn': 'Publish_x0020_Date',
-            'ContentPaths':
-        [
-            {
-                'Paths': ['Date-Posted']
-            }
-        ]
-    },
-    {
-        'SharePointColumn': 'Modified',
-            'ContentPaths':
-        [
-            {
-                'Paths': ['Date-Updated']
-            }
-        ]
-    },
-    {
-        'SharePointColumn': 'StaticURL',
+        'SharePointColumn': 'StaticUrl',
         'ContentPaths':
             [
                 {
