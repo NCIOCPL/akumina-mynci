@@ -58,48 +58,29 @@ let site = new AkuminaSite(spConfig);
 let userList = site.sp.web.lists.getByTitle('User Information List');
 const users = await userList.items.getAll();
 
+// Prepare the content for importing
 await drupalExport.prepareContent(urlsConverted, users, drupalUsers, taxonomyList);
-// Reset the site, deleting all the old content
-await site.reset();
 
-// const importTest = [
-//   {
-//     path: '',
-//     name: "",
-//     data: {
-//       Description: ""
-//     }
-//   }
-// ];
-// Import images
-let images = drupalExport.findUsedImages();
-await site.importFiles('LIST_NAME', images); // will probably need to convert images to the correct format before importing;
+//// Import images
+//let images = drupalExport.findUsedImages();
+//await site.importFiles('LIST_NAME', images); 
 
-// Import files
-let files = drupalExport.findLinkedFiles();
-await site.importFiles('LIST_NAME', files); // will probably need to convert files to the correct format before importing;
+//// Import files
+//let files = drupalExport.findLinkedFiles();
+//await site.importFiles('LIST_NAME', files); 
 
-// const importTest = [
-//   {
-//     Title: 'Batch Test 1'
-//   },
-//   {
-//     Title: 'Batch Test 2'
-//   },
-//   {
-//     Title: 'Batch Test 3'
-//   }];
 // Import blogs
-await site.importList('Blogs_AK', drupalExport.blogs); // will probably need to convert drupalExport.blogs to the correct format before importing;
+//await site.truncateList('Blogs_AK');
+//await site.importList('Blogs_AK', drupalExport.akumina.blogs); 
+//await site.updateListIds('Blogs_AK')
 
-// Import events
-await site.importList('Calendar_AK', drupalExport.events); // will probably need to convert drupalExport.events to the correct format before importing;
+//// Import events
+//await site.truncateList('Calendar_AK');
+//await site.importList('Calendar_AK', drupalExport.akumina.events); 
+//await site.importList('Calendar_AK', drupalExport.akumina.holidayEvents); 
+//await site.updateListIds('Calendar_AK')
 
-// Import pages
-await site.importList('InternalPages_AK', drupalExport.coreContent); // will probably need to convert drupalExport.pages to the correct format before importing;
-
-// Import holiday events
-await site.importList('Calendar_AK', drupalExport.holidayEvents); // will probably need to convert drupalExport.pages to the correct format before importing;
-
-let exclude = [3, 4, 6, 7, 8, 10, 12, 14, 15, 18, 19, 20, 23, 25, 26, 30, 31, 32, 33, 35, 37, 38, 39, 40, 41, 42, 43, 57, 58, 59, 60, 61, 62, 63, 70, 71, 72, 75, 76, 78]
-await site.truncateList('TEST_data_migration', exclude);
+//// Import pages
+//await site.truncateList('InternalPages_AK')
+//await site.importList('InternalPages_AK', drupalExport.akumina.coreContent); 
+//await site.updateListIds('InternalPages_AK')

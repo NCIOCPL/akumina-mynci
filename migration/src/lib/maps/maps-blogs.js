@@ -32,50 +32,50 @@ export const blogsMap = [
             }
         ]
     },
-    {
-        'SharePointColumn': 'Image',
-            'ContentPaths':
-        [
-            {
-                'Paths': ['Image'],
-                'Transformation': 'convertImage'
-            }
-        ]
-    },
-    {
-        'SharePointColumn': 'Tags',
-            'ContentPaths':
-            [
-                {
-                    'Paths': ['Blog-Series'],
-                    'Transformation': 'convertTags'
-                },
-                {
-                    'Paths': ['Topics'],
-                    'Transformation': 'convertTags'
-                }
-            ]
-    },
-    {
-        'SharePointColumn': 'Departments',
-            'ContentPaths':
-            [
-                {
-                    'Paths': ['Content-Owner--Organization-'],
-                    'Transformation': 'convertDepartments'
-                }
-            ]
-    },
-    {
-        'SharePointColumn': 'Publisher',
-            'ContentPaths':
-        [
-            {
-                'Paths': ['Contact-for-this-Content'],
-                'Transformation': 'convertPerson'
-            }
-        ]
-    },
+    //{
+    //    'SharePointColumn': 'Image',
+    //        'ContentPaths':
+    //    [
+    //        {
+    //            'Paths': ['Image'],
+    //            'Transformation': 'convertImage'
+    //        }
+    //    ]
+    //},
+    //{
+    //    'SharePointColumn': 'Tags',
+    //        'ContentPaths':
+    //        [
+    //            {
+    //                'Paths': ['Blog-Series'],
+    //                'Transformation': 'convertTags'
+    //            },
+    //            {
+    //                'Paths': ['Topics'],
+    //                'Transformation': 'convertTags'
+    //            }
+    //        ]
+    //},
+    //{
+    //    'SharePointColumn': 'Departments',
+    //        'ContentPaths':
+    //        [
+    //            {
+    //                'Paths': ['Content-Owner--Organization-'],
+    //                'Transformation': 'convertDepartments'
+    //            }
+    //        ]
+    //},
+    //{
+    //    'SharePointColumn': 'Publisher',
+    //        'ContentPaths':
+    //    [
+    //        {
+    //            'Paths': ['Contact-for-this-Content'],
+    //            'Transformation': 'convertPerson'
+    //        }
+    //    ]
+    //},
     {
         'SharePointColumn': 'Publish_x0020_Date',
         'ContentPaths':
@@ -95,7 +95,7 @@ export const blogsMap = [
             ]
     },
     {
-        'SharePointColumn': 'StaticURL',
+        'SharePointColumn': 'StaticUrl',
         'ContentPaths':
             [
                 {
@@ -120,7 +120,17 @@ export const blogsMap = [
     {
         'SharePointColumn': 'AkLanguageId',
         'HardcodedData': '1033'
-    }
+    },
+    //// Marks import as already published
+    //// Probably don't want this here
+    //{
+    //    'SharePointColumn': 'OData__ModerationStatus',
+    //    'HardcodedData': '0'
+    //},
+    //{
+    //    'SharePointColumn': 'OData__ModerationComments',
+    //    'HardcodedData': 'Imported from Drupal'
+    //},
 ];
 
 

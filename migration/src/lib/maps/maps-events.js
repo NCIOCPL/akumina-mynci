@@ -8,22 +8,22 @@ export const eventsMap = [
             }
         ]
     },
-    {
-        'SharePointColumn': 'EventDate',
-        'ContentPaths': [
-            {
-                'Paths': ['Event-Date']
-            }
-        ]
-    },
-    {
-        'SharePointColumn': 'Region',
-        'ContentPaths': [
-            {
-                'Paths': ['Campus']
-            }
-        ]
-    },
+    //{
+    //    'SharePointColumn': 'EventDate',
+    //    'ContentPaths': [
+    //        {
+    //            'Paths': ['Event-Date']
+    //        }
+    //    ]
+    //},
+    //{
+    //    'SharePointColumn': 'Region',
+    //    'ContentPaths': [
+    //        {
+    //            'Paths': ['Campus']
+    //        }
+    //    ]
+    //},
     {
         'SharePointColumn': 'Location',
         'ContentPaths': [
@@ -65,56 +65,47 @@ export const eventsMap = [
             ],
         'Separator':'<br />'
     },
+    //{
+    //    'SharePointColumn': 'Tags',
+    //    'ContentPaths':
+    //        [
+    //            {
+    //                'Paths': ['Topics'],
+    //                'Transformation': 'convertTags'
+    //            }
+    //        ]
+    //},
+    //{
+    //    'SharePointColumn': 'Departments',
+    //    'ContentPaths':
+    //        [
+    //            {
+    //                'Paths': ['Content-Owner--Organization-'],
+    //                'Transformation': 'convertDepartments'
+    //            }
+    //        ]
+    //},
+    //{
+    //    'SharePointColumn': 'Publisher',
+    //    'ContentPaths':
+    //        [
+    //            {
+    //                'Paths': ['Contact-for-this-Content'],
+    //                'Transformation': 'convertPerson'
+    //            }
+    //        ]
+    //},
+    //{
+    //    'SharePointColumn': 'Modified',
+    //    'ContentPaths':
+    //        [
+    //            {
+    //                'Paths': ['Date-Updated']
+    //            }
+    //        ]
+    //},
     {
-        'SharePointColumn': 'Search_x0020_Description',
-        'ContentPaths':
-            [
-                {
-                    'Paths': ['Short-Description']
-                }
-            ]
-    },
-    {
-        'SharePointColumn': 'Tags',
-        'ContentPaths':
-            [
-                {
-                    'Paths': ['Topics'],
-                    'Transformation': 'convertTags'
-                }
-            ]
-    },
-    {
-        'SharePointColumn': 'Departments',
-        'ContentPaths':
-            [
-                {
-                    'Paths': ['Content-Owner--Organization-'],
-                    'Transformation': 'convertDepartments'
-                }
-            ]
-    },
-    {
-        'SharePointColumn': 'Publisher',
-        'ContentPaths':
-            [
-                {
-                    'Paths': ['Contact-for-this-Content'],
-                    'Transformation': 'convertPerson'
-                }
-            ]
-    },
-    {
-        'SharePointColumn': 'Modified',
-        'ContentPaths':
-            [
-                {
-                    'Paths': ['Date-Updated']
-                }
-            ]
-    },
-    {
-        'SharePointColumn': 'StaticURL',
+        'SharePointColumn': 'StaticUrl',
         'ContentPaths':
             [
                 {
