@@ -158,7 +158,25 @@ class AkuminaSite {
     while (numItems > 0) {
       const batch = sp.createBatch();
       for (let i = 0; i < batchSize && numItems > 0; i++) {
-        list.items.getById(allItems[i].Id).update({ AkId: allItems[i].Id });
+        await list.items.getById(allItems[i].Id).update({ AkId: allItems[i].Id });
+        numItems--;
+      }
+      await batch.execute();
+    }
+  }
+
+  async publishListItems(listName, comment, batchSize = 100) {
+    let list = sp.web.lists.getByTitle(listName);
+    let allItems = (await list.items.select('Id', 'Title').getAll());
+    let numItems = allItems.length
+
+    while (numItems > 0) {
+      const batch = sp.createBatch();
+      for (let i = 0; i < batchSize && numItems > 0; i++) {
+        await list.items.getById(allItems[i].Id).update({ 
+          'OData__ModerationStatus': '0',
+          'OData__ModerationComments': comment
+        });
         numItems--;
       }
       await batch.execute();
