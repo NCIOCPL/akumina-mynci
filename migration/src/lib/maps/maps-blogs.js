@@ -32,16 +32,16 @@ export const blogsMap = [
             }
         ]
     },
-    //{
-    //    'SharePointColumn': 'Image',
-    //        'ContentPaths':
-    //    [
-    //        {
-    //            'Paths': ['Image'],
-    //            'Transformation': 'convertImage'
-    //        }
-    //    ]
-    //},
+    {
+        'SharePointColumn': 'Image',
+            'ContentPaths':
+        [
+            {
+                'Paths': ['Image'],
+                'Transformation': 'convertImage'
+            }
+        ]
+    },
     //{
     //    'SharePointColumn': 'Tags',
     //        'ContentPaths':
@@ -66,22 +66,23 @@ export const blogsMap = [
     //            }
     //        ]
     //},
-    //{
-    //    'SharePointColumn': 'Publisher',
-    //        'ContentPaths':
-    //    [
-    //        {
-    //            'Paths': ['Contact-for-this-Content'],
-    //            'Transformation': 'convertPerson'
-    //        }
-    //    ]
-    //},
+    {
+        'SharePointColumn': 'PublisherId',
+            'ContentPaths':
+        [
+            {
+                'Paths': ['Contact-for-this-Content'],
+                'Transformation': 'convertPerson'
+            }
+        ]
+    },
     {
         'SharePointColumn': 'Publish_x0020_Date',
         'ContentPaths':
             [
                 {
-                    'Paths': ['Date-Posted']
+                    'Paths': ['Date-Posted'],
+                    'Transformation': 'convertDate'
                 }
             ]
     },
@@ -90,7 +91,8 @@ export const blogsMap = [
         'ContentPaths':
             [
                 {
-                    'Paths': ['Date-Updated']
+                    'Paths': ['Date-Updated'],
+                    'Transformation': 'convertDate'
                 }
             ]
     },

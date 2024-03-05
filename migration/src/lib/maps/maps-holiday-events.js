@@ -24,13 +24,21 @@ export const holidayEventsMap = [
         'Separator':'<br />'
     },
     {
-        'SharePointColumn': 'Search Description',
+        'SharePointColumn': 'Search_x0020_Description',
         'ContentPaths':
             [
                 {
                     'Paths': ['Short-Description']
                 }
             ]
+    },
+    {
+        'SharePointColumn': 'EventDate',
+        'ContentPaths': [
+            {
+                'Paths': ['Event-Start']
+            }
+        ]
     },
     {
         'SharePointColumn': 'Image',
@@ -63,7 +71,7 @@ export const holidayEventsMap = [
             ]
     },
     {
-        'SharePointColumn': 'Publisher',
+        'SharePointColumn': 'PublisherId',
         'ContentPaths':
             [
                 {
@@ -73,7 +81,7 @@ export const holidayEventsMap = [
             ]
     },
     {
-        'SharePointColumn': 'Publish Date',
+        'SharePointColumn': 'Publish_x0020_Date',
         'ContentPaths':
             [
                 {

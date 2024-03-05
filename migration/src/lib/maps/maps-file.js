@@ -24,7 +24,7 @@ export const fileMap = [
             'Separator':'<br />'
     },
     {
-        'SharePointColumn': 'Search Description',
+        'SharePointColumn': 'Search_x0020_Description',
             'ContentPaths':
         [
             {
@@ -72,7 +72,7 @@ export const fileMap = [
             ]
     },
     {
-        'SharePointColumn': 'Publisher',
+        'SharePointColumn': 'PublisherId',
             'ContentPaths':
         [
             {
@@ -82,7 +82,7 @@ export const fileMap = [
         ]
     },
     {
-        'SharePointColumn': 'Date Posted',
+        'SharePointColumn': 'Date_x0020_Posted',
             'ContentPaths':
         [
             {
@@ -91,7 +91,7 @@ export const fileMap = [
         ]
     },
     {
-        'SharePointColumn': 'Date Updated',
+        'SharePointColumn': 'Date_x0020_Updated',
             'ContentPaths':
         [
             {

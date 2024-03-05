@@ -8,14 +8,24 @@ export const eventsMap = [
             }
         ]
     },
-    //{
-    //    'SharePointColumn': 'EventDate',
-    //    'ContentPaths': [
-    //        {
-    //            'Paths': ['Event-Date']
-    //        }
-    //    ]
-    //},
+    {
+        'SharePointColumn': 'EventDate',
+        'ContentPaths': [
+            {
+                'Paths': ['Event-Start'],
+                'Transformation': 'convertDate'
+            }
+        ]
+    },
+    {
+        'SharePointColumn': 'EndDate',
+        'ContentPaths': [
+            {
+                'Paths': ['Event-End'],
+                'Transformation': 'convertDate'
+            }
+        ]
+    },
     //{
     //    'SharePointColumn': 'Region',
     //    'ContentPaths': [
@@ -85,25 +95,26 @@ export const eventsMap = [
     //            }
     //        ]
     //},
-    //{
-    //    'SharePointColumn': 'Publisher',
-    //    'ContentPaths':
-    //        [
-    //            {
-    //                'Paths': ['Contact-for-this-Content'],
-    //                'Transformation': 'convertPerson'
-    //            }
-    //        ]
-    //},
-    //{
-    //    'SharePointColumn': 'Modified',
-    //    'ContentPaths':
-    //        [
-    //            {
-    //                'Paths': ['Date-Updated']
-    //            }
-    //        ]
-    //},
+    {
+        'SharePointColumn': 'PublisherId',
+        'ContentPaths':
+            [
+                {
+                    'Paths': ['Contact-for-this-Content'],
+                    'Transformation': 'convertPerson'
+                }
+            ]
+    },
+    {
+        'SharePointColumn': 'Modified',
+        'ContentPaths':
+            [
+                {
+                    'Paths': ['Date-Updated'],
+                'Transformation': 'convertDate'
+                }
+            ]
+    },
     {
         'SharePointColumn': 'StaticUrl',
         'ContentPaths':

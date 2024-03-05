@@ -32,16 +32,16 @@ export const coreContentMap = [
             }
         ]
     },
-    //{
-    //    'SharePointColumn': 'Image',
-    //        'ContentPaths':
-    //    [
-    //        {
-    //            'Paths': ['Image'],
-    //            'Transformation': 'convertImage'
-    //        }
-    //    ]
-    //},
+    {
+        'SharePointColumn': 'Image',
+            'ContentPaths':
+        [
+            {
+                'Paths': ['Image'],
+                'Transformation': 'convertImage'
+            }
+        ]
+    },
     //{
     //    'SharePointColumn': 'Departments',
     //        'ContentPaths':
@@ -52,16 +52,16 @@ export const coreContentMap = [
     //            }
     //        ]
     //},
-    //{
-    //    'SharePointColumn': 'Publisher',
-    //        'ContentPaths':
-    //    [
-    //        {
-    //            'Paths': ['Contact-for-this-Content'],
-    //            'Transformation': 'convertPerson'
-    //        }
-    //    ]
-    //},
+    {
+        'SharePointColumn': 'PublisherId',
+            'ContentPaths':
+        [
+            {
+                'Paths': ['Contact-for-this-Content'],
+                'Transformation': 'convertPerson'
+            }
+        ]
+    },
     //{
     //    'SharePointColumn': 'Tags',
     //        'ContentPaths':

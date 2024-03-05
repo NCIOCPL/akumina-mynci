@@ -88,7 +88,7 @@ class AkuminaSite {
    *
    * @param {string} listName SharePoint list name
    * @param {Array<object>} items An array of items to import, each item containing only the appropriately named columns
-   * @param {integer} batchSize Size of batches when looping
+   * @param {number} batchSize Size of batches when looping
    */
   async importList(listName, items, batchSize = 100) {
     // Loop through the items provided
@@ -105,11 +105,11 @@ class AkuminaSite {
     while (itemsImported < items.length) {
       const batch = sp.createBatch();
 
-      for (let i = 0; i < batchSize && itemsImported < items.length; i++) {
+      for (let i = 0; (i < batchSize) && (itemsImported < items.length); i++) {
         list.items.inBatch(batch).add(items[itemsImported].columns);
         itemsImported++;
       }
-
+      console.log('List Items Imported: ', itemsImported);
       await batch.execute();
     }
   }
@@ -130,7 +130,7 @@ class AkuminaSite {
    *
    * @param {string} listName A SharePoint list name.
    * @param {Array<integer>} exclude A list of IDs to exclude
-   * @param {integer} batchSize Size of batches when looping
+   * @param {number} batchSize Size of batches when looping
    */
   async truncateList(listName, exclude = [], batchSize = 100) {
     console.log('Truncating list ' + listName + '...');
@@ -149,23 +149,30 @@ class AkuminaSite {
       await batch.execute();
     }
   }
-
+  /**
+   * Update list ids from SharePoint list.
+   *
+   * @param {string} listName A SharePoint list name.
+   * @param {number} batchSize Size of batches when looping
+   */
   async updateListIds(listName, batchSize = 100) {
+    console.log('Updating listIds ' + listName + '...');
     let list = sp.web.lists.getByTitle(listName);
     let allItems = (await list.items.select('Id', 'Title').getAll());
-    let numItems = allItems.length
+    let numItems = allItems.length;
 
     while (numItems > 0) {
       const batch = sp.createBatch();
-      for (let i = 0; i < batchSize && numItems > 0; i++) {
-        list.items.getById(allItems[i].Id).update({
+      for (let i = 0; (i < batchSize) && (numItems > 0); i++) {
+        await list.items.getById(allItems[i].Id).update({
           AkId: allItems[i].Id,
           //// May need to re-set this to re-publish again
-          //'OData__ModerationStatus': 0,
-          //'OData__ModerationComments': 'Imported from Drupal'
+          'OData__ModerationStatus': 0,
+          'OData__ModerationComments': 'Imported from Drupal'
         });
         numItems--;
       }
+      console.log('Number of listIds left to update: ', numItems);
       await batch.execute();
     }
   }

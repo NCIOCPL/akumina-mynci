@@ -48,6 +48,17 @@ await urlsConverted.loadURLs(drupalExport.drupal.holidayEvents,'Path','/Events/e
 await urlsConverted.loadURLs(drupalExport.drupal.organizationDetails,'Path','/Inside/en-us/');
 await urlsConverted.loadURLs(drupalExport.drupal.policy,'Path','/Inside/en-us/');
 
+const counter = {};
+for( const [key, value] of urlsConverted.urls){
+  let slug = value.slug;
+  if(counter[slug]){
+    counter[slug] += 1;
+    value.isUnique = false;
+    value.newSlug = slug + '_' + counter;
+  } else {
+    counter[slug] = 1;
+  }
+}
 // Set up the SharePoint connection
 const spConfig = {
   siteURL: process.env.SITE_URL,
@@ -70,17 +81,17 @@ await drupalExport.prepareContent(urlsConverted, users, drupalUsers, taxonomyLis
 //await site.importFiles('LIST_NAME', files); 
 
 // Import blogs
-//await site.truncateList('Blogs_AK');
-//await site.importList('Blogs_AK', drupalExport.akumina.blogs); 
-//await site.updateListIds('Blogs_AK')
+await site.truncateList('Blogs_AK');
+await site.importList('Blogs_AK', drupalExport.akumina.blogs, 1);
+await site.updateListIds('Blogs_AK', 150);
 
 //// Import events
-//await site.truncateList('Calendar_AK');
-//await site.importList('Calendar_AK', drupalExport.akumina.events); 
-//await site.importList('Calendar_AK', drupalExport.akumina.holidayEvents); 
-//await site.updateListIds('Calendar_AK')
+await site.truncateList('Calendar_AK');
+await site.importList('Calendar_AK', drupalExport.akumina.events, 1);
+await site.importList('Calendar_AK', drupalExport.akumina.holidayEvents);
+await site.updateListIds('Calendar_AK');
 
 //// Import pages
-//await site.truncateList('InternalPages_AK')
+//await site.truncateList('InternalPages_AK');
 //await site.importList('InternalPages_AK', drupalExport.akumina.coreContent); 
-//await site.updateListIds('InternalPages_AK')
+//await site.updateListIds('InternalPages_AK');

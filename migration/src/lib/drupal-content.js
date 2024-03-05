@@ -116,19 +116,26 @@ class DrupalContent {
               }
               return content;
           },
+          convertDate: async function (content) {
+              if(content && (content !== '')){
+                  let myDate = (Date.parse(content) * 1000).toISOString();
+                  return myDate; //dateTime
+              }
+              return content;
+          },
           convertTags: async function (content) {
               if(content && (content !== '')) {
                   let termList = content.split('|');
-                  let termObject = {terms: []};
+                  let termObject = {results: []};
                   let termGuid = '';
                   if (termList && termList.length > 1) {
                       for (const term of termList) {
                           termGuid = await taxonomyList.lookup('topics', term);
-                          termObject.terms.push({'Label': term, 'TermGuid': termGuid});
+                          termObject.results.push({'Label': term, 'TermGuid': termGuid});
                       }
                   } else {
                       termGuid = await taxonomyList.lookup('topics', content);
-                      termObject.terms.push({'Label': content, 'TermGuid': termGuid});
+                      termObject.results.push({'Label': content, 'TermGuid': termGuid});
                   }
                   return termObject; //Object
               }
@@ -139,27 +146,36 @@ class DrupalContent {
           },
           convertPerson: async function (content) {
               let emailList = content.split('|');
-              let sharepointUsers = {sharepointList:[]};
+              let personEmail = '';
+             // let sharepointUsers = {results:[]};
               let sharepointUser = {};
               if(emailList && emailList.length>1) {
-                  for(const email of emailList) {
+                 personEmail =  emailList[0];
+                  /*for(const email of emailList) {
                       sharepointUser = await getSharepointUser(email);
                       await drupalUsers.add(email,sharepointUser);
                       if(sharepointUser.hasOwnProperty('person_columnID') && sharepointUser.person_columnID !== ''){
-                          sharepointUsers.sharepointList.push(sharepointUser);
+                          sharepointUsers.results.push(sharepointUser);
                       }
-                  }
+                  }*/
               } else {
-                  sharepointUser = await getSharepointUser(content);
-                  await drupalUsers.add(content,sharepointUser);
-                  if(sharepointUser.hasOwnProperty('person_columnID') && sharepointUser.person_columnID !== '') {
-                      sharepointUsers.sharepointList.push(sharepointUser);
-                  }
+                  personEmail = emailList;
               }
-              if((sharepointUsers.sharepointList.length>0)){
+              sharepointUser = await getSharepointUser(personEmail);
+              await drupalUsers.add(personEmail,sharepointUser);
+              if(sharepointUser.hasOwnProperty('person_columnID') && sharepointUser.person_columnID !== '') {
+                  //sharepointUsers.results.push(sharepointUser);
+                  return sharepointUser.person_columnID;
+              }
+              /*if((sharepointUsers.results.length>0)){
                   return sharepointUsers; //Object
-              }
-              return content; //String
+              }*/
+              //Otherwise return a default user 13;
+              return 13;
+              /*{
+                  Title: 'Frank, James (NIH/NCI) [C]',
+                  person_columnID: 13
+              };*///Object
           },
           convertText: async function (content) {
               content = '<body>' + content + '</body>';
@@ -173,9 +189,14 @@ class DrupalContent {
                   .replace('</body>',''); //String
           },
           convertURL: async function (content) {
-              let slug = content.split('/').pop();
-              if(slug){
-                  return slug;
+              let newSlug = urlsConverted.getNewSlug(content);
+              if (newSlug && (newSlug!=='Not Found')){
+                  return newSlug;
+              } else {
+                  let slug = content.split('/').pop();
+                  if(slug){
+                      return slug;
+                  }
               }
               return content; //String
           },
@@ -190,11 +211,11 @@ class DrupalContent {
         let sharepointUser = {Title:'',person_columnID:''}
         for (const element of users) {
             if(element.hasOwnProperty('EMail') && (element.EMail === email)) {
-                if(element.hasOwnProperty('Id')) {
-                   sharepointUser.person_columnID = element.Id;
-                }
                 if(element.hasOwnProperty('Title')) {
                     sharepointUser.Title = element.Title;
+                }
+                if(element.hasOwnProperty('Id')) {
+                   sharepointUser.person_columnID = element.Id;
                 }
             }
         }
@@ -236,7 +257,9 @@ class DrupalContent {
         if (tagHref.startsWith('http://mynci.cancer.gov')){
             tagHref = tagHref.replace('http://mynci.cancer.gov','');
         }
-
+        if (tagHref.startsWith('https://ocpl-mynci:8890')){
+            tagHref = tagHref.replace('https://ocpl-mynci:8890','');
+        }
         //Check for anchors
         let hash = '';
         if(tagHref.includes('#')){
@@ -272,30 +295,37 @@ class DrupalContent {
      *  sharepoint links using url-converter
      */
     async function convertLinks(content,tagType) {
-        let linkList = {links:[]};
-        let link = {};
+        let linkList = {};
         content = '<body>' + content + '</body>';
         const parser = new DOMParser();
         let htmlDoc = parser.parseFromString(content, "text/html");
         const htmlTags = htmlDoc.getElementsByTagName(tagType);
         let thisURL = '';
         let thisDescription = '';
-        for (let i=0; i< htmlTags.length; i++) {
-            let tag = htmlTags[i];
-            let myTag = await updateLinkSource(tag);
-            if (tagType === 'img') {
-                thisURL = myTag.getAttribute('src');
-                thisDescription = myTag.getAttribute('alt');
+        if(htmlTags.length>0){
+            if (tagType === 'img'){
+                let imgSrc = await updateLinkSource(htmlTags[0]);
+                linkList = {
+                    Url: imgSrc.getAttribute('src'),
+                    Description: imgSrc.getAttribute('alt')
+                }
             } else {
-                thisURL = myTag.getAttribute('href');
-                thisDescription = await getLinkText(myTag);
+                linkList = {results:[]};
+                let link = {};
+                for (let i=0; i< htmlTags.length; i++) {
+                    let tag = htmlTags[i];
+                    let myTag = await updateLinkSource(tag);
+                    thisURL = myTag.getAttribute('href');
+                    thisDescription = await getLinkText(myTag);
+                    link = {
+                        URL: thisURL,
+                        Description: thisDescription
+                    }
+                    linkList.results.push(link);
+                }
             }
-            link = {
-                URL: thisURL,
-                Description: thisDescription
-            }
-            linkList.links.push(link);
         }
+
         return linkList;
     }
     /**
@@ -336,13 +366,7 @@ class DrupalContent {
                             elementData = await transformContent[contentPath.Transformation](elementData);
                         }
                         if (elementData) {
-                            if ((typeof elementData) === 'string') {
-                                if (mapElement.Separator && (index > 0)) {
-                                    newData += mapElement.Separator + elementData;
-                                } else {
-                                    newData = elementData;
-                                }
-                            } else { //elementData is object
+                            if ((typeof elementData) === 'object') {
                                 if (Object.keys(newObjectData).length === 0) {
                                     newObjectData = elementData;
                                 } else {
@@ -350,6 +374,12 @@ class DrupalContent {
                                     let newObjectDataKey = Object.keys(newObjectData)[0];
                                     let elementDataKey = Object.keys(elementData)[0];
                                     newObjectData[newObjectDataKey].push(...elementData[elementDataKey]);
+                                }
+                            } else {
+                                if (mapElement.Separator && (index > 0)) {
+                                    newData += mapElement.Separator + elementData;
+                                } else {
+                                    newData = elementData;
                                 }
                             }
                         }
@@ -386,10 +416,10 @@ class DrupalContent {
                 }
             }
 
-            if(mapElement.hasOwnProperty('Metadata')){
+            if(mapElement.hasOwnProperty('Metadata') && newData && (newData !== '')){
                 convertedItem.metadata[mapElement.Metadata] = newData;
             }
-            if(mapElement.hasOwnProperty('SharePointColumn')){
+            if(mapElement.hasOwnProperty('SharePointColumn') && newData && (newData !== '')){
                 convertedItem.columns[mapElement.SharePointColumn] = newData;
             }
         }
@@ -422,6 +452,28 @@ class DrupalContent {
         return element;
     }
 
+    /**
+     * Checks whether node has been linked
+     * to and logs active status
+     *
+     * @param {object} element
+     *
+     * @returns {Promise<object>}
+     */
+    async function guaranteeUniqueURL(element) {
+        let isUnique;
+        if(element.hasOwnProperty('metadata') && element.metadata.hasOwnProperty('OldPath')) {
+            if(element.metadata.OldPath.charAt(0)!=='/'){
+                isUnique = await urlsConverted.lookupUnique('/' + element.metadata.OldPath);
+            } else {
+                isUnique = await urlsConverted.lookupUnique(element.metadata.OldPath);
+            }
+            if(!isUnique && element.hasOwnProperty('columns') && element.columns.hasOwnProperty('StaticUrl')){
+                element.columns.StaticUrl = element.metadata.OldPath.replace('/','-');
+            }
+        }
+        return element;
+    }
     //Cycles through all of the Drupal export objects and builds Akumina variants applying the
     //mapping between Drupal and Akumina fields and any transformations
     for (const [key, value] of Object.entries(this.drupal)) {
@@ -430,10 +482,12 @@ class DrupalContent {
         }
     }
 
-    //Cycles through all of the Akumina objects,logs which are linked to (active)
+    //Cycles through all of the Akumina objects,logs which are linked to (active),
+    //Also checks if staticurl is unique and modifies if not
     for (const [key, value] of Object.entries(this.akumina)) {
         for (const element of this.akumina[key]) {
             await logIfContentIsActive(element);
+           // await guaranteeUniqueURL(element);
         }
     }
     //Cycles through images and files and sets migrate to false for
