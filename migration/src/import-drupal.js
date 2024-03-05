@@ -5,7 +5,6 @@ import AkuminaSite from './lib/akumina-site.js';
 import DrupalContent from './lib/drupal-content.js';
 import URLConverter from './lib/url-converter.js';
 import DrupalUserlist from "./lib/drupal-userlist.js";
-import AkuminaTaxonomyList from "./lib/akumina-taxonomy-list.js";
 
 // Retrieve our secrets
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -24,16 +23,11 @@ const drupalExports = {
   organizationDetails: '../content/organization-details.xml',
   policy: '../content/policy.xml',
 };
-// Define our taxonomy export location
-const taxonomyJSON = {
-  topics: '../content/taxonomy-topics.json',
-};
+
 // Set up the export data
 let drupalExport = new DrupalContent();
 await drupalExport.loadContent(drupalExports);
-//Set up list of taxonomy terms and ids from sharepoint
-let taxonomyList = new AkuminaTaxonomyList();
-await taxonomyList.loadContent(taxonomyJSON);
+
 //Create the map of old to new urls
 let urlsConverted = new URLConverter();
 let drupalUsers = new DrupalUserlist();
@@ -48,6 +42,17 @@ await urlsConverted.loadURLs(drupalExport.drupal.holidayEvents,'Path','/Events/e
 await urlsConverted.loadURLs(drupalExport.drupal.organizationDetails,'Path','/Inside/en-us/');
 await urlsConverted.loadURLs(drupalExport.drupal.policy,'Path','/Inside/en-us/');
 
+const counter = {};
+for( const [key, value] of urlsConverted.urls){
+  let slug = value.slug;
+  if(counter[slug]){
+    counter[slug] += 1;
+    value.isUnique = false;
+    value.newSlug = slug + '_' + counter;
+  } else {
+    counter[slug] = 1;
+  }
+}
 // Set up the SharePoint connection
 const spConfig = {
   siteURL: process.env.SITE_URL,
@@ -58,48 +63,48 @@ let site = new AkuminaSite(spConfig);
 let userList = site.sp.web.lists.getByTitle('User Information List');
 const users = await userList.items.getAll();
 
-await drupalExport.prepareContent(urlsConverted, users, drupalUsers, taxonomyList);
-// Reset the site, deleting all the old content
-await site.reset();
+let akTaxonomyList = site.sp.web.lists.getByTitle('TaxonomyHiddenList');
+const taxonomyTags = await akTaxonomyList.items.getAll();
 
-// const importTest = [
-//   {
-//     path: '',
-//     name: "",
-//     data: {
-//       Description: ""
-//     }
-//   }
-// ];
-// Import images
-let images = drupalExport.findUsedImages();
-await site.importFiles('LIST_NAME', images); // will probably need to convert images to the correct format before importing;
+let taxonomyFields = {
+  Tags:'',
+  Departments:'',
+  Region:''
+}
 
-// Import files
-let files = drupalExport.findLinkedFiles();
-await site.importFiles('LIST_NAME', files); // will probably need to convert files to the correct format before importing;
+const BlogFieldTags_one = await site.sp.web.lists.getByTitle('Blogs_AK').fields.filter("Title eq 'Tags_1'")();
+const BlogFieldDepartments_one = await site.sp.web.lists.getByTitle('Blogs_AK').fields.filter("Title eq 'Departments_1'")();
+const BlogFieldRegion_one = await site.sp.web.lists.getByTitle('Blogs_AK').fields.filter("Title eq 'Region_1'")();
+taxonomyFields.Tags = BlogFieldTags_one[0].StaticName;
+taxonomyFields.Departments = BlogFieldDepartments_one[0].StaticName;
+taxonomyFields.Region = BlogFieldRegion_one[0].StaticName;
 
-// const importTest = [
-//   {
-//     Title: 'Batch Test 1'
-//   },
-//   {
-//     Title: 'Batch Test 2'
-//   },
-//   {
-//     Title: 'Batch Test 3'
-//   }];
+// Prepare the content for importing
+await drupalExport.prepareContent(urlsConverted, users, drupalUsers, taxonomyTags, taxonomyFields);
+
+//// Import images
+//let images = drupalExport.findUsedImages();
+//await site.importFiles('LIST_NAME', images);
+
+//// Import files
+//let files = drupalExport.findLinkedFiles();
+//await site.importFiles('LIST_NAME', files);
+
 // Import blogs
-await site.importList('Blogs_AK', drupalExport.blogs); // will probably need to convert drupalExport.blogs to the correct format before importing;
+await site.truncateList('Blogs_AK');
+await site.importList('Blogs_AK', drupalExport.akumina.blogs);
+await site.updateListIds('Blogs_AK');
+await site.publishListItems("Blogs_AK", 'Imported from Drupal myNCI');
 
-// Import events
-await site.importList('Calendar_AK', drupalExport.events); // will probably need to convert drupalExport.events to the correct format before importing;
+//// Import events
+await site.truncateList('Calendar_AK');
+await site.importList('Calendar_AK', drupalExport.akumina.events);
+await site.importList('Calendar_AK', drupalExport.akumina.holidayEvents);
+await site.updateListIds('Calendar_AK');
+await site.publishListItems("Calendar_AK", 'Imported from Drupal myNCI');
 
-// Import pages
-await site.importList('InternalPages_AK', drupalExport.coreContent); // will probably need to convert drupalExport.pages to the correct format before importing;
-
-// Import holiday events
-await site.importList('Calendar_AK', drupalExport.holidayEvents); // will probably need to convert drupalExport.pages to the correct format before importing;
-
-let exclude = [3, 4, 6, 7, 8, 10, 12, 14, 15, 18, 19, 20, 23, 25, 26, 30, 31, 32, 33, 35, 37, 38, 39, 40, 41, 42, 43, 57, 58, 59, 60, 61, 62, 63, 70, 71, 72, 75, 76, 78]
-await site.truncateList('TEST_data_migration', exclude);
+//// Import pages
+await site.truncateList('InternalPages_AK');
+await site.importList('InternalPages_AK', drupalExport.akumina.coreContent);
+await site.updateListIds('InternalPages_AK');
+await site.publishListItems("InternalPages_AK", 'Imported from Drupal myNCI');
