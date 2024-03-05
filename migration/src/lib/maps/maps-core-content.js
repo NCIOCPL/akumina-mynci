@@ -6,7 +6,8 @@ export const coreContentMap = [
             {
                 'Paths': ['Title']
             }
-        ]
+        ],
+        'CharacterLimit': 255
     },
     {
         'SharePointColumn': 'Body',
@@ -42,18 +43,19 @@ export const coreContentMap = [
             }
         ]
     },
+    //{
+    //    'SharePointColumn': 'Departments',
+    //        'SharePointType': 'TaxMulti',
+    //        'ContentPaths':
+    //        [
+    //            {
+    //                'Paths': ['Content-Owner--Organization-'],
+    //                'Transformation': 'convertDepartments'
+    //            }
+    //        ]
+    //},
     {
-        'SharePointColumn': 'Departments',
-            'ContentPaths':
-            [
-                {
-                    'Paths': ['Content-Owner--Organization-'],
-                    'Transformation': 'convertDepartments'
-                }
-            ]
-    },
-    {
-        'SharePointColumn': 'Publisher',
+        'SharePointColumn': 'PublisherId',
             'ContentPaths':
         [
             {
@@ -64,6 +66,7 @@ export const coreContentMap = [
     },
     {
         'SharePointColumn': 'Tags',
+        'SharePointType': 'TaxMulti',
             'ContentPaths':
         [
             {
@@ -77,7 +80,8 @@ export const coreContentMap = [
             'ContentPaths':
         [
             {
-                'Paths': ['Date-Posted']
+                'Paths': ['Date-Posted'],
+                'Transformation': 'convertDate'
             }
         ]
     },
@@ -86,19 +90,21 @@ export const coreContentMap = [
             'ContentPaths':
         [
             {
-                'Paths': ['Date-Updated']
+                'Paths': ['Date-Updated'],
+                'Transformation': 'convertDate'
             }
         ]
     },
     {
-        'SharePointColumn': 'StaticURL',
+        'SharePointColumn': 'StaticUrl',
         'ContentPaths':
             [
                 {
                     'Paths': ['Path'],
                     'Transformation': 'convertURL'
                 }
-            ]
+            ],
+        'CharacterLimit': 255
     },
     {
         'Metadata': 'OldPath',

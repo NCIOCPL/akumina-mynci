@@ -6,7 +6,8 @@ export const holidayEventsMap = [
             {
                 'Paths': ['Title']
             }
-        ]
+        ],
+        'CharacterLimit': 255
     },
     {
         'SharePointColumn': 'Body',
@@ -24,7 +25,7 @@ export const holidayEventsMap = [
         'Separator':'<br />'
     },
     {
-        'SharePointColumn': 'Search Description',
+        'SharePointColumn': 'Description',
         'ContentPaths':
             [
                 {
@@ -33,17 +34,17 @@ export const holidayEventsMap = [
             ]
     },
     {
-        'SharePointColumn': 'Image',
-        'ContentPaths':
-            [
-                {
-                    'Paths': ['Image'],
-                    'Transformation': 'convertImage'
-                }
-            ]
+        'SharePointColumn': 'EventDate',
+        'ContentPaths': [
+            {
+                'Paths': ['Event-Start'],
+                'Transformation': 'convertDate'
+            }
+        ]
     },
     {
         'SharePointColumn': 'Tags',
+        'SharePointType': 'TaxMulti',
         'ContentPaths':
             [
                 {
@@ -52,18 +53,8 @@ export const holidayEventsMap = [
                 }
             ]
     },
-    {
-        'SharePointColumn': 'Department',
-        'ContentPaths':
-            [
-                {
-                    'Paths': ['Content-Owner--Organization-'],
-                    'Transformation': 'convertDepartments'
-                }
-            ]
-    },
-    {
-        'SharePointColumn': 'Publisher',
+   /* {
+        'SharePointColumn': 'PublisherId',
         'ContentPaths':
             [
                 {
@@ -71,34 +62,27 @@ export const holidayEventsMap = [
                     'Transformation': 'convertPerson'
                 }
             ]
-    },
-    {
-        'SharePointColumn': 'Publish Date',
-        'ContentPaths':
-            [
-                {
-                    'Paths': ['Date-Posted']
-                }
-            ]
-    },
+    },*/
     {
         'SharePointColumn': 'Modified',
         'ContentPaths':
             [
                 {
-                    'Paths': ['Date-Updated']
+                    'Paths': ['Date-Updated'],
+                    'Transformation': 'convertDate'
                 }
             ]
     },
     {
-        'SharePointColumn': 'StaticURL',
+        'SharePointColumn': 'StaticUrl',
         'ContentPaths':
             [
                 {
                     'Paths': ['Path'],
                     'Transformation': 'convertURL'
                 }
-            ]
+            ],
+        'CharacterLimit': 255
     },
     {
         'Metadata': 'OldPath',

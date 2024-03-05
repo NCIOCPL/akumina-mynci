@@ -19,10 +19,11 @@ class URLConverter {
    * @param {string} oldURL The old URL to use for reference
    * @param {string} oldNID The drupal NID to use for reference
    * @param {string} newURL The new URL to replace the old URL
+   * @param {string} slug The slug of the old URL
    */
-  async add(oldURL, oldNID, newURL) {
+  async add(oldURL, oldNID, newURL, slug) {
     if(!this.urls.has(oldURL)) {
-      this.urls.set(oldURL, {url: newURL, nid: oldNID, isActive: false});
+      this.urls.set(oldURL, {url: newURL, nid: oldNID, slug: slug, newSlug: slug, isActive: false, isUnique: true});
     }
   }
   /**
@@ -69,6 +70,33 @@ class URLConverter {
     }
   }
   /**
+   * Retrieves the new slug for an oldURL
+   *
+   * @param {string} oldURL The old URL to use for reference
+   * @returns {Promise<string>} The new slug
+   */
+  async getNewSlug(oldURL) {
+    if(this.urls.has(oldURL)){
+      return this.urls.get(oldURL).newSlug;
+    } else {
+      return 'Not Found';
+    }
+  }
+  /**
+   * Retrieves the unique status of a slug
+   *
+   * @param {string} oldURL The old URL to use for reference
+   * @returns {Promise<boolean>|Promise<string>} The active status of URL
+   */
+  async lookupUnique(oldURL) {
+    if(this.urls.has(oldURL)){
+      return this.urls.get(oldURL).isUnique;
+    } else {
+      return 'Not Found';
+    }
+  }
+
+  /**
    * Retrieves the active status of a URL to be converted converted from drupal NID
    *
    * @param {string} NID The old NID to use for reference
@@ -106,7 +134,7 @@ class URLConverter {
       }
       let slug = oldURL.split('/').pop();
       let newURL = newPath + slug;
-      this.add(oldURL,NID,newURL);
+      this.add(oldURL,NID,newURL,slug);
     })
   }
 }

@@ -88,7 +88,7 @@ class AkuminaSite {
    *
    * @param {string} listName SharePoint list name
    * @param {Array<object>} items An array of items to import, each item containing only the appropriately named columns
-   * @param {integer} batchSize Size of batches when looping
+   * @param {number} batchSize Size of batches when looping
    */
   async importList(listName, items, batchSize = 100) {
     // Loop through the items provided
@@ -98,19 +98,20 @@ class AkuminaSite {
     // Continue to the next batch until done
 
     console.log('Importing ' + items.length + ' items to ' + listName + '...');
-
     const list = sp.web.lists.getByTitle(listName);
     let itemsImported = 0;
-
-    while (itemsImported < items.length) {
+    let batchExecuted = false;
+    while ((itemsImported < items.length) || !batchExecuted) {
+      batchExecuted = false;
       const batch = sp.createBatch();
-
-      for (let i = 0; i < batchSize && itemsImported < items.length; i++) {
-        list.items.inBatch(batch).add(items[itemsImported]);
+      for (let i = 0; (i < batchSize) && (itemsImported < items.length); i++) {
+        list.items.inBatch(batch).add(items[itemsImported].columns);
         itemsImported++;
       }
-
-      await batch.execute();
+      await batch.execute().then(() =>{
+        batchExecuted = true;
+        console.log('itemsImported ' + itemsImported);
+      });
     }
   }
 
@@ -130,7 +131,7 @@ class AkuminaSite {
    *
    * @param {string} listName A SharePoint list name.
    * @param {Array<integer>} exclude A list of IDs to exclude
-   * @param {integer} batchSize Size of batches when looping
+   * @param {number} batchSize Size of batches when looping
    */
   async truncateList(listName, exclude = [], batchSize = 100) {
     console.log('Truncating list ' + listName + '...');
@@ -138,48 +139,64 @@ class AkuminaSite {
     const allItems = (await list.items.select('Id').getAll())
       .filter((item) => !exclude.includes(item.Id))
       .map((item) => item.Id);
-
-    while (allItems.length > 0) {
+    let batchExecuted = false;
+    while ((allItems.length > 0) || !batchExecuted) {
+      batchExecuted = false;
       const batch = sp.createBatch();
-
-      for (let i = 0; i < batchSize && allItems.length > 0; i++) {
+      for (let i = 0; (i < batchSize) && (allItems.length > 0); i++) {
         list.items.getById(allItems.pop()).inBatch(batch).delete();
       }
-
-      await batch.execute();
+      await batch.execute().then(() =>{
+        batchExecuted = true;
+        console.log('Items left to truncate ' + allItems.length);
+      });
     }
   }
 
   async updateListIds(listName, batchSize = 100) {
     let list = sp.web.lists.getByTitle(listName);
     let allItems = (await list.items.select('Id', 'Title').getAll());
-    let numItems = allItems.length
-
-    while (numItems > 0) {
+    let numItems = allItems.length;
+    console.log('Updating ' + numItems + ' List IDs for ' + listName + '...');
+    let batchExecuted = false;
+    let itemIndex = 0;
+    while ((numItems > 0) || !batchExecuted) {
+      batchExecuted = false;
       const batch = sp.createBatch();
-      for (let i = 0; i < batchSize && numItems > 0; i++) {
-        await list.items.getById(allItems[i].Id).update({ AkId: allItems[i].Id });
+      for (let i = 0; (i < batchSize) && (numItems > 0); i++) {
+        list.items.getById(allItems[itemIndex].Id).inBatch(batch).update({ AkId: allItems[i].Id });
         numItems--;
+        itemIndex++;
       }
-      await batch.execute();
+      await batch.execute().then(() =>{
+        batchExecuted = true;
+        console.log('Item IDs left to update ' + numItems);
+      });
     }
   }
 
   async publishListItems(listName, comment, batchSize = 100) {
     let list = sp.web.lists.getByTitle(listName);
     let allItems = (await list.items.select('Id', 'Title').getAll());
-    let numItems = allItems.length
-
-    while (numItems > 0) {
+    let numItems = allItems.length;
+    console.log('Publishing ' + numItems + ' items for ' + listName + '...');
+    let batchExecuted = false;
+    let itemIndex = 0;
+    while ((numItems > 0) || !batchExecuted) {
+      batchExecuted = false;
       const batch = sp.createBatch();
-      for (let i = 0; i < batchSize && numItems > 0; i++) {
-        await list.items.getById(allItems[i].Id).update({ 
+      for (let i = 0; (i < batchSize) && (numItems > 0); i++) {
+        list.items.getById(allItems[itemIndex].Id).inBatch(batch).update({
           'OData__ModerationStatus': '0',
           'OData__ModerationComments': comment
         });
         numItems--;
+        itemIndex++;
       }
-      await batch.execute();
+      await batch.execute().then(() =>{
+        batchExecuted = true;
+        console.log('Items left to publish ' + numItems);
+      });
     }
   }
 }

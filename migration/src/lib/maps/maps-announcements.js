@@ -6,10 +6,11 @@ export const announcementsMap = [
             {
                 'Paths': ['Title']
             }
-        ]
+        ],
+        'CharacterLimit': 255
     },
     {
-        'SharePointColumn': 'Deadline Date',
+        'SharePointColumn': 'Deadline_x0020_Date',
         'ContentPaths': [
             {
                 'Paths': ['Deadline-Date']
@@ -40,7 +41,7 @@ export const announcementsMap = [
         'Separator':'<br />'
     },
     {
-        'SharePointColumn': 'Search Description',
+        'SharePointColumn': 'Search_x0020_Description',
         'ContentPaths':
             [
                 {
@@ -50,6 +51,7 @@ export const announcementsMap = [
     },
     {
         'SharePointColumn': 'Tags',
+        'SharePointType': 'TaxMulti',
         'ContentPaths':
             [
                 {
@@ -60,6 +62,7 @@ export const announcementsMap = [
     },
     {
         'SharePointColumn': 'Department',
+        'SharePointType': 'TaxMulti',
         'ContentPaths':
             [
                 {
@@ -69,7 +72,7 @@ export const announcementsMap = [
             ]
     },
     {
-        'SharePointColumn': 'Publisher',
+        'SharePointColumn': 'PublisherId',
         'ContentPaths':
             [
                 {
@@ -79,11 +82,12 @@ export const announcementsMap = [
             ]
     },
     {
-        'SharePointColumn': 'Publish Date',
+        'SharePointColumn': 'Publish_x0020_Date',
         'ContentPaths':
             [
                 {
-                    'Paths': ['Date-Posted']
+                    'Paths': ['Date-Posted'],
+                    'Transformation': 'convertDate'
                 }
             ]
     },
@@ -92,19 +96,21 @@ export const announcementsMap = [
         'ContentPaths':
             [
                 {
-                    'Paths': ['Date-Updated']
+                    'Paths': ['Date-Updated'],
+                    'Transformation': 'convertDate'
                 }
             ]
     },
     {
-        'SharePointColumn': 'StaticURL',
+        'SharePointColumn': 'StaticUrl',
         'ContentPaths':
             [
                 {
                     'Paths': ['Path'],
                     'Transformation': 'convertURL'
                 }
-            ]
+            ],
+        'CharacterLimit': 255
     },
     {
         'Metadata': 'OldPath',

@@ -6,24 +6,44 @@ export const eventsMap = [
             {
                 'Paths': ['Title']
             }
-        ]
+        ],
+        'CharacterLimit': 255
+    },
+    {
+        'SharePointColumn': 'Description',
+        'ContentPaths':
+            [
+                {
+                    'Paths': ['Short-Description']
+                }
+            ]
     },
     {
         'SharePointColumn': 'EventDate',
         'ContentPaths': [
             {
-                'Paths': ['Event-Date']
+                'Paths': ['Event-Start'],
+                'Transformation': 'convertDate'
             }
         ]
     },
     {
-        'SharePointColumn': 'Region',
+        'SharePointColumn': 'EndDate',
         'ContentPaths': [
             {
-                'Paths': ['Campus']
+                'Paths': ['Event-End'],
+                'Transformation': 'convertDate'
             }
         ]
     },
+    //{
+    //    'SharePointColumn': 'Region',
+    //    'ContentPaths': [
+    //        {
+    //            'Paths': ['Campus']
+    //        }
+    //    ]
+    //},
     {
         'SharePointColumn': 'Location',
         'ContentPaths': [
@@ -33,7 +53,8 @@ export const eventsMap = [
             {
                 'Paths': ['Other-Location-Information']
             },
-        ]
+        ],
+        'CharacterLimit': 255
     },
     {
         'SharePointColumn': 'Body',
@@ -66,16 +87,8 @@ export const eventsMap = [
         'Separator':'<br />'
     },
     {
-        'SharePointColumn': 'Search_x0020_Description',
-        'ContentPaths':
-            [
-                {
-                    'Paths': ['Short-Description']
-                }
-            ]
-    },
-    {
         'SharePointColumn': 'Tags',
+        'SharePointType': 'TaxMulti',
         'ContentPaths':
             [
                 {
@@ -84,18 +97,19 @@ export const eventsMap = [
                 }
             ]
     },
-    {
-        'SharePointColumn': 'Departments',
-        'ContentPaths':
-            [
-                {
-                    'Paths': ['Content-Owner--Organization-'],
-                    'Transformation': 'convertDepartments'
-                }
-            ]
-    },
-    {
-        'SharePointColumn': 'Publisher',
+    //{
+    //    'SharePointColumn': 'Departments',
+    //      'SharePointType': 'TaxMulti',
+    //    'ContentPaths':
+    //        [
+    //            {
+    //                'Paths': ['Content-Owner--Organization-'],
+    //                'Transformation': 'convertDepartments'
+    //            }
+    //        ]
+    //},
+   /* {
+        'SharePointColumn': 'PublisherId',
         'ContentPaths':
             [
                 {
@@ -103,25 +117,27 @@ export const eventsMap = [
                     'Transformation': 'convertPerson'
                 }
             ]
-    },
+    },*/
     {
         'SharePointColumn': 'Modified',
         'ContentPaths':
             [
                 {
-                    'Paths': ['Date-Updated']
+                    'Paths': ['Date-Updated'],
+                'Transformation': 'convertDate'
                 }
             ]
     },
     {
-        'SharePointColumn': 'StaticURL',
+        'SharePointColumn': 'StaticUrl',
         'ContentPaths':
             [
                 {
                     'Paths': ['Path'],
                     'Transformation': 'convertURL'
                 }
-            ]
+            ],
+        'CharacterLimit': 255
     },
     {
         'Metadata': 'OldPath',

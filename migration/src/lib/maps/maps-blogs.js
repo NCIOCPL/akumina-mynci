@@ -6,7 +6,8 @@ export const blogsMap = [
             {
                 'Paths': ['Title']
             }
-        ]
+        ],
+        'CharacterLimit': 255
     },
     {
         'SharePointColumn': 'Body',
@@ -44,6 +45,7 @@ export const blogsMap = [
     },
     {
         'SharePointColumn': 'Tags',
+        'SharePointType': 'TaxMulti',
             'ContentPaths':
             [
                 {
@@ -56,18 +58,19 @@ export const blogsMap = [
                 }
             ]
     },
+    //{
+    //    'SharePointColumn': 'Departments',
+    //      'SharePointType': 'TaxMulti',
+    //        'ContentPaths':
+    //        [
+    //            {
+    //                'Paths': ['Content-Owner--Organization-'],
+    //                'Transformation': 'convertDepartments'
+    //            }
+    //        ]
+    //},
     {
-        'SharePointColumn': 'Departments',
-            'ContentPaths':
-            [
-                {
-                    'Paths': ['Content-Owner--Organization-'],
-                    'Transformation': 'convertDepartments'
-                }
-            ]
-    },
-    {
-        'SharePointColumn': 'Publisher',
+        'SharePointColumn': 'PublisherId',
             'ContentPaths':
         [
             {
@@ -81,7 +84,8 @@ export const blogsMap = [
         'ContentPaths':
             [
                 {
-                    'Paths': ['Date-Posted']
+                    'Paths': ['Date-Posted'],
+                    'Transformation': 'convertDate'
                 }
             ]
     },
@@ -90,12 +94,13 @@ export const blogsMap = [
         'ContentPaths':
             [
                 {
-                    'Paths': ['Date-Updated']
+                    'Paths': ['Date-Updated'],
+                    'Transformation': 'convertDate'
                 }
             ]
     },
     {
-        'SharePointColumn': 'StaticURL',
+        'SharePointColumn': 'StaticUrl',
         'ContentPaths':
             [
                 {

@@ -6,7 +6,8 @@ export const fileMap = [
             {
                 'Paths': ['Title']
             }
-        ]
+        ],
+        'CharacterLimit': 255
     },
     {
         'SharePointColumn': 'Body',
@@ -24,7 +25,7 @@ export const fileMap = [
             'Separator':'<br />'
     },
     {
-        'SharePointColumn': 'Search Description',
+        'SharePointColumn': 'Search_x0020_Description',
             'ContentPaths':
         [
             {
@@ -53,6 +54,7 @@ export const fileMap = [
     },
     {
         'SharePointColumn': 'Tags',
+        'SharePointType': 'TaxMulti',
             'ContentPaths':
             [
                 {
@@ -63,6 +65,7 @@ export const fileMap = [
     },
     {
         'SharePointColumn': 'Department',
+        'SharePointType': 'TaxMulti',
             'ContentPaths':
             [
                 {
@@ -72,7 +75,7 @@ export const fileMap = [
             ]
     },
     {
-        'SharePointColumn': 'Publisher',
+        'SharePointColumn': 'PublisherId',
             'ContentPaths':
         [
             {
@@ -82,32 +85,35 @@ export const fileMap = [
         ]
     },
     {
-        'SharePointColumn': 'Date Posted',
+        'SharePointColumn': 'Date_x0020_Posted',
             'ContentPaths':
         [
             {
-                'Paths': ['Date-Posted']
+                'Paths': ['Date-Posted'],
+                'Transformation': 'convertDate'
             }
         ]
     },
     {
-        'SharePointColumn': 'Date Updated',
+        'SharePointColumn': 'Date_x0020_Updated',
             'ContentPaths':
         [
             {
-                'Paths': ['Date-Updated']
+                'Paths': ['Date-Updated'],
+                'Transformation': 'convertDate'
             }
         ]
     },
     {
-        'SharePointColumn': 'StaticURL',
+        'SharePointColumn': 'StaticUrl',
         'ContentPaths':
             [
                 {
                     'Paths': ['Path'],
                     'Transformation': 'convertURL'
                 }
-            ]
+            ],
+        'CharacterLimit': 255
     },
     {
         'Metadata': 'OldPath',
