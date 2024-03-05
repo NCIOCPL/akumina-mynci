@@ -6,7 +6,8 @@ export const organizationDetailsMap = [
             {
                 'Paths': ['Title']
             }
-        ]
+        ],
+        'CharacterLimit': 255
     },
     {
         'SharePointColumn': 'Body',
@@ -46,7 +47,7 @@ export const organizationDetailsMap = [
         'Separator':'<br />'
     },
     {
-        'SharePointColumn': 'Search Description',
+        'SharePointColumn': 'Search_x0020_Description',
         'ContentPaths':
             [
                 {
@@ -56,6 +57,7 @@ export const organizationDetailsMap = [
     },
     {
         'SharePointColumn': 'Tags',
+        'SharePointType': 'TaxMulti',
         'ContentPaths':
             [
                 {
@@ -65,14 +67,15 @@ export const organizationDetailsMap = [
             ]
     },
     {
-        'SharePointColumn': 'StaticURL',
+        'SharePointColumn': 'StaticUrl',
         'ContentPaths':
             [
                 {
                     'Paths': ['Path'],
                     'Transformation': 'convertURL'
                 }
-            ]
+            ],
+        'CharacterLimit': 255
     },
     {
         'Metadata': 'OldPath',

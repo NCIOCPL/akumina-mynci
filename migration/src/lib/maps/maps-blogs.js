@@ -6,7 +6,8 @@ export const blogsMap = [
             {
                 'Paths': ['Title']
             }
-        ]
+        ],
+        'CharacterLimit': 255
     },
     {
         'SharePointColumn': 'Body',
@@ -19,6 +20,14 @@ export const blogsMap = [
                 {
                     'Paths': ['For-More-Information'],
                     'Transformation': 'convertLinksForBody'
+                },
+                {
+                    'Paths': ['Author-to-Be-Displayed-in-Byline'],
+                    'Transformation': 'convertPersonForBody'
+                },
+                {
+                    'Paths': ['Contact-for-this-Content'],
+                    'Transformation': 'convertPersonForBody'
                 }
             ],
             'Separator':'<br />'
@@ -44,6 +53,7 @@ export const blogsMap = [
     },
     {
         'SharePointColumn': 'Tags',
+        'SharePointType': 'TaxMulti',
             'ContentPaths':
             [
                 {
@@ -56,20 +66,25 @@ export const blogsMap = [
                 }
             ]
     },
+    //{
+    //    'SharePointColumn': 'Departments',
+    //      'SharePointType': 'TaxMulti',
+    //        'ContentPaths':
+    //        [
+    //            {
+    //                'Paths': ['Content-Owner--Organization-'],
+    //                'Transformation': 'convertDepartments'
+    //            }
+    //        ]
+    //},
     {
-        'SharePointColumn': 'Departments',
-            'ContentPaths':
-            [
-                {
-                    'Paths': ['Content-Owner--Organization-'],
-                    'Transformation': 'convertDepartments'
-                }
-            ]
-    },
-    {
-        'SharePointColumn': 'Publisher',
+        'SharePointColumn': 'PublisherId',
             'ContentPaths':
         [
+            {
+                'Paths': ['Author-to-Be-Displayed-in-Byline'],
+                'Transformation': 'convertPerson'
+            },
             {
                 'Paths': ['Contact-for-this-Content'],
                 'Transformation': 'convertPerson'
@@ -81,7 +96,8 @@ export const blogsMap = [
         'ContentPaths':
             [
                 {
-                    'Paths': ['Date-Posted']
+                    'Paths': ['Date-Posted'],
+                    'Transformation': 'convertDate'
                 }
             ]
     },
@@ -90,12 +106,13 @@ export const blogsMap = [
         'ContentPaths':
             [
                 {
-                    'Paths': ['Date-Updated']
+                    'Paths': ['Date-Updated'],
+                    'Transformation': 'convertDate'
                 }
             ]
     },
     {
-        'SharePointColumn': 'StaticURL',
+        'SharePointColumn': 'StaticUrl',
         'ContentPaths':
             [
                 {

@@ -83,10 +83,11 @@ class DrupalContent {
  * @param {object} urlsConverted
  * @param {array} users
  * @param {object} drupalUsers
- * @param {object} taxonomyList
+ * @param {array} taxonomyTags
+ * @param {object} taxonomyFields
  * @returns {Promise<void>}
  */
-  async prepareContent(urlsConverted, users, drupalUsers, taxonomyList) {
+  async prepareContent(urlsConverted, users, drupalUsers, taxonomyTags, taxonomyFields) {
       //TODO Build functions to transform content
       let transformContent = {
           convertLink: async function (content) {
@@ -116,50 +117,128 @@ class DrupalContent {
               }
               return content;
           },
+          convertDate: async function (content) {
+              if(content && (content !== '')){
+                  let myDate = new Date(Date.parse(content));
+                  if(myDate.getTime()>0) {
+                      return myDate.toISOString();
+                  }
+                  return content; //dateTime
+              }
+              return content;
+          },
           convertTags: async function (content) {
               if(content && (content !== '')) {
                   let termList = content.split('|');
-                  let termObject = {terms: []};
-                  let termGuid = '';
+                  let termObject = {results: []};
+                  let taxonomyItem = {Label:'', TermGuid:''};
+                  let termString = '';
+                  let termStringSuffix = ';#';
+                  let index = 0;
+                  let trimmedTerm = '';
                   if (termList && termList.length > 1) {
                       for (const term of termList) {
-                          termGuid = await taxonomyList.lookup('topics', term);
-                          termObject.terms.push({'Label': term, 'TermGuid': termGuid});
+                          trimmedTerm = term.trim();
+                          index++;
+                          taxonomyItem = await getTaxonomyTerm(trimmedTerm);
+                          if(taxonomyItem && taxonomyItem.hasOwnProperty('TermGuid') && taxonomyItem.TermGuid && (taxonomyItem.TermGuid !== 'Not Found')){
+                              if((index) === termList.length){
+                                  termStringSuffix = '';
+                              }
+                              // termObject.results.push(taxonomyItem);
+                             termString += 'taxonomyItem.Id;#' + taxonomyItem.Label + '|' +  taxonomyItem.TermGuid + termStringSuffix;
+                          }
                       }
+                      //  return termObject; //Object
+                      return termString; //String
                   } else {
-                      termGuid = await taxonomyList.lookup('topics', content);
-                      termObject.terms.push({'Label': content, 'TermGuid': termGuid});
+                      trimmedTerm = content.trim();
+                      taxonomyItem = await getTaxonomyTerm(trimmedTerm);
+                      if(taxonomyItem && taxonomyItem.hasOwnProperty('TermGuid') && taxonomyItem.TermGuid && (taxonomyItem.TermGuid !== 'Not Found')){
+                          //termObject.results.push(taxonomyItem);
+                          termString += 'taxonomyItem.Id;#' + taxonomyItem.Label + '|' +  taxonomyItem.TermGuid;
+                        //return termObject; //Object
+                         return termString; //String
+                      }
                   }
-                  return termObject; //Object
               }
-              return content; //String
+              return ''; //String
           },
           convertDepartments: async function (content) {
               return content; //String
           },
           convertPerson: async function (content) {
               let emailList = content.split('|');
-              let sharepointUsers = {sharepointList:[]};
-              let sharepointUser = {};
-              if(emailList && emailList.length>1) {
-                  for(const email of emailList) {
+              let personEmail;
+             // let sharepointUsers = {results:[]};
+              let sharepointUser;
+          //    if(emailList && emailList.length>1) {
+           //      personEmail =  emailList[0].trim();
+                  /*for(const email of emailList) {
                       sharepointUser = await getSharepointUser(email);
                       await drupalUsers.add(email,sharepointUser);
                       if(sharepointUser.hasOwnProperty('person_columnID') && sharepointUser.person_columnID !== ''){
-                          sharepointUsers.sharepointList.push(sharepointUser);
+                          sharepointUsers.results.push(sharepointUser);
+                      }
+                  }*/
+         //     } else {
+              //    personEmail = emailList[0].trim();
+            //  }
+              personEmail = emailList[0].trim();
+              sharepointUser = await getSharepointUser(personEmail);
+              await drupalUsers.add(personEmail,sharepointUser);
+              if(sharepointUser.hasOwnProperty('person_columnID') && sharepointUser.person_columnID !== '') {
+                  //sharepointUsers.results.push(sharepointUser);
+                  return sharepointUser.person_columnID;
+              }
+              /*if((sharepointUsers.results.length>0)){
+                  return sharepointUsers; //Object
+              }*/
+              //Otherwise return a default user 13;
+              return 13;
+              /*{
+                  Title: 'Frank, James (NIH/NCI) [C]',
+                  person_columnID: 13
+              };*///Object
+          },
+          convertPersonForBody: async function (content) {
+              let emailList = content.split('|');
+              let personEmail;
+              let sharepointUser;
+             // let sharepointUsers = {results:[]};
+              let contactText = '';
+              let listIndex = 0;
+              let contactTextSuffix = ', ';
+              let defaultContact ="<a href='mailto:james.frank@nih.gov'>Frank, James (NIH/NCI) [C]</a>";
+              if(emailList && emailList.length>1) {
+                  for(const email of emailList) {
+                      listIndex++;
+                      sharepointUser = await getSharepointUser(email.trim());
+
+                      if(sharepointUser.hasOwnProperty('EMail') && sharepointUser.EMail !== '' &&
+                          sharepointUser.hasOwnProperty('Title') && sharepointUser.Title !== ''){
+                          await drupalUsers.add(email.trim(),sharepointUser);
+                          if(listIndex === emailList.length){
+                              contactTextSuffix = '';
+                          }
+                         // sharepointUsers.results.push(sharepointUser);
+                          contactText+= '<a href=mailto:"' + sharepointUser.EMail + '">' +  sharepointUser.Title + '</a>' + contactTextSuffix;
                       }
                   }
               } else {
-                  sharepointUser = await getSharepointUser(content);
-                  await drupalUsers.add(content,sharepointUser);
-                  if(sharepointUser.hasOwnProperty('person_columnID') && sharepointUser.person_columnID !== '') {
-                      sharepointUsers.sharepointList.push(sharepointUser);
+                  personEmail = emailList[0].trim();
+                  sharepointUser = await getSharepointUser(personEmail);
+                  if(sharepointUser.hasOwnProperty('EMail') && sharepointUser.EMail !== '' &&
+                      sharepointUser.hasOwnProperty('Title') && sharepointUser.Title !== '') {
+                      contactText = '<a href="' + sharepointUser.EMail + '">' + sharepointUser.Title + '</a>';
+                      await drupalUsers.add(personEmail,sharepointUser);
                   }
+
               }
-              if((sharepointUsers.sharepointList.length>0)){
-                  return sharepointUsers; //Object
+              if(contactText && (contactText !== '')){
+                  return contactText;
               }
-              return content; //String
+              return defaultContact;
           },
           convertText: async function (content) {
               content = '<body>' + content + '</body>';
@@ -173,13 +252,37 @@ class DrupalContent {
                   .replace('</body>',''); //String
           },
           convertURL: async function (content) {
-              let slug = content.split('/').pop();
-              if(slug){
-                  return slug;
+              let newSlug = urlsConverted.getNewSlug(content);
+              if (newSlug && (newSlug!=='Not Found')){
+                  return newSlug;
+              } else {
+                  let slug = content.split('/').pop();
+                  if(slug){
+                      return slug;
+                  }
               }
               return content; //String
           },
       }
+
+    /**
+     *  @param {string} term
+     *  @returns {Promise<object>}
+     *  Loops through childnodes of href and returns text
+     */
+    async function getTaxonomyTerm(term) {
+        for (const element of taxonomyTags) {
+            if(element.hasOwnProperty('Title') && (element.Title === term) && element.hasOwnProperty('Id') && (element.hasOwnProperty('IdForTerm'))) {
+                let taxonomyItem = {Label:'', TermGuid:'', WssId:''};
+               // taxonomyItem.Label = element.Id.toString();
+                taxonomyItem.Label = element.Title;
+                taxonomyItem.TermGuid = element.IdForTerm;
+                taxonomyItem.WssId = element.Id;
+                return taxonomyItem;
+            }
+        }
+        return 'Not Found';
+    }
 
     /**
      *  @param {string} email
@@ -187,15 +290,16 @@ class DrupalContent {
      *  Loops through childnodes of href and returns text
      */
     async function getSharepointUser(email) {
-        let sharepointUser = {Title:'',person_columnID:''}
+        let sharepointUser = {Title:'',person_columnID:'', EMail:''}
         for (const element of users) {
             if(element.hasOwnProperty('EMail') && (element.EMail === email)) {
-                if(element.hasOwnProperty('Id')) {
-                   sharepointUser.person_columnID = element.Id;
-                }
                 if(element.hasOwnProperty('Title')) {
                     sharepointUser.Title = element.Title;
                 }
+                if(element.hasOwnProperty('Id')) {
+                   sharepointUser.person_columnID = element.Id;
+                }
+                sharepointUser.EMail = element.EMail;
             }
         }
         return sharepointUser;
@@ -236,7 +340,9 @@ class DrupalContent {
         if (tagHref.startsWith('http://mynci.cancer.gov')){
             tagHref = tagHref.replace('http://mynci.cancer.gov','');
         }
-
+        if (tagHref.startsWith('https://ocpl-mynci:8890')){
+            tagHref = tagHref.replace('https://ocpl-mynci:8890','');
+        }
         //Check for anchors
         let hash = '';
         if(tagHref.includes('#')){
@@ -272,29 +378,35 @@ class DrupalContent {
      *  sharepoint links using url-converter
      */
     async function convertLinks(content,tagType) {
-        let linkList = {links:[]};
-        let link = {};
+        let linkList = {};
         content = '<body>' + content + '</body>';
         const parser = new DOMParser();
         let htmlDoc = parser.parseFromString(content, "text/html");
         const htmlTags = htmlDoc.getElementsByTagName(tagType);
         let thisURL = '';
         let thisDescription = '';
-        for (let i=0; i< htmlTags.length; i++) {
-            let tag = htmlTags[i];
-            let myTag = await updateLinkSource(tag);
-            if (tagType === 'img') {
-                thisURL = myTag.getAttribute('src');
-                thisDescription = myTag.getAttribute('alt');
+        if(htmlTags.length>0){
+            if (tagType === 'img'){
+                let imgSrc = await updateLinkSource(htmlTags[0]);
+                linkList = {
+                    Url: imgSrc.getAttribute('src'),
+                    Description: imgSrc.getAttribute('alt')
+                }
             } else {
-                thisURL = myTag.getAttribute('href');
-                thisDescription = await getLinkText(myTag);
+                linkList = {results:[]};
+                let link = {};
+                for (let i=0; i< htmlTags.length; i++) {
+                    let tag = htmlTags[i];
+                    let myTag = await updateLinkSource(tag);
+                    thisURL = myTag.getAttribute('href');
+                    thisDescription = await getLinkText(myTag);
+                    link = {
+                        URL: thisURL,
+                        Description: thisDescription
+                    }
+                    linkList.results.push(link);
+                }
             }
-            link = {
-                URL: thisURL,
-                Description: thisDescription
-            }
-            linkList.links.push(link);
         }
         return linkList;
     }
@@ -318,7 +430,7 @@ class DrupalContent {
      *  @param {object} element
      *  @param {object} mapElement
      *  @returns {Promise<object>|Promise<string>}
-     *  Loops through contentPaths in map and applies any tranformations before copying data
+     *  Loops through contentPaths in map and applies any transformations before copying data
      */
     async function readContentPaths(element, mapElement) {
         let newData = '';
@@ -329,28 +441,47 @@ class DrupalContent {
                 if (contentPath.Transformation) {
                     transform = true;
                 }
-                for (const path of contentPath.Paths) {
-                    if (element[path]) {
-                        let elementData = element[path].toString();
-                        if (transform && elementData && (elementData !== '')) {
-                            elementData = await transformContent[contentPath.Transformation](elementData);
-                        }
-                        if (elementData) {
-                            if ((typeof elementData) === 'string') {
-                                if (mapElement.Separator && (index > 0)) {
-                                    newData += mapElement.Separator + elementData;
-                                } else {
-                                    newData = elementData;
+                let elementItem = contentPath.Paths[0];
+                if (element[elementItem]) {
+                    let elementData = element[elementItem].toString();
+                    if (transform && elementData && (elementData !== '')) {
+                        elementData = await transformContent[contentPath.Transformation](elementData);
+                    }
+                    if (elementData) {
+                        if ((typeof elementData) === 'object') {
+                            if (Object.keys(newObjectData).length === 0) {
+                                newObjectData = elementData;
+                            } else {
+                                //We will always be looking for the first key here
+                                let elementDataKey = Object.keys(elementData)[0];
+                                let newObjectDataKey = Object.keys(newObjectData)[0];
+                                newObjectData[newObjectDataKey].push(...elementData[elementDataKey]);
+                            }
+                        } else {
+                            //Checks if Author to be Displayed in Byline is present if Contact and removes any duplicate
+                            if((elementItem === 'Contact-for-this-Content')
+                                && (element.hasOwnProperty('Author-to-Be-Displayed-in-Byline'))
+                                && transform
+                            && (typeof elementData === 'string' )) {
+                                if(contentPath.Transformation === 'convertPersonForBody'){
+                                    let authorData = element['Author-to-Be-Displayed-in-Byline'].toString();
+                                    authorData = await transformContent[contentPath.Transformation](authorData);
+                                    if(elementData.includes(authorData)){
+                                        elementData = elementData.replace(authorData,'');
+                                    }
                                 }
-                            } else { //elementData is object
-                                if (Object.keys(newObjectData).length === 0) {
-                                    newObjectData = elementData;
-                                } else {
-                                    //We will always be looking for the first key here
-                                    let newObjectDataKey = Object.keys(newObjectData)[0];
-                                    let elementDataKey = Object.keys(elementData)[0];
-                                    newObjectData[newObjectDataKey].push(...elementData[elementDataKey]);
-                                }
+                            }
+                            //picks first item for publisher field
+                            if((elementItem === 'Contact-for-this-Content')
+                                && transform
+                            && (contentPath.Transformation === 'convertPerson')
+                                && (newData!=='')) {
+                                elementData = '';
+                            }
+                            if (mapElement.Separator && (index > 0)) {
+                                newData += mapElement.Separator + elementData;
+                            } else {
+                                newData += elementData;
                             }
                         }
                     }
@@ -386,11 +517,25 @@ class DrupalContent {
                 }
             }
 
-            if(mapElement.hasOwnProperty('Metadata')){
+            if(mapElement.hasOwnProperty('Metadata') && newData && (newData !== '')){
                 convertedItem.metadata[mapElement.Metadata] = newData;
             }
-            if(mapElement.hasOwnProperty('SharePointColumn')){
-                convertedItem.columns[mapElement.SharePointColumn] = newData;
+            if(mapElement.hasOwnProperty('SharePointColumn') && newData && (newData !== '')){
+                if(mapElement.hasOwnProperty('CharacterLimit') && (typeof newData === 'string')){
+                    if(mapElement.SharePointColumn !== 'Location'){
+                        newData = newData.substring(0,mapElement.CharacterLimit);
+                    }
+                }
+                if((mapElement.SharePointColumn === 'Location')
+                    && (typeof newData === 'string')
+                    && (newData.length>255)){
+                        newData = '';
+                }
+                let sharePointColumnName = mapElement.SharePointColumn;
+                if(mapElement.hasOwnProperty('SharePointType') && (mapElement.SharePointType === 'TaxMulti')){
+                    sharePointColumnName = taxonomyFields[sharePointColumnName];
+                }
+                convertedItem.columns[sharePointColumnName] = newData;
             }
         }
         convertedItem.metadata.migrate = true;
@@ -430,10 +575,12 @@ class DrupalContent {
         }
     }
 
-    //Cycles through all of the Akumina objects,logs which are linked to (active)
+    //Cycles through all of the Akumina objects,logs which are linked to (active),
+    //Also checks if staticUrl is unique and modifies if not
     for (const [key, value] of Object.entries(this.akumina)) {
         for (const element of this.akumina[key]) {
             await logIfContentIsActive(element);
+           // await guaranteeUniqueURL(element);
         }
     }
     //Cycles through images and files and sets migrate to false for
