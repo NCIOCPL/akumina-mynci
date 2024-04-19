@@ -4,7 +4,8 @@ export const organizationDetailsMap = [
         'SharePointColumn': 'Title',
         'ContentPaths': [
             {
-                'Paths': ['Title']
+                'Paths': ['Title'],
+                'Transformation': 'convertTitle'
             }
         ],
         'CharacterLimit': 255
@@ -83,6 +84,15 @@ export const organizationDetailsMap = [
             [
                 {
                     'Paths': ['Path']
+                }
+            ]
+    },
+    {
+        'Metadata': 'MigrateAdminUse',
+        'ContentPaths':
+            [
+                {
+                    'Paths': ['Admin-use-only']
                 }
             ]
     },

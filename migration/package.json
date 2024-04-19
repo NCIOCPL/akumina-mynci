@@ -21,6 +21,8 @@
     "@pnp/sp-commonjs": "^2.15.0",
     "@xmldom/xmldom": "^0.8.10",
     "dotenv": "^16.3.1",
+    "mime": "^4.0.1",
+    "mime-types": "^2.1.35",
     "pnp-auth": "^2.0.0",
     "xml2js": "^0.6.2"
   },

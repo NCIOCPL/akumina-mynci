@@ -1,53 +1,35 @@
 
-export const aboutMap = [
+export const mediaFilesMap = [
     {
         'SharePointColumn': 'Title',
         'ContentPaths': [
             {
-                'Paths': ['Title'],
+                'Paths': ['File-Name'],
                 'Transformation': 'convertTitle'
             }
         ],
         'CharacterLimit': 255
     },
     {
-        'SharePointColumn': 'Body',
+        'SharePointColumn': 'Name',
         'ContentPaths':
             [
                 {
-                    'Paths': ['Body'],
-                    'Transformation': 'convertText'
-                },
-                {
-                    'Paths': [
-                        'For-More-Information',
-                    ],
-                    'Transformation': 'convertLinksForBody'
-                }
-            ],
-        'Separator':'<br />'
-    },
-    {
-        'SharePointColumn': 'Search_x0020_Description',
-        'ContentPaths':
-            [
-                {
-                    'Paths': ['Short-Description']
+                    'Paths': ['File-Name']
                 }
             ]
     },
     {
-        'SharePointColumn': 'Tags',
-        'SharePointType': 'TaxMulti',
+        'SharePointColumn': 'Created',
         'ContentPaths':
             [
                 {
-                    'Paths': ['Topics'],
-                    'Transformation': 'convertTags'
+                    'Paths': ['Upload-Date'],
+                    'Transformation': 'convertDate'
                 }
             ]
     },
-    {
+    /*{
         'SharePointColumn': 'StaticUrl',
         'ContentPaths':
             [
@@ -57,22 +39,24 @@ export const aboutMap = [
                 }
             ],
         'CharacterLimit': 255
-    },
+    },*/
     {
         'Metadata': 'OldPath',
         'ContentPaths':
             [
                 {
-                    'Paths': ['Path']
+                    'Paths': ['Path'],
+                    'Transformation': 'convertToSlug'
                 }
             ]
     },
     {
-        'Metadata': 'MigrateAdminUse',
+        'Metadata': 'ExistingPath',
         'ContentPaths':
             [
                 {
-                    'Paths': ['Admin-use-only']
+                    'Paths': ['Path'],
+                    'Transformation': 'convertFilePath'
                 }
             ]
     },

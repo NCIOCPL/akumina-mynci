@@ -1,3 +1,5 @@
+import mime from "mime-types";
+
 /**
  * URL Converter
  *
@@ -14,37 +16,125 @@ class URLConverter {
   }
 
   /**
+   * Checks if string can be made into URL object
+   *
+   * @param {string} urlString The string to check
+   * @returns {boolean} Whether or not string can be made URL
+   */
+   isValidUrl(urlString) {
+    try {
+      return Boolean(new URL(urlString));
+    }
+    catch(e){
+      return false;
+    }
+  }
+  /**
    * Adds a URL to be converted
    *
-   * @param {string} oldURL The old URL to use for reference
+   * @param {URL|string} oldURL The old URL to use for reference
    * @param {string} oldNID The drupal NID to use for reference
-   * @param {string} newURL The new URL to replace the old URL
+   * @param {URL|string} newURL The new URL to replace the old URL
    * @param {string} slug The slug of the old URL
    */
   async add(oldURL, oldNID, newURL, slug) {
-    if(!this.urls.has(oldURL)) {
-      this.urls.set(oldURL, {url: newURL, nid: oldNID, slug: slug, newSlug: slug, isActive: false, isUnique: true});
+    let pathname;
+    if(typeof oldURL === 'string'){
+      pathname = oldURL;
+    } else {
+      if (((typeof oldURL) === 'object')
+          && (('pathname' in oldURL) && (oldURL.pathname !== ''))) {
+        pathname = oldURL.pathname;
+      }
     }
+    if(!this.urls.has(pathname)) {
+      this.urls.set(pathname, {url: newURL, nid: oldNID, slug: slug, newSlug: slug, isActive: false, isUnique: true});
+    }
+  }
+
+  /**
+   * Gets the key for the urls object from a path string
+   *
+   * @param {string} oldURL The string to check
+   * @returns {object} urlData
+   */
+  getKeyFromPath (oldURL){
+    let urlData ={slug:''}
+    if(((typeof oldURL) === 'object')
+        && (('pathname' in oldURL) && (oldURL.pathname !== '')))
+    {
+      urlData.pathname = oldURL.pathname;
+    } else {
+      urlData.pathname = oldURL;
+    }
+    if(typeof urlData.pathname === 'string'){
+      urlData.slug = urlData.pathname.split('/').pop();
+    }
+    urlData.mime_type = mime.lookup(urlData.slug);
+    urlData.key = urlData.pathname;
+    if(urlData.mime_type && (urlData.mime_type.includes('image') || (urlData.mime_type.includes('application')))){
+      urlData.key = urlData.slug.replaceAll(' ','%20');
+    }
+    return urlData;
   }
   /**
    * Retrieves a URL to be converted
    *
-   * @param {string} oldURL The old URL to use for reference
-   * @returns {Promise<string>} The new URL
+   * @param {URL|string} oldURL The old URL to use for reference
+   * @returns {Promise<object>|Promise<string>} The new URL object
    */
   async lookup(oldURL) {
-    if(this.urls.has(oldURL)){
-      this.urls.get(oldURL).isActive = true;
-      return this.urls.get(oldURL);
+    let urlData = this.getKeyFromPath(oldURL);
+    if(urlData.hasOwnProperty('key') && this.urls.has(urlData['key'])){
+      this.urls.get(urlData['key']).isActive = true;
+      return this.urls.get(urlData['key']);
     } else {
-      return 'Not Found';
+      //Check if absolute link
+      let newPath;
+      if(urlData.hasOwnProperty('mime_type') && (typeof urlData["mime_type"] === 'string')){
+        if(urlData["mime_type"].includes('image')) {
+          newPath = '/NCI-OCPL-myNCI-preprod/Images1/';
+        } else {
+          newPath = '/sites/NCI-OCPL-myNCI-preprod/Shared%20Documents/';
+        }
+      }
+      let newURL;
+      let slug = '';
+      if(urlData.hasOwnProperty['slug']){
+        slug = urlData['slug'];
+      }
+      if(this.isValidUrl(newPath + slug)){
+        newURL = new URL(newPath + slug);
+      } else {
+        newURL = newPath + slug;
+      }
+      if(urlData.hasOwnProperty('key') && urlData.hasOwnProperty('pathname')){
+        if (oldURL.hostname){
+          if(((oldURL.hostname==='mynci.cancer.gov')
+                  || (oldURL.hostname==='mynci-qa.cancer.gov')
+                  || (oldURL.hostname==='ocpl-mynci'))
+              &&
+              ((typeof urlData['pathname'] === 'string') && ((urlData['pathname'].includes('files/') || (urlData['pathname'].includes('file/')))))
+          ){
+            this.urls.set(urlData['key'], {url: newURL, nid: '', slug: slug, newSlug: slug, isActive: true, isUnique: true});
+            return this.urls.get(urlData['key']);
+          }
+          //if relative link
+        } else {
+          if((typeof urlData['pathname'] === 'string') && (urlData['pathname'].includes('files/'))) {
+            this.urls.set(urlData['key'], {url: newURL, nid: '', slug: slug, newSlug: slug, isActive: true, isUnique: true});
+            return this.urls.get(urlData['key']);
+          }
+        }
+      }
     }
+    return 'Not Found';
   }
   /**
    * Retrieves a URL to be converted from drupal NID
    *
    * @param {string} NID The old NID to use for reference
-   * @returns {Promise<string>} The new URL
+   * @returns {Promise<object>|Promise<string>} The new URL
    */
   async lookupNID(NID) {
     for (let [key, value] of this.urls.entries()) {
@@ -59,12 +149,13 @@ class URLConverter {
   /**
    * Retrieves the active status of a URL to be converted
    *
-   * @param {string} oldURL The old URL to use for reference
+   * @param {URL|string} oldURL The old URL to use for reference
    * @returns {Promise<boolean>|Promise<string>} The active status of URL
    */
   async lookupActive(oldURL) {
-    if(this.urls.has(oldURL)){
-      return this.urls.get(oldURL).isActive;
+    let urlData = this.getKeyFromPath(oldURL);
+    if(urlData.hasOwnProperty('key') && this.urls.has(urlData['key'])){
+      return this.urls.get(urlData['key']).isActive;
     } else {
       return 'Not Found';
     }
@@ -72,12 +163,13 @@ class URLConverter {
   /**
    * Retrieves the new slug for an oldURL
    *
-   * @param {string} oldURL The old URL to use for reference
+   * @param {URL|string} oldURL The old URL to use for reference
    * @returns {Promise<string>} The new slug
    */
   async getNewSlug(oldURL) {
-    if(this.urls.has(oldURL)){
-      return this.urls.get(oldURL).newSlug;
+    let urlData = this.getKeyFromPath(oldURL);
+    if(urlData.hasOwnProperty('key') && this.urls.has(urlData['key'])){
+      return this.urls.get(urlData['key']).newSlug;
     } else {
       return 'Not Found';
     }
@@ -85,12 +177,13 @@ class URLConverter {
   /**
    * Retrieves the unique status of a slug
    *
-   * @param {string} oldURL The old URL to use for reference
+   * @param {URL|string} oldURL The old URL to use for reference
    * @returns {Promise<boolean>|Promise<string>} The active status of URL
    */
   async lookupUnique(oldURL) {
-    if(this.urls.has(oldURL)){
-      return this.urls.get(oldURL).isUnique;
+    let urlData = this.getKeyFromPath(oldURL);
+    if(urlData.hasOwnProperty('key') && this.urls.has(urlData['key'])){
+      return this.urls.get(urlData['key']).isUnique;
     } else {
       return 'Not Found';
     }
@@ -112,6 +205,37 @@ class URLConverter {
   }
 
   /**
+   * Loops through array of objects and adds converts file pretty urls to filename urls
+   *
+   * @param {array} items
+   * @returns {Promise<void>}
+   */
+  async convertFileURLs(items){
+    items.forEach((item) => {
+      let path = '';
+      let newURLParts = [];
+      let newURL = '';
+      let slug = '';
+      if(item.hasOwnProperty('Path')){
+        path = item['Path'][0];
+      }
+      if (item.hasOwnProperty('Upload-File')){
+        slug = unescape(item['Upload-File'][0].split('/').pop());
+      }
+      //Remove slug and replace it with filename slug
+      if(path
+          && (path !=='')
+          && this.urls.has(path)
+          && (slug !== '')){
+        newURLParts = (this.urls.get(path).url).split('/');
+        newURLParts.pop();
+        newURLParts.push(slug);
+        newURL = newURLParts.join('/');
+        this.urls.get(path).url = newURL;
+      }
+    })
+  }
+  /**
    * Loops through array of objects and adds contents to list of urls for conversion
    *
    * @param {array} items
@@ -121,20 +245,55 @@ class URLConverter {
    */
   async loadURLs(items, urlAlias,newPath){
     items.forEach((item) => {
-      let oldURL = item[urlAlias];
+      let oldURLstring;
       if (Array.isArray(item[urlAlias])) {
-        oldURL = item[urlAlias][0];
+        oldURLstring = item[urlAlias][0];
+      } else {
+        oldURLstring =item[urlAlias];
       }
-      let NID = oldURL;
+      let oldURL;
+      let pathname = '';
+      if(this.isValidUrl(oldURLstring)){
+        oldURL = new URL(oldURLstring);
+        if (('href' in oldURL) && (oldURL.href !== '')){
+          pathname = oldURL.href;
+        }
+      } else {
+        oldURL = oldURLstring;
+        pathname = oldURLstring;
+      }
+      let NID = pathname;
       if(item['Nid']){
         NID = item['Nid'];
       }
       if (Array.isArray(item['Nid'])) {
         NID = item['Nid'][0];
       }
-      let slug = oldURL.split('/').pop();
-      let newURL = newPath + slug;
-      this.add(oldURL,NID,newURL,slug);
+      let slug = '';
+      if(typeof pathname === 'string'){
+        slug = pathname.split('/').pop().replaceAll(' ','%20');
+      }
+      let newURL;
+      if(this.isValidUrl(newPath + slug)){
+        newURL = new URL(newPath + slug);
+      } else {
+        newURL = newPath + slug;
+      }
+      //If file or image and use slug for key
+      const mime_type = mime.lookup(slug);
+      let key = oldURL;
+      let hrefKey;
+      if((typeof oldURL === 'object') && (oldURL.hasOwnProperty('href'))) {
+        hrefKey = key.href;
+      } else {
+        if (typeof oldURL === 'string'){
+          hrefKey = key;
+        }
+      }
+      if(mime_type && (mime_type.includes('image') || (mime_type.includes('application')))){
+        hrefKey = slug;
+      }
+      this.add(hrefKey,NID,newURL,slug);
     })
   }
 }

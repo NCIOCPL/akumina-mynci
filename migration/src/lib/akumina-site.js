@@ -32,12 +32,12 @@ class AkuminaSite {
 
     // set up the site using pnp-auth
     bootstrap(
-      sp,
-      {
-        clientId: clientId,
-        clientSecret: clientSecret,
-      },
-      siteURL
+        sp,
+        {
+          clientId: clientId,
+          clientSecret: clientSecret,
+        },
+        siteURL
     );
 
     this.sp = sp;
@@ -62,24 +62,31 @@ class AkuminaSite {
    */
   async importFiles(listPath, items) {
     console.log('Importing ' + items.length + ' files to ' + listPath + '...')
-    try {
-      // Loop through files provided
-      for (let i = 0; i < items.length; i++) {
-        const fileContents = await fs.readFile(items[i].path, {
-          encoding: null,
-        });
+    // Loop through files provided
+    for (let i = 0; i < items.length; i++) {
+      try {
+        if (items[i].hasOwnProperty('metadata')
+            && items[i].metadata.hasOwnProperty('migrate')
+            && items[i].metadata.migrate
+            && items[i].metadata.hasOwnProperty('ExistingPath')) {
+          console.log('Importing File # ' + i + ', ' + items[i].columns.Title);
 
-        // Upload each item to SharePoint
-        const file = await sp.web
-          .getFolderByServerRelativeUrl(listPath)
-          .files.add(items[i].name, fileContents, true);
+          const fileContents = await fs.readFile(items[i].metadata["ExistingPath"], {
+            encoding: null,
+          });
 
-        // get item and update the uploaded file with the metadata
-        const item = await file.file.getItem();
-        await item.update(items[i].data);
+          // Upload each item to SharePoint
+          const file = await sp.web
+              .getFolderByServerRelativeUrl(listPath)
+              .files.add(items[i].columns.Name, fileContents, true);
+
+          // get item and update the uploaded file with the metadata
+          const item = await file.file.getItem();
+          await item.update(items[i].data);
+        }
+      }catch (error) {
+        console.error(error);
       }
-    } catch (error) {
-      console.error(error);
     }
   }
 
@@ -101,16 +108,23 @@ class AkuminaSite {
     const list = sp.web.lists.getByTitle(listName);
     let itemsImported = 0;
     let batchExecuted = false;
+    let addedContent = 0;
     while ((itemsImported < items.length) || !batchExecuted) {
       batchExecuted = false;
       const batch = sp.createBatch();
       for (let i = 0; (i < batchSize) && (itemsImported < items.length); i++) {
+        if(items[itemsImported].metadata.hasOwnProperty('MigrateAdminUse') &&
+            (items[itemsImported].metadata['MigrateAdminUse'] === 'true')){
+          addedContent++;
+        }
+        console.log('Importing Content Node # ' + itemsImported + ', ' + items[itemsImported].columns.Title);
         list.items.inBatch(batch).add(items[itemsImported].columns);
         itemsImported++;
       }
       await batch.execute().then(() =>{
         batchExecuted = true;
         console.log('itemsImported ' + itemsImported);
+        console.log('addedContent ' + addedContent + ' items to ' + listName + '...');
       });
     }
   }
@@ -137,8 +151,8 @@ class AkuminaSite {
     console.log('Truncating list ' + listName + '...');
     const list = sp.web.lists.getByTitle(listName);
     const allItems = (await list.items.select('Id').getAll())
-      .filter((item) => !exclude.includes(item.Id))
-      .map((item) => item.Id);
+        .filter((item) => !exclude.includes(item.Id))
+        .map((item) => item.Id);
     let batchExecuted = false;
     while ((allItems.length > 0) || !batchExecuted) {
       batchExecuted = false;
