@@ -22,7 +22,7 @@ export const aboutMap = [
                     'Paths': [
                         'For-More-Information',
                     ],
-                    'Transformation': 'convertLinksForBody'
+                    'Transformation': 'convertForMoreInformationLinks'
                 }
             ],
         'Separator':'<br />'
@@ -83,6 +83,21 @@ export const aboutMap = [
     {
         'SharePointColumn': 'AkLanguageId',
         'HardcodedData': '1033'
+    },
+    {
+        'SharePointColumn': 'Persona_0',
+        'HardcodedData': 'All'
+    },
+    {
+        'SharePointColumn': 'Region',
+        'SharePointType': 'TaxMulti',
+        'ContentPaths':
+            [
+                {
+                    'HardCoded': 'All NCI',
+                    'Transformation': 'convertRegion'
+                }
+            ]
     }
 ];
 

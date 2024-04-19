@@ -1,6 +1,8 @@
 import xml2js from 'xml2js';
 import { promises as fsPromises } from 'fs';
 import { DOMParser } from "@xmldom/xmldom";
+import mime from "mime-types";
+import FileSystem from 'fs';
 import { aboutMap } from "./maps/maps-about.js";
 import { announcementsMap } from "./maps/maps-announcements.js";
 import { blogsMap } from "./maps/maps-blogs.js";
@@ -85,22 +87,40 @@ class DrupalContent {
  * @param {object} drupalUsers
  * @param {array} taxonomyTags
  * @param {object} taxonomyFields
+ * @param {object} orgMap
+ * @param {object} redirectMap
+ * @param {object} taxonomyRedirectMap
+ * @param {object} spConfig
+ * @param {array} currentImages
+ * @param {array} currentDocuments
  * @returns {Promise<void>}
  */
-  async prepareContent(urlsConverted, users, drupalUsers, taxonomyTags, taxonomyFields) {
+  async prepareContent(urlsConverted, users, drupalUsers, taxonomyTags, taxonomyFields, orgMap, redirectMap, taxonomyRedirectMap, spConfig, currentImages, currentDocuments) {
       //TODO Build functions to transform content
       let transformContent = {
           /*convertLink: async function (content) {
               if(content && (content !== '')){
-                  return await convertLinks(content, 'a'); //Object
+                  return await convertLinks(content, 'a', false, convertLinks); //Object
               }
               return content;
           },*/
           convertTitle: async function (content) {
-              return unescape(content)
-                  .replaceAll(':',' - ')
-                  .replaceAll('|',' - ')
-                  .replaceAll('/',' and ');
+              return await textConverter(content);
+          },
+          convertTitleForBody: async function (content) {
+              if(content.includes('-DUP')){
+                  content = content.substring(0, content.indexOf('-DUP'));
+              }
+              return '<h1>' + await textConverter(content) + '</h1>';
+          },
+          convertOrgTitleToAcronym: async function (content) {
+              let newOrgTitle = '';
+              let orgTitle = content.replaceAll('&','AND');
+              newOrgTitle = await getAcrByName(orgMap, orgTitle);
+              if(newOrgTitle && newOrgTitle !== ''){
+                  return newOrgTitle;
+              }
+              return await textConverter(content);
           },
           convertToSlug: async function (content) {
               let slug = '';
@@ -109,13 +129,13 @@ class DrupalContent {
               }
               return slug;
           },
-          convertLinksForBody: async function (content) {
+          convertForMoreInformationLinks: async function (content) {
               if(content && (content !== '')){
-                  let transformedContent = await convertLinks(content,'a');
+                  let transformedContent = await convertLinks(content,'a', false, redirectMap, taxonomyRedirectMap, spConfig);
                   let links = '';
-                  if(transformedContent && transformedContent.hasOwnProperty('links')){
-                      links = '<ul>';
-                      for (const link of transformedContent.links) {
+                  if(transformedContent && transformedContent.hasOwnProperty('results')){
+                      links = '<h2>For More Information</h2><ul>';
+                      for (const link of transformedContent.results) {
                           links += "<li><a href='" + link.URL + "'>" + link.Description + "</a></li>";
                       }
                       links += '</ul>';
@@ -124,9 +144,51 @@ class DrupalContent {
               }
               return content;
           },
+          convertAddress: async function (content) {
+              if(content && (content !== '')) {
+                  return content.replace('Room:',' Room:');
+              }
+              return content;
+          },
+          convertPrependPhone: async function (content) {
+              if(content && (content !== '')) {
+                  return '<p><strong>Phone: </strong>' + content + '</p>';
+              }
+              return content;
+          },
+          convertLinkPrependEmail: async function (content) {
+              if(content && (content !== '')) {
+                return '<p><strong>E-Mail: </strong><a href="mailto:' + content + '">' + content + '</a></p>';
+              }
+              return content;
+          },
+          convertLinkPrependWebsite: async function (content) {
+              if(content && (content !== '')) {
+                return '<p><strong>Website Url: </strong><a href="' + content + '">' + content + '</a></p>';
+              }
+              return content;
+          },
+          convertTextLink: async function (content) {
+              if(content && (content !== '')) {
+                  return '<p><a href="' + content + '">' + content + '</a></p>';
+              }
+              return content;
+          },
+          convertTextLinkSingleLine: async function (content) {
+              if(content && (content !== '')) {
+                  return '<br /><a href="' + content + '">' + content + '</a><br />';
+              }
+              return content;
+          },
+          convertTextAddEm: async function (content) {
+              if(content && (content !== '')) {
+                  return '<em>' + content + '</em>';
+              }
+              return content;
+          },
           convertImage: async function (content) {
               if(content && (content !== '')){
-                  return await convertLinks(content, 'img'); //object
+                  return await convertLinks(content, 'img', true, redirectMap, taxonomyRedirectMap, spConfig); //object
               }
               return content;
           },
@@ -142,77 +204,48 @@ class DrupalContent {
           },
           convertTags: async function (content) {
               if(content && (content !== '')) {
-                  let termList = content.split('|');
-                  //let termObject = {results: []};
-                  let taxonomyItem = {Label:'', TermGuid:''};
-                  let termString = '';
-                  let termStringSuffix = ';#';
-                  let index = 0;
-                  let trimmedTerm = '';
-                  if (termList && termList.length > 1) {
-                      for (const term of termList) {
-                          trimmedTerm = term.trim();
-                          index++;
-                          taxonomyItem = await getTaxonomyTerm(trimmedTerm);
-                          if(taxonomyItem && taxonomyItem.hasOwnProperty('TermGuid') && taxonomyItem.TermGuid && (taxonomyItem.TermGuid !== 'Not Found')){
-                              if((index) === termList.length){
-                                  termStringSuffix = '';
-                              }
-                              // termObject.results.push(taxonomyItem);
-                             termString += 'taxonomyItem.Id;#' + taxonomyItem.Label + '|' +  taxonomyItem.TermGuid + termStringSuffix;
-                          }
-                      }
-                      //  return termObject; //Object
-                      return termString; //String
-                  } else {
-                      trimmedTerm = content.trim();
-                      taxonomyItem = await getTaxonomyTerm(trimmedTerm);
-                      if(taxonomyItem && taxonomyItem.hasOwnProperty('TermGuid') && taxonomyItem.TermGuid && (taxonomyItem.TermGuid !== 'Not Found')){
-                          //termObject.results.push(taxonomyItem);
-                          termString += 'taxonomyItem.Id;#' + taxonomyItem.Label + '|' +  taxonomyItem.TermGuid;
-                        //return termObject; //Object
-                         return termString; //String
-                      }
-                  }
+                  return await tagConverter(content,''); //String
+              } else {
+                  return '';
               }
-              return ''; //String
           },
           convertDepartments: async function (content) {
-              return content; //String
+              if(content && (content !== '')) {
+                  return await tagConverter(content,'Office of the Director'); //String
+              } else {
+                  return '';
+              }
+          },
+          convertRegion: async function (content) {
+              if(content && (content !== '')) {
+                  return await tagConverter(content,'');
+              } else {
+                  return await tagConverter('All NCI','');
+              }
           },
           convertPerson: async function (content) {
-              let emailList = content.split('|');
-              let personEmail;
-             // let sharepointUsers = {results:[]};
-              let sharepointUser;
-          //    if(emailList && emailList.length>1) {
-           //      personEmail =  emailList[0].trim();
-                  /*for(const email of emailList) {
-                      sharepointUser = await getSharepointUser(email);
-                      await drupalUsers.add(email,sharepointUser);
-                      if(sharepointUser.hasOwnProperty('person_columnID') && sharepointUser.person_columnID !== ''){
-                          sharepointUsers.results.push(sharepointUser);
-                      }
-                  }*/
-         //     } else {
-              //    personEmail = emailList[0].trim();
-            //  }
-              personEmail = emailList[0].trim();
-              sharepointUser = await getSharepointUser(personEmail);
-              await drupalUsers.add(personEmail,sharepointUser);
-              if(sharepointUser.hasOwnProperty('person_columnID') && sharepointUser.person_columnID !== '') {
-                  //sharepointUsers.results.push(sharepointUser);
-                  return sharepointUser.person_columnID;
+              let personID = await personConverter(content, 0);
+              if (personID && (typeof personID === "number")) {
+                  return personID;
+              } else {
+                  return 15;
               }
-              /*if((sharepointUsers.results.length>0)){
-                  return sharepointUsers; //Object
-              }*/
-              //Otherwise return a default user 13;
-              return 13;
-              /*{
-                  Title: 'Frank, James (NIH/NCI) [C]',
-                  person_columnID: 13
-              };*///Object
+          },
+          convertPersonForContactOne: async function (content) {
+              let personID = await personConverter(content, 0);
+              if (personID && (typeof personID === "number")) {
+                  return personID;
+              } else {
+                  return '';
+              }
+          },
+          convertPersonForContactTwo: async function (content) {
+              let personID = await personConverter(content, 1);
+              if (personID && (typeof personID === "number")) {
+                  return personID;
+              } else {
+                  return '';
+              }
           },
           convertPersonForBody: async function (content) {
               let emailList = content.split('|');
@@ -257,20 +290,23 @@ class DrupalContent {
           convertText: async function (content) {
               content = '<body>' + content + '</body>';
               let htmlDoc = await createHTMLDocument(content);
-              htmlDoc = await replaceLinks(htmlDoc,'a');
-              htmlDoc = await replaceLinks(htmlDoc,'img');
+              htmlDoc = await replaceLinks(htmlDoc,'a', redirectMap, taxonomyRedirectMap, spConfig);
+              htmlDoc = await replaceLinks(htmlDoc,'img', redirectMap, taxonomyRedirectMap, spConfig);
               return htmlDoc
                   .toString()
                   .replace('<body xmlns="http://www.w3.org/1999/xhtml">','')
                   .replace('</body>',''); //String
           },
+
           convertURL: async function (content) {
               let link = changeStringToURL(content);
               let newSlug = await urlsConverted.getNewSlug(link['url']);
               if (newSlug && (newSlug!=='Not Found') && (newSlug !== '')){
+                  newSlug = newSlug.replaceAll('--','-');
                   return newSlug;
               } else {
                   let slug = link['pathname'].split('/').pop();
+                  slug = slug.replaceAll('--','-');
                   if(slug){
                       return slug;
                   }
@@ -280,14 +316,147 @@ class DrupalContent {
           convertFilePath: async function (content) {
               //We need to convert all instances of public:// to ../files/
               return unescape(content).replaceAll('///','//')
-                  .replace('https://','')
-                  .replace('mynci-qa.cancer.gov','')
-                  .replace('mynci.cancer.gov','')
+                  .replaceAll('https://','')
+                  .replaceAll('mynci-qa.cancer.gov','')
+                  .replaceAll('mynci.cancer.gov','')
+                  .replaceAll('ocpl-mynci:8890','')
                   .replace('/sites/','')
-                  .replace('public://','/files/')
+                  .replaceAll('public://','/files/')
                   .replace('/files/','../files/'); //String
           },
       }
+
+    /**
+     *
+     * @param {object} object
+     * @param {string} value
+     * @returns {Promise<string>}
+     */
+    async function getAcrByName(object, value) {
+        // myArray.find(item => item.id === 2);
+        value = value.replaceAll('-DUP ','');
+         let foundOrg = object.find(item => item.Name === value);
+        if (foundOrg && foundOrg.hasOwnProperty('Acronym')) {
+            return foundOrg.Acronym;
+        }
+        return '';
+    }
+
+    /**
+     *
+     * @param {object} object
+     * @param {object} value
+     * @param {string} staticRedirect
+     * @returns {Promise<object>}
+     */
+    async function getRedirectURL(object, value, staticRedirect = '') {
+        try {
+            if(!value.url.hostname || (value.url.hostname === '') || (!value.url.hostname.length > 0)
+                || (value.url.hostname === 'mynci.cancer.gov')
+            ) {
+                let found = object.find(item => item.Source === value.pathname);
+                if (found) {
+                    if (staticRedirect && staticRedirect !== '') {
+                        value.pathname = staticRedirect;
+                        value.url = staticRedirect;
+                    } else if (found.hasOwnProperty('Redirect')) {
+                        value.pathname = found.Redirect;
+                    }
+                }
+            }
+            return value;
+        } catch (err) {
+            console.error('Error:', err);
+            return value;
+        }
+
+
+    }
+    /**
+     *
+     * @param {string} content
+     * @returns {Promise<string>}
+     */
+    async function textConverter(content){
+        return unescape(content)
+            .replaceAll('  ',' ')
+            .replaceAll('&amp;nbsp;',' ')
+            .replaceAll('&nbsp;',' ')
+            .replaceAll(':',' - ')
+            .replaceAll('|',' - ')
+            .replaceAll('/',' and ')
+            .replaceAll('  ',' ');
+    }
+
+    /**
+     *
+     * @param {string} content
+     * @param {number} contactNumber
+     * @returns {Promise<Number>|Promise<string>}
+     */
+    async function personConverter(content, contactNumber){
+        let emailList = content.split('|');
+        let personEmail;
+        let sharepointUser;
+        if(contactNumber === 1){
+            if((emailList.length>1) && (emailList[1]!== null) && (emailList[1]!=='')) {
+                personEmail = emailList[1].trim();
+            }
+        } else {
+            if((emailList[0]!== null) && (emailList[0]!=='')){
+                personEmail = emailList[0].trim();
+            }
+        }
+        sharepointUser = await getSharepointUser(personEmail);
+        await drupalUsers.add(personEmail,sharepointUser);
+        if(sharepointUser.hasOwnProperty('person_columnID') && sharepointUser.person_columnID !== '') {
+            return sharepointUser.person_columnID;
+        }
+    }
+    /**
+     *
+     * @param {string} content
+     * @param {string} baseTag
+     * @returns {Promise<String>}
+     */
+    async function tagConverter(content,baseTag){
+        let termList = content.split('|');
+        if(baseTag && (baseTag !== '')){
+            termList.push(baseTag);
+        }
+        //let termObject = {results: []};
+        let fullTermString = '';
+        if (termList && termList.length > 1) {
+            for (const term of termList) {
+                fullTermString += await convertTermToString(term);
+            }
+            return fullTermString; //String
+        } else {
+            return await convertTermToString(content);
+        }
+    }
+    /**
+     *
+     * @param {string} term
+     * @returns {Promise<string>}
+     */
+    async function convertTermToString(term){
+        let taxonomyItem = {Label:'', TermGuid:''};
+        let defaultTagItem = {Label:'', TermGuid:''};
+        let termString = '';
+        let index = 0;
+        let trimmedTerm = '';
+        trimmedTerm = term.trim();
+        taxonomyItem = await getTaxonomyTerm(trimmedTerm);
+        if(taxonomyItem && taxonomyItem.hasOwnProperty('TermGuid') && taxonomyItem.TermGuid && (taxonomyItem.TermGuid !== 'Not Found')){
+            //termObject.results.push(taxonomyItem);
+            termString += 'taxonomyItem.Id;#' + taxonomyItem.Label + '|' +  taxonomyItem.TermGuid + ';#';
+            //return termObject; //Object
+            return termString; //String
+        } else {
+            return '';
+        }
+    }
 
     /**
      *
@@ -305,12 +474,14 @@ class DrupalContent {
      */
     async function getTaxonomyTerm(term) {
         for (const element of taxonomyTags) {
-            if(element.hasOwnProperty('Title') && (element.Title === term) && element.hasOwnProperty('Id') && (element.hasOwnProperty('IdForTerm'))) {
-                let taxonomyItem = {Label:'', TermGuid:'', WssId:''};
-                taxonomyItem.Label = element.Title;
-                taxonomyItem.TermGuid = element.IdForTerm;
-                taxonomyItem.WssId = element.Id;
-                return taxonomyItem;
+            if(element.hasOwnProperty('Title') && (element.Title !== null)){
+               if(((element.Title.toLowerCase() === term.toLowerCase()) || (element.Title.toLowerCase().includes(term.toLowerCase() + ' ('))) && element.hasOwnProperty('Id') && (element.hasOwnProperty('IdForTerm'))) {
+                    let taxonomyItem = {Label:'', TermGuid:'', WssId:''};
+                    taxonomyItem.Label = element.Title;
+                    taxonomyItem.TermGuid = element.IdForTerm;
+                    taxonomyItem.WssId = element.Id;
+                    return taxonomyItem;
+                }
             }
         }
         return 'Not Found';
@@ -374,61 +545,134 @@ class DrupalContent {
 
     /**
      *  @param {Element} tag
+     *  @param {object} redirectMap
+     *  @param {object} taxonomyRedirectMap
+     *  @param {object} spConfig
      *  @returns {Promise<Element>}
      *  Loops through childnodes of href and returns text
      */
-    async function updateLinkSource(tag) {
+    async function updateLinkSource(tag, redirectMap, taxonomyRedirectMap, spConfig) {
         let content;
         if (tag.tagName === 'img'){
             content = tag.getAttribute('src');
         } else {
             content = tag.getAttribute('href');
         }
+        //content = content.replaceAll('https://cloud-fe-nci.onakumina.com/','/');
         let link = changeStringToURL(content);
 
         //Check for Node/NID links
-        let newHref;
+        let newHref = {url:'', pathname:''};
         let NID = '';
-        if (link['pathname'].startsWith('/node/')){
-            let urlParts = link['pathname'].split('/');
-            NID = urlParts.pop();
-            newHref = await urlsConverted.lookupNID(NID);
-        } else {
-            newHref = await urlsConverted.lookup(link['url']);
+        //Basically convert aliases/redirects into /node/NID
+        link = await getRedirectURL(redirectMap,link);
+        //Convert redirects to taxonomy terms into taxonomy term links
+        link = await getRedirectURL(taxonomyRedirectMap,link,'/sitepages/orgdirectory.aspx');
+        //Check for links to people
+        let slug = link.pathname.split('/').pop();
+        const mime_type = mime.lookup(slug);
+        if(!mime_type){
+            if (link.pathname.includes('/users/')) {
+                link.pathname = '/sitepages/peoplefinder.aspx';
+            }
+        }
+        newHref.url = link['url'];
+        if (!link['pathname'].startsWith('/sitepages/')) {
+
+            if (link['pathname'].startsWith('/node/')){
+                let urlParts = link['pathname'].split('/');
+                NID = urlParts.pop();
+                newHref = await urlsConverted.lookupNID(NID);
+            } else {
+                newHref = await urlsConverted.lookup(link, spConfig);
+            }
         }
         let hash = '';
-        if (newHref && (newHref !== 'Not Found') && newHref.hasOwnProperty('url') && (newHref.url !== '')){
+        let newUrl = '';
+     //let preProdAbsoluteDomain = 'https://mynci-preprod.cancer.gov/sites/NCI-OCPL-myNCI-preprod#';
+        /*let prodAbsoluteDomain = 'http://cloud-fe-nci.onakumina.com/#';
+        let absoluteDomain = preProdAbsoluteDomain;
+        let preprodImgEnv = 'https://mynci-appmanager-preprod.cancer.gov/api/sharepoint/spfile?siteurl=https://nih.sharepoint.com/sites/nci-ocpl-mynci-preprod&relativeUrl=';
+        let prodImgEnv = 'https://mynci-appmanager.cancer.gov/api/sharepoint/spfile?siteurl=https://nih.sharepoint.com/sites/nci-ocpl-mynci&relativeUrl=';
+        let imgEnv = preprodImgEnv;
+        let imgSrcPrefix = imgEnv + '/sites';*/
+        let absoluteDomain = spConfig.absoluteDomain;
+        let imgSrcPrefix = spConfig.imagePrefix + '/sites';
+        if (newHref && (newHref.hasOwnProperty('url')) && (newHref.url !== 'Not Found')){
             if(newHref.url.hasOwnProperty('hash') && (newHref.url.hash !== '')){
-                hash = newHref.url.hash;
+                    hash = newHref.url.hash;
             }
-            if (tag.tagName === 'img'){
-                tag.setAttribute('src', newHref.url + hash);
-            } else {
-                tag.setAttribute('href', newHref.url + hash);
+            newUrl = newHref.url + hash;
+        } else {
+            //newUrl = urlsConverted.getKeyFromPath(link['url']).key;
+            if(link.hasOwnProperty('url')) {
+                if(link.url.hasOwnProperty('href') && link.url.href !== ''){
+                    newUrl = link.url.href;
+                } else {
+                    newUrl = link.url;
+                }
+            }
+            absoluteDomain = '';
+        }
+        let newUrlSlug = '';
+        if(typeof newUrl === 'string'){
+            newUrlSlug =  newUrl.split('/').pop();
+        } else {
+            if (typeof newUrl === 'object'){
+                newUrlSlug =  newUrl.href.split('/').pop();
             }
         }
+
+        const mime_type_newUrl = mime.lookup(newUrlSlug);
+        if(!mime_type_newUrl){
+            newUrl = absoluteDomain + newUrl;
+        }
+        if(typeof newUrl === 'string'){
+            if (tag.tagName === 'img'){
+                tag.setAttribute('src', imgSrcPrefix + newUrl);
+            } else {
+                tag.setAttribute('href', newUrl);
+            }
+        } else {
+            if (typeof newUrl === 'object'){
+                if (tag.tagName === 'img'){
+                    tag.setAttribute('src', imgSrcPrefix + newUrl.href);
+                } else {
+                    tag.setAttribute('href', newUrl.href);
+                }
+            }
+        }
+
         return tag;
     }
 
     /**
      *  @param {string} content
      *  @param {string} tagType
+     *  @param {boolean} imageField
+     *  @param {object} redirectMap
+     *  @param {object} taxonomyRedirectMap
+     *  @param {object} spConfig
      *  @returns {Promise<object>}
      *  Loops through set of links and replaces drupal links with
      *  sharepoint links using url-converter
      */
-    async function convertLinks(content,tagType) {
+    async function convertLinks(content,tagType, imageField, redirectMap, taxonomyRedirectMap, spConfig) {
         let linkList = {};
+        /*let urlPrefix = '';
+        if (imageField) {
+            urlPrefix = '/sites';
+        }*/
         content = '<body>' + content + '</body>';
-        const parser = new DOMParser();
-        let htmlDoc = parser.parseFromString(content, "text/html");
+        let htmlDoc = await createHTMLDocument(content);
         const htmlTags = htmlDoc.getElementsByTagName(tagType);
         let thisURL = '';
         let thisDescription = '';
         if(htmlTags.length>0){
             if (tagType === 'img'){
-                let imgSrc = await updateLinkSource(htmlTags[0]);
+                let imgSrc = await updateLinkSource(htmlTags[0], redirectMap, taxonomyRedirectMap, spConfig);
                 linkList = {
+                   //Url: urlPrefix + imgSrc.getAttribute('src'),
                     Url: imgSrc.getAttribute('src'),
                     Description: imgSrc.getAttribute('alt')
                 }
@@ -437,7 +681,8 @@ class DrupalContent {
                 let link = {};
                 for (let i=0; i< htmlTags.length; i++) {
                     let tag = htmlTags[i];
-                    let myTag = await updateLinkSource(tag);
+                    let myTag = await updateLinkSource(tag, redirectMap, taxonomyRedirectMap, spConfig);
+                    //thisURL = urlPrefix + myTag.getAttribute('href');
                     thisURL = myTag.getAttribute('href');
                     thisDescription = await getLinkText(myTag);
                     link = {
@@ -453,20 +698,24 @@ class DrupalContent {
     /**
      *  @param {Document} htmlDoc
      *  @param {string} tagType
+     *  @param {object} redirectMap
+     *  @param {object} taxonomyRedirectMap
+     *  @param {object} spConfig
      *  @returns {Promise<Document>}
      *  Loops through set of links and replaces drupal links with
      *  sharepoint links using url-converter
      */
-    async function replaceLinks(htmlDoc, tagType) {
+    async function replaceLinks(htmlDoc, tagType, redirectMap, taxonomyRedirectMap, spConfig) {
         const htmlTags = htmlDoc.getElementsByTagName(tagType);
         for (let i=0; i< htmlTags.length; i++) {
             let tag = htmlTags[i];
-            await updateLinkSource(tag);
-            if (tag.tagName === 'img'){
-                let imagePrefix = 'https://nih.sharepoint.com/sites';
+            /*if (tagType === 'img'){
+                // let imagePrefix = 'https://nih.sharepoint.com/sites';
+                let imagePrefix = '/sites';
                 let src = tag.getAttribute('src');
                 tag.setAttribute('src', imagePrefix + src);
-            }
+            }*/
+            await updateLinkSource(tag, redirectMap, taxonomyRedirectMap, spConfig);
         }
         return htmlDoc;
     }
@@ -480,16 +729,57 @@ class DrupalContent {
     async function readContentPaths(element, mapElement) {
         let newData = '';
         let newObjectData = {};
+        let contactHeader = '';
+
+        //check if has ContactHeader property and Phone, e-mail website-URL, For more information, Twitter, Facebook or Linkedin have content
+        if ( (mapElement.hasOwnProperty('ContactHeader') && (mapElement.ContactHeader !== '')) &&
+            ( (element.hasOwnProperty('Phone') && element.Phone[0] && (element.Phone[0] !== '')) ||
+                (element.hasOwnProperty('E-mail') && element['E-mail'][0] && (element['E-mail'][0] !== '')) ||
+                (element.hasOwnProperty('Website-URL') && element['Website-URL'][0] && (element['Website-URL'][0] !== '')) ||
+                (element.hasOwnProperty('For-More-Information') && element['For-More-Information'][0] && (element['For-More-Information'][0] !== '')) ||
+                (element.hasOwnProperty('Twitter') && element['Twitter'][0] && (element['Twitter'][0] !== '')) ||
+                (element.hasOwnProperty('Facebook') && element['Facebook'][0] && (element['Facebook'][0] !== '')) ||
+                (element.hasOwnProperty('LinkedIn') && element['LinkedIn'][0] && (element['LinkedIn'][0] !== ''))
+            )){
+                contactHeader = '<h2>' + mapElement.ContactHeader + '</h2>';
+        }
           for (const contentPath of mapElement.ContentPaths) {
                 const index = mapElement.ContentPaths.indexOf(contentPath);
                 let transform = false;
+                let hardCodedPath = false;
+
                 if (contentPath.Transformation) {
                     transform = true;
                 }
-                let elementItem = contentPath.Paths[0];
-                if (element[elementItem]) {
-                    let elementData = element[elementItem].toString();
-                    if (transform && elementData && (elementData !== '')) {
+              if (contentPath.HardCoded) {
+                  hardCodedPath = true;
+              }
+              let elementItem = '';
+              let elementPrepend = '';
+              if(contentPath.hasOwnProperty('Paths') && contentPath.Paths[0]) {
+                  elementItem = contentPath.Paths[0];
+                  if (elementItem === 'Twitter'){
+                      elementPrepend = '<span class="twitter-icon"><strong>Twitter</strong></span>: '
+                  }
+                  if (elementItem === 'Facebook'){
+                      elementPrepend = '<span class="facebook-icon"><strong>Facebook</strong></span>: '
+                  }
+                  if (elementItem === 'LinkedIn'){
+                      elementPrepend = '<span class="linkedIn-icon"><strong>LinkedIn</strong></span>: ';
+                  }
+              }
+//If element[phone] is empty, but we still want a contact header
+              if(elementItem === 'Phone') {
+                  newData += contactHeader;
+              }
+                if ((element[elementItem] !== null) || hardCodedPath || (element[elementItem][0] && element[elementItem][0] !== '')) {
+                    let elementData = '';
+                    if (hardCodedPath) {
+                        elementData = contentPath.HardCoded;
+                    } else if (element[elementItem] && (element[elementItem] !== '') ) {
+                        elementData = element[elementItem].toString();
+                    }
+                    if (transform) {
                         elementData = await transformContent[contentPath.Transformation](elementData);
                     }
                     if (elementData) {
@@ -523,6 +813,8 @@ class DrupalContent {
                                 && (newData!=='')) {
                                 elementData = '';
                             }
+                            elementData = elementPrepend + elementData;
+
                             if (mapElement.Separator && (index > 0)) {
                                 newData += mapElement.Separator + elementData;
                             } else {
@@ -545,10 +837,11 @@ class DrupalContent {
      *
      * @param {object} element
      * @param {array} map
+     * @param {object} spConfig
      *
      * @returns {Promise<object>}
      */
-    async function applyContentMap(element, map) {
+    async function applyContentMap(element, map, spConfig) {
         let convertedItem = {columns: {}, metadata: {}};
         for (const mapElement of map) {
             let newData;
@@ -558,7 +851,33 @@ class DrupalContent {
             } else {
                 //Import hardcoded data if found
                 if(mapElement.hasOwnProperty('HardcodedData')){
-                    newData = mapElement.HardcodedData.toString();
+                    if(mapElement.hasOwnProperty('SharePointColumn') && (mapElement.SharePointColumn === 'Persona_0') ) {
+                        newData = 'taxonomyItem.Id;' + mapElement.HardcodedData.toString() + '|' + spConfig.personaIdAll.toString() + ';#';
+                    }
+                    else if(mapElement.hasOwnProperty('SharePointColumn') && (mapElement.SharePointColumn === 'ContentTypeId') ) {
+                        switch(mapElement.HardcodedData){
+                            case 'Blog':
+                                newData = spConfig.blogListID.toString();
+                                break;
+                            case 'InternalPage':
+                                newData = spConfig.internalPageListID.toString();
+                                break;
+                            case 'Calendar':
+                                newData = spConfig.calendarListID.toString();
+                                break;
+                            case 'GenericHTML':
+                                newData = spConfig.genericHTMLListID.toString();
+                                break;
+                            default:
+                                newData = mapElement.HardcodedData.toString();
+                                break;
+                        }
+                    }
+
+
+                    else {
+                        newData = mapElement.HardcodedData.toString();
+                    }
                 }
             }
 
@@ -584,6 +903,7 @@ class DrupalContent {
             }
         }
         convertedItem.metadata.migrate = true;
+        convertedItem.metadata.isOnAkumina = false;
         return convertedItem;
     }
 
@@ -638,7 +958,7 @@ class DrupalContent {
     //mapping between Drupal and Akumina fields and any transformations
     for (const [key, value] of Object.entries(this.drupal)) {
         for (const element of this.drupal[key]) {
-            this.akumina[key].push(await applyContentMap(element, eval(key + 'Map')));
+            this.akumina[key].push(await applyContentMap(element, eval(key + 'Map'), spConfig));
         }
     }
 
@@ -652,15 +972,50 @@ class DrupalContent {
     }
     //Cycles through mediaImages and files and sets migrate to false for
     // inactive items (items not linked anywhere)
+    let fileList = [];
+    let mediaFileList = [];
+    let imageList = [];
     for (const element of this.akumina.file) {
         element.metadata.migrate = element.metadata.isActive;
+        element.metadata.isOnAkumina = currentDocuments.some(e => e.Title === element.columns.Title);
+        if (element.hasOwnProperty('metadata')
+            && element.metadata.hasOwnProperty('migrate')
+            && element.metadata.migrate
+            && element.metadata.hasOwnProperty('OldPath')){
+                fileList.push(element.metadata.OldPath);
+        }
+
     }
     for (const element of this.akumina.mediaFiles) {
         element.metadata.migrate = element.metadata.isActive;
+        element.metadata.isOnAkumina = currentDocuments.some(e => e.Title === element.columns.Title);
+        if (element.hasOwnProperty('metadata')
+            && element.metadata.hasOwnProperty('migrate')
+            && element.metadata.migrate
+            && element.metadata.hasOwnProperty('OldPath')){
+            mediaFileList.push(element.metadata.OldPath);
+        }
     }
     for (const element of this.akumina.mediaImages) {
         element.metadata.migrate = element.metadata.isActive;
+        //check if Title already exists on server
+        element.metadata.isOnAkumina = currentImages.some(e => e.Title === element.columns.Title);
+        if (element.hasOwnProperty('metadata')
+            && element.metadata.hasOwnProperty('migrate')
+            && element.metadata.migrate
+            && element.metadata.hasOwnProperty('OldPath')) {
+            imageList.push(element.metadata.OldPath);
+        }
     }
+    FileSystem.writeFile('../content/fileList.json', JSON.stringify(fileList), (error) => {
+        if (error) throw error;
+    });
+    FileSystem.writeFile('../content/mediaFileList.json', JSON.stringify(mediaFileList), (error) => {
+        if (error) throw error;
+    });
+    FileSystem.writeFile('../content/ImageList.json', JSON.stringify(imageList), (error) => {
+        if (error) throw error;
+    });
   }
 
   /**

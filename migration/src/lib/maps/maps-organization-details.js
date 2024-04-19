@@ -5,78 +5,54 @@ export const organizationDetailsMap = [
         'ContentPaths': [
             {
                 'Paths': ['Title'],
-                'Transformation': 'convertTitle'
+                'Transformation': 'convertOrgTitleToAcronym'
             }
-        ],
-        'CharacterLimit': 255
+        ]
     },
     {
         'SharePointColumn': 'Body',
         'ContentPaths':
             [
                 {
+                    'Paths': ['Title'],
+                    'Transformation': 'convertTitleForBody'
+                },
+                {
                     'Paths': ['Body'],
                     'Transformation': 'convertText'
                 },
                 {
-                    'Paths': ['Phone']
-                },
-                {
-                    'Paths': ['E-mail']
-                },
-                {
-                    'Paths': ['Website-URL']
-                },
-                {
                     'Paths': ['For-More-Information'],
-                    'Transformation': 'convertLinksForBody'
+                    'Transformation': 'convertForMoreInformationLinks'
+                },
+                {
+                    'Paths': ['Phone'],
+                    'Transformation': 'convertPrependPhone'
+                },
+                {
+                    'Paths': ['E-mail'],
+                    'Transformation': 'convertLinkPrependEmail'
+                },
+                {
+                    'Paths': ['Website-URL'],
+                    'Transformation': 'convertLinkPrependWebsite'
                 },
                 {
                     'Paths': ['Twitter'],
-                    'Transformation': 'convertLinksForBody'
+                    'Transformation': 'convertTextLink'
                 },
                 {
                     'Paths': ['Facebook'],
-                    'Transformation': 'convertLinksForBody'
+                    'Transformation': 'convertTextLink'
                 },
                 {
                     'Paths': ['LinkedIn'],
-                    'Transformation': 'convertLinksForBody'
+                    'Transformation': 'convertTextLink'
                 }
 
             ],
-        'Separator':'<br />'
-    },
-    {
-        'SharePointColumn': 'Search_x0020_Description',
-        'ContentPaths':
-            [
-                {
-                    'Paths': ['Short-Description']
-                }
-            ]
-    },
-    {
-        'SharePointColumn': 'Tags',
-        'SharePointType': 'TaxMulti',
-        'ContentPaths':
-            [
-                {
-                    'Paths': ['Topics'],
-                    'Transformation': 'convertTags'
-                }
-            ]
-    },
-    {
-        'SharePointColumn': 'StaticUrl',
-        'ContentPaths':
-            [
-                {
-                    'Paths': ['Path'],
-                    'Transformation': 'convertURL'
-                }
-            ],
-        'CharacterLimit': 255
+        'Separator':'<br />',
+        'ContactHeader':'Contact Information'
     },
     {
         'Metadata': 'OldPath',
@@ -95,6 +71,10 @@ export const organizationDetailsMap = [
                     'Paths': ['Admin-use-only']
                 }
             ]
+    },
+    {
+        'SharePointColumn': 'ContentTypeId',
+        'HardcodedData': 'GenericHTML'
     },
     {
         'SharePointColumn': 'AkLanguageCode',

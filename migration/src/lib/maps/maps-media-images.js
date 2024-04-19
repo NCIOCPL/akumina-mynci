@@ -11,6 +11,17 @@ export const mediaImagesMap = [
         'CharacterLimit': 255
     },
     {
+        'SharePointColumn': 'OData__x0024_Resources_x003a_core_x002c_Title_x003b_',
+        'ContentPaths':
+            [
+                {
+                    'Paths': ['File-Name'],
+                    'Transformation': 'convertTitle'
+                }
+            ],
+        'CharacterLimit': 255
+    },
+    {
         'SharePointColumn': 'Description',
             'ContentPaths':
         [

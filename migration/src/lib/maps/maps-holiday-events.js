@@ -11,6 +11,16 @@ export const holidayEventsMap = [
         'CharacterLimit': 255
     },
     {
+        'SharePointColumn': 'EventTitle',
+        'ContentPaths': [
+            {
+                'Paths': ['Title'],
+                'Transformation': 'convertTitle'
+            }
+        ],
+        'CharacterLimit': 255
+    },
+    {
         'SharePointColumn': 'Body',
         'ContentPaths':
             [
@@ -20,14 +30,30 @@ export const holidayEventsMap = [
                 },
                 {
                     'Paths': ['For-More-Information'],
-                    'Transformation': 'convertLinksForBody'
-                },
-                {
-                    'Paths': ['Contact-for-this-Content'],
-                    'Transformation': 'convertPersonForBody'
+                    'Transformation': 'convertForMoreInformationLinks'
                 }
             ],
         'Separator':'<br />'
+    },
+    {
+        'SharePointColumn': 'NCIContactPerson1Id',
+        'ContentPaths':
+            [
+                {
+                    'Paths': ['Contact-for-this-Content'],
+                    'Transformation': 'convertPersonForContactOne'
+                }
+            ]
+    },
+    {
+        'SharePointColumn': 'NCIContactPerson2Id',
+        'ContentPaths':
+            [
+                {
+                    'Paths': ['Contact-for-this-Content'],
+                    'Transformation': 'convertPersonForContactTwo'
+                }
+            ]
     },
     {
         'SharePointColumn': 'Description',
@@ -114,7 +140,30 @@ export const holidayEventsMap = [
     {
         'SharePointColumn': 'AkLanguageId',
         'HardcodedData': '1033'
-    }
+    },
+    {
+        'SharePointColumn': 'ContentTypeId',
+        'HardcodedData': 'Calendar'
+    },
+    {
+        'SharePointColumn': 'Persona_0',
+        'HardcodedData': 'All'
+    },
+    {
+        'SharePointColumn': 'Region',
+        'SharePointType': 'TaxMulti',
+        'ContentPaths':
+            [
+                {
+                    'HardCoded': 'All NCI',
+                    'Transformation': 'convertRegion'
+                }
+            ]
+    },
+    {
+        'SharePointColumn': 'Featured',
+        'HardcodedData': 'true'
+    },
 ];
 
 
