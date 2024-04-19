@@ -40,6 +40,8 @@
 !migration/content
 **/migration/content/**
 /migration/content/*
+**/migration/files/**
+/migration/files/*
 !migration/content/readme.txt
 
 # === Global Rules ===

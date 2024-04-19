@@ -4,7 +4,8 @@ export const announcementsMap = [
         'SharePointColumn': 'Title',
         'ContentPaths': [
             {
-                'Paths': ['Title']
+                'Paths': ['Title'],
+                'Transformation': 'convertTitle'
             }
         ],
         'CharacterLimit': 255
@@ -122,6 +123,15 @@ export const announcementsMap = [
             [
                 {
                     'Paths': ['Path']
+                }
+            ]
+    },
+    {
+        'Metadata': 'MigrateAdminUse',
+        'ContentPaths':
+            [
+                {
+                    'Paths': ['Admin-use-only']
                 }
             ]
     },

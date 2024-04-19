@@ -20,6 +20,8 @@ const drupalExports = {
   file: '../content/file.xml',
   forms: '../content/forms.xml',
   holidayEvents: '../content/holiday-events.xml',
+  mediaFiles: '../content/media-files.xml',
+  mediaImages: '../content/media-images.xml',
   organizationDetails: '../content/organization-details.xml',
   policy: '../content/policy.xml',
 };
@@ -31,13 +33,16 @@ await drupalExport.loadContent(drupalExports);
 //Create the map of old to new urls
 let urlsConverted = new URLConverter();
 let drupalUsers = new DrupalUserlist();
+await urlsConverted.loadURLs(drupalExport.drupal.file,'Path','/sites/NCI-OCPL-myNCI-preprod/Shared%20Documents/');
+await urlsConverted.loadURLs(drupalExport.drupal.file,'Upload-File','/sites/NCI-OCPL-myNCI-preprod/Shared%20Documents/');
+await urlsConverted.convertFileURLs(drupalExport.drupal.file);
+await urlsConverted.loadURLs(drupalExport.drupal.mediaImages,'Path','/NCI-OCPL-myNCI-preprod/Images1/');
+await urlsConverted.loadURLs(drupalExport.drupal.mediaFiles,'Path','/sites/NCI-OCPL-myNCI-preprod/Shared%20Documents/');
 await urlsConverted.loadURLs(drupalExport.drupal.about,'Path','/Inside/en-us/');
 await urlsConverted.loadURLs(drupalExport.drupal.announcements,'Path','/FoundationNews/en-us/');
 await urlsConverted.loadURLs(drupalExport.drupal.blogs,'Path','/Blogs/en-us/');
 await urlsConverted.loadURLs(drupalExport.drupal.coreContent,'Path','/Inside/en-us/');
 await urlsConverted.loadURLs(drupalExport.drupal.events,'Path','/Events/en-us/');
-await urlsConverted.loadURLs(drupalExport.drupal.file,'Path','/myNCI-preprod/Shared%20Documents/');
-await urlsConverted.loadURLs(drupalExport.drupal.file,'Upload-File','/myNCI-preprod/Shared%20Documents/');
 await urlsConverted.loadURLs(drupalExport.drupal.holidayEvents,'Path','/Events/en-us/');
 await urlsConverted.loadURLs(drupalExport.drupal.organizationDetails,'Path','/Inside/en-us/');
 await urlsConverted.loadURLs(drupalExport.drupal.policy,'Path','/Inside/en-us/');
@@ -83,28 +88,29 @@ taxonomyFields.Region = BlogFieldRegion_one[0].StaticName;
 await drupalExport.prepareContent(urlsConverted, users, drupalUsers, taxonomyTags, taxonomyFields);
 
 //// Import images
-//let images = drupalExport.findUsedImages();
-//await site.importFiles('LIST_NAME', images);
-
+await site.importFiles('Images1', drupalExport.akumina.mediaImages);
 //// Import files
-//let files = drupalExport.findLinkedFiles();
-//await site.importFiles('LIST_NAME', files);
-
+await site.importFiles('Shared%20Documents', drupalExport.akumina.mediaFiles);
+await site.importFiles('Shared%20Documents', drupalExport.akumina.file);
 // Import blogs
+
 await site.truncateList('Blogs_AK');
 await site.importList('Blogs_AK', drupalExport.akumina.blogs);
 await site.updateListIds('Blogs_AK');
 await site.publishListItems("Blogs_AK", 'Imported from Drupal myNCI');
 
+
 //// Import events
+
 await site.truncateList('Calendar_AK');
 await site.importList('Calendar_AK', drupalExport.akumina.events);
 await site.importList('Calendar_AK', drupalExport.akumina.holidayEvents);
 await site.updateListIds('Calendar_AK');
 await site.publishListItems("Calendar_AK", 'Imported from Drupal myNCI');
 
+
 //// Import pages
 await site.truncateList('InternalPages_AK');
-await site.importList('InternalPages_AK', drupalExport.akumina.coreContent);
+await site.importList('InternalPages_AK', drupalExport.akumina.coreContent, 50);
 await site.updateListIds('InternalPages_AK');
 await site.publishListItems("InternalPages_AK", 'Imported from Drupal myNCI');

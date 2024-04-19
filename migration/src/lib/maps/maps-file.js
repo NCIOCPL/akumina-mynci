@@ -4,10 +4,21 @@ export const fileMap = [
         'SharePointColumn': 'Title',
         'ContentPaths': [
             {
-                'Paths': ['Title']
+                'Paths': ['Title'],
+                'Transformation': 'convertTitle'
             }
         ],
         'CharacterLimit': 255
+    },
+    {
+        'SharePointColumn': 'Name',
+        'ContentPaths':
+            [
+                {
+                    'Paths': ['Title'],
+                    'Transformation': 'convertTitle'
+                }
+            ]
     },
     {
         'SharePointColumn': 'Body',
@@ -113,8 +124,7 @@ export const fileMap = [
         'ContentPaths':
             [
                 {
-                    'Paths': ['Path'],
-                    'Transformation': 'convertURL'
+                    'Paths': ['Path']
                 }
             ],
         'CharacterLimit': 255
@@ -124,7 +134,18 @@ export const fileMap = [
         'ContentPaths':
             [
                 {
-                    'Paths': ['Path']
+                    'Paths': ['Upload-File'],
+                    'Transformation': 'convertToSlug'
+                }
+            ]
+    },
+    {
+        'Metadata': 'ExistingPath',
+        'ContentPaths':
+            [
+                {
+                    'Paths': ['Upload-File'],
+                    'Transformation': 'convertFilePath'
                 }
             ]
     },

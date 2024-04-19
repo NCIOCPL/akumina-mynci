@@ -4,7 +4,8 @@ export const holidayEventsMap = [
         'SharePointColumn': 'Title',
         'ContentPaths': [
             {
-                'Paths': ['Title']
+                'Paths': ['Title'],
+                'Transformation': 'convertTitle'
             }
         ],
         'CharacterLimit': 255
@@ -94,6 +95,15 @@ export const holidayEventsMap = [
             [
                 {
                     'Paths': ['Path']
+                }
+            ]
+    },
+    {
+        'Metadata': 'MigrateAdminUse',
+        'ContentPaths':
+            [
+                {
+                    'Paths': ['Admin-use-only']
                 }
             ]
     },

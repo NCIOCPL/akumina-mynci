@@ -9,10 +9,10 @@ import { eventsMap } from "./maps/maps-events.js";
 import { fileMap } from "./maps/maps-file.js";
 import { formsMap } from "./maps/maps-forms.js";
 import { holidayEventsMap } from "./maps/maps-holiday-events.js";
+import { mediaImagesMap } from "./maps/maps-media-images.js";
+import { mediaFilesMap } from "./maps/maps-media-files.js";
 import { organizationDetailsMap } from "./maps/maps-organization-details.js";
 import { policyMap } from "./maps/maps-policy.js";
-
-
 
 /**
  * Represents an extraction of content from the Drupal 7 site
@@ -25,8 +25,8 @@ class DrupalContent {
    */
   constructor() {
       this.drupal = {
-          images: [],
-          files: [],
+          mediaImages: [],
+          mediaFiles: [],
           about: [],
           announcements: [],
           blogs: [],
@@ -40,8 +40,8 @@ class DrupalContent {
       };
 
       this.akumina = {
-          images: [],
-          files: [],
+          mediaImages: [],
+          mediaFiles: [],
           about: [],
           announcements: [],
           blogs: [],
@@ -90,11 +90,24 @@ class DrupalContent {
   async prepareContent(urlsConverted, users, drupalUsers, taxonomyTags, taxonomyFields) {
       //TODO Build functions to transform content
       let transformContent = {
-          convertLink: async function (content) {
+          /*convertLink: async function (content) {
               if(content && (content !== '')){
                   return await convertLinks(content, 'a'); //Object
               }
               return content;
+          },*/
+          convertTitle: async function (content) {
+              return unescape(content)
+                  .replaceAll(':',' - ')
+                  .replaceAll('|',' - ')
+                  .replaceAll('/',' and ');
+          },
+          convertToSlug: async function (content) {
+              let slug = '';
+              if((typeof content === 'string') && (content !== '')){
+                  slug = content.split('/').pop().replaceAll(' ','%20');
+              }
+              return slug;
           },
           convertLinksForBody: async function (content) {
               if(content && (content !== '')){
@@ -130,7 +143,7 @@ class DrupalContent {
           convertTags: async function (content) {
               if(content && (content !== '')) {
                   let termList = content.split('|');
-                  let termObject = {results: []};
+                  //let termObject = {results: []};
                   let taxonomyItem = {Label:'', TermGuid:''};
                   let termString = '';
                   let termStringSuffix = ';#';
@@ -210,30 +223,31 @@ class DrupalContent {
               let listIndex = 0;
               let contactTextSuffix = ', ';
               let defaultContact ="<a href='mailto:james.frank@nih.gov'>Frank, James (NIH/NCI) [C]</a>";
-              if(emailList && emailList.length>1) {
-                  for(const email of emailList) {
-                      listIndex++;
-                      sharepointUser = await getSharepointUser(email.trim());
+              if(emailList){
+                  if(emailList.length>1) {
+                      for(const email of emailList) {
+                          listIndex++;
+                          sharepointUser = await getSharepointUser(email.trim());
 
-                      if(sharepointUser.hasOwnProperty('EMail') && sharepointUser.EMail !== '' &&
-                          sharepointUser.hasOwnProperty('Title') && sharepointUser.Title !== ''){
-                          await drupalUsers.add(email.trim(),sharepointUser);
-                          if(listIndex === emailList.length){
-                              contactTextSuffix = '';
+                          if(sharepointUser.hasOwnProperty('EMail') && sharepointUser.EMail !== '' &&
+                              sharepointUser.hasOwnProperty('Title') && sharepointUser.Title !== ''){
+                              await drupalUsers.add(email.trim(),sharepointUser);
+                              if(listIndex === emailList.length){
+                                  contactTextSuffix = '';
+                              }
+                              // sharepointUsers.results.push(sharepointUser);
+                              contactText+= '<a href=mailto:"' + sharepointUser.EMail + '">' +  sharepointUser.Title + '</a>' + contactTextSuffix;
                           }
-                         // sharepointUsers.results.push(sharepointUser);
-                          contactText+= '<a href=mailto:"' + sharepointUser.EMail + '">' +  sharepointUser.Title + '</a>' + contactTextSuffix;
+                      }
+                  } else {
+                      personEmail = emailList[0].trim();
+                      sharepointUser = await getSharepointUser(personEmail);
+                      if(sharepointUser.hasOwnProperty('EMail') && sharepointUser.EMail !== '' &&
+                          sharepointUser.hasOwnProperty('Title') && sharepointUser.Title !== '') {
+                          contactText = '<a href="' + sharepointUser.EMail + '">' + sharepointUser.Title + '</a>';
+                          await drupalUsers.add(personEmail,sharepointUser);
                       }
                   }
-              } else {
-                  personEmail = emailList[0].trim();
-                  sharepointUser = await getSharepointUser(personEmail);
-                  if(sharepointUser.hasOwnProperty('EMail') && sharepointUser.EMail !== '' &&
-                      sharepointUser.hasOwnProperty('Title') && sharepointUser.Title !== '') {
-                      contactText = '<a href="' + sharepointUser.EMail + '">' + sharepointUser.Title + '</a>';
-                      await drupalUsers.add(personEmail,sharepointUser);
-                  }
-
               }
               if(contactText && (contactText !== '')){
                   return contactText;
@@ -242,8 +256,7 @@ class DrupalContent {
           },
           convertText: async function (content) {
               content = '<body>' + content + '</body>';
-              const parser = new DOMParser();
-              let htmlDoc = parser.parseFromString(content, "text/html");
+              let htmlDoc = await createHTMLDocument(content);
               htmlDoc = await replaceLinks(htmlDoc,'a');
               htmlDoc = await replaceLinks(htmlDoc,'img');
               return htmlDoc
@@ -252,19 +265,39 @@ class DrupalContent {
                   .replace('</body>',''); //String
           },
           convertURL: async function (content) {
-              let newSlug = urlsConverted.getNewSlug(content);
-              if (newSlug && (newSlug!=='Not Found')){
+              let link = changeStringToURL(content);
+              let newSlug = await urlsConverted.getNewSlug(link['url']);
+              if (newSlug && (newSlug!=='Not Found') && (newSlug !== '')){
                   return newSlug;
               } else {
-                  let slug = content.split('/').pop();
+                  let slug = link['pathname'].split('/').pop();
                   if(slug){
                       return slug;
                   }
               }
               return content; //String
           },
+          convertFilePath: async function (content) {
+              //We need to convert all instances of public:// to ../files/
+              return unescape(content).replaceAll('///','//')
+                  .replace('https://','')
+                  .replace('mynci-qa.cancer.gov','')
+                  .replace('mynci.cancer.gov','')
+                  .replace('/sites/','')
+                  .replace('public://','/files/')
+                  .replace('/files/','../files/'); //String
+          },
       }
 
+    /**
+     *
+     * @param {string} content
+     * @returns {Promise<Document>}
+     */
+    async function createHTMLDocument(content){
+        const parser = new DOMParser();
+        return parser.parseFromString(content, "text/html");
+    }
     /**
      *  @param {string} term
      *  @returns {Promise<object>}
@@ -274,7 +307,6 @@ class DrupalContent {
         for (const element of taxonomyTags) {
             if(element.hasOwnProperty('Title') && (element.Title === term) && element.hasOwnProperty('Id') && (element.hasOwnProperty('IdForTerm'))) {
                 let taxonomyItem = {Label:'', TermGuid:'', WssId:''};
-               // taxonomyItem.Label = element.Id.toString();
                 taxonomyItem.Label = element.Title;
                 taxonomyItem.TermGuid = element.IdForTerm;
                 taxonomyItem.WssId = element.Id;
@@ -322,49 +354,57 @@ class DrupalContent {
     }
 
     /**
+     *  @param {string} content
+     *  @returns {string|object}
+     *  Converts string to URL object if possible
+     */
+    function changeStringToURL (content){
+        let link = {pathname:''};
+        if (urlsConverted.isValidUrl(content)) {
+            link.url = new URL(content);
+            if (('pathname' in link.url) && (link.url.pathname !== '')){
+                link.pathname = link.url.pathname;
+            }
+        } else {
+            link.url = content;
+            link.pathname = content;
+        }
+        return link;
+    }
+
+    /**
      *  @param {Element} tag
      *  @returns {Promise<Element>}
      *  Loops through childnodes of href and returns text
      */
     async function updateLinkSource(tag) {
-        let tagHref;
+        let content;
         if (tag.tagName === 'img'){
-            tagHref = tag.getAttribute('src');
+            content = tag.getAttribute('src');
         } else {
-            tagHref = tag.getAttribute('href');
+            content = tag.getAttribute('href');
         }
-        //Remove domain
-        if (tagHref.startsWith('https://mynci.cancer.gov')){
-            tagHref = tagHref.replace('https://mynci.cancer.gov','');
-        }
-        if (tagHref.startsWith('http://mynci.cancer.gov')){
-            tagHref = tagHref.replace('http://mynci.cancer.gov','');
-        }
-        if (tagHref.startsWith('https://ocpl-mynci:8890')){
-            tagHref = tagHref.replace('https://ocpl-mynci:8890','');
-        }
-        //Check for anchors
-        let hash = '';
-        if(tagHref.includes('#')){
-            let tagHrefHashParts = tagHref.split('#');
-            hash = '#' + tagHrefHashParts.pop();
-            tagHref = tagHrefHashParts.join('');
-        }
+        let link = changeStringToURL(content);
+
         //Check for Node/NID links
         let newHref;
         let NID = '';
-        if (tagHref.startsWith('/node/')){
-            let tagHrefParts = tagHref.split('/');
-            NID = tagHrefParts.pop();
+        if (link['pathname'].startsWith('/node/')){
+            let urlParts = link['pathname'].split('/');
+            NID = urlParts.pop();
             newHref = await urlsConverted.lookupNID(NID);
         } else {
-            newHref = await urlsConverted.lookup(tagHref);
+            newHref = await urlsConverted.lookup(link['url']);
         }
-        if ((newHref !== '') && (newHref !== 'Not Found')){
+        let hash = '';
+        if (newHref && (newHref !== 'Not Found') && newHref.hasOwnProperty('url') && (newHref.url !== '')){
+            if(newHref.url.hasOwnProperty('hash') && (newHref.url.hash !== '')){
+                hash = newHref.url.hash;
+            }
             if (tag.tagName === 'img'){
-                tag.setAttribute('src', newHref + hash);
+                tag.setAttribute('src', newHref.url + hash);
             } else {
-                tag.setAttribute('href', newHref + hash);
+                tag.setAttribute('href', newHref.url + hash);
             }
         }
         return tag;
@@ -422,6 +462,11 @@ class DrupalContent {
         for (let i=0; i< htmlTags.length; i++) {
             let tag = htmlTags[i];
             await updateLinkSource(tag);
+            if (tag.tagName === 'img'){
+                let imagePrefix = 'https://nih.sharepoint.com/sites';
+                let src = tag.getAttribute('src');
+                tag.setAttribute('src', imagePrefix + src);
+            }
         }
         return htmlDoc;
     }
@@ -543,26 +588,48 @@ class DrupalContent {
     }
 
     /**
+     *
+     * @param {string} OldPath
+     * @returns {Promise<boolean>}
+     */
+    async function checkIfURLIsActive(OldPath) {
+        let url;
+        if (urlsConverted.isValidUrl(OldPath)) {
+            url = new URL(OldPath);
+        } else {
+            url = OldPath;
+        }
+        return await urlsConverted.lookupActive(url);
+    }
+    /**
      * Checks whether node has been linked
      * to and logs active status
      *
      * @param {object} element
+     * @param {string} key
      *
      * @returns {Promise<object>}
      */
-    async function logIfContentIsActive(element) {
+    async function logIfContentIsActive(element, key) {
         let isActive;
-        if(element.hasOwnProperty('metadata') && element.metadata.hasOwnProperty('OldPath')){
-            if(element.metadata.OldPath.charAt(0)!=='/'){
-                isActive = await urlsConverted.lookupActive('/' + element.metadata.OldPath);
-            } else {
-                isActive = await urlsConverted.lookupActive(element.metadata.OldPath);
-            }
+        let isFile = false;
+        if(key === 'file'){
+            isFile = true;
         }
-        //sets isActive to true by default
-        element.metadata.isActive = true;
-        if((isActive !== 'Not Found') && (isActive!==null)) {
+        if(element.hasOwnProperty('metadata') && element.metadata.hasOwnProperty('OldPath')){
+            isActive = await checkIfURLIsActive(element.metadata["OldPath"]);
+        }
+        //sets isActive to false by default
+        element.metadata.isActive = false;
+        if((isActive !== 'Not Found') && (isActive !== null)  && (isActive !== false)) {
             element.metadata.isActive = isActive;
+        } else {
+            if(isFile && element.hasOwnProperty('columns') && element.columns.hasOwnProperty('StaticUrl')){
+                isActive = await checkIfURLIsActive(element.columns["StaticUrl"]);
+                if((isActive !== 'Not Found') && (isActive !== null)) {
+                    element.metadata.isActive = isActive;
+                }
+            }
         }
         return element;
     }
@@ -579,16 +646,19 @@ class DrupalContent {
     //Also checks if staticUrl is unique and modifies if not
     for (const [key, value] of Object.entries(this.akumina)) {
         for (const element of this.akumina[key]) {
-            await logIfContentIsActive(element);
+            await logIfContentIsActive(element, key);
            // await guaranteeUniqueURL(element);
         }
     }
-    //Cycles through images and files and sets migrate to false for
+    //Cycles through mediaImages and files and sets migrate to false for
     // inactive items (items not linked anywhere)
     for (const element of this.akumina.file) {
         element.metadata.migrate = element.metadata.isActive;
     }
-    for (const element of this.akumina.images) {
+    for (const element of this.akumina.mediaFiles) {
+        element.metadata.migrate = element.metadata.isActive;
+    }
+    for (const element of this.akumina.mediaImages) {
         element.metadata.migrate = element.metadata.isActive;
     }
   }
@@ -598,14 +668,14 @@ class DrupalContent {
    *
    * @returns {Array<object>} An array of file objects used in the content
    */
-  async findLinkedFiles() {}
+  //async findLinkedFiles() {}
 
   /**
    * Find all images used in content.
    *
    * @returns {Array<object>} An array of image objects used in the content
    */
-  async findUsedImages() {}
+  //async findUsedImages() {}
 }
 
 

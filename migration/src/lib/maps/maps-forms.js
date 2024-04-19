@@ -4,7 +4,8 @@ export const formsMap = [
         'SharePointColumn': 'Title',
         'ContentPaths': [
             {
-                'Paths': ['Title']
+                'Paths': ['Title'],
+                'Transformation': 'convertTitle'
             }
         ],
         'CharacterLimit': 255
@@ -125,6 +126,15 @@ export const formsMap = [
             [
                 {
                     'Paths': ['Path']
+                }
+            ]
+    },
+    {
+        'Metadata': 'MigrateAdminUse',
+        'ContentPaths':
+            [
+                {
+                    'Paths': ['Admin-use-only']
                 }
             ]
     },

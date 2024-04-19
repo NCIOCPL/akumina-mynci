@@ -4,7 +4,8 @@ export const blogsMap = [
         'SharePointColumn': 'Title',
         'ContentPaths': [
             {
-                'Paths': ['Title']
+                'Paths': ['Title'],
+                'Transformation': 'convertTitle'
             }
         ],
         'CharacterLimit': 255
@@ -127,6 +128,15 @@ export const blogsMap = [
             [
                 {
                     'Paths': ['Path']
+                }
+            ]
+    },
+    {
+        'Metadata': 'MigrateAdminUse',
+        'ContentPaths':
+            [
+                {
+                    'Paths': ['Admin-use-only']
                 }
             ]
     },
