@@ -20,14 +20,30 @@ export const coreContentMap = [
                 },
                 {
                     'Paths': ['For-More-Information'],
-                    'Transformation': 'convertLinksForBody'
-                },
-                {
-                    'Paths': ['Contact-for-this-Content'],
-                    'Transformation': 'convertPersonForBody'
+                    'Transformation': 'convertForMoreInformationLinks'
                 }
             ],
             'Separator':'<br />'
+    },
+    {
+        'SharePointColumn': 'NCIContactPerson1Id',
+        'ContentPaths':
+            [
+                {
+                    'Paths': ['Contact-for-this-Content'],
+                    'Transformation': 'convertPersonForContactOne'
+                }
+            ]
+    },
+    {
+        'SharePointColumn': 'NCIContactPerson2Id',
+        'ContentPaths':
+            [
+                {
+                    'Paths': ['Contact-for-this-Content'],
+                    'Transformation': 'convertPersonForContactTwo'
+                }
+            ]
     },
     {
         'SharePointColumn': 'Search_x0020_Description',
@@ -39,6 +55,15 @@ export const coreContentMap = [
         ]
     },
     {
+        'SharePointColumn': 'Summary',
+        'ContentPaths':
+            [
+                {
+                    'Paths': ['Short-Description']
+                }
+            ]
+    },
+    {
         'SharePointColumn': 'Image',
             'ContentPaths':
         [
@@ -48,17 +73,28 @@ export const coreContentMap = [
             }
         ]
     },
-    //{
-    //    'SharePointColumn': 'Departments',
-    //        'SharePointType': 'TaxMulti',
-    //        'ContentPaths':
-    //        [
-    //            {
-    //                'Paths': ['Content-Owner--Organization-'],
-    //                'Transformation': 'convertDepartments'
-    //            }
-    //        ]
-    //},
+    {
+        'SharePointColumn': 'Departments',
+        'SharePointType': 'TaxMulti',
+        'ContentPaths':
+            [
+                {
+                    'Paths': ['Content-Owner--Organization-'],
+                    'Transformation': 'convertDepartments'
+                }
+            ]
+    },
+    {
+        'SharePointColumn': 'NCIOrgOwner',
+        'SharePointType': 'TaxMulti',
+        'ContentPaths':
+            [
+                {
+                    'Paths': ['Content-Owner--Organization-'],
+                    'Transformation': 'convertTags'
+                }
+            ]
+    },
     {
         'SharePointColumn': 'PublisherId',
             'ContentPaths':
@@ -136,6 +172,25 @@ export const coreContentMap = [
     {
         'SharePointColumn': 'AkLanguageId',
         'HardcodedData': '1033'
+    },
+    {
+        'SharePointColumn': 'ContentTypeId',
+        'HardcodedData': 'InternalPage'
+    },
+    {
+        'SharePointColumn': 'Persona_0',
+        'HardcodedData': 'All'
+    },
+    {
+        'SharePointColumn': 'Region',
+        'SharePointType': 'TaxMulti',
+        'ContentPaths':
+            [
+                {
+                    'HardCoded': 'All NCI',
+                    'Transformation': 'convertRegion'
+                }
+            ]
     }
 ];
 

@@ -20,14 +20,30 @@ export const formsMap = [
                 },
                 {
                     'Paths': ['For-More-Information'],
-                    'Transformation': 'convertLinksForBody'
-                },
-                {
-                    'Paths': ['Contact-for-this-Content'],
-                    'Transformation': 'convertPersonForBody'
+                    'Transformation': 'convertForMoreInformationLinks'
                 }
             ],
         'Separator':'<br />'
+    },
+    {
+        'SharePointColumn': 'NCIContactPerson1Id',
+        'ContentPaths':
+            [
+                {
+                    'Paths': ['Contact-for-this-Content'],
+                    'Transformation': 'convertPersonForContactOne'
+                }
+            ]
+    },
+    {
+        'SharePointColumn': 'NCIContactPerson2Id',
+        'ContentPaths':
+            [
+                {
+                    'Paths': ['Contact-for-this-Content'],
+                    'Transformation': 'convertPersonForContactTwo'
+                }
+            ]
     },
     {
         'SharePointColumn': 'Search_x0020_Description',
@@ -43,7 +59,8 @@ export const formsMap = [
         'ContentPaths':
             [
                 {
-                    'Paths': ['Upload-File']
+                    'Paths': ['Upload-File'],
+                    'Transformation': 'convertFilePath'
                 }
             ]
     },
@@ -69,13 +86,24 @@ export const formsMap = [
             ]
     },
     {
-        'SharePointColumn': 'Department',
+        'SharePointColumn': 'Departments',
         'SharePointType': 'TaxMulti',
         'ContentPaths':
             [
                 {
                     'Paths': ['Content-Owner--Organization-'],
                     'Transformation': 'convertDepartments'
+                }
+            ]
+    },
+    {
+        'SharePointColumn': 'NCIOrgOwner',
+        'SharePointType': 'TaxMulti',
+        'ContentPaths':
+            [
+                {
+                    'Paths': ['Content-Owner--Organization-'],
+                    'Transformation': 'convertTags'
                 }
             ]
     },
@@ -145,6 +173,21 @@ export const formsMap = [
     {
         'SharePointColumn': 'AkLanguageId',
         'HardcodedData': '1033'
+    },
+    {
+        'SharePointColumn': 'Persona_0',
+        'HardcodedData': 'All'
+    },
+    {
+        'SharePointColumn': 'Region',
+        'SharePointType': 'TaxMulti',
+        'ContentPaths':
+            [
+                {
+                    'HardCoded': 'All NCI',
+                    'Transformation': 'convertRegion'
+                }
+            ]
     }
 ];
 

@@ -20,18 +20,34 @@ export const blogsMap = [
                 },
                 {
                     'Paths': ['For-More-Information'],
-                    'Transformation': 'convertLinksForBody'
+                    'Transformation': 'convertForMoreInformationLinks'
                 },
                 {
                     'Paths': ['Author-to-Be-Displayed-in-Byline'],
                     'Transformation': 'convertPersonForBody'
-                },
-                {
-                    'Paths': ['Contact-for-this-Content'],
-                    'Transformation': 'convertPersonForBody'
                 }
             ],
             'Separator':'<br />'
+    },
+    {
+        'SharePointColumn': 'NCIContactPerson1Id',
+        'ContentPaths':
+            [
+                {
+                    'Paths': ['Contact-for-this-Content'],
+                    'Transformation': 'convertPersonForContactOne'
+                }
+            ]
+    },
+    {
+        'SharePointColumn': 'NCIContactPerson2Id',
+        'ContentPaths':
+            [
+                {
+                    'Paths': ['Contact-for-this-Content'],
+                    'Transformation': 'convertPersonForContactTwo'
+                }
+            ]
     },
     {
         'SharePointColumn': 'Search_x0020_Description',
@@ -41,6 +57,15 @@ export const blogsMap = [
                 'Paths': ['Short-Description']
             }
         ]
+    },
+    {
+        'SharePointColumn': 'Summary',
+        'ContentPaths':
+            [
+                {
+                    'Paths': ['Short-Description']
+                }
+            ]
     },
     {
         'SharePointColumn': 'Image',
@@ -67,17 +92,28 @@ export const blogsMap = [
                 }
             ]
     },
-    //{
-    //    'SharePointColumn': 'Departments',
-    //      'SharePointType': 'TaxMulti',
-    //        'ContentPaths':
-    //        [
-    //            {
-    //                'Paths': ['Content-Owner--Organization-'],
-    //                'Transformation': 'convertDepartments'
-    //            }
-    //        ]
-    //},
+    {
+        'SharePointColumn': 'Departments',
+          'SharePointType': 'TaxMulti',
+            'ContentPaths':
+            [
+                {
+                    'Paths': ['Content-Owner--Organization-'],
+                    'Transformation': 'convertDepartments'
+                }
+            ]
+    },
+   {
+        'SharePointColumn': 'NCIOrgOwner',
+        'SharePointType': 'TaxMulti',
+        'ContentPaths':
+            [
+                {
+                    'Paths': ['Content-Owner--Organization-'],
+                   'Transformation': 'convertTags'
+                }
+            ]
+    },
     {
         'SharePointColumn': 'PublisherId',
             'ContentPaths':
@@ -123,6 +159,17 @@ export const blogsMap = [
             ]
     },
     {
+        'SharePointColumn': 'Region',
+        'SharePointType': 'TaxMulti',
+        'ContentPaths':
+            [
+                {
+                    'HardCoded': 'All NCI',
+                    'Transformation': 'convertRegion'
+                }
+            ]
+    },
+    {
         'Metadata': 'OldPath',
         'ContentPaths':
             [
@@ -147,6 +194,14 @@ export const blogsMap = [
     {
         'SharePointColumn': 'AkLanguageId',
         'HardcodedData': '1033'
+    },
+    {
+        'SharePointColumn': 'ContentTypeId',
+        'HardcodedData': 'Blog'
+    },
+    {
+        'SharePointColumn': 'Persona_0',
+        'HardcodedData': 'All'
     }
 ];
 

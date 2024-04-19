@@ -16,6 +16,23 @@ class URLConverter {
   }
 
   /**
+   * Checks if url is active
+   *
+   * @param {object} urlObject The urlObject to check
+   * @returns {boolean} Whether or not string can be made URL
+   */
+  isActiveUrl(urlObject) {
+    try {
+      return urlObject.isActive === true;
+    }
+    catch(e){
+      return false;
+    }
+  }
+
+
+
+  /**
    * Checks if string can be made into URL object
    *
    * @param {string} urlString The string to check
@@ -39,6 +56,9 @@ class URLConverter {
    */
   async add(oldURL, oldNID, newURL, slug) {
     let pathname;
+    let newSlug = slug;
+    let duplicateUrl = false;
+    let numberOfDuplicates = 0;
     if(typeof oldURL === 'string'){
       pathname = oldURL;
     } else {
@@ -47,15 +67,34 @@ class URLConverter {
         pathname = oldURL.pathname;
       }
     }
+
+  for (let url of this.urls.keys()){
+    if(this.urls.get(url).slug === slug) {
+      duplicateUrl = true;
+      numberOfDuplicates ++;
+    }
+  }
+    /*for (const url of Object.entries(this.urls)) {
+      if(url.slug === slug) {
+        duplicateUrl = true;
+        numberOfDuplicates ++;
+      }
+    }*/
+    if(duplicateUrl) {
+      let brokenSlug = newSlug.split('.');
+      brokenSlug[0]+= numberOfDuplicates;
+      newSlug = brokenSlug.join('.');
+      newSlug += numberOfDuplicates;
+    }
     if(!this.urls.has(pathname)) {
-      this.urls.set(pathname, {url: newURL, nid: oldNID, slug: slug, newSlug: slug, isActive: false, isUnique: true});
+      this.urls.set(pathname, {url: newURL, nid: oldNID, slug: slug, newSlug: newSlug, isActive: false, isUnique: true});
     }
   }
 
   /**
    * Gets the key for the urls object from a path string
    *
-   * @param {string} oldURL The string to check
+   * @param {string|object} oldURL The string to check
    * @returns {object} urlData
    */
   getKeyFromPath (oldURL){
@@ -72,30 +111,41 @@ class URLConverter {
     }
     urlData.mime_type = mime.lookup(urlData.slug);
     urlData.key = urlData.pathname;
-    if(urlData.mime_type && (urlData.mime_type.includes('image') || (urlData.mime_type.includes('application')))){
-      urlData.key = urlData.slug.replaceAll(' ','%20');
+    if(urlData.mime_type){
+      urlData.slug = urlData.slug
+          .replaceAll('%28','(')
+          .replaceAll('%29',')')
+          .replaceAll('%2C',',');
+      if((urlData.mime_type.includes('image') || (urlData.mime_type.includes('application')))){
+        urlData.key = urlData.slug.replaceAll(' ','%20');
+      }
     }
     return urlData;
   }
   /**
    * Retrieves a URL to be converted
    *
-   * @param {URL|string} oldURL The old URL to use for reference
+   * @param {object} oldURL The old URL to use for reference
+   * @param {object} spConfig
    * @returns {Promise<object>|Promise<string>} The new URL object
    */
-  async lookup(oldURL) {
-    let urlData = this.getKeyFromPath(oldURL);
+  async lookup(oldURL, spConfig) {
+    let urlData = this.getKeyFromPath(oldURL.pathname);
     if(urlData.hasOwnProperty('key') && this.urls.has(urlData['key'])){
       this.urls.get(urlData['key']).isActive = true;
       return this.urls.get(urlData['key']);
     } else {
       //Check if absolute link
       let newPath;
+      /*const prodPath = 'myNCI';
+      const devPath = 'NCI-OCPL-myNCI-preprod';
+      const importPath = devPath;*/
+      //const importPath = prodPath;
       if(urlData.hasOwnProperty('mime_type') && (typeof urlData["mime_type"] === 'string')){
         if(urlData["mime_type"].includes('image')) {
-          newPath = '/NCI-OCPL-myNCI-preprod/Images1/';
+          newPath = '/' + spConfig.sitePath +  '/Images1/';
         } else {
-          newPath = '/sites/NCI-OCPL-myNCI-preprod/Shared%20Documents/';
+          newPath = '/sites/' + spConfig.sitePath + '/Shared%20Documents/';
         }
       }
       let newURL;
@@ -109,10 +159,10 @@ class URLConverter {
         newURL = newPath + slug;
       }
       if(urlData.hasOwnProperty('key') && urlData.hasOwnProperty('pathname')){
-        if (oldURL.hostname){
-          if(((oldURL.hostname==='mynci.cancer.gov')
-                  || (oldURL.hostname==='mynci-qa.cancer.gov')
-                  || (oldURL.hostname==='ocpl-mynci'))
+        if (oldURL.url.hostname){
+          if(((oldURL.url.hostname==='mynci.cancer.gov')
+                  || (oldURL.url.hostname==='mynci-qa.cancer.gov')
+                  || (oldURL.url.hostname==='ocpl-mynci'))
               &&
               ((typeof urlData['pathname'] === 'string') && ((urlData['pathname'].includes('files/') || (urlData['pathname'].includes('file/')))))
           ){
@@ -128,7 +178,9 @@ class URLConverter {
         }
       }
     }
-    return 'Not Found';
+    let notFound = { url:'' };
+    notFound.url = 'Not Found';
+    return notFound;
   }
   /**
    * Retrieves a URL to be converted from drupal NID
@@ -143,7 +195,9 @@ class URLConverter {
         return this.urls.get(key);
       }
     }
-    return 'Not Found';
+    let notFound = { url:'' };
+    notFound.url = 'Not Found';
+    return notFound;
   }
 
   /**
@@ -241,9 +295,10 @@ class URLConverter {
    * @param {array} items
    * @param {string} urlAlias
    * @param {string} newPath
+   * @param {boolean} areFiles
    * @returns {Promise<void>}
    */
-  async loadURLs(items, urlAlias,newPath){
+  async loadURLs(items, urlAlias,newPath, areFiles= false){
     items.forEach((item) => {
       let oldURLstring;
       if (Array.isArray(item[urlAlias])) {
@@ -271,7 +326,12 @@ class URLConverter {
       }
       let slug = '';
       if(typeof pathname === 'string'){
-        slug = pathname.split('/').pop().replaceAll(' ','%20');
+        slug = pathname.split('/').pop()
+            .replaceAll(' ','%20');
+        if(!areFiles) {
+          slug = slug.replaceAll('(','%28')
+                      .replaceAll(')','%29');
+        }
       }
       let newURL;
       if(this.isValidUrl(newPath + slug)){

@@ -11,6 +11,16 @@ export const eventsMap = [
         'CharacterLimit': 255
     },
     {
+        'SharePointColumn': 'EventTitle',
+        'ContentPaths': [
+            {
+                'Paths': ['Title'],
+                'Transformation': 'convertTitle'
+            }
+        ],
+        'CharacterLimit': 255
+    },
+    {
         'SharePointColumn': 'Description',
         'ContentPaths':
             [
@@ -37,14 +47,6 @@ export const eventsMap = [
             }
         ]
     },
-    //{
-    //    'SharePointColumn': 'Region',
-    //    'ContentPaths': [
-    //        {
-    //            'Paths': ['Campus']
-    //        }
-    //    ]
-    //},
     {
         'SharePointColumn': 'Location',
         'ContentPaths': [
@@ -73,10 +75,11 @@ export const eventsMap = [
                 },
                 {
                     'Paths': ['Videocast-or-Webinar-Link'],
-                    'Transformation': 'convertLinksForBody'
+                    'Transformation': 'convertTextLinkSingleLine'
                 },
                 {
-                    'Paths': ['Special-Instructions-for-Videocast-or-Webinar']
+                    'Paths': ['Special-Instructions-for-Videocast-or-Webinar'],
+                    'Transformation': 'convertTextAddEm'
                 },
                 {
                     'Paths': ['Type-of-CME-CEU-Credit-Offered']
@@ -85,17 +88,45 @@ export const eventsMap = [
                     'Paths': ['CME-CEU-Credit-Hours']
                 },
                 {
-                    'Paths': ['Contact-for-this-Content'],
-                    'Transformation': 'convertPersonForBody'
-                },
-                {
-                    'Paths': ['Address']
+                    'Paths': ['Address'],
+                    'Transformation': 'convertAddress'
                 },
                 {
                     'Paths': ['Other-Location-Information']
                 }
             ],
         'Separator':'<br />'
+    },
+    {
+        'SharePointColumn': 'NCIContactPerson1Id',
+        'ContentPaths':
+            [
+                {
+                    'Paths': ['Contact-for-this-Content'],
+                    'Transformation': 'convertPersonForContactOne'
+                }
+            ]
+    },
+    {
+        'SharePointColumn': 'NCIContactPerson2Id',
+        'ContentPaths':
+            [
+                {
+                    'Paths': ['Contact-for-this-Content'],
+                    'Transformation': 'convertPersonForContactTwo'
+                }
+            ]
+    },
+    {
+        'SharePointColumn': 'Region',
+        'SharePointType': 'TaxMulti',
+        'ContentPaths':
+            [
+                {
+                    'Paths': ['Campus'],
+                    'Transformation': 'convertRegion'
+                }
+            ]
     },
     {
         'SharePointColumn': 'Tags',
@@ -108,17 +139,28 @@ export const eventsMap = [
                 }
             ]
     },
-    //{
-    //    'SharePointColumn': 'Departments',
-    //      'SharePointType': 'TaxMulti',
-    //    'ContentPaths':
-    //        [
-    //            {
-    //                'Paths': ['Content-Owner--Organization-'],
-    //                'Transformation': 'convertDepartments'
-    //            }
-    //        ]
-    //},
+    {
+        'SharePointColumn': 'Departments',
+        'SharePointType': 'TaxMulti',
+        'ContentPaths':
+            [
+                {
+                    'Paths': ['Content-Owner--Organization-'],
+                    'Transformation': 'convertDepartments'
+                }
+            ]
+    },
+    {
+        'SharePointColumn': 'NCIOrgOwner',
+        'SharePointType': 'TaxMulti',
+        'ContentPaths':
+            [
+                {
+                    'Paths': ['Content-Owner--Organization-'],
+                    'Transformation': 'convertTags'
+                }
+            ]
+    },
    /* {
         'SharePointColumn': 'PublisherId',
         'ContentPaths':
@@ -175,7 +217,19 @@ export const eventsMap = [
     {
         'SharePointColumn': 'AkLanguageId',
         'HardcodedData': '1033'
-    }
+    },
+    {
+        'SharePointColumn': 'ContentTypeId',
+        'HardcodedData': 'Calendar'
+    },
+    {
+        'SharePointColumn': 'Persona_0',
+        'HardcodedData': 'All'
+    },
+    {
+        'SharePointColumn': 'Featured',
+        'HardcodedData': 'true'
+    },
 ];
 
 

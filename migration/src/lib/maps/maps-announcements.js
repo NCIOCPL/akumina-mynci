@@ -36,7 +36,7 @@ export const announcementsMap = [
                 },
                 {
                     'Paths': ['For-More-Information'],
-                    'Transformation': 'convertLinksForBody'
+                    'Transformation': 'convertForMoreInformationLinks'
                 },
                 {
                     'Paths': ['Contact-for-this-Content'],
@@ -66,7 +66,7 @@ export const announcementsMap = [
             ]
     },
     {
-        'SharePointColumn': 'Department',
+        'SharePointColumn': 'Departments',
         'SharePointType': 'TaxMulti',
         'ContentPaths':
             [
@@ -77,12 +77,43 @@ export const announcementsMap = [
             ]
     },
     {
+        'SharePointColumn': 'NCIOrgOwner',
+        'SharePointType': 'TaxMulti',
+        'ContentPaths':
+            [
+                {
+                    'Paths': ['Content-Owner--Organization-'],
+                    'Transformation': 'convertTags'
+                }
+            ]
+    },
+    {
         'SharePointColumn': 'PublisherId',
         'ContentPaths':
             [
                 {
                     'Paths': ['Contact-for-this-Content'],
                     'Transformation': 'convertPerson'
+                }
+            ]
+    },
+    {
+        'SharePointColumn': 'NCIContactPerson1Id',
+        'ContentPaths':
+            [
+                {
+                    'Paths': ['Contact-for-this-Content'],
+                    'Transformation': 'convertPersonForContactOne'
+                }
+            ]
+    },
+    {
+        'SharePointColumn': 'NCIContactPerson2Id',
+        'ContentPaths':
+            [
+                {
+                    'Paths': ['Contact-for-this-Content'],
+                    'Transformation': 'convertPersonForContactTwo'
                 }
             ]
     },
@@ -142,6 +173,21 @@ export const announcementsMap = [
     {
         'SharePointColumn': 'AkLanguageId',
         'HardcodedData': '1033'
+    },
+    {
+        'SharePointColumn': 'Persona_0',
+        'HardcodedData': 'All'
+    },
+    {
+        'SharePointColumn': 'Region',
+        'SharePointType': 'TaxMulti',
+        'ContentPaths':
+            [
+                {
+                    'HardCoded': 'All NCI',
+                    'Transformation': 'convertRegion'
+                }
+            ]
     }
 ];
 
