@@ -1,0 +1,122 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{86173B7B-90A2-4C06-8219-D62CD33EE121}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Service.NCI.Api</RootNamespace>
+    <AssemblyName>NCI.Api</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Akumina.AzureKeyVault, Version=6.0.0.0, Culture=neutral, PublicKeyToken=55f0ca53094df4a6, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\NCIAPI\Api\Akumina6.2\bin\Akumina.AzureKeyVault.dll</HintPath>
+    </Reference>
+    <Reference Include="Akumina.Caching, Version=6.0.0.0, Culture=neutral, PublicKeyToken=55f0ca53094df4a6, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\NCIAPI\Api\Akumina6.2\bin\Akumina.Caching.dll</HintPath>
+    </Reference>
+    <Reference Include="Akumina.Common, Version=6.0.0.0, Culture=neutral, PublicKeyToken=55f0ca53094df4a6, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\NCIAPI\Api\Akumina6.2\bin\Akumina.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Akumina.DataHub.Web, Version=6.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\NCIAPI\Api\Akumina6.2\bin\Akumina.DataHub.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="Akumina.DataHub.Web.Api, Version=6.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\NCIAPI\Api\Akumina6.2\bin\Akumina.DataHub.Web.Api.dll</HintPath>
+    </Reference>
+    <Reference Include="Akumina.Infrastructure, Version=6.0.0.0, Culture=neutral, PublicKeyToken=55f0ca53094df4a6, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\NCIAPI\Api\Akumina6.2\bin\Akumina.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="Akumina.Interchange.Core, Version=6.0.0.0, Culture=neutral, PublicKeyToken=55f0ca53094df4a6, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\NCIAPI\Api\Akumina6.2\bin\Akumina.Interchange.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Akumina.Interchange.Services, Version=6.0.0.0, Culture=neutral, PublicKeyToken=55f0ca53094df4a6, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\NCIAPI\Api\Akumina6.2\bin\Akumina.Interchange.Services.dll</HintPath>
+    </Reference>
+    <Reference Include="Akumina.Interchange.Services.Core, Version=6.0.0.0, Culture=neutral, PublicKeyToken=55f0ca53094df4a6, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\NCIAPI\Api\Akumina6.2\bin\Akumina.Interchange.Services.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Akumina.Interchange.Web, Version=6.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\NCIAPI\Api\Akumina6.2\bin\Akumina.Interchange.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="Akumina.Interchange.Web.Utility, Version=6.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\NCIAPI\Api\Akumina6.2\bin\Akumina.Interchange.Web.Utility.dll</HintPath>
+    </Reference>
+    <Reference Include="Akumina.Logging, Version=6.0.0.0, Culture=neutral, PublicKeyToken=55f0ca53094df4a6, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\NCIAPI\Api\Akumina6.2\bin\Akumina.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.SharePoint.Client - Copia">
+      <HintPath>..\..\..\..\NCIAPI\Api\Akumina6.2\bin\Microsoft.SharePoint.Client - Copia.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.SharePoint.Client.Runtime - Copia">
+      <HintPath>..\..\..\..\NCIAPI\Api\Akumina6.2\bin\Microsoft.SharePoint.Client.Runtime - Copia.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.SharePoint.Client.Search - Copia">
+      <HintPath>..\..\..\..\NCIAPI\Api\Akumina6.2\bin\Microsoft.SharePoint.Client.Search - Copia.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.SharePoint.Client.Taxonomy - Copia">
+      <HintPath>..\..\..\..\NCIAPI\Api\Akumina6.2\bin\Microsoft.SharePoint.Client.Taxonomy - Copia.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\NCIAPI\Api\Akumina6.2\bin\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Http, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\NCIAPI\Api\Akumina6.2\bin\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Controllers\Controller.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\Service.cs" />
+    <Compile Include="Services\TermLabelInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

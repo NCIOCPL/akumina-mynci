@@ -1,0 +1,96 @@
+{
+    "Definition": {
+        "Name": "ImportantDatesWidget",
+        "Description": "Select dates of import.",
+        "Class": "Akumina.AddIn.ImportantDatesWidget",
+        "ContentTypes": [],
+        "Version": "",
+        "Dependencies": [],
+        "Properties": [],
+        "Views": [
+            {
+                "Name": "Important Dates NCI",
+                "Path": "/{AssetLibraryName}/digitalworkPlace/content/templates/importantdateswidget/importantdatesmodern nci.html",
+                "Id": "0402a107-9029-4844-80f0-cde037a75530"
+            }
+        ],
+        "JS":
+            {
+                "Default": "/{AssetLibraryName}/DigitalWorkPlace/JS/widgets/importantdateswidget.js"
+            }
+        },     
+        "Instances": [
+            {
+                "Name": "Home Page Upcoming Events",
+                "Description": "Displays list of important dates from site calendar.",
+                "Icon": "fa fa-cog",
+                "Id": "f8133321-9958-40fe-af32-861c6f6c3fbb",
+                "Properties": [
+                    {
+                        "name": "listname",
+                        "value": "Calendar_AK"
+                    },
+                    {
+                        "name": "additionalselectfields",
+                        "value": ""
+                    },
+                    {
+                        "name": "featured",
+                        "value": true
+                    },
+                    {
+                        "name": "viewalllink",
+                        "value": "calendareventslist.aspx"
+                    },
+                    {
+                        "name": "title",
+                        "value": "{importantdates.title}"
+                    },
+                    {
+                        "name": "icon",
+                        "value": "None"
+                    },
+                    {
+                        "name": "calendar",
+                        "value": true
+                    },
+                    {
+                        "name": "featuredfield",
+                        "value": "Featured"
+                    },
+                    {
+                        "name": "calendardisplay",
+                        "value": "today"
+                    },
+                    {
+                        "name": "cacheinterval",
+                        "value": "10"
+                    },
+                    {
+                        "name": "itemstodisplay",
+                        "value": ""
+                    },
+                    {
+                        "name": "uicallbackmethod",
+                        "value": ""
+                    },
+                    {
+                        "name": "callbackmethod",
+                        "value": ""
+                    },
+                    {
+                        "name": "sitecollectionurl",
+                        "value": ""
+                    }
+                ],
+                "SelectedView": "Important Dates NCI",
+                "AvailableViews": [],
+                "HiddenFields": []
+            }
+        ],
+    "Options": {
+        "IsPartialDefinition": true,
+        "IsDashboardWidget": false,
+        "IsAppManagerWidget": false
+    }
+}

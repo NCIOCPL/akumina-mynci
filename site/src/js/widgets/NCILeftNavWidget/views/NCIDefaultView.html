@@ -1,0 +1,21 @@
+{{debug}}
+<div ak-item="" class="interAction ak-widget-item">
+{{#if Loading}}
+<span>Loading ...</span>
+{{else}}
+    <div class="left-nav-wrapper">
+        {{#if HasItems}}
+        <div class="left-nav-items">
+            {{#Items}}
+            <div class="left-nav-item selected-{{IsSelectedNode}}">
+                <div class="selection-indicator"></div>
+                <a class="node-level-{{NodeLevel}}" linktype="{{LinkType}}" nodetype="{{NodeType}}" itemid="{{Id}}" parentid="{{ParentItemId}}" displayorder="{{DisplayOrder}}" href="{{LinkUrl}}">{{Title}}</a>
+            </div>
+            {{/Items}}
+        </div>
+        {{else}}
+        {{/if}}
+    </div>
+{{/if}}
+</div>
+ 

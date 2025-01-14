@@ -1,0 +1,52 @@
+{
+    "Definition": {
+        "Name": "BreadcrumbsWidget",
+        "Description": "Provides a breadcrumb navigation trail.",
+        "Class": "Akumina.AddIn.BreadcrumbsWidget",
+        "ContentTypes": [],
+        "Version": "",
+        "Dependencies": [],
+        "Properties": [],
+        "Views": [
+            {
+                "Name": "NCI Breadcrumb Widget View",
+                "Path": "/{AssetLibraryName}/digitalworkPlace/content/templates/breadcrumbswidget/breadcrumbs.html",
+                "Id": "d09d9db3-e9bc-4580-92e4-737f30fe6a48"
+            }
+        ],
+        "JS":
+            {
+                "Default": "/{AssetLibraryName}/DigitalWorkPlace/JS/widgets/breadcrumbwidget.js"
+            }
+        },     
+        "Instances": [
+            {
+                "Name": "NCI Breadcrumb Widget",
+                "Description": "",
+                "Icon": "fa fa-cog",
+                "Id": "0785b3f9-1f8c-4684-9dde-91a9c75c6b23",
+                "Properties": [
+                    {
+                        "name": "callbackmethod",
+                        "value": ""
+                    },
+                    {
+                        "name": "uicallbackmethod",
+                        "value": ""
+                    },
+                    {
+                        "name": "usepagefolders",
+                        "value": true
+                    }
+                ],
+                "SelectedView": "NCI Breadcrumb Widget View",
+                "AvailableViews": [],
+                "HiddenFields": []
+            }
+        ],
+    "Options": {
+        "IsPartialDefinition": true,
+        "IsDashboardWidget": false,
+        "IsAppManagerWidget": false
+    }
+}

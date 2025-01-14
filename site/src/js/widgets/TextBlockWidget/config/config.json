@@ -1,0 +1,54 @@
+{
+    "Definition": {
+      "Name": "TextBlockWidget",
+      "Description": "",
+      "Class": "Akumina.AddIn.TextBlockWidget",
+      "ContentTypes": [],
+      "Version": "",
+      "Dependencies": [],
+      "Properties": [],
+      "Views": [
+        {
+          "Name": "NCI Default Textblock View",
+          "Path": "/akumina%20library/digitalworkplace/content/templates/textblockwidget/default.html",
+          "Id": "110aa7ec-f4e6-481d-93ca-75987130cc50"
+        }
+      ],
+  
+      "JS": {
+        "Default": "/{AssetLibraryName}/DigitalWorkPlace/JS/widgets/textblockwidget.js"
+      }
+    },
+    "Instances": [{
+      "Name": "Tip of the Week Header",
+      "Description": "",
+      "Icon": "fa fa-cog",
+      "Id": "0deef6c6-f852-4365-bc25-bb3dc4db6d2d",
+      "Properties": [
+        {
+          "name": "content",
+          "value": "<h1 class=\"ia-page-title\">Tip of the Week</h1>"
+        },        
+        {
+          "name": "callbackmethod",
+          "value": ""
+        },
+        {
+          "name": "uicallbackmethod",
+          "value": ""
+        },
+        {
+          "name": "widgetframework",
+          "value": "react"
+        }
+      ],
+      "SelectedView": "NCI Default Textblock View",
+      "AvailableViews": [],
+      "HiddenFields": []
+    }],
+    "Options": {
+      "IsPartialDefinition": true,
+      "IsDashboardWidget": false,
+      "IsAppManagerWidget": false
+    }
+  }

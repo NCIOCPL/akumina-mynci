@@ -1,0 +1,54 @@
+{
+    "Name": "Blog Detail",
+    "Id": "3473d920-9baf-402b-991c-b84c2bc51cdf",
+    "Type": "GenericPage",
+    "List": "GenericPages_AK",
+    "AdditionalSelectColumns": "",
+    "Url": "blogdetail.aspx",
+    "Personas": [
+        "All"
+    ],
+    "PageDefinition": {
+        "Containers": [
+            {
+                "id": "container1",
+                "layoutid": "2 Column Large Right",
+                "zones": [
+                    {
+                        "id": "zone1",
+                        "widgets": [
+                            {
+                                "Title": "Left Navigation Indicator",
+                                "WidgetInstanceId": "550ddab9-9020-4b13-8672-7adc3fa375fd",
+                                "Name": "NCILeftNavWidget",
+                                "Icon": "fa fa-cog",
+                                "Description": "Reflects the current position in the nav hierarchy.",
+                                "Options": "",
+                                "DisplayOrder": "0",
+                                "Grid": "",
+                                "Properties": []
+                            }
+                        ]
+                    },
+                    {
+                        "id": "zone2",
+                        "widgets": [
+                            {
+                                "Title": "Blog Detail",
+                                "WidgetInstanceId": "0E19175D-FFB7-4B2F-B10B-6D380D198442",
+                                "Name": "BlogDetailWidget",
+                                "Icon": "fa fa-cog",
+                                "Description": "A single NCI blog entry.",
+                                "Options": "",
+                                "DisplayOrder": "0",
+                                "Grid": "",
+                                "Properties": []
+                            }
+                        ]
+                    }
+                ]
+            }
+       ]    
+    },
+    "IsLegacyMode": false
+}

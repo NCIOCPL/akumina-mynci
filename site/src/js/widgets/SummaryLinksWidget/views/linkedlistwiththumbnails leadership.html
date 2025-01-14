@@ -1,0 +1,64 @@
+{/*root*/}
+
+React.createElement(
+    "div",
+    { className: "ia-slw ia-slw-thumbnails ia-widget-wrapper leadership-slw" },
+    model.DisplayCollectionName && React.createElement(
+        "div",
+        { className: "ia-slw-header" },
+        React.createElement(
+            "h2",
+            { className: " h3 ia-slw-title" },
+            model.CollectionName
+        ),
+        React.createElement("div", { className: "ia-slw-description", dangerouslySetInnerHTML: { __html: model.Summary } })
+    ),
+    model.Items && model.Items.filter(x => x.NodeType == "Item").length != 0 ? React.createElement(
+        "div",
+        { className: "ia-slw-thumbails-lists ia-card" },
+        Children
+    ) : React.createElement(
+        "p",
+        null,
+        Akumina.Digispace.Language.TryGetText("summarylink.error.nolinkstodisplay")
+    )
+);
+{/*group*/}
+React.createElement(React.Fragment, null);
+{/*item*/}
+React.createElement(
+    "div",
+    { className: "ak-slw-item" },
+    editComponent,
+    React.createElement(
+        "div",
+        { "class": "ia-slw-thumbnails-item" },
+        React.createElement(
+            "div",
+            { className: "ia-slw-article-image" },
+            model.Link ? React.createElement("a", { href: model.Link, target: model.LinkTarget, className: Akumina.Digispace.ConfigurationContext.IsSPAMode ? "ak-spalink" : "", style: { backgroundImage: "url('" + model.ImageUrl + "')" }, title: model.Tooltip }) : React.createElement(
+                "span",
+                null,
+                model.Title
+            )
+        ),
+        React.createElement(
+            "div",
+            { className: "ia-slw-article-desc" },
+            React.createElement(
+                "h3",
+                { "class": "h4" },
+                model.Link ? React.createElement(
+                    "a",
+                    { href: model.Link, target: model.LinkTarget, className: Akumina.Digispace.ConfigurationContext.IsSPAMode ? "ak-spalink" : "", title: model.Tooltip, "data-interception": "off" },
+                    model.Title
+                ) : React.createElement(
+                    "span",
+                    null,
+                    model.Title
+                )
+            ),
+            React.createElement("div", { dangerouslySetInnerHTML: { __html: model.Summary } })
+        )
+    )
+);

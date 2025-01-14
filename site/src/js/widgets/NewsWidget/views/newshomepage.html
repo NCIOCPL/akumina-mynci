@@ -1,0 +1,131 @@
+React.createElement(
+    "div",
+    { "class": "d-flex flex-column w-100 h-100 news-home-page" },
+    React.createElement(
+        "div",
+        { "class": "row" },
+        React.createElement(
+            "h3",
+            null,
+            Akumina.Digispace.Language.TryGetText("announcementitems.title")
+        )
+    ),
+    React.createElement(
+        "div",
+        { className: "content-container-wrapper" },
+        IsFetching ? React.createElement(
+            "div",
+            { className: "ia-loading-state h-100" },
+            React.createElement(
+                "div",
+                { className: "ia-skeleton-wrapper d-flex flex-direction-column" },
+                React.createElement("div", { className: "ia-skeleton-media" })
+            ),
+            React.createElement(
+                "div",
+                { className: "ia-skeleton-wrapper d-flex flex-direction-column" },
+                React.createElement("div", { className: "ia-skeleton-media" })
+            ),
+            React.createElement(
+                "div",
+                { className: "ia-skeleton-wrapper d-flex flex-direction-column" },
+                React.createElement("div", { className: "ia-skeleton-media" })
+            ),
+            React.createElement(
+                "div",
+                { className: "ia-skeleton-wrapper d-flex flex-direction-column" },
+                React.createElement("div", { className: "ia-skeleton-media" })
+            ),
+            React.createElement(
+                "div",
+                { className: "ia-skeleton-wrapper d-flex flex-direction-column" },
+                React.createElement("div", { className: "ia-skeleton-media" })
+            ),
+            React.createElement(
+                "div",
+                { className: "ia-skeleton-wrapper d-flex flex-direction-column" },
+                React.createElement("div", { className: "ia-skeleton-media" })
+            ),
+            React.createElement(
+                "div",
+                { className: "ia-skeleton-wrapper d-flex flex-direction-column" },
+                React.createElement("div", { className: "ia-skeleton-media" })
+            ),
+            React.createElement(
+                "div",
+                { className: "ia-skeleton-wrapper d-flex flex-direction-column" },
+                React.createElement("div", { className: "ia-skeleton-media" })
+            ),
+            React.createElement(
+                "div",
+                { className: "ia-skeleton-wrapper d-flex flex-direction-column" },
+                React.createElement("div", { className: "ia-skeleton-media" })
+            )
+        ) : HasNews ? React.createElement(
+            "div",
+            null,
+            NewsItems.map(Item => {
+                return React.createElement(
+                    "div",
+                    { className: "mt-2 p-2 news-item-card", id: Item.NewsItemIdentifier,
+                        "ak-item": Item.NewsItemIdentifier, "data-webid": Item.WebId, "data-siteid": Item.SiteId },
+                    React.createElement(
+                        "div",
+                        { className: "w-100" },
+                        React.createElement(
+                            "h4",
+                            { className: "ia-tag-title" + (Item.IsDeleted ? " ia-deleted-article" : "") },
+                            Item.IsDeleted ? React.createElement(
+                                "span",
+                                null,
+                                Item.Title
+                            ) : React.createElement(
+                                "a",
+                                { className: Akumina.Digispace.ConfigurationContext.IsSPAMode ? "ak-spalink" : "",
+                                    href: Item.FriendlyUrl },
+                                Item.Title
+                            )
+                        )
+                    ),
+                    React.createElement(
+                        "div",
+                        { className: "w-100 mt-auto" },
+                        Item.PublishedDate && React.createElement(
+                            "span",
+                            { className: "display-date-light" },
+                            moment(Item.PublishedDate).format(Akumina.Digispace.SiteContext.DateFormat.monthdatelongyear)
+                        )
+                    ),
+                    React.createElement(
+                        "div",
+                        { className: "w-100" },
+                        React.createElement(
+                            "p",
+                            { 
+                                className: "display-date" ,
+                                dangerouslySetInnerHTML: { __html: Item.SPSummary }
+                            }
+                        )
+                    )
+                );
+            })
+        ) : React.createElement(
+            "p",
+            null,
+            Akumina.Digispace.Language.TryGetText("fs.newswidget.nonewsfound")
+        )
+    ),
+    React.createElement(
+        "div",
+        { className: "row mt-3" },
+        React.createElement(
+            "div",
+            { className: "d-flex flex-row justify-content-end" },
+            React.createElement(
+                "a",
+                { "class": "ia-button", href: Handlebars.helpers.AddSPALink("/sitepages/newslist.aspx") },
+                Akumina.Digispace.Language.TryGetText("fs.newswidget.showmore")
+            )
+        )
+    )
+);

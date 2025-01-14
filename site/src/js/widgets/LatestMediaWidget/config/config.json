@@ -1,0 +1,159 @@
+{
+  "Definition": {
+    "Name": "LatestMediaWidget",
+    "Description": "",
+    "Class": "Akumina.AddIn.LatestMediaWidget",
+    "ContentTypes": [],
+    "Version": "",
+    "Dependencies": [],
+    "Properties": [],
+    "Views": [
+      {
+        "Name": "HomePage-Photos",
+        "Path": "/{AssetLibraryName}/DigitalWorkPlace/Content/Templates/LatestMediaWidget/FeaturedPhotos.html",
+        "Id": "14969547-e36c-499e-916b-d125f759a387"
+      },
+      {
+        "Name": "NCI-Photos-Carousel",
+        "Path": "/{AssetLibraryName}/DigitalWorkPlace/Content/Templates/LatestMediaWidget/ncifeaturedphotos.html",
+        "Id": "5e867468-6fec-4e10-b9d8-dfc63926d722"
+      }
+    ],
+    "JS": {
+      "Default": "/{AssetLibraryName}/DigitalWorkPlace/JS/widgets/latestmediawidget.js"
+    }
+  },
+  "Instances": [
+    {
+      "Name": "Latest NCI Photos",
+      "Description": "",
+      "Icon": "fa fa-cog",
+      "Id": "0a46992e-b6f8-4793-b6a1-553a1c7a9414",
+      "Properties": [
+        {
+          "name": "widgettitle",
+          "type": "Latest NCI Photos"
+        },
+        {
+          "name": "isroot",
+          "value": true
+        },
+        {
+          "name": "selectfields",
+          "value": "Image"
+        },
+        {
+          "name": "listname",
+          "value": "LatestPhotos_NCI"
+        },
+        {
+          "name": "callbackmethod",
+          "value": ""
+        },
+        {
+          "name": "viewxml",
+          "value": ""
+        },
+        {
+          "name": "cacheinterval",
+          "value": -1
+        },
+        {
+          "name": "ispaging",
+          "value": ""
+        },
+        {
+          "name": "pagesize",
+          "value": 5
+        },
+        {
+          "name": "media",
+          "value": "Photo"
+        },
+        {
+          "name": "uicallbackmethod",
+          "value": ""
+        },
+        {
+          "name": "sitecollectionurl",
+          "value": ""
+        },
+        {
+          "name": "viewalllink",
+          "value": ""
+        }
+      ],
+      "SelectedView": "HomePage-Photos",
+      "AvailableViews": [],
+      "HiddenFields": []
+    },
+    {
+      "Name": "Latest NCI Photos Carousel",
+      "Description": "",
+      "Icon": "fa fa-cog",
+      "Id": "79502f8a-289f-4816-8e54-fa047e536766",
+      "Properties": [
+        {
+          "name": "widgettitle",
+          "type": "Latest NCI Photos"
+        },
+        {
+          "name": "isroot",
+          "value": true
+        },
+        {
+          "name": "selectfields",
+          "value": "Image"
+        },
+        {
+          "name": "listname",
+          "value": "LatestPhotos_NCI"
+        },
+        {
+          "name": "callbackmethod",
+          "value": ""
+        },
+        {
+          "name": "viewxml",
+          "value": ""
+        },
+        {
+          "name": "cacheinterval",
+          "value": -1
+        },
+        {
+          "name": "ispaging",
+          "value": ""
+        },
+        {
+          "name": "pagesize",
+          "value": 5
+        },
+        {
+          "name": "media",
+          "value": "Photo"
+        },
+        {
+          "name": "uicallbackmethod",
+          "value": "NCI_LatestMediaPhotos"
+        },
+        {
+          "name": "sitecollectionurl",
+          "value": ""
+        },
+        {
+          "name": "viewalllink",
+          "value": ""
+        }
+      ],
+      "SelectedView": "NCI-Photos-Carousel",
+      "AvailableViews": [],
+      "HiddenFields": []
+    }
+  ],
+  "Options": {
+    "IsPartialDefinition": true,
+    "IsDashboardWidget": false,
+    "IsAppManagerWidget": false
+  }
+}

@@ -1,0 +1,94 @@
+{
+  "Definition": {
+    "Name": "NewsDetailWidget",
+    "Description": "",
+    "Class": "Akumina.AddIn.NewsDetailWidget",
+    "ContentTypes": [],
+    "Version": "",
+    "Dependencies": [],
+    "Properties": [],
+    "Views": [
+      {
+        "Name": "ncinewsdetail",
+        "Path": "/{AssetLibraryName}/DigitalWorkPlace/Content/Templates/NewsDetailWidget/ncinewsdetail.html",
+        "Id": "777d25b7-de24-40bd-8a2a-5b2cfb84a233"
+      }
+    ],
+    "JS": {
+      "Default": "/{AssetLibraryName}/DigitalWorkPlace/JS/widgets/newsdetailwidget.js"
+    }
+  },
+  "Instances": [
+    {
+      "Name": "News Details",
+      "Description": "Displays news detail",
+      "Icon": "fa fa-cog",
+      "Id": "89fa2ce8-e45f-9232-14dc-a1c3cd0bb1ba",
+      "Properties": [
+        {
+          "name": "listname",
+          "value": "FoundationNews_AK"
+        },
+        {
+          "name": "selectfields",
+          "value": "ID,Created,Title,Body,Featured,Image,Video,Modified,Publish_x0020_Date,Region,Departments,NCIOrgOwner,Tags,ReadTime,ContentTypeId,FriendlyUrl,Archive_x0020_Date,Share_x0020_URL,Shareable,Summary,Thumbnail_x0020_URL,Publisher/ID,Publisher/EMail,Publisher/Title,Author/ID,Author/EMail,Author/Title,NCIContactPerson1/ID,NCIContactPerson1/Title,NCIContactPerson1/EMail,NCIContactPerson2/ID,NCIContactPerson2/Title,NCIContactPerson2/EMail,Departments"
+        },
+        {
+          "name": "expandfields",
+          "value": "Publisher,Author,NCIContactPerson1,NCIContactPerson2"
+        },
+        {
+          "name": "relatedtagstaxonomy",
+          "value": [
+            {
+              "columnName": "Tags",
+              "displayName": "{common.tags}",
+              "managedPropertyName": "SPTags",
+              "taxonomyIsTermSet": false
+            },
+            {
+              "columnName": "Departments",
+              "displayName": "{common.departments}",
+              "managedPropertyName": "Departments",
+              "taxonomyIsTermSet": false
+            },
+            {
+              "columnName": "Region",
+              "diplayName": "{common.regions}",
+              "managedPropertyName": "Region",
+              "taxonomyIsTermSet": false
+            }
+          ]
+        },
+        {
+          "name": "cacheinterval",
+          "value": "-1"
+        },
+        {
+          "name": "callbackmethod",
+          "value": "NewsDetailContactCallback"
+        },        
+        {
+          "name": "uicallbackmethod",
+          "value": "NCINewsDetailUICallback"
+        },        
+        {
+          "name": "usereactionslegacyview",
+          "value": false
+        },
+        {
+          "name": "widgetframework",
+          "value": "react"
+        }
+      ],
+      "SelectedView": "ncinewsdetail",
+      "AvailableViews": [],
+      "HiddenFields": []
+    }
+  ],
+  "Options": {
+    "IsPartialDefinition": true,
+    "IsDashboardWidget": false,
+    "IsAppManagerWidget": false
+  }
+}

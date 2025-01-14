@@ -1,0 +1,48 @@
+{
+  "Definition": {
+    "Name": "TabWidget",
+    "Description": "Displays tab list.",
+    "Class": "Akumina.AddIn.TabWidget",
+    "ContentTypes": [],
+    "Version": "{CurrentBuildVersion}",
+    "Icon": "far fa-folder",
+    "Dependencies": [],
+    "Properties": [      
+    ],
+    "Views": [
+      {
+        "Name": "Tab Widget",
+        "Path": "/akumina%20library/digitalworkplace/content/templates/tabwidget/tabwidget.html",
+        "Id": "5c326954-d994-401c-8a7d-08970036b32b"
+      },
+      {
+        "Name": "nci tabs",
+        "Path": "/akumina%20library/digitalworkplace/content/templates/tabwidget/nci-tabs.html",
+        "Id": "c5090c4e-d4a2-49d5-8489-b3212e9f003b"
+      }
+    ],
+    "JS": {
+      "Default": "/{AssetLibraryName}/digitalworkplace/js/widgets/digitalworkplace.core.tabwidget.min.js"
+    }
+  },
+    "Instances": 
+    [
+      {
+        "Name": "NCI Organization Directory TABS",
+        "Id": "e0ad50b2-af6b-4167-9d30-6097ce3ee338",
+        "Description": "Displays the results of a search including results list and filters",
+        "Icon": "fa fa-search",
+        "SelectedView": "nci tabs",
+        "AvailableViews": ["nci tabs"],
+        "Properties": [
+          {
+            "name": "tabs",
+            "value": "[{\"title\":\"Overview\",\"id\":\"05fd9ed4-fcd8-44db-8525-93ed8506cc74\"},{\"title\":\"People\",\"id\":\"PeopleTab\"},{\"title\":\"Content\",\"id\":\"425ed999-9be0-4780-8206-39383f6b0627\"}]"
+          }
+        ]
+      }
+    ],
+    "Options": {
+        "IsPartialDefinition": true
+    }
+}

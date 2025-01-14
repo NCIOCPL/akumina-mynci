@@ -1,0 +1,276 @@
+React.createElement(
+    "div",
+    { id: "HomeNewsEventsTabs", className: "ia-news-list ia-widget-wrapper custom-event-list" },
+    React.createElement(
+        "h2",
+        null,
+        Title
+    ),
+    ConfigurationErrorMessage ? React.createElement(
+        "span",
+        null,
+        ConfigurationErrorMessage
+    ) : React.createElement(
+        React.Fragment,
+        null,
+        React.createElement(
+            "div",
+            { className: "ia-grid-utility-container" },
+            React.createElement(
+                "div",
+                { className: "ia-grid-utility-left-col" },
+                React.createElement(
+                    "div",
+                    { className: "ia-list-action" },
+                    SearchCriteria && SearchCriteria.length > 0 && React.createElement(
+                        React.Fragment,
+                        null,
+                        React.createElement(
+                            "div",
+                            { className: "ia-filter-selector" },
+                            React.createElement(
+                                "span",
+                                { className: "ia-filter-text" },
+                                Akumina.Digispace.Language.TryGetText("fs.blogswidget.filterby"),
+                                ":"
+                            ),
+                            SearchCriteria.map(radiofilter => {
+                                return React.createElement(
+                                    React.Fragment,
+                                    null,
+                                    React.createElement(
+                                        "a",
+                                        { className: "ia-filter-option " + (radiofilter.IsSelected ? " fs-js-active" : ""),
+                                            role: "button", onClick: () => SearchBasedOnSelectedCriteria(false, undefined, radiofilter, true) },
+                                        radiofilter.Name
+                                    ),
+                                    radiofilter.Value == EnumFilteringCriteria.UserInterest && React.createElement(
+                                        "button",
+                                        { className: "ia-filter-option ia-button-icon ia-group-button-icon " + (radiofilter.IsSelected ? " fs-js-active" : ""), onClick: () => OpenEditPreferencesPopup() },
+                                        React.createElement("i", { className: "fa-regular fa-sliders", title: Akumina.Digispace.Language.TryGetText("fs.common.changepreferences"), "aria-label": Akumina.Digispace.Language.TryGetText("fs.common.changepreferences") })
+                                    )
+                                );
+                            })
+                        )
+                    ),
+                    React.createElement("div", { rel: "Search Refiner", "class": "ak-widget fs-js-search-refiner-widget", id: "398d1678-60dd-4758-a8df-e8b1b4464a4a" })
+                )
+            ),
+            React.createElement(
+                "div",
+                { className: "ia-grid-utility-right-col" },
+                React.createElement(
+                    "div",
+                    { className: "ia-masanory-grid-view-toggle" },
+                    React.createElement(
+                        "button",
+                        { className: IsListView ? "" : "fs-js-active", onClick: () => {
+                                ToggleView(false);
+                            } },
+                        React.createElement("span", { className: "assessibility-hidden-text" }, "Grid"),
+                        React.createElement("i", { className: "fa-solid fa-grid", "aria-label": Akumina.Digispace.Language.TryGetText("fs.common.gridview") })
+                    ),
+                    React.createElement("span", { className: "ia-button-separator" }),
+                    React.createElement(
+                        "button",
+                        { className: IsListView ? "fs-js-active" : "", onClick: () => {
+                                ToggleView(true);
+                            } },
+                        React.createElement("span", { className: "assessibility-hidden-text" }, "List"),
+                        React.createElement("i", { className: "fa-solid fa-list", "aria-label": Akumina.Digispace.Language.TryGetText("fs.common.listview") })
+                    )
+                )
+            )
+        ),
+        IsFetching ? React.createElement(
+            "div",
+            { className: "ia-loading-state" },
+            React.createElement(
+                "div",
+                { className: "ia-skeleton-wrapper" },
+                React.createElement(
+                    "div",
+                    { className: "ia-skeleton-col" },
+                    React.createElement("div", { className: "ia-skeleton-media" }),
+                    React.createElement("div", { className: "ia-skeleton-heading" }),
+                    React.createElement(
+                        "div",
+                        { className: "ia-skeleton-body" },
+                        React.createElement("div", { className: "ia-skeleton-text" }),
+                        React.createElement("div", { className: "ia-skeleton-text" }),
+                        React.createElement("div", { className: "ia-skeleton-text" }),
+                        React.createElement("div", { className: "ia-skeleton-text" })
+                    )
+                ),
+                React.createElement(
+                    "div",
+                    { className: "ia-skeleton-col" },
+                    React.createElement("div", { className: "ia-skeleton-media" }),
+                    React.createElement("div", { className: "ia-skeleton-heading" }),
+                    React.createElement(
+                        "div",
+                        { className: "ia-skeleton-body" },
+                        React.createElement("div", { className: "ia-skeleton-text" }),
+                        React.createElement("div", { className: "ia-skeleton-text" }),
+                        React.createElement("div", { className: "ia-skeleton-text" }),
+                        React.createElement("div", { className: "ia-skeleton-text" })
+                    )
+                ),
+                React.createElement(
+                    "div",
+                    { className: "ia-skeleton-col" },
+                    React.createElement("div", { className: "ia-skeleton-media" }),
+                    React.createElement("div", { className: "ia-skeleton-heading" }),
+                    React.createElement(
+                        "div",
+                        { className: "ia-skeleton-body" },
+                        React.createElement("div", { className: "ia-skeleton-text" }),
+                        React.createElement("div", { className: "ia-skeleton-text" }),
+                        React.createElement("div", { className: "ia-skeleton-text" }),
+                        React.createElement("div", { className: "ia-skeleton-text" })
+                    )
+                ),
+                React.createElement(
+                    "div",
+                    { className: "ia-skeleton-col" },
+                    React.createElement("div", { className: "ia-skeleton-media" }),
+                    React.createElement("div", { className: "ia-skeleton-heading" }),
+                    React.createElement(
+                        "div",
+                        { className: "ia-skeleton-body" },
+                        React.createElement("div", { className: "ia-skeleton-text" }),
+                        React.createElement("div", { className: "ia-skeleton-text" }),
+                        React.createElement("div", { className: "ia-skeleton-text" }),
+                        React.createElement("div", { className: "ia-skeleton-text" })
+                    )
+                )
+            )
+        ) : React.createElement(
+            React.Fragment,
+            null,
+            React.createElement(
+                "div",
+                { className: "ia-masanory-grid " + (IsListView ? " ia-list-view" : "") },
+                HasNews ? React.createElement(
+                    React.Fragment,
+                    null,
+                    NewsItems.map(Item => {
+                        return React.createElement(
+                            "div",
+                            { className: "ia-grid-card ak-item", id: Item.NewsItemIdentifier,
+                                "ak-item": Item.NewsItemIdentifier, "data-webid": Item.WebId, "data-siteid": Item.SiteId },
+                            React.createElement(
+                                "div",
+                                { className: "ia-card" + (Item.DisplayDefaultImage ? " ia-default" : "") + (Item.Featured ? " ia-featured" : "") },
+                                React.createElement(
+                                    "div",
+                                    { className: "ia-card-image" + (Item.VideoUrl ? " ia-has-video" : ""), style: { backgroundImage: `url(${Item.DisplayDefaultImage ? DefaultImageSrc : Item.ThumbnailUrl ? Item.ThumbnailUrl : Item.ImageUrl})` } },
+                                    Item.VideoUrl && React.createElement(
+                                        "button",
+                                        { className: "ia-video-play", onClick: () => {
+                                                ShowVideoModal(Item.VideoUrl);
+                                            } },
+                                        React.createElement("i", { className: "fa-regular fa-circle-play", "aria-label": Akumina.Digispace.Language.TryGetText("fs.common.playvideo") })
+                                    ),
+                                    Item.Featured && React.createElement(
+                                        "div",
+                                        { className: "ia-featured-tag" },
+                                        Akumina.Digispace.Language.TryGetText("fs.blogswidget.featured")
+                                    ),
+                                    Item.IsDeleted && React.createElement(
+                                        "div",
+                                        { className: "ia-deleted-tag" },
+                                        Akumina.Digispace.Language.TryGetText("fs.blogswidget.deleted")
+                                    )
+                                ),
+                                React.createElement(
+                                    "div",
+                                    { className: "ia-card-content" },
+                                    Item.Categories && React.createElement(
+                                        "div",
+                                        { className: "ia-tag-collection" },
+                                        Item.Categories.map(category => React.createElement(
+                                            "span",
+                                            { className: "ia-tag" },
+                                            "#",
+                                            category
+                                        )),
+                                        Item.OtherTags && React.createElement(
+                                            React.Fragment,
+                                            null,
+                                            React.createElement(
+                                                "a",
+                                                { href: "javascript:void(0);", className: "ia-tag", id: "fs-js-tag-" + Item.UniqueId, onMouseOver: e => ShowOtherTags(e.target.id), onFocus: e => ShowOtherTags(e.target.id) },
+                                                "+",
+                                                Item.OtherTags.length
+                                            ),
+                                            React.createElement(
+                                                "div",
+                                                { id: "othertags-content-fs-js-tag-" + Item.UniqueId, className: "ia-tippy-content-wrapper", style: { display: "none" } },
+                                                Item.OtherTags.map(otherTags => React.createElement(
+                                                    "div",
+                                                    { className: "ia-tippy-content" },
+                                                    "#",
+                                                    otherTags
+                                                ))
+                                            )
+                                        )
+                                    ),
+                                    React.createElement(
+                                        "h3",
+                                        { className: "ia-tag-title" + (Item.IsDeleted ? " ia-deleted-article" : "") },
+                                        Item.IsDeleted ? React.createElement(
+                                            "span",
+                                            null,
+                                            Item.Title
+                                        ) : React.createElement(
+                                            "a",
+                                            { className: Akumina.Digispace.ConfigurationContext.IsSPAMode ? "ak-spalink" : "",
+                                                href: Item.FriendlyUrl },
+                                            Item.Title
+                                        )
+                                    ),
+                                    React.createElement(
+                                        "div",
+                                        { className: "ia-card-footer" },
+                                        React.createElement(
+                                            "div",
+                                            { className: "ia-post-by ia-post-by-blogs-home" },
+                                            React.createElement(
+                                                "div",
+                                                { className: "ia-posted-by-details" },
+                                                React.createElement(
+                                                    "div",
+                                                    { className: "ia-posted-date" },
+                                                    Item.PublishedDate && React.createElement(
+                                                        "span",
+                                                        null,
+                                                        moment(Item.PublishedDate).format(Akumina.Digispace.SiteContext.DateFormat.monthdatelongyear)
+                                                    )
+                                                )
+                                            )
+                                        )
+                                    )
+                                )
+                            )
+                        );
+                    })
+                ) : React.createElement(
+                    "p",
+                    null,
+                    Akumina.Digispace.Language.TryGetText("fs.blogswidget.nonewsfound")
+                )
+            ),
+            DisplayShowMoreButton && React.createElement(
+                "div",
+                { className: "ia-button-row" },
+                React.createElement(
+                    "button",
+                    { className: "ia-button", onClick: () => ShowMore() },
+                    Akumina.Digispace.Language.TryGetText("fs.blogswidget.showmore")
+                )
+            )
+        )
+    ),
+    VideoModal
+);

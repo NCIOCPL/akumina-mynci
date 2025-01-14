@@ -1,0 +1,88 @@
+{
+  "Definition": {
+    "Name": "QuickLinksWidget",
+    "Description": "",
+    "Class": "Akumina.AddIn.QuickLinksWidget",
+    "Icon": "",
+    "ContentTypes": [],
+    "Version": "",
+    "Dependencies": [],
+    "Properties": [],
+    "Views": [
+      {
+        "Name": "NCI-MegaMenuDefaultVisible",
+        "Path": "/{AssetLibraryName}/DigitalWorkPlace/Content/Templates/QuickLinksWidget/ncimegamenudefaultvisible.html",
+        "Id": "93084c1a-bb54-4e10-8386-b3b0d9043d3f"
+      }
+    ],
+    "JS": {
+      "Default": "/{AssetLibraryName}/DigitalWorkPlace/JS/widgets/quicklinkswidget.js"
+    }
+  },
+  "Instances": [
+    {
+      "Name": "NCI-TopNav-MegaMenu",
+      "Description": "",
+      "Icon": "fa fa-cog",
+      "Id": "4f534d73-5afa-45a1-a439-8d1108ac4097",
+      "Properties": [
+        {
+          "name": "callbackmethod",
+          "value": ""
+        },
+        {
+          "name": "listname",
+          "value": "FoundationTopNavigation_AK"
+        },
+        {
+          "name": "featuredlist",
+          "value": "FeaturedContent_AK"
+        },
+        {
+          "name": "isroot",
+          "value": true
+        },
+        {
+          "name": "title",
+          "value": "{quicklinks.title}"
+        },
+        {
+          "name": "icon",
+          "value": "None"
+        },
+        {
+          "name": "additionalselectfields",
+          "value": "SPALink"
+        },
+        {
+          "name": "featuredlistselectfields",
+          "value": "Title,Body,Image,IsVideo,Link"
+        },
+        {
+          "name": "uicallbackmethod",
+          "value": ""
+        },
+        {
+          "name": "sitecollectionurl",
+          "value": ""
+        },
+        {
+          "name": "lazyload",
+          "value": true
+        },
+        {
+          "name": "openonclickofmenubutton",
+          "value": false
+        }
+      ],
+      "SelectedView": "NCI-MegaMenuDefaultVisible",
+      "AvailableViews": [],
+      "HiddenFields": []
+    }
+  ],
+  "Options": {
+    "IsPartialDefinition": true,
+    "IsDashboardWidget": false,
+    "IsAppManagerWidget": false
+  }
+}

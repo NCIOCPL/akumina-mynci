@@ -1,0 +1,360 @@
+{{#if Loading}}
+<div className="ia-loading-state">
+    <div class="ia-skeleton-wrapper ia-skeleton-3-1-col">
+        <div class="ia-skeleton-col">
+            <div class="ia-skeleton-media ia-skeleton-media-h-100"></div>
+            <div class="ia-skeleton-heading"></div>
+            <div class="ia-skeleton-body">
+                <div class="ia-skeleton-text"></div>
+                <div class="ia-skeleton-text"></div>
+                <div class="ia-skeleton-text"></div>
+                <div class="ia-skeleton-text"></div>
+            </div>
+        </div>
+        <div class="ia-skeleton-col">
+            <div class="ia-skeleton-heading"></div>
+            <div class="ia-skeleton-body">
+                <div class="ia-skeleton-text"></div>
+                <div class="ia-skeleton-text"></div>
+                <div class="ia-skeleton-text"></div>
+                <div class="ia-skeleton-text"></div>
+            </div>
+        </div>
+    </div>
+</div>
+{{else}}
+<div class="ia-profile fs-js-profile ia-widget-wrapper">
+    <div class="row ia-profile-details">
+        <div class="col-lg-8">
+            <div class="profile_avatar ia-profile-avatar" data-edit="{{CanChangeBackground}}" {{#if backgroundimage}} style="background-image: url('{{backgroundimage}}');background-repeat: no-repeat; background-size: cover;"
+                {{/if}}>
+                <a href="#">
+                    <img id="ed-photo" class="avatar round" src="{{pictureurl}}"
+                        alt="Profile picture of {{givenname}} {{surname}}">
+                </a>
+                {{#if CanEditData}}
+                <button type="button" name="" class="btn-edit-profile ia-btn-edit-profile ia-button-small ia-button-secondary">
+                    <i class="fa-light fa-pencil" aria-hidden="true"></i>{{translate "fs.employeedetail.editprofile"}}
+                </button>
+                {{/if}}
+            </div>
+            <div class="profile_info ia-profile-detail-info">
+                <div class="ia-profile-detail-name">
+                    <h1 class="title">{{givenname}} {{surname}}</h1>
+                    {{#if jobtitle}}
+                    <div class="ia-key-value">
+                        <div class="ia-value">{{jobtitle}}</div>
+                    </div>
+                    {{/if}}
+                </div>
+                <div class="ia-profile-detail-others-info">
+
+                    
+
+                    {{#if mail}}
+                    <div class="ia-key-value">
+                        <label class="ia-key">{{translate "NCI.profile.email"}}:</label>
+                        <div class="ia-value">
+                            <a href="mailto: {{mail}}"><span id="ed-mail">{{mail}}</span></a>
+                        </div>
+                    </div>
+                    
+                    
+                    {{/if}}
+                    <div class="ia-key-value">
+                        <label class="ia-key">{{translate "NCI.profile.phone"}}:</label>
+                        <div class="ia-value">
+                            <a href="tel: {{mobilephone}}"><span id="ed-mobile">{{graph.customfieldstring5}}</span></a>
+                        </div>
+                    </div>
+
+
+                    {{#if graph.officelocation}}
+                    <div class="ia-key-value">
+                        <label class="ia-key">{{translate "NCI.profile.location"}}:</label>
+                        <div class="ia-value ia-location">{{formatAddress graph.officelocation}}</div>
+                    </div>
+                    {{/if}}
+
+
+                    {{#if graph.customfieldstring6}}
+                    <div class="ia-key-value">
+                        <label class="ia-key">{{translate "NCI.profile.classification"}}:</label>
+                        <div class="ia-value">{{graph.customfieldstring6}}</div>
+                    </div>
+                    {{/if}}
+
+
+                    {{#if office}}
+                    <div class="ia-key-value">
+                        <label class="ia-key">{{translate "NCI.profile.organization"}}:</label>
+                        <div class="ia-value">{{OrganizationSpaces office}}</div>
+                    </div>
+                    {{/if}}
+
+
+                    
+                </div>
+                <div class="ia-profile-button-container">
+                    {{#if mail}}
+                    <a class="ia-button-small ia-button-secondary teams" href="mailto: {{mail}}"
+                    target="_blank">
+                        <i class="fa-regular fa-envelope" aria-hidden="true"></i>
+                        Email
+                    </a>
+                    {{/if}}
+                    {{#unless CanEditData}}
+                    <a class="ia-button-small ia-button-secondary ia-button-msteams teams" href="https://teams.microsoft.com/l/chat/0/0?users={{mail}}"
+                    target="_blank">
+                        Message
+                    </a>
+                    {{/unless}}
+                </div>
+            </div>
+            <div class="ia-profile-information">
+                <div class="ia-about-me">
+                    <div class="ia-about-me-content">
+                        <h2 class="h3">
+                            {{translate "peoplelist.aboutme"}}
+                        </h2>
+                        <div class="empContent">
+                            <p id="ed-aboutme">{{{aboutme}}}</p>
+                        </div>
+                        <div class="ia-hide" style="padding-bottom: 12px;">{{translate "peoplelist.editprofileadd"}} {{translate "peoplelist.youraboutme"}} </div>
+                    </div>
+                    <div class="ia-about-me-content">
+                        <h2 class="h3">
+                            {{translate "peoplelist.hobbies"}}
+                        </h2>
+                        <div class="empContent">
+                            <p id="ed-hobbies">{{{hobbies}}}</p>
+                        </div>
+                        <div class="ia-hide" style="padding-bottom: 12px;">{{translate "peoplelist.editprofileadd"}} {{translate "peoplelist.yourhobbies"}} </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="ia-card ia-profile-card">
+                <div id='certificationsContainer' class="ia-profile-background-info">
+                    <h2 class="h3">
+                        {{translate "peoplelist.certifications"}}
+                    </h2>
+                    {{#if CanEditData}}
+                    {{#if certificationsItems.length}}
+                    <ul>
+                        {{#certificationsItems}}
+                        <li>{{this}}</li>
+                        {{/certificationsItems}}
+                    </ul>
+                    {{else}}
+                    <div class="fs-js-empty-certs">
+                        {{translate "peoplelist.editprofileadd"}} {{translate "peoplelist.yourcertifications"}}
+                    </div>
+                    {{/if}}
+                    {{else}}
+                    <ul>
+                        {{#certificationsItems}}
+                        <li>{{this}}</li>
+                        {{/certificationsItems}}
+                    </ul>
+                    {{/if}}
+                </div>
+                <div id='techskillsContainer' class="ia-profile-background-info">
+                    <h2 class="h3">
+                        {{translate "peoplelist.techskills"}}
+                    </h2>
+                    {{#if CanEditData}}
+                    {{#if skillsItems.length}}
+                    <ul>
+                        {{#skillsItems}}
+                        <li>{{this}}</li>
+                        {{/skillsItems}}
+                    </ul>
+                    {{else}}
+                    <div class="fs-js-empty-skills">
+                        {{translate "peoplelist.editprofileadd"}} {{translate "peoplelist.yourtechskills"}}
+                    </div>
+                    {{/if}}
+                    {{else}}
+                    <ul>
+                        {{#skillsItems}}
+                        <li>{{this}}</li>
+                        {{/skillsItems}}
+                    </ul>
+                    {{/if}}
+                </div>
+            </div>
+            <!--<div class="fs-profile-background fs-profile-chart">
+                <h2 class="h3">
+                    {{translate "peoplelist.manager"}}
+                </h2>
+                {{#if HasManager}}
+                <a href="#" class="enc-emp-link ia-chip" data-manager="{{managerid}}">
+                    <span class="ia-chip-content">{{managergivenname}} {{managersurname}}</span>
+                </a>
+                {{else}}
+                <p>{{translate "peoplelist.nomanagerfound"}}</p>
+                {{/if}}
+            </div>-->
+            <div rel="MyOrgTreeWidget-Hive" class="ak-widget fs-js-my-org-instance" id="9cb54975-0b16-4a88-9c73-d608c41e4554"></div>
+        </div>
+    </div>
+</div>
+{{/if}}
+
+
+<!-- modal popup -->
+<div class="mfp-hide" id="divProfileEdit">
+    <div class="ia-modal ia-modal-medium ia-profile-detail-modal">
+        <header class="ia-modal-header">
+            <h2>{{translate "fs.employeedetail.editprofile"}}</h2>
+            <a  href="javascript:void(0)" class="ia-modal-close fs-modal-close"><i class="fa fa-times" aria-label="{{translate 'fs.common.closemodal'}}"></i></a>
+        </header>
+        <section class="ia-modal-content">
+            <div class="ia-form-row ia-bg-img-row">
+                {{#if CanChangeBackground}}
+                <label id="backgroundlabel">{{translate "fs.employeedetail.background_image_profile_card"}}</label>
+                {{/if}}
+                <div class="ia-value ia-profile-bg-options">
+                    {{#Items}}
+                    <a href="javascript:void(0)" class="ia-img-options">
+                        <div>
+                            <input type="radio" name="bg-img" {{#if IsChecked}} checked="checked" {{/if}}
+                                   value="image description" />
+                        </div>
+                        <div>
+                            <img src="{{Image}}" data-spimage="{{SpImageUrl}}" alt="{{translate 'fs.employeedetail.selectBackgroundImageProfileCard'}}" />
+                        </div>
+                    </a>
+                    {{/Items}}
+                </div>
+            </div>
+            <div class="row">
+                <div class="ia-form-row col-md-6">
+                    <label>{{translate "fs.employeedetail.mobile"}}</label>
+                    <div class="ia-value">
+                        {{#if CanChangeMobilePhone}}
+                        <input type="text" id="MobilePhoneEdit" />
+                        {{else}}
+                        <input type="text" id="MobilePhoneEdit" disabled />
+                        {{/if}}
+                    </div>
+                </div>
+                <!-- <div class="ia-form-row col-md-6">
+                    <label>{{translate "fs.employeedetail.fax"}}</label>
+                    <div class="ia-value">
+                        {{#if CanChangeFax}}
+                        <input type="text" id="FaxEdit" />
+                        {{else}}
+                        <input type="text" id="FaxEdit" disabled />
+                        {{/if}}
+                    </div>
+                </div> -->
+                <div class="ia-bootstrap-input-button col-md-6">
+                    <label>{{translate "peoplelist.certifications"}}</label>
+                    <div class="ia-value ia-btn-text">
+                        {{#if CanChangeSchool}}
+                        <div class="input-group">
+                            <input type="text" id="edit-area-certifications" class="form-control"/>
+                            <div class="input-group-prepend">
+                                <button id="addCertification" class="ia-button">
+                                    {{translate "fs.employeedetail.add"}}
+                                </button>
+                            </div>
+                        </div>
+                        {{else}}
+                        <div class="input-group">
+                            <input type="text" id="edit-area-certifications" class="form-control" disabled />
+                            <div class="input-group-prepend">
+                                <button id="addCertification" class="ia-button" disabled>
+                                    {{translate "fs.employeedetail.add"}}
+                                </button>
+                            </div>
+                        </div>
+                        {{/if}}
+                    </div>
+                    <div id='certificationsEditContainer' class="fs-chip-collection ia-chip-collection">
+                    </div>
+                </div>
+                <div class="ia-bootstrap-input-button col-md-6">
+                    <label>{{translate "peoplelist.techskills"}}</label>
+                    <div class="ia-value ia-btn-text row">
+                        {{#if CanChangeSkills}}
+                        <div class="input-group">
+                            <input type="text" id="edit-area-skill" class="form-control"/>
+                            <div class="input-group-prepend">
+                                <button id="addSkill" class="ia-button">{{translate "fs.employeedetail.add"}}</button>
+                            </div>
+                        </div>
+                        {{else}}
+                        <div class="input-group">
+                            <input type="text" id="edit-area-skill" class="form-control" disabled />
+                            <div class="input-group-prepend">
+                                <button id="addSkill" class="ia-button" disabled>{{translate "fs.employeedetail.add"}}</button>
+                            </div>
+                        </div>
+                        {{/if}}
+                    </div>
+                    <div id='techskillsEditContainer' class="fs-chip-collection ia-chip-collection">
+                    </div>
+                </div>
+                <div class="ia-form-row col-md-6">
+                    <label>{{translate "peoplelist.aboutme"}}</label>
+                    <div class="ia-value">
+                        {{#if CanChangeAboutMe}}
+                        <textarea rows="4" id="AboutMeEdit"></textarea>
+                        {{else}}
+                        <textarea rows="4" id="AboutMeEdit" disabled></textarea>
+                        {{/if}}
+                    </div>
+                </div>
+                <div class="ia-form-row col-md-6">
+                    <label>{{translate "peoplelist.hobbies"}}</label>
+                    <div class="ia-value">
+                        {{#if CanChangeInterests}}
+                        <textarea rows="4" id="HobbiesEdit"></textarea>
+                        {{else}}
+                        <textarea rows="4" id="HobbiesEdit" disabled></textarea>
+                        {{/if}}
+                    </div>
+                </div>
+            </div>
+            <!-- <div class="ia-form-row">
+                <label>{{translate "peoplelist.birthday"}}</label>
+                <div class="ia-value ia-multiple">
+                    {{#if CanChangeBirthday}}
+                    <select type="text" id="BirthdayEditMonth" style="width: 200px">
+                        {{birthdaymonth}}
+                        <option value="00"></option>
+                        <option value="01">{{translate "calendar.january"}}</option>
+                        <option value="02">{{translate "calendar.february"}}</option>
+                        <option value="03">{{translate "calendar.march"}}</option>
+                        <option value="04">{{translate "calendar.april"}}</option>
+                        <option value="05">{{translate "calendar.may"}}</option>
+                        <option value="06">{{translate "calendar.june"}}</option>
+                        <option value="07">{{translate "calendar.july"}}</option>
+                        <option value="08">{{translate "calendar.august"}}</option>
+                        <option value="09">{{translate "calendar.september"}}</option>
+                        <option value="10">{{translate "calendar.october"}}</option>
+                        <option value="11">{{translate "calendar.november"}}</option>
+                        <option value="12">{{translate "calendar.december"}}</option>
+                    </select>
+                    <select type="text" id="BirthdayEditDate" style="width: 72px">
+                        {{birthdaydate}}
+                    </select>
+                    {{else}}
+                    <input type="text" id="BirthdayDisplay" disabled />
+                    {{/if}}
+                </div>
+            </div> -->
+            <p>
+                <em>{{translate "fs.employeedetail.helptext"}}</em>
+            </p>
+        </section>
+        <footer class="ia-modal-footer">
+            <button id="popupCancelButton" class="ia-button-text">{{translate "fs.employeedetail.cancel" }}</button>
+            <button id="popupSaveButton" class="ia-button-primary">{{translate "fs.employeedetail.save"}}</button>
+        </footer>
+    </div>
+</div>

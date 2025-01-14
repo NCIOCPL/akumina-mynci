@@ -1,0 +1,115 @@
+<div id="ia-news-list" className="ia-news-list ia-widget-wrapper">
+    <h3 class="ia-header--title">{Title}</h3>
+    {ConfigurationErrorMessage ? <span>{ConfigurationErrorMessage}</span> :
+    <React.Fragment>
+        {((SearchCriteria && SearchCriteria.length > 0) || SearchRefinersComponent) && <div className={"ia-grid-utility-container" + (HasDateFilter ? " ia-grid-utility-container-date-filter" : "" )}>
+            <div className="ia-grid-utility-left-col">
+                <div className="ia-list-action">
+                    {SearchCriteria && SearchCriteria.length > 0 && <React.Fragment>
+                        <div className="ia-filter-selector">
+                            <span className="ia-filter-text">{Akumina.Digispace.Language.TryGetText("fs.newswidget.filterby")}:</span>
+                            {SearchCriteria.map((radiofilter) => {
+                            return <React.Fragment>
+                                <a href="javascript:void(0)" className={"ia-filter-option " + (radiofilter.IsSelected ? " fs-js-active" : "" ) + (!radiofilter.IsEnabled ? " ia-filter-option-disabled" : "" )}
+                                   role="button" onClick={() =>
+                                    SearchBasedOnSelectedCriteria(false,
+                                    undefined, radiofilter, true)}>{radiofilter.Name}
+                                </a>
+                                {radiofilter.Value == EnumFilteringCriteria.UserInterest && <button className={"ia-filter-option ia-button-icon ia-group-button-icon " + (radiofilter.IsSelected ? " fs-js-active" : "" )} onClick={() => OpenEditPreferencesPopup()}><i className="fa-regular fa-sliders" title={Akumina.Digispace.Language.TryGetText("fs.common.changepreferences")} aria-label={Akumina.Digispace.Language.TryGetText("fs.common.changepreferences")}></i></button>}
+                            </React.Fragment>
+                            })}
+                        </div>
+                    </React.Fragment>}
+                    <div rel="Search Refiner" class="ak-widget fs-js-search-refiner-widget" id="398d1678-60dd-4758-a8df-e8b1b4464a4a"></div>
+                </div>
+            </div>
+        </div>}
+        {IsFetching ?
+        <div className="ia-loading-state">
+            <div className="ia-skeleton-wrapper">
+                <div className="ia-skeleton-col">
+                    <div className="ia-skeleton-media"></div>
+                    <div className="ia-skeleton-heading"></div>
+                    <div className="ia-skeleton-body">
+                        <div className="ia-skeleton-text"></div>
+                        <div className="ia-skeleton-text"></div>
+                        <div className="ia-skeleton-text"></div>
+                        <div className="ia-skeleton-text"></div>
+                    </div>
+                </div>
+                <div className="ia-skeleton-col">
+                    <div className="ia-skeleton-media"></div>
+                    <div className="ia-skeleton-heading"></div>
+                    <div className="ia-skeleton-body">
+                        <div className="ia-skeleton-text"></div>
+                        <div className="ia-skeleton-text"></div>
+                        <div className="ia-skeleton-text"></div>
+                        <div className="ia-skeleton-text"></div>
+                    </div>
+                </div>
+                <div className="ia-skeleton-col">
+                    <div className="ia-skeleton-media"></div>
+                    <div className="ia-skeleton-heading"></div>
+                    <div className="ia-skeleton-body">
+                        <div className="ia-skeleton-text"></div>
+                        <div className="ia-skeleton-text"></div>
+                        <div className="ia-skeleton-text"></div>
+                        <div className="ia-skeleton-text"></div>
+                    </div>
+                </div>
+                <div className="ia-skeleton-col">
+                    <div className="ia-skeleton-media"></div>
+                    <div className="ia-skeleton-heading"></div>
+                    <div className="ia-skeleton-body">
+                        <div className="ia-skeleton-text"></div>
+                        <div className="ia-skeleton-text"></div>
+                        <div className="ia-skeleton-text"></div>
+                        <div className="ia-skeleton-text"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        :
+        <React.Fragment>
+            <div className="d-flex flex-column">
+                {HasNews ?
+                <React.Fragment>
+                    {NewsItems.map((Item) => {
+                    console.log(Item);
+                    return <div className="mt-2 p-2" id={Item.NewsItemIdentifier}
+                                ak-item={Item.NewsItemIdentifier} data-webid={Item.WebId} data-siteid={Item.SiteId} style={{ "display": "flex", "flex-direction": "column", "align-items": "flex-start", "min-height": "100px", "background-color":"white", "border-top": "none", "border-right": "none", "border-left": "none", "border-bottom":"1px solid var(--fs-text-color-light-bg)"}}>
+                        <div className="w-100">
+                            <h4 className={"ia-tag-title" + (Item.IsDeleted? " ia-deleted-article" : "" )}>
+                                {Item.IsDeleted?
+                                <span>{Item.Title}</span>:
+                                <a className={Akumina.Digispace.ConfigurationContext.IsSPAMode ? "ak-spalink" : "" }
+                                   href={Item.FriendlyUrl}>{Item.Title}</a>
+                                }
+                            </h4>
+                        </div>
+                        <div className="w-100 mt-auto">
+                            {Item.PublishedDate && <span style={{"font-size":"12px", color:"grey"}}>{moment(Item.PublishedDate).format(Akumina.Digispace.SiteContext.DateFormat.monthdatelongyear)}</span>}
+                        </div>
+                        <div className="w-100">
+                            <p style={{"font-size":"14px"}}>{Item.SPSummary}</p>
+                        </div>
+                    </div>
+                    })}
+                </React.Fragment>
+                :
+                <p>{Akumina.Digispace.Language.TryGetText("fs.newswidget.nonewsfound")}</p>
+                }
+            </div>
+            <div className="row mt-3">
+                <div className="d-flex flex-row justify-content-end">
+                    <a class="ia-button" href={Handlebars.helpers.AddSPALink("/sitepages/newslist.aspx")}>
+                        {Akumina.Digispace.Language.TryGetText("fs.newswidget.showmore")}<i class="fa fa-chevron-right ia-chevron"></i>
+                    </a>
+                </div>
+            </div>
+        </React.Fragment>
+        }
+    </React.Fragment>
+    }
+    {VideoModal}
+</div>

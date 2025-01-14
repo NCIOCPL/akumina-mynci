@@ -1,0 +1,560 @@
+var _this = this;
+
+React.createElement(
+    "div",
+    { className: "ia-media-library ia-widget-wrapper" },
+    this.templateModel.SearchAndFilter,
+    React.createElement(
+        "div",
+        { className: "ia-grid-utility-container" },
+        React.createElement(
+            "div",
+            { className: "ia-grid-utility-left-col" },
+            React.createElement(
+                "div",
+                { className: "ia-list-action ia-media-dropdown-select" },
+                React.createElement(
+                    "div",
+                    { className: "ia-form-row" },
+                    React.createElement(
+                        "label",
+                        null,
+                        Akumina.Digispace.Language.TryGetText("fs.mediawidget.sortby")
+                    ),
+                    React.createElement(
+                        "div",
+                        { className: "ia-value" },
+                        React.createElement(
+                            "select",
+                            { className: "text", onChange: this.onSortChange },
+                            this.sortOptions.map(option => React.createElement(
+                                "option",
+                                { value: option.Name },
+                                Akumina.Digispace.Language.TryGetText(option.DisplayName)
+                            ))
+                        )
+                    )
+                ),
+                React.createElement("div", { rel: "Search Refiner", "class": "ak-widget fs-js-search-refiner-widget", id: "398d1678-60dd-4758-a8df-e8b1b4464a4a" })
+            )
+        )
+    ),
+    this.state.loading ? React.createElement(
+        "div",
+        { className: "ia-loading-state" },
+        React.createElement(
+            "div",
+            { className: "ia-skeleton-wrapper ia-skeleton-3-col" },
+            React.createElement(
+                "div",
+                { className: "ia-skeleton-col" },
+                React.createElement("div", { className: "ia-skeleton-media" }),
+                React.createElement("div", { className: "ia-skeleton-heading" }),
+                React.createElement(
+                    "div",
+                    { className: "ia-skeleton-body" },
+                    React.createElement("div", { className: "ia-skeleton-text" }),
+                    React.createElement("div", { className: "ia-skeleton-text" }),
+                    React.createElement("div", { className: "ia-skeleton-text" }),
+                    React.createElement("div", { className: "ia-skeleton-text" })
+                )
+            ),
+            React.createElement(
+                "div",
+                { className: "ia-skeleton-col" },
+                React.createElement("div", { className: "ia-skeleton-media" }),
+                React.createElement("div", { className: "ia-skeleton-heading" }),
+                React.createElement(
+                    "div",
+                    { className: "ia-skeleton-body" },
+                    React.createElement("div", { className: "ia-skeleton-text" }),
+                    React.createElement("div", { className: "ia-skeleton-text" }),
+                    React.createElement("div", { className: "ia-skeleton-text" }),
+                    React.createElement("div", { className: "ia-skeleton-text" })
+                )
+            ),
+            React.createElement(
+                "div",
+                { className: "ia-skeleton-col" },
+                React.createElement("div", { className: "ia-skeleton-media" }),
+                React.createElement("div", { className: "ia-skeleton-heading" }),
+                React.createElement(
+                    "div",
+                    { className: "ia-skeleton-body" },
+                    React.createElement("div", { className: "ia-skeleton-text" }),
+                    React.createElement("div", { className: "ia-skeleton-text" }),
+                    React.createElement("div", { className: "ia-skeleton-text" }),
+                    React.createElement("div", { className: "ia-skeleton-text" })
+                )
+            )
+        )
+    ) : this.state.errorMessage != "" ? React.createElement(
+        "div",
+        null,
+        this.state.errorMessage
+    ) : React.createElement(
+        React.Fragment,
+        null,
+        React.createElement(
+            "div",
+            { className: "ia-masanory-grid" },
+            this.state.mediaItems.length ? this.state.mediaItems.map(item => {
+                {/* Media Card HTML Starts */}
+                return React.createElement(
+                    "div",
+                    { className: item.IsDefault ? "ia-grid-card ak-item fs-default" : "ia-grid-card ak-item", "ak-item": item.NewsItemIdentifier, "data-webid": item.WebId, "data-siteid": item.SiteId },
+                    React.createElement(
+                        "div",
+                        { className: "ia-card" },
+                        item.IsVideo ? React.createElement(
+                            "div",
+                            { id: "card_" + item.UniqueId, onClick: e => _this.openMediaDetail(item),
+                                className: `ia-card-image ia-has-video ${item.FileType == "ogg" ? " ia-has-video-default-image" : ""}`, style: { backgroundImage: `url(${item.ImageSrc})` } },
+                            React.createElement(
+                                "button",
+                                { className: "ia-play-button" },
+                                React.createElement("i", { className: "fa-solid fa-play",
+                                    "aria-label": Akumina.Digispace.Language.TryGetText("fs.common.playvideo") })
+                            ),
+                            item.VideoDuration && React.createElement(
+                                "div",
+                                { className: "ia-media-video-duration" },
+                                item.VideoDuration
+                            ),
+                            item.IsDeleted && React.createElement(
+                                "div",
+                                { className: "ia-deleted-tag" },
+                                Akumina.Digispace.Language.TryGetText("fs.common.deleted")
+                            )
+                        ) : React.createElement(
+                            "a",
+                            { href: "javascript:void(0)", id: "card_" + item.UniqueId, onClick: e => _this.openMediaDetail(item),
+                                className: "ia-card-image", style: {
+                                    backgroundImage: `url(${!Akumina.AddIn.Utilities.IsNullOrEmpty(item.ImageSrc) ? item.ImageSrc : item.FileUrl})`
+                                } },
+                            item.IsDeleted && React.createElement(
+                                "div",
+                                { className: "ia-deleted-tag" },
+                                Akumina.Digispace.Language.TryGetText("fs.common.deleted")
+                            )
+                        ),
+                        React.createElement(
+                            "div",
+                            { className: "ia-card-content" },
+                            item.Categories && React.createElement(
+                                "div",
+                                { className: "ia-tag-collection" },
+                                item.Categories.map(category => React.createElement(
+                                    "span",
+                                    { className: "ia-tag" },
+                                    "#",
+                                    category
+                                )),
+                                item.OtherTags && React.createElement(
+                                    React.Fragment,
+                                    null,
+                                    React.createElement(
+                                        "a",
+                                        { href: "javascript:void(0)", className: "ia-tag", id: "fs-js-tag-" + item.UniqueId, onMouseOver: e => _this.showOtherTags(e.currentTarget.id), onFocus: e => _this.showOtherTags(e.currentTarget.id) },
+                                        "+ ",
+                                        item.OtherTags.length
+                                    ),
+                                    React.createElement(
+                                        "div",
+                                        { id: "othertags-content-fs-js-tag-" + item.UniqueId,
+                                            className: "ia-tippy-content-wrapper", style: { display: "none" } },
+                                        item.OtherTags.map(tag => React.createElement(
+                                            "div",
+                                            { className: "ia-tippy-content" },
+                                            "#",
+                                            tag
+                                        ))
+                                    )
+                                )
+                            ),
+                            React.createElement(
+                                "h3",
+                                { className: "ia-tag-title" },
+                                React.createElement(
+                                    "a",
+                                    { href: "javascript:void(0)", className: item.IsDeleted ? "ia-deleted-item" : "", id: "title_" + item.UniqueId,
+                                        onClick: e => _this.openMediaDetail(item) },
+                                    item.Title
+                                )
+                            ),
+                            React.createElement(
+                                "div",
+                                { className: "ia-card-footer" },
+                                React.createElement(
+                                    "div",
+                                    { className: "ia-post-by" },
+                                    item.Publisher && item.Publisher.ProfilePicture && React.createElement(
+                                        "div",
+                                        { className: "ia-posted-by-user" },
+                                        React.createElement("img", { className: "fs-js-publisher-image", alt: item.Publisher.Name,
+                                            src: item.Publisher.ProfilePicture })
+                                    ),
+                                    React.createElement(
+                                        "div",
+                                        { className: "ia-posted-by-details" },
+                                        item.Publisher && item.Publisher.Name && (item.Publisher.userprincipalname ? React.createElement(
+                                            "div",
+                                            { onClick: () => _this.handlePublisherClick(item.Publisher.userprincipalname) },
+                                            React.createElement(
+                                                "a",
+                                                { className: "ia-author-name", href: "javascript:void(0);" },
+                                                item.Publisher.Name
+                                            )
+                                        ) : React.createElement(
+                                            "div",
+                                            null,
+                                            React.createElement(
+                                                "span",
+                                                { className: "ia-author-name" },
+                                                item.Publisher.Name
+                                            )
+                                        )),
+                                        item.LastModifiedTime && React.createElement(
+                                            "div",
+                                            { className: "ia-posted-date" },
+                                            React.createElement(
+                                                "span",
+                                                null,
+                                                moment(item.LastModifiedTime).format(Akumina.Digispace.SiteContext.DateFormat.monthdatelongyear)
+                                            )
+                                        )
+                                    )
+                                ),
+                                React.createElement(
+                                    "div",
+                                    { className: "ia-card-actions" },
+                                    React.createElement(
+                                        "div",
+                                        { className: "ia-reactions-container" },
+                                        item.Reactions && item.Reactions.map(reaction => React.createElement(
+                                            "div",
+                                            { className: "ia-reaction", title: reaction.Label },
+                                            React.createElement("i", { className: "fa-regular " + reaction.CssClass }),
+                                            reaction.Count
+                                        ))
+                                    ),
+                                    React.createElement(
+                                        "div",
+                                        { className: " ia-post-statistics" },
+                                        React.createElement(
+                                            "span",
+                                            { className: "fs-post-views", title: Akumina.Digispace.Language.TryGetText("fs.common.numberofviews") },
+                                            React.createElement("i", { className: "fa-regular fa-eye", "aria-hidden": "true" }),
+                                            item.ViewsCount
+                                        ),
+                                        React.createElement(
+                                            "span",
+                                            { className: "ia-post-comments", title: Akumina.Digispace.Language.TryGetText("fs.common.numberofcomments") },
+                                            React.createElement("i", { "class": "fa-regular fa-comment", "aria-hidden": "true" }),
+                                            item.CommentsCount
+                                        )
+                                    )
+                                )
+                            )
+                        )
+                    )
+                );
+                {/* Media Card HTML Ends */}
+            }) : React.createElement(
+                "div",
+                null,
+                Akumina.Digispace.Language.TryGetText("fs.mediawidget.noitemsfound")
+            )
+        ),
+        this.state.mediaDetailItem && React.createElement(
+            React.Fragment,
+            null,
+            React.createElement("div", { className: "ia-modal-overlay" }),
+            React.createElement(
+                "div",
+                { className: "ia-modal ia-modal-lower ia-modal-large ia-media-modal", id: "media-detail-" + this.state.mediaDetailItem.UniqueId },
+                React.createElement(
+                    "header",
+                    { className: "ia-modal-header" },
+                    React.createElement(
+                        "button",
+                        { id: "popupCloseButton", className: "ia-modal-close", onClick: () => _this.closeMediaDetail(_this.state.mediaDetailItem) },
+                        React.createElement("i", { className: "fa-regular fa-xmark", "aria-label": Akumina.Digispace.Language.TryGetText("fs.common.closevideo") })
+                    )
+                ),
+                React.createElement(
+                    "section",
+                    { className: "ia-modal-content" },
+                    React.createElement(
+                        "span",
+                        { className: "ia-error" },
+                        this.state.mediaDetailErrorMessage
+                    ),
+                    React.createElement(
+                        "div",
+                        { className: "ia-media-modal-wrapper" },
+                        React.createElement(
+                            "div",
+                            { className: "ia-media-left-content" },
+                            this.state.mediaDetailItem.IsVideo ? React.createElement(
+                                "div",
+                                { className: "ia-media-img-wrapper" },
+                                this.state.mediaDetailItem.VideoPlayer
+                            ) : React.createElement("div", { className: "ia-media-img-wrapper ia-media-img-wrapper-responsive", style: {
+                                    backgroundImage: `url(${this.state.mediaDetailItem.FileUrl})`
+                                } }),
+                            this.templateModel.ActivityCommentsComponent
+                        ),
+                        React.createElement(
+                            "div",
+                            { className: "ia-media-right-content" },
+                            React.createElement(
+                                "h3",
+                                null,
+                                this.state.mediaDetailItem.Title
+                            ),
+                            React.createElement(
+                                "div",
+                                { className: "ia-modal-section" },
+                                React.createElement(
+                                    "div",
+                                    { className: "ia-media-modal-button" },
+                                    React.createElement(
+                                        "button",
+                                        { id: "popupDownloadButton", className: "ia-button ia-button-w-icon",
+                                            onClick: this.downloadFile },
+                                        React.createElement("i", { className: "fa-regular fa-cloud-arrow-down" })
+                                    ),
+                                    React.createElement(
+                                        "button",
+                                        { id: "popupCopyLinkButton-" + this.state.mediaDetailItem.UniqueId,
+                                            className: "ia-button ia-button-w-icon", onClick: this.copyToClipboard },
+                                        React.createElement("i", { className: "fa-regular fa-link" })
+                                    )
+                                ),
+                                React.createElement(
+                                    "div",
+                                    { className: "ia-post-by" },
+                                    React.createElement(
+                                        "div",
+                                        { className: "ia-posted-by-user" },
+                                        React.createElement("img", { className: "fs-js-publisher-image", alt: this.state.mediaDetailItem.Publisher ? this.state.mediaDetailItem.Publisher.Name : "", src: this.state.mediaDetailItem.Publisher ? this.state.mediaDetailItem.Publisher.ProfilePicture : "" })
+                                    ),
+                                    React.createElement(
+                                        "div",
+                                        { className: "ia-posted-by-details" },
+                                        this.state.mediaDetailItem.Publisher && this.state.mediaDetailItem.Publisher.Name && (this.state.mediaDetailItem.Publisher.userprincipalname ? React.createElement(
+                                            "div",
+                                            { onClick: () => _this.handlePublisherClick(_this.state.mediaDetailItem.Publisher.userprincipalname) },
+                                            React.createElement(
+                                                "a",
+                                                { className: "ia-author-name", href: "javascript:void(0);" },
+                                                this.state.mediaDetailItem.Publisher.Name
+                                            )
+                                        ) : React.createElement(
+                                            "div",
+                                            null,
+                                            React.createElement(
+                                                "span",
+                                                { className: "ia-author-name" },
+                                                this.state.mediaDetailItem.Publisher.Name
+                                            )
+                                        )),
+                                        React.createElement(
+                                            "div",
+                                            { className: "ia-posted-date" },
+                                            moment(this.state.mediaDetailItem.LastModifiedTime).format(Akumina.Digispace.SiteContext.DateFormat.monthdatelongyear)
+                                        )
+                                    )
+                                ),
+                                React.createElement(
+                                    "div",
+                                    { className: "ia-form-row" },
+                                    React.createElement(
+                                        "label",
+                                        null,
+                                        Akumina.Digispace.Language.TryGetText("fs.mediawidget.detail.filename")
+                                    ),
+                                    React.createElement(
+                                        "div",
+                                        { className: "ia-value" },
+                                        this.state.mediaDetailItem.Filename
+                                    )
+                                ),
+                                React.createElement(
+                                    "div",
+                                    { className: "ia-form-row ia-media-modal-details-column" },
+                                    React.createElement(
+                                        "div",
+                                        { className: "ia-form-row" },
+                                        React.createElement(
+                                            "label",
+                                            null,
+                                            Akumina.Digispace.Language.TryGetText("fs.mediawidget.detail.filetype")
+                                        ),
+                                        React.createElement(
+                                            "div",
+                                            { className: "ia-value" },
+                                            this.state.mediaDetailItem.FileType
+                                        )
+                                    ),
+                                    React.createElement(
+                                        "div",
+                                        { className: "ia-form-row" },
+                                        React.createElement(
+                                            "label",
+                                            null,
+                                            Akumina.Digispace.Language.TryGetText("fs.mediawidget.detail.filesize")
+                                        ),
+                                        React.createElement(
+                                            "div",
+                                            { className: "ia-value" },
+                                            this.state.mediaDetailItem.Size
+                                        )
+                                    )
+                                ),
+                                React.createElement(
+                                    "div",
+                                    { className: "ia-form-row ia-media-modal-details-column" },
+                                    React.createElement(
+                                        "div",
+                                        { className: "ia-form-row" },
+                                        React.createElement(
+                                            "label",
+                                            null,
+                                            Akumina.Digispace.Language.TryGetText("fs.mediawidget.detail.dimensions")
+                                        ),
+                                        this.state.mediaDetailItem.IsVideo ? React.createElement(
+                                            "div",
+                                            { className: "ia-value" },
+                                            this.state.mediaDetailItem.frameWidth ? this.state.mediaDetailItem.frameWidth + "x" + this.state.mediaDetailItem.frameHeight : "N/A"
+                                        ) : React.createElement(
+                                            "div",
+                                            { className: "ia-value" },
+                                            this.state.mediaDetailItem.PictureWidth,
+                                            " x ",
+                                            this.state.mediaDetailItem.PictureHeight
+                                        )
+                                    )
+                                ),
+                                React.createElement(
+                                    "div",
+                                    { className: "ia-form-row" },
+                                    React.createElement(
+                                        "label",
+                                        null,
+                                        Akumina.Digispace.Language.TryGetText("fs.mediawidget.detail.description")
+                                    ),
+                                    this.state.mediaDetailItem.Description ? React.createElement(
+                                        "div",
+                                        { className: "ia-value" },
+                                        this.state.mediaDetailItem.Description
+                                    ) : React.createElement(
+                                        "div",
+                                        { className: "ia-value" },
+                                        "N/A"
+                                    )
+                                ),
+                                React.createElement(
+                                    "div",
+                                    { className: "ia-form-row" },
+                                    React.createElement(
+                                        "label",
+                                        null,
+                                        Akumina.Digispace.Language.TryGetText("fs.mediawidget.detail.tags")
+                                    ),
+                                    this.state.mediaDetailItem.Categories && this.state.mediaDetailItem.Categories.length ? React.createElement(
+                                        "div",
+                                        { className: "ia-tag-collection" },
+                                        this.state.mediaDetailItem.Categories.map(category => React.createElement(
+                                            "span",
+                                            { className: "ia-tag" },
+                                            "#",
+                                            category
+                                        )),
+                                        this.state.mediaDetailItem.OtherTags && this.state.mediaDetailItem.OtherTags.map(tag => React.createElement(
+                                            "span",
+                                            { className: "ia-tag" },
+                                            "#",
+                                            tag
+                                        ))
+                                    ) : React.createElement(
+                                        "div",
+                                        { className: "ia-value" },
+                                        "N/A"
+                                    )
+                                )
+                            ),
+                            React.createElement(
+                                "div",
+                                { className: "ia-activity-wrapper" },
+                                this.templateModel.ActivityReactionsComponent,
+                                this.templateModel.ActivityReactionsAggregateComponent
+                            )
+                        )
+                    )
+                )
+            )
+        ),
+        this.state.showMoreLoading && React.createElement(
+            "div",
+            { className: "ia-loading-state" },
+            React.createElement(
+                "div",
+                { className: "ia-skeleton-wrapper ia-skeleton-3-col mt-5" },
+                React.createElement(
+                    "div",
+                    { className: "ia-skeleton-col" },
+                    React.createElement("div", { className: "ia-skeleton-media" }),
+                    React.createElement("div", { className: "ia-skeleton-heading" }),
+                    React.createElement(
+                        "div",
+                        { className: "ia-skeleton-body" },
+                        React.createElement("div", { className: "ia-skeleton-text" }),
+                        React.createElement("div", { className: "ia-skeleton-text" }),
+                        React.createElement("div", { className: "ia-skeleton-text" }),
+                        React.createElement("div", { className: "ia-skeleton-text" })
+                    )
+                ),
+                React.createElement(
+                    "div",
+                    { className: "ia-skeleton-col" },
+                    React.createElement("div", { className: "ia-skeleton-media" }),
+                    React.createElement("div", { className: "ia-skeleton-heading" }),
+                    React.createElement(
+                        "div",
+                        { className: "ia-skeleton-body" },
+                        React.createElement("div", { className: "ia-skeleton-text" }),
+                        React.createElement("div", { className: "ia-skeleton-text" }),
+                        React.createElement("div", { className: "ia-skeleton-text" }),
+                        React.createElement("div", { className: "ia-skeleton-text" })
+                    )
+                ),
+                React.createElement(
+                    "div",
+                    { className: "ia-skeleton-col" },
+                    React.createElement("div", { className: "ia-skeleton-media" }),
+                    React.createElement("div", { className: "ia-skeleton-heading" }),
+                    React.createElement(
+                        "div",
+                        { className: "ia-skeleton-body" },
+                        React.createElement("div", { className: "ia-skeleton-text" }),
+                        React.createElement("div", { className: "ia-skeleton-text" }),
+                        React.createElement("div", { className: "ia-skeleton-text" }),
+                        React.createElement("div", { className: "ia-skeleton-text" })
+                    )
+                )
+            )
+        ),
+        this.state.displayShowMoreButton && React.createElement(
+            "div",
+            { className: "ia-button-row pt-5 justify-content-center" },
+            React.createElement(
+                "button",
+                { className: "ia-button ia-button-big", disabled: this.state.showMoreLoading,
+                    onClick: this.getNextMediaItems },
+                Akumina.Digispace.Language.TryGetText("common.showmore")
+            )
+        )
+    )
+);

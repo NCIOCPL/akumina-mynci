@@ -1,0 +1,9 @@
+
+# Exclude things copied in via webpack
+build/sitedefinitions/Client/CDNAssets/Content/Templates/Masterpage
+build/sitedefinitions/Client/CDNAssets/css/digitalworkplace.custom.css
+build/sitedefinitions/Client/CDNAssets/js/digitalworkplace.custom.js
+
+# Exclude the tools
+tools/*
+!tools/deploy.js
