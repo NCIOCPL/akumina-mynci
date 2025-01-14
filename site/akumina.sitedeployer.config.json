@@ -3,7 +3,7 @@
     "masterpage": false,
     "js": false,
     "css": false,
-    "lists": true,
+    "lists": false,
     "layouts": false,
     "pages": false,
     "controls": false,

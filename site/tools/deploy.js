@@ -19,4 +19,5 @@ try {
     exeCute('.\\tools\\Akumina.SiteDeployer.exe options ' + options + ' ' + envParams);
 } catch (ex) {
     console.error('Error executing the SiteDeployer.exe, check console');
+    process.exit(1); // Ensures the script exits with failure
 }
