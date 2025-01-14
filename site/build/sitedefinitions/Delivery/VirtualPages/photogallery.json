@@ -1,0 +1,38 @@
+{
+    "Name": "Photo Gallery",
+    "Id": "1286015a-dfff-44d4-8bb9-38c0dee7070c",
+    "Type": "GenericPage",
+    "List": "GenericPages_AK",
+    "AdditionalSelectColumns": "",
+    "Url": "photo-gallery.aspx",
+    "Personas": [
+        "All"
+    ],
+    "PageDefinition": {
+        "Containers": [
+            {
+                "id": "container1",
+                "layoutid": "1 Column",
+                "zones": [
+                    {
+                        "id": "zone1",
+                        "widgets": [
+                            {
+                                "Title": "NCI Photo Gallery",
+                                "WidgetInstanceId": "f31efa69-63c7-49e9-a643-86519b48425e",
+                                "Name": "PhotoGallery",
+                                "Icon": "fa fa-cog",
+                                "Description": "Displays images in gallery format.",
+                                "Options": "",
+                                "DisplayOrder": "0",
+                                "Grid": "",
+                                "Properties": []
+                            }
+                        ]
+                    }
+                ]
+            }
+       ]    
+    },
+    "IsLegacyMode": false
+}

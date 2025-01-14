@@ -1,0 +1,322 @@
+{
+    "Name": "NCI Home Page",
+    "Id": "ec08f523-e7e1-428a-b1e6-7d0a8beec442",
+    "Type": "GenericPage",
+    "List": "GenericPages_AK",
+    "AdditionalSelectColumns": "",
+    "Url": "home.aspx",
+    "Personas": [
+        "All"
+    ],
+    "PageDefinition": {
+        "Containers": [ 
+            {
+                "id": "container1",
+                "layoutid": "1 Column",
+                "zones": [
+                    {
+                        "id": "zone1",
+                        "widgets": [
+                            {
+                              "Title": "Company Highlights",
+                              "WidgetInstanceId": "{NewGuid}",
+                              "DisplayOrder": "0",
+                              "Properties": [
+                                {
+                                    "name": "collectionid",
+                                    "value": "1873003b-8e50-6cce-abac-97527740ab3e"
+                                },
+                                {
+                                    "name": "displaycollectionname",
+                                    "value": false
+                                },
+                                {
+                                    "name": "callbackmethod",
+                                    "value": ""
+                                },
+                                {
+                                    "name": "uicallbackmethod",
+                                    "value": ""
+                                },
+                                {
+                                    "name": "widgetframework",
+                                    "value": "react"
+                                },
+                                {
+                                    "name": "disablewidgetpropsedit",
+                                    "value": true
+                                },
+                                {
+                                    "name": "isonpage",
+                                    "value": true
+                                },
+                                {
+                                    "name": "haspageprops",
+                                    "value": true
+                                },
+                                {
+                                    "name": "displaytemplateurl",
+                                    "value": "/Akumina%20Library/DigitalWorkPlace/Content/Templates/SummaryLinksWidget/featuredbox.html"
+                                }
+                              ],
+                              "PageSpecific": true,
+                              "Name": "SummaryLinksWidget",
+                              "Icon": "fa fa-list-ul",
+                              "Description": "",
+                              "Options": "",
+                              "Grid": ""
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "id": "container2",
+                "layoutid": "2 Column",
+                "zones": [
+                    {
+                        "id": "zone1",
+                        "widgets": [
+                            {
+                                "Title": "Home Page Upcoming Events",
+                                "WidgetInstanceId": "f8133321-9958-40fe-af32-861c6f6c3fbb",
+                                "Name": "ImportantDatesWidget",
+                                "Icon": "fa fa-cog",
+                                "Description": "Lists dates and events identified as important.",
+                                "Options": "",
+                                "DisplayOrder": "0",
+                                "Grid": "",
+                                "Properties": []
+                            }
+                        ]
+                    },
+                    {
+                        "id": "zone2",
+                        "widgets": [
+                            {
+                              "Title": "Announcement Items",
+                              "WidgetInstanceId": "{NewGuid}",
+                              "DisplayOrder": "1",
+                              "Properties": [
+                                {
+                                    "name": "widgetframework",
+                                    "value": "react"
+                                },
+                                {
+                                    "name": "widgettitle",
+                                    "value": "{fs.newswidget.title}"
+                                },
+                                {
+                                    "name": "querytext",
+                                    "value": "(ContentTypeId:0x0100A75A29C9F7894C83AA451364A226C855*) (ArchiveDate>{Now}) (PublishDate<{Now}) (-owstaxidmetadataalltagsinfo:\"Tip of the week\")"
+                                },
+                                {
+                                    "name": "selectfields",
+                                    "value": "ListID,ListItemID,PublishDate,ImageOWSURLH,Title,owstaxidmetadataalltagsinfo,FeaturedOWSBOOL,PublisherOWSUSER,ThumbnailURLOWSURLH,ServerRedirectedURL,VideoOWSURLH,ReadTimeOWSNMBR,WebId,SiteId,OriginalPath,SPWebUrl,HitHighlightedSummary,SPSummary"
+                                },
+                                {
+                                    "name": "searchacrosssites",
+                                    "value": true
+                                },
+                                {
+                                    "name": "enablerefiners",
+                                    "value": false
+                                },
+                                {
+                                    "name": "searchrefiners",
+                                    "value": "{\"termStoreId\":\"\",\"terms\":[{\"managedPropertyName\":\"SPTags\",\"displayName\":\"common.tags\",\"id\":\"\",\"taxonomyIsTermSet\":false,\"termSetName\":\"Category\"},{\"managedPropertyName\":\"Departments\",\"displayName\":\"common.departments\",\"id\":\"\",\"taxonomyIsTermSet\":false,\"termSetName\":\"Category\"},{\"managedPropertyName\":\"Region\",\"displayName\":\"common.regions\",\"id\":\"\",\"taxonomyIsTermSet\":false,\"termSetName\":\"Category\"}],\"dateFilter\":{\"name\":\"\",\"displayName\":\"\"}}"
+                                },
+                                {
+                                    "name": "refinercondition",
+                                    "value": "and"
+                                },
+                                {
+                                    "name": "displaycount",
+                                    "value": "8"
+                                },
+                                {
+                                    "name": "enablepaging",
+                                    "value": false
+                                },
+                                {
+                                    "name": "enableinterests",
+                                    "value": false
+                                },
+                                {
+                                    "name": "enabletopreacted",
+                                    "value": false
+                                },
+                                {
+                                    "name": "enablepopular",
+                                    "value": false
+                                },
+                                {
+                                    "name": "enableallnews",
+                                    "value": false
+                                },
+                                {
+                                    "name": "islanguageneutral",
+                                    "value": false
+                                },
+                                {
+                                    "name": "isdeptspecific",
+                                    "value": false
+                                },
+                                {
+                                    "name": "sortby",
+                                    "value": "PublishDate"
+                                },
+                                {
+                                    "name": "cacheinterval",
+                                    "value": "-1"  
+                                },
+                                {
+                                    "name": "callbackmethod",
+                                    "value": ""
+                                },
+                                {
+                                    "name": "uicallbackmethod",
+                                    "value": ""
+                                },
+                                {
+                                    "name": "isonpage",
+                                    "value": true
+                                },
+                                {
+                                    "name": "haspageprops",
+                                    "value": true
+                                },
+                                {
+                                    "name": "displaytemplateurl",
+                                    "value": "/Akumina%20Library/digitalworkplace/content/templates/newswidget/newshomepage.html"
+                                }
+                              ],
+                              "PageSpecific": true,
+                              "Name": "NewsWidget",
+                              "Icon": "fa fa-list-ul",
+                              "Description": "",
+                              "Options": "",
+                              "Grid": ""
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "id": "container3",
+                "layoutid": "1 Column",
+                "zones": [
+                    {
+                        "id": "zone1",
+                        "widgets": [
+                            {
+                              "Title": "Latest Leadership",
+                              "WidgetInstanceId": "{NewGuid}",
+                              "DisplayOrder": "0",
+                              "Properties": [
+                                {
+                                    "name": "collectionid",
+                                    "value": "9fb4a6f3-9c02-afad-4d93-96151195e1a5"
+                                },
+                                {
+                                    "name": "displaycollectionname",
+                                    "value": true
+                                },
+                                {
+                                    "name": "callbackmethod",
+                                    "value": ""
+                                },
+                                {
+                                    "name": "uicallbackmethod",
+                                    "value": ""
+                                },
+                                {
+                                    "name": "widgetframework",
+                                    "value": "react"
+                                },
+                                {
+                                    "name": "disablewidgetpropsedit",
+                                    "value": true
+                                },
+                                {
+                                    "name": "isonpage",
+                                    "value": true
+                                },
+                                {
+                                    "name": "haspageprops",
+                                    "value": true
+                                },
+                                {
+                                    "name": "displaytemplateurl",
+                                    "value": "/Akumina%20Library/DigitalWorkPlace/Content/Templates/SummaryLinksWidget/linkedlistwiththumbnails leadership.html"
+                                }
+                              ],
+                              "PageSpecific": true,
+                              "Name": "SummaryLinksWidget",
+                              "Icon": "fa fa-list-ul",
+                              "Description": "",
+                              "Options": "",
+                              "Grid": ""
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "id": "container4",
+                "layoutid": "1 Column",
+                "zones": [
+                    {
+                        "id": "zone1",
+                        "widgets": [
+                            {
+                                "Title": "Hive Blogs Global",
+                                "WidgetInstanceId": "6c9c2fd5-323e-4c25-9364-bd0903ef589c",
+                                "Name": "BlogsWidget",
+                                "Icon": "fa fa-cog",
+                                "Description": "A collection of staff spotlight blogs.",
+                                "Options": "",
+                                "DisplayOrder": "0",
+                                "Grid": "",
+                                "Properties": []
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "RailModel":
+        {
+            "RailType": "1",
+            "RailConfig": {
+                "leftRailWidth": "3",
+                "centerZoneWidth": "9"
+            },
+            "Widgets": [
+                {
+                    "rail": "left",
+                    "DisplayOrder": "0",
+                    "id": "6ff2e254-2506-4ed0-9b24-70c321c3fecf"
+                },
+                {
+                    "rail": "left",
+                    "DisplayOrder": "1",
+                    "id": "263e492a-68fe-48d7-81bf-f75dffb84df5"
+                },
+                {
+                    "rail": "left",
+                    "DisplayOrder": "2",
+                    "id": "79502f8a-289f-4816-8e54-fa047e536766"
+                }
+            ],
+            "cssClasses": [
+                {
+                    "rail": "leftfocus", 
+                    "leftcolumn" : "columns medium-12 large-3 left-column",
+                    "centercolumn": "columns medium-12 large-9 center-column"
+                }
+            ]            
+        }    
+    },
+    "IsLegacyMode": false
+}

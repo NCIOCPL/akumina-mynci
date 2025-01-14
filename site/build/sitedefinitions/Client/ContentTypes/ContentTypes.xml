@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<lists>
+    <ContentType Name="NCIAkuminaArticle" Group="NCI Content Types" Description="AkuminaArticle with extra NCI metadata fields" Inherits="TRUE" ParentName="AkuminaArticle">
+        <FieldRefs>
+            <Field Type="TaxonomyFieldTypeMulti" DisplayName="Organization Owner" Group="NCI Site Columns" ShowField="Term1033" Required="FALSE" EnforceUniqueValues="FALSE" Mult="TRUE" Sortable="FALSE" StaticName="NCIOrgOwner" Name="NCIOrgOwner"></Field>
+            <Field Type="User" DisplayName="Contact Person 1" Group="NCI Site Columns" UserSelectionMode="PeopleAndGroups" Required="FALSE" StaticName="NCIContactPerson1" Name="NCIContactPerson1"></Field>
+            <Field Type="User" DisplayName="Contact Person 2" Group="NCI Site Columns" UserSelectionMode="PeopleAndGroups" Required="FALSE" StaticName="NCIContactPerson2" Name="NCIContactPerson2"></Field>
+            <Field Type="DateTime" DisplayName="Deadline" Group="NCI Site Columns" Required="FALSE" StaticName="NCIDeadline" Name="NCIDeadline"></Field>
+            <Field Type="URL" DisplayName="External Link" Format="Hyperlink" Group="NCI Site Columns" Required="FALSE" StaticName="NCIExternalLink" Name="NCIExternalLink"></Field>
+            <Field Type="TaxonomyFieldTypeMulti" DisplayName="Left Navigation Selection" Group="NCI Site Columns" ShowField="Term1033" Required="FALSE" EnforceUniqueValues="FALSE" Mult="TRUE" Sortable="FALSE" StaticName="NCILeftNaveView" Name="NCILeftNavView"></Field>            
+        </FieldRefs>
+    </ContentType>
+    <ContentType Name="NCIAkuminaBlogs" Group="NCI Content Types" Description="AkuminaBlogs with extra NCI metadata fields" Inherits="TRUE" ParentName="AkuminaBlogs">
+        <FieldRefs>
+            <Field Type="TaxonomyFieldTypeMulti" DisplayName="Organization Owner" Group="NCI Site Columns" ShowField="Term1033" Required="FALSE" EnforceUniqueValues="FALSE" Mult="TRUE" Sortable="FALSE" StaticName="NCIOrgOwner" Name="NCIOrgOwner"></Field>
+            <Field Type="User" DisplayName="Contact Person 1" Group="NCI Site Columns" UserSelectionMode="PeopleAndGroups" Required="FALSE" StaticName="NCIContactPerson1" Name="NCIContactPerson1"></Field>
+            <Field Type="User" DisplayName="Contact Person 2" Group="NCI Site Columns" UserSelectionMode="PeopleAndGroups" Required="FALSE" StaticName="NCIContactPerson2" Name="NCIContactPerson2"></Field>
+            <Field Type="DateTime" DisplayName="Deadline" Group="NCI Site Columns" Required="FALSE" StaticName="NCIDeadline" Name="NCIDeadline"></Field>
+            <Field Type="URL" DisplayName="External Link" Format="Hyperlink" Group="NCI Site Columns" Required="FALSE" StaticName="NCIExternalLink" Name="NCIExternalLink"></Field>
+            <Field Type="TaxonomyFieldTypeMulti" DisplayName="Left Navigation Selection" Group="NCI Site Columns" ShowField="Term1033" Required="FALSE" EnforceUniqueValues="FALSE" Mult="TRUE" Sortable="FALSE" StaticName="NCILeftNaveView" Name="NCILeftNavView"></Field>            
+        </FieldRefs>
+    </ContentType>
+    <ContentType Name="NCIAkuminaCalendar" Group="NCI Content Types" Description="AkuminaArticle with extra NCI metadata fields" Inherits="TRUE" ParentName="AkuminaCalendar">
+        <FieldRefs>
+            <Field Type="TaxonomyFieldTypeMulti" DisplayName="Organization Owner" Group="NCI Site Columns" ShowField="Term1033" Required="FALSE" EnforceUniqueValues="FALSE" Mult="TRUE" Sortable="FALSE" StaticName="NCIOrgOwner" Name="NCIOrgOwner"></Field>
+            <Field Type="User" DisplayName="Contact Person 1" Group="NCI Site Columns" UserSelectionMode="PeopleAndGroups" Required="FALSE" StaticName="NCIContactPerson1" Name="NCIContactPerson1"></Field>
+            <Field Type="User" DisplayName="Contact Person 2" Group="NCI Site Columns" UserSelectionMode="PeopleAndGroups" Required="FALSE" StaticName="NCIContactPerson2" Name="NCIContactPerson2"></Field>
+            <Field Type="DateTime" DisplayName="Deadline" Group="NCI Site Columns" Required="FALSE" StaticName="NCIDeadline" Name="NCIDeadline"></Field>
+            <Field Type="URL" DisplayName="External Link" Format="Hyperlink" Group="NCI Site Columns" Required="FALSE" StaticName="NCIExternalLink" Name="NCIExternalLink"></Field>
+            <Field Type="TaxonomyFieldTypeMulti" DisplayName="Left Navigation Selection" Group="NCI Site Columns" ShowField="Term1033" Required="FALSE" EnforceUniqueValues="FALSE" Mult="TRUE" Sortable="FALSE" StaticName="NCILeftNaveView" Name="NCILeftNavView"></Field>            
+        </FieldRefs>
+    </ContentType>
+    <ContentType Name="NCIAkuminaInternalPage" Group="NCI Content Types" Description="AkuminaInternalPage with extra NCI metadata fields" Inherits="TRUE" ParentName="AkuminaInternalPage">
+        <FieldRefs>
+            <Field Type="TaxonomyFieldTypeMulti" DisplayName="Organization Owner" Group="NCI Site Columns" ShowField="Term1033" Required="FALSE" EnforceUniqueValues="FALSE" Mult="TRUE" Sortable="FALSE" StaticName="NCIOrgOwner" Name="NCIOrgOwner"></Field>
+            <Field Type="User" DisplayName="Contact Person 1" Group="NCI Site Columns" UserSelectionMode="PeopleAndGroups" Required="FALSE" StaticName="NCIContactPerson1" Name="NCIContactPerson1"></Field>
+            <Field Type="User" DisplayName="Contact Person 2" Group="NCI Site Columns" UserSelectionMode="PeopleAndGroups" Required="FALSE" StaticName="NCIContactPerson2" Name="NCIContactPerson2"></Field>
+            <Field Type="DateTime" DisplayName="Deadline" Group="NCI Site Columns" Required="FALSE" StaticName="NCIDeadline" Name="NCIDeadline"></Field>
+            <Field Type="URL" DisplayName="External Link" Format="Hyperlink" Group="NCI Site Columns" Required="FALSE" StaticName="NCIExternalLink" Name="NCIExternalLink"></Field>
+            <Field Type="TaxonomyFieldTypeMulti" DisplayName="Left Navigation Selection" Group="NCI Site Columns" ShowField="Term1033" Required="FALSE" EnforceUniqueValues="FALSE" Mult="TRUE" Sortable="FALSE" StaticName="NCILeftNaveView" Name="NCILeftNavView"></Field>            
+        </FieldRefs>
+    </ContentType>
+</lists>

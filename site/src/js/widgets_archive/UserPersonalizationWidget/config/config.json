@@ -1,0 +1,85 @@
+{
+    "Definition": {
+      "Name": "UserPersonalizationWidget",
+      "Description": "",
+      "Class": "Akumina.AddIn.UserPersonalizationWidget",
+      "ContentTypes": [],
+      "Version": "",
+      "Dependencies": [],
+      "Properties": [],
+      "Views": [
+        {
+            "Name": "NCI User Personalization View",
+            "Path": "/{AssetLibraryName}/DigitalWorkPlace/Content/Templates/userpersonalizationwidget/ncitabpartialview.html",
+            "Id": "e55481e6-0b18-4eec-86c7-c12b6f947b4a"
+        }      
+      ],
+      "JS": {
+        "Default": "/{AssetLibraryName}/DigitalWorkPlace/JS/widgets/userpersonalizationwidget.js"
+      }
+    },
+    "Instances": [{
+      "Name": "NCI User Personalization",
+      "Description": "",
+      "Icon": "fa fa-cog",
+      "Id": "8cf58a5f-8e3c-4d23-85ad-83acfb9cd9eb",
+      "Properties": [
+        {
+          "name": "tabslist",
+          "value": 
+          {
+            "termStoreId": "d6bd7a5a-6539-4c82-a2dc-764ac3682a4a",
+            "termSetName": "Category",
+            "terms": [
+              {
+                "name": "Departments",
+                "displayName": "common.departments",
+                "displayType": "Tree",
+                "id": "ef90fc48-1b8a-4242-bbda-df722c8b3a47"
+              },
+              {
+                "name": "Region",
+                "displayName": "common.regions",
+                "displayType": "Tree",
+                "id": "5b1272bd-6012-4a2a-a5c7-8b718ec23521"
+              },
+              {
+                "name": "SPTags",
+                "displayName": "common.tags",
+                "displayType": "Tags",
+                "id": "d10aa6a1-00dd-46e8-b6ac-fc073ed14747"
+            }
+            ]
+          }
+        },        
+        {
+          "name": "cacheinterval",
+          "value": "-1"
+        },
+        {
+          "name": "callbackmethod",
+          "value": ""
+        },
+        {
+          "name": "uicallbackmethod",
+          "value": ""
+        },
+        {
+          "name": "widgetframework",
+          "value": "react"
+        },
+        {
+          "name": "disablewidgetpropsedit",
+          "value": true
+        }
+      ],
+      "SelectedView": "NCI User Personalization View",
+      "AvailableViews": [],
+      "HiddenFields": []
+    }],
+    "Options": {
+      "IsPartialDefinition": true,
+      "IsDashboardWidget": false,
+      "IsAppManagerWidget": false
+    }
+  }

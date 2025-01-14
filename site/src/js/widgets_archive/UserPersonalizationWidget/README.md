@@ -1,0 +1,1 @@
+ Akumina stored the original UserPersonalizationWidget (with our OOTB configuration) and config because the only way they had available to change the display names of the Region and Departments terms was to recreate the widget as the names are hardcoded into the OOTB UserPersonalizationWidget instance.

@@ -1,0 +1,54 @@
+{
+    "Name": "Event Detail",
+    "Id": "5e46ca26-f064-4ed2-a299-d83756ba6b1c",
+    "Type": "GenericPage",
+    "List": "GenericPages_AK",
+    "AdditionalSelectColumns": "",
+    "Url": "eventdetail.aspx",
+    "Personas": [
+        "All"
+    ],
+    "PageDefinition": {
+        "Containers": [
+            {
+                "id": "container1",
+                "layoutid": "2 Column Large Right",
+                "zones": [
+                    {
+                        "id": "zone1",
+                        "widgets": [
+                            {
+                                "Title": "Left Navigation Indicator",
+                                "WidgetInstanceId": "550ddab9-9020-4b13-8672-7adc3fa375fd",
+                                "Name": "NCILeftNavWidget",
+                                "Icon": "fa fa-cog",
+                                "Description": "Reflects the current position in the nav hierarchy.",
+                                "Options": "",
+                                "DisplayOrder": "0",
+                                "Grid": "",
+                                "Properties": []
+                            }
+                        ]
+                    },
+                    {
+                        "id": "zone2",
+                        "widgets": [
+                            {
+                                "Title": "Event Detail",
+                                "WidgetInstanceId": "a279943c-6d2d-4703-871c-8fdd695f24c7",
+                                "Name": "EventDetailWidget",
+                                "Icon": "fa fa-cog",
+                                "Description": "Provides details of a specific event.",
+                                "Options": "",
+                                "DisplayOrder": "0",
+                                "Grid": "",
+                                "Properties": []
+                            }
+                        ]
+                    }
+                ]
+            }
+       ]    
+    },
+    "IsLegacyMode": false
+}

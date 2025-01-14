@@ -1,0 +1,242 @@
+{
+    "AppName": "Tip of the Week",
+    "AppID": "c8f99b81-b776-4e3f-b63b-3664d4887e5b",
+    "AppType": "Author",
+    "AppIcon": "fa fa-newspaper-o",
+    "AppUsage": "Component",
+    "AuthRoles": [ "{Owners}"],
+    "ListName": "TipOfTheWeek_NCI",
+    "Links": [],
+    "ImageLibraryName": "Images_AK",
+    "EnableComments": false,
+    "HideAddNewItem": false,
+    "HideDeleteItem": false,
+    "EnableAutoTranslate": true,
+    "CheckTitleUniqueness": false,
+    "EnableCreatedByFilter": false,
+    "EnablePermissionSettings": false,
+    "EnableSocialReactions": false,
+    "EnablePersonas": false,
+    "IsPersonaSettingsRequired": false,
+    "EnableContentDistributionSetting": false,
+    "Fields": [
+        {
+            "IsVisible": true,
+            "IsMetaDataField": "false",
+            "Name": "Title",
+            "IsAutoTranslate": false,
+            "DisplayOrder": "0"
+        },
+        {
+            "IsVisible": true,
+            "IsMetaDataField": "false",
+            "Name": "Body",
+            "IsAutoTranslate": false,
+            "DisplayOrder": "1"
+        },
+        {
+            "IsVisible": true,
+            "IsMetaDataField": false,
+            "Name": "NCIContactPerson1",
+            "IsAutoTranslate": false,
+            "DisplayOrder": "2"
+        },
+        {
+            "IsVisible": true,
+            "IsMetaDataField": false,
+            "Name": "NCIContactPerson2",
+            "IsAutoTranslate": false,
+            "DisplayOrder": "3"
+        },
+        {
+            "IsVisible": true,
+            "IsMetaDataField": false,
+            "Name": "Created",
+            "IsAutoTranslate": false,
+            "DisplayOrder": "4"
+        },
+        {
+            "IsVisible": true,
+            "IsMetaDataField": false,
+            "Name": "Modified",
+            "IsAutoTranslate": false,
+            "DisplayOrder": "5"
+        },
+        {
+            "IsVisible": true,
+            "IsMetaDataField": false,
+            "Name": "NCIDeadline",
+            "IsAutoTranslate": false,
+            "DisplayOrder": "6"
+        },
+        {
+            "IsVisible": true,
+            "IsMetaDataField": true,
+            "Name": "Departments",
+            "IsAutoTranslate": false,
+            "DisplayOrder": "7"
+        },
+        {
+            "IsVisible": true,
+            "IsMetaDataField": false,
+            "Name": "Featured",
+            "IsAutoTranslate": false,
+            "DisplayOrder": "8"
+        },
+        {
+            "IsVisible": true,
+            "IsMetaDataField": false,
+            "Name": "Archive_x0020_Date",
+            "IsAutoTranslate": false,
+            "DisplayOrder": "9"
+        },
+        {
+            "IsVisible": true,
+            "IsMetaDataField": false,
+            "Name": "Departments",
+            "IsAutoTranslate": false,
+            "DisplayOrder": "10"
+        },
+        {
+            "IsVisible": true,
+            "IsMetaDataField": false,
+            "Name": "NCIExternalLink",
+            "IsAutoTranslate": false,
+            "DisplayOrder": "11"
+        },
+        {
+            "IsVisible": true,
+            "IsMetaDataField": false,
+            "Name": "FriendlyUrl",
+            "IsAutoTranslate": false,
+            "DisplayOrder": "12"
+        },
+        {
+            "IsVisible": true,
+            "IsMetaDataField": false,
+            "Name": "FriendlyUrlSearch",
+            "IsAutoTranslate": false,
+            "DisplayOrder": "13"
+        },
+        {
+            "IsVisible": true,
+            "IsMetaDataField": false,
+            "Name": "Image",
+            "IsAutoTranslate": false,
+            "DisplayOrder": "14"
+        },
+        {
+            "IsVisible": true,
+            "IsMetaDataField": true,
+            "Name": "NCIOrgOwner",
+            "IsAutoTranslate": false,
+            "DisplayOrder": "15"
+        },
+        {
+            "IsVisible": true,
+            "IsMetaDataField": true,
+            "Name": "OrganizationDirectory",
+            "IsAutoTranslate": false,
+            "DisplayOrder": "16"
+        },
+        {
+            "IsVisible": true,
+            "IsMetaDataField": false,
+            "Name": "Publish_x0020_Date",
+            "IsAutoTranslate": false,
+            "DisplayOrder": "17"
+        },
+        {
+            "IsVisible": true,
+            "IsMetaDataField": false,
+            "Name": "Publisher",
+            "IsAutoTranslate": false,
+            "DisplayOrder": "18"
+        },
+        {
+            "IsVisible": true,
+            "IsMetaDataField": false,
+            "Name": "ReadTime",
+            "IsAutoTranslate": false,
+            "DisplayOrder": "19"
+        },
+        {
+            "IsVisible": true,
+            "IsMetaDataField": true,
+            "Name": "Region",
+            "IsAutoTranslate": false,
+            "DisplayOrder": "20"
+        },
+        {
+            "IsVisible": true,
+            "IsMetaDataField": false,
+            "Name": "Search_x0020_Description",
+            "IsAutoTranslate": false,
+            "DisplayOrder": "21"
+        },
+        {
+            "IsVisible": true,
+            "IsMetaDataField": false,
+            "Name": "Share_x0020_URL",
+            "IsAutoTranslate": false,
+            "DisplayOrder": "22"
+        },
+        {
+            "IsVisible": true,
+            "IsMetaDataField": false,
+            "Name": "Shareable",
+            "IsAutoTranslate": false,
+            "DisplayOrder": "23"
+        },
+        {
+            "IsVisible": true,
+            "IsMetaDataField": false,
+            "Name": "StaticUrl",
+            "IsAutoTranslate": false,
+            "DisplayOrder": "24"
+        },
+        {
+            "IsVisible": true,
+            "IsMetaDataField": false,
+            "Name": "Summary",
+            "IsAutoTranslate": false,
+            "DisplayOrder": "25"
+        },
+        {
+            "IsVisible": true,
+            "IsMetaDataField": true,
+            "Name": "Tags",
+            "IsAutoTranslate": false,
+            "DisplayOrder": "26"
+        },
+        {
+            "IsVisible": true,
+            "IsMetaDataField": false,
+            "Name": "Thumbnail_x0020_URL",
+            "IsAutoTranslate": false,
+            "DisplayOrder": "27"
+        },
+        {
+            "IsVisible": true,
+            "IsMetaDataField": false,
+            "Name": "Video",
+            "IsAutoTranslate": false,
+            "DisplayOrder": "28"
+        },
+        {
+            "IsVisible": true,
+            "IsMetaDataField": false,
+            "Name": "Author",
+            "IsAutoTranslate": false,
+            "DisplayOrder": "29"
+        },
+        {
+            "IsVisible": true,
+            "IsMetaDataField": false,
+            "Name": "Editor",
+            "IsAutoTranslate": false,
+            "DisplayOrder": "30"
+        }
+    ],
+    "Previews": []
+}

@@ -1,0 +1,106 @@
+{
+    "Definition": {
+      "Name": "MediaWidget",
+      "Description": "",
+      "Class": "Akumina.AddIn.MediaWidget",
+      "ContentTypes": [],
+      "Version": "",
+      "Dependencies": [],
+      "Properties": [],
+      "Views": [
+        {
+          "Name": "NCIPhotoGallery",
+          "Path": "/{AssetLibraryName}/DigitalWorkPlace/Content/Templates/MediaWidget/NCIPhotoGallery.html",
+          "Id": "46863469-aaaa-43a5-8328-a2106928c55d"
+        }
+    ],
+    "JS": {
+      "Default": "/{AssetLibraryName}/DigitalWorkPlace/JS/widgets/mediawidget.js"
+        }
+    },
+    "Instances": [
+        {
+          "Name": "NCI Photo Gallery",
+          "Description": "",
+          "Icon": "fa fa-cog",
+          "Id": "f31efa69-63c7-49e9-a643-86519b48425e",
+          "Properties": [
+            {
+                "name": "filteroptions",
+                "value": [
+                    {
+                        "Title": "fs.mediawidget.images",
+                        "Query": "ContentType:AkuminaImages OR ContentType:AkuminaImageGallery",
+                        "ContentTypeId": "0x010102001E45BA94E91D6143997277C99F1858A4"
+                    }
+                ]
+            },
+            {
+                "name": "searchacrosssites",
+                "value": false
+            },
+            {
+                "name": "count",
+                "value": 100
+            },
+            {
+                "name": "selectproperties",
+                "value": "OriginalPath,Title,Filename,FileType,PictureThumbnailURL,DefaultEncodingURL,LastModifiedTime,MediaServiceMetadata,ListId,ListItemId,ViewsLifeTime,UniqueId,PublisherOWSUSER,FileType,Size,PictureWidth,PictureHeight,Description,Created,owstaxidmetadataalltagsinfo,ContentTypeId,SitePath,SiteId,WebId,Image"
+            },
+            {
+                "name": "searchrefiners",
+                "value": {}
+            },
+            {
+                "name": "sortoptions",
+                "value": [
+                    {
+                        "DisplayName": "fs.mediawidget.relevance",
+                        "Name": "Rank"
+                    },
+                    {
+                        "DisplayName": "fs.mediawidget.uploaddate",
+                        "Name": "Created"
+                    },
+                    {
+                        "DisplayName": "fs.mediawidget.modifieddate",
+                        "Name": "LastModifiedTime"
+                    },
+                    {
+                        "DisplayName": "fs.mediawidget.popularity",
+                        "Name": "Popularity"
+                    }
+                ]
+            },
+            {
+                "name": "usereactionslegacyview",
+                "value": false
+            },
+            {
+                "name": "commentssortoption",
+                "value": "oldestfirst"
+            },
+            {
+                "name": "cacheinterval",
+                "value": -1
+            },
+            {
+                "name": "callbackmethod",
+                "value": ""
+            },
+            {
+                "name": "uicallbackmethod",
+                "value": ""
+            }
+        ],
+          "SelectedView": "NCIPhotoGallery",
+          "AvailableViews": ["default", "NCIPhotoGallery"],
+          "HiddenFields": []
+        }
+    ],
+    "Options": {
+        "IsPartialDefinition": true,
+        "IsDashboardWidget": false,
+        "IsAppManagerWidget": false
+    }  
+}

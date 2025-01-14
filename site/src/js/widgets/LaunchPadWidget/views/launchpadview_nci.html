@@ -1,0 +1,111 @@
+{{debug}}
+<div class="ia-mission-control-apps">
+    {{#if hasError}}
+    <div class="alert alert-danger" role="alert">
+        {{ErrorText}}
+    </div>
+    {{else}}
+    {{#if Loading}}
+    <div className="ia-loading-state">
+        <div class="ia-skeleton-wrapper ia-skeleton-1-col">
+            <div class="ia-skeleton-col">
+                <div class="ia-skeleton-media"></div>
+                <div class="ia-skeleton-heading"></div>
+                <div class="ia-skeleton-body">
+                    <div class="ia-skeleton-text"></div>
+                    <div class="ia-skeleton-text"></div>
+                    <div class="ia-skeleton-text"></div>
+                    <div class="ia-skeleton-text"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{else}}
+    <div class="ia-apps-list ia-apps-selected-list">
+        {{#each selectedApps}}
+        {{#ifCondition @index '<' '12'}}
+        <a href="{{Url}}" target="_blank" class="ia-apps-items {{IsSPALink}}">
+            <div class="ia-apps-img">
+                {{#if hasImage}}
+                <img src="{{Image}}" alt="" />
+                {{else}}
+                <i class="fa-regular fa-objects-column" aria-hidden="true"></i>
+                {{/if}}
+            </div>
+            <div class="ia-apps-title">{{Title}}</div>
+        </a>
+        {{/ifCondition}}
+        {{/each}}
+    </div>
+
+    <div class="ia-apps-available-list fs-js-app-list {{#unless ShowAllApps}} fs-hide {{/unless}}">
+        <h4 class="h3">{{translate "launchpadwidget.addapps"}}</h4>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="ia-form-row">
+                    <label>&nbsp; </label>
+                    <div class="ia-value ia-text-icon-group">
+                        <input id="myAppsSearch" type="text" placeholder="{{translate 'launchpadwidget.searchapp'}}" />
+                        <i class="fa fa-search" aria-hidden="true"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="ia-form-row">
+                    <label>{{translate "launchpadwidget.filter"}}</label>
+                    <div class="ia-value">
+                        <select type="text" id="myAppsFilter">
+                            {{#each filterOptions}}
+                            <option {{#if selected}} selected="selected" {{/if}} value="{{filterName}}">{{filterName}}</option>
+                            {{/each}}
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {{#if hasData}}
+        <div class="ia-apps-group">
+            <div class="ia-apps-list">
+                {{#each data}}
+                {{#if Selected}}
+                <div class="ia-apps-items fs-js-app-items {{#unless IsRequired}}fs-js-item-selected {{/unless}}" data-id={{Id}}>
+                    <div class="ia-apps-img">
+                        {{#if hasImage}}
+                        <img src="{{Image}}" alt="" />
+                        {{else}}
+                        <i class="fa-regular fa-objects-column" aria-hidden="true"></i>
+                        {{/if}}
+                    </div>
+                    <div class="ia-apps-title">{{Title}}</div>
+                    <div class="ia-app-icon-button fs-js-app-icon {{#if IsRequired}}ia-app-lock{{else}} ia-app-close {{/if}}">
+                        <i class="fa-solid {{#if IsRequired}}fa-lock{{else}} fa-xmark{{/if}}"></i>
+                    </div>
+                </div>
+                {{else}}
+                <a href="javascript:void(0)" class="ia-apps-items fs-js-app-items" data-id={{Id}}>
+                    <div class="ia-apps-img">
+                        {{#if hasImage}}
+                        <img src="{{Image}}" alt="" />
+                        {{else}}
+                        <i class="fa-regular fa-objects-column" aria-hidden="true"></i>
+                        {{/if}}
+                    </div>
+                    <div class="ia-apps-title">{{Title}}</div>
+                </a>
+                {{/if}}
+                {{/each}}
+            </div>
+            {{#unless isLastPage}}
+            <div class="ia-button-row text-center">
+                <button class="fs-js-apps-show-more ia-button">{{translate "launchpadwidget.showmore"}}</button>
+            </div>
+            {{/unless}}
+        </div>
+        {{else}}
+        <div>{{translate "launchpadwidget.noapps"}}</div>
+        {{/if}}
+    </div>
+    {{/if}}
+    {{/if}}
+</div>

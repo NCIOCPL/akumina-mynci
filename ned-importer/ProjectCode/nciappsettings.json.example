@@ -1,0 +1,7 @@
+{
+  "AppSettings": {
+    "User": "user",
+    "Password": "password",
+    "NEDApiUrl": "https://soadev.nih.gov/NEDPERSONREST?Email="
+  }
+}

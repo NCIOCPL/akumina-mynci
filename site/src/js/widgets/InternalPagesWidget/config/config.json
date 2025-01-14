@@ -1,0 +1,99 @@
+{
+  "Definition": {
+    "Name": "InternalPagesWidget",
+    "Description": "",
+    "Class": "Akumina.AddIn.InternalPagesWidget",
+    "ContentTypes": [],
+    "Version": "",
+    "Dependencies": [],
+    "Properties": [],
+    "Views": [
+      {
+        "Name": "nci-internal",
+        "Path": "/{AssetLibraryName}/DigitalWorkPlace/Content/Templates/internalpageswidget/nci-internal.html",
+        "Id": "836970a4-93bf-476d-8f5e-2303f68475c5"
+      }
+    ],
+    "JS": {
+      "Default": "/{AssetLibraryName}/DigitalWorkPlace/JS/widgets/internalpageswidget.js"
+    }
+  },
+  "Instances": [
+    {
+      "Name": "Internal Pages Widget",
+      "Description": "Displays internal pages",
+      "Icon": "fa fa-cog",
+      "Id": "72933d2f-1d5d-4133-a51d-9ebb5cecd7b9",
+      "Properties": [
+        {
+          "name": "listname",
+          "value": "InternalPages_AK"
+        },
+        {
+          "name": "selectfields",
+          "value": "ID,Title,Image,Publish_x0020_Date,Body,Archive_x0020_Date,RelatedLinks,Thumbnail_x0020_URL,Departments,NCIOrgOwner,NCIContactPerson1/ID,NCIContactPerson1/Title,NCIContactPerson1/EMail,NCIContactPerson2/ID,NCIContactPerson2/Title,NCIContactPerson2/EMail"
+        },
+        {
+          "name": "expandfields",
+          "value": "NCIContactPerson1,NCIContactPerson2"
+        },
+        {
+          "name": "cacheinterval",
+          "value": "-1"
+        },
+        {
+          "name": "usefriendlyurl",
+          "value": true
+        },              
+        {
+          "name": "callbackmethod",
+          "value": ""
+        },
+        {
+          "name": "uicallbackmethod",
+          "value": ""
+        },
+        {
+          "name": "isasynccallback",
+          "value": false
+        },      
+        {
+          "name": "isroot",
+          "value": true
+        },          
+        {
+          "name": "displaylikes",
+          "value": true
+        },          
+        {
+          "name": "displayshare",
+          "value": true
+        },          
+        {
+          "name": "viewxml",
+          "value": ""
+        },          
+        {
+          "name": "sitecollectionurl",
+          "value": ""
+        },          
+        {
+          "name": "widgetframework",
+          "value": ""
+        },          
+        {
+          "name": "dependencies",
+          "value": "GenericItemWidget"
+        }
+      ],
+      "SelectedView": "nci-internal",
+      "AvailableViews": [],
+      "HiddenFields": []
+    }
+  ],
+  "Options": {
+    "IsPartialDefinition": true,
+    "IsDashboardWidget": false,
+    "IsAppManagerWidget": false
+  }
+}

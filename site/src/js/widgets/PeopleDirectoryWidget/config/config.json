@@ -1,0 +1,225 @@
+{
+  "Definition": {
+    "Name": "PeopleDirectoryWidget",
+    "Description": "Provides a keyword search (after 3 characters of input) or last name/first name search.  Requires Azure AD and Akumina people sync to be configured for the site.",
+    "Class": "Akumina.AddIn.PeopleDirectoryWidget",
+    "Version": "{CurrentBuildVersion}",
+    "Icon": "far fa-address-book",
+    "Properties": [
+      {
+        "name": "title",
+        "friendlyname": "{propertyfriendlynames.friendlyname_title}",
+        "value": "",
+        "type": "string"
+      },
+      {
+        "name": "searchtype",
+        "friendlyname": "{peopledirectory.friendlyname_sortby}",
+        "value": {
+          "First Name": "first",
+          "Last Name": "last"
+        },
+        "type": "choice"
+      },
+      {
+        "name": "facets",
+        "friendlyname": "{peopledirectory.friendlyname_facets}",
+        "value": [
+          {
+            "facetName": "department",
+            "facetDisplayName": "Department"
+          },
+          {
+            "facetName": "officelocation",
+            "facetDisplayName": "Office Location"
+          }
+        ],
+        "type": "json"
+      },
+      {
+        "name": "fetchphotofromad",
+        "friendlyname": "{peopledirectory.friendlyname_fetchphotofromad}",
+        "value": "true",
+        "type": "bool"
+      },
+      {
+        "name": "searchlistingdisplay",
+        "friendlyname": "{peopledirectory.friendlyname_searchlistingdisplay}",
+        "value": {
+          "First, Last": "FL",
+          "Last, First": "LF"
+        },
+        "type": "choice"
+      },
+      {
+        "name": "enableazselector",
+        "friendlyname": "{peopledirectory.friendlyname_enableazselector}",
+        "value": "true",
+        "type": "bool"
+      },
+      {
+        "name": "displayview",
+        "friendlyname": "{peopledirectory.friendlyname_displayview}",
+        "value": {
+          "Tile": "tile",
+          "List": "list"
+        },
+        "type": "choice"
+      },
+      {
+        "name": "uicallbackmethod",
+        "friendlyname": "{propertyfriendlynames.friendlyname_uicallbackmethod}",
+        "value": "",
+        "type": "string"
+      },
+      {
+        "name": "callbackmethod",
+        "friendlyname": "{propertyfriendlynames.friendlyname_callbackmethod}",
+        "value": "",
+        "type": "string"
+      },
+      {
+        "name": "propcallbackmethod",
+        "friendlyname": "propcallbackmethod",
+        "value": "",
+        "type": "string"
+      },
+      {
+        "name": "usesearchscore",
+        "friendlyname": "{propertyfriendlynames.friendlyname_usesearchscore}",
+        "value": false,
+        "type": "bool"
+      },
+      {
+        "name": "defaultsortasc",
+        "friendlyname": "{propertyfriendlynames.friendlyname_defaultsortasc}",
+        "value": true,
+        "type": "bool"
+      },
+      {
+        "name": "querycallbackmethod",
+        "friendlyname": "{propertyfriendlynames.friendlyname_querycallbackmethod}",
+        "value": "",
+        "type": "string"
+      }
+    ],
+    "Views": [
+      {
+        "Name": "NCI Organization Directory View",
+        "Path": "/{AssetLibraryName}/DigitalWorkPlace/Content/Templates/PeopleDirectoryWidget/NCIOrgDirectoryView.html",
+        "Id": "1ba83029-995f-49c1-a828-b067bbb40ef9"
+      },
+      {
+        "Name": "NCI People Finder",
+        "Path": "/{AssetLibraryName}/DigitalWorkPlace/Content/Templates/PeopleDirectoryWidget/NCIPeopleDIrectoryView.html",
+        "Id": "3294e69f-cc70-4bad-a577-2a4a70d5daa0"
+      }
+    ],
+    "JS": {
+      "Default": "/{AssetLibraryName}/DigitalWorkPlace/JS/widgets/digitalworkplace.core.peopledirectorywidget.min.js"
+    }
+  },
+  "Instances": [
+    {
+      "Name": "NCI Organization Directory",
+      "Id": "ac5dc749-7e29-4842-8bd2-6177d3a08041",
+      "Description": "Displays searchable list of people with filters from Entra ID/AAD and NED synchronization",
+      "Icon": "far fa-address-book",
+      "SelectedView": "NCI Organization Directory View",
+      "AvailableViews": [],
+      "HiddenFields": [],
+      "Properties": [
+        {
+          "name": "title",
+          "value": "{peopledirectory.title}"
+        },
+        {
+          "name": "searchtype",
+          "value": ""
+        },
+        {
+          "name": "facets",
+          "value": [{"facetName": "department_keyword","facetDisplayName": "{NCI.OrgDirectory.NIHOUName}"}]
+        },
+        {
+          "name": "fetchphotofromad",
+          "value": "true"
+        },
+        {
+          "name": "usesearchscore",
+          "value": false
+        },
+        {
+          "name": "defaultsortasc",
+          "value": true
+        },
+        {
+          "name": "callbackmethod",
+          "value": "NCIDirectoryOrgCallBack"
+        },
+        {
+          "name": "uicallbackmethod",
+          "value": "NCIDirectoryOrgCallBackUI"
+        }
+      ]
+    },
+    {
+      "Name": "NCI People Directory",
+      "Id": "a47473cf-b520-4402-9f05-1ea4fb9e6d22",
+      "Description": "NCI's Corporate People Directory",
+      "Icon": "far fa-address-book",
+      "SelectedView": "NCI People Finder",
+      "AvailableViews": [],
+      "HiddenFields": [],
+      "Properties": [
+        {
+          "name": "title",
+          "value": "{peopledirectory.title}"
+        },
+        {
+          "name": "searchtype",
+          "value": "first"
+        },
+        {
+          "name": "facets",
+          "value": "{}"
+        },
+        {
+          "name": "fetchphotofromad",
+          "value": true
+        },
+        {
+          "name": "searchlistingdisplay",
+          "value": "true"
+        },
+        {
+          "name": "enableazselector",
+          "value": true
+        },
+        {
+          "name": "displayview",
+          "value": "tile"
+        },
+        {
+          "name": "usesearchscore",
+          "value": false
+        },
+        {
+          "name": "defaultsortasc",
+          "value": true
+        },
+        {
+          "name": "callbackmethod",
+          "value": "NCIDirectoryOrgCallBack"
+        },
+        {
+          "name": "uicallbackmethod",
+          "value": "NCIDirectoryOrgCallBackUI"
+        }
+      ]
+    }
+  ],
+  "Options": {
+    "IsPartialDefinition": true
+  }
+}

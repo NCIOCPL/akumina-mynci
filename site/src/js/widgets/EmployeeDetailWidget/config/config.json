@@ -1,0 +1,111 @@
+{
+    "Definition": {
+      "Name": "EmployeeDetailWidget",
+      "Description": "",
+      "Class": "Akumina.AddIn.EmployeeDetailWidget",
+      "ContentTypes": [],
+      "Version": "",
+      "Dependencies": [],
+      "Properties": [],
+      "Views": [
+        {
+          "Name": "NCI Employee Detail",
+          "Path": "/{AssetLibraryName}/DigitalWorkPlace/Content/Templates/employeedetailwidget/nciemployeedetail.html",
+          "Id": "2aa11c44-aa50-4c7f-93de-582c05dad58f"
+        }
+      ],
+      "JS": {
+        "Default": "/{AssetLibraryName}/DigitalWorkPlace/JS/widgets/employeedetailwidget.js"
+      }
+    },
+    "Instances": [
+      {
+        "Name": "Employee Details",
+        "Description": "Displays details about an NCI employee",
+        "Icon": "fa fa-cog",
+        "Id": "5e6c080d-810e-43bb-8862-eb2a20ce03ec",
+        "Properties": [
+          {
+            "name": "selectfields",
+            "value": "ID,FileRef"
+          },
+          {
+            "name": "libraryname",
+            "value": "BackgroundImages_AK"
+          },
+          {
+            "name": "allowchangebackground",
+            "value": true
+          },
+          {
+            "name": "allowchangemobilephone",
+            "value": true
+          },
+          {
+            "name": "allowchangefax",
+            "value": true
+          },
+          {
+            "name": "allowchangeschool",
+            "value": true
+          },
+          {
+            "name": "allowchangeskills",
+            "value": true
+          },
+          {
+            "name": "allowchangeaboutme",
+            "value": true
+          },
+          {
+            "name": "allowchangeinterests",
+            "value": true
+          },
+          {
+            "name": "allowchangebirthday",
+            "value": true
+          },
+          {
+            "name": "viewxml",
+            "value": ""
+          },
+          {
+            "name": "isroot",
+            "value": false
+          },
+          {
+            "name": "sitecollectionurl",
+            "value": ""
+          },
+          {
+            "name": "callbackmethod",
+            "value": ""
+          },
+          {
+            "name": "uicallbackmethod",
+            "value": ""
+          },
+          {
+            "name": "eventsubscriptionid",
+            "value": ""
+          },
+          {
+            "name": "authorizationcode",
+            "value": ""
+          },
+          {
+            "name": "widgetframework",
+            "value": ""
+          }
+        ],
+        "SelectedView": "NCI Employee Detail",
+        "AvailableViews": [],
+        "HiddenFields": []
+      }
+    ],
+    "Options": {
+      "IsPartialDefinition": true,
+      "IsDashboardWidget": false,
+      "IsAppManagerWidget": false
+    }
+  }

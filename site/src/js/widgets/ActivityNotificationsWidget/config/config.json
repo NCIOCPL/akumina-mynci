@@ -1,0 +1,44 @@
+{
+  "Definition": {
+    "Name": "ActivityNotificationsWidget",
+    "Class": "Akumina.AddIn.ActivityNotificationsWidget",
+    "Version": "",
+    "ContentTypes": [],
+    "Properties": [],
+    "Views": [
+      {
+        "Name": "NCI-default",
+        "Path": "/{AssetLibraryName}/DigitalWorkPlace/Content/Templates/ActivityNotificationsWidget/nci-default.html",
+        "Id": "29b62dd0-0cdf-337d-b254-3571de6496f6"
+      }
+    ],
+    "JS": {
+      "Default": "/{AssetLibraryName}/DigitalWorkPlace/JS/widgets/digitalworkplace.core.ActivityNotificationsWidget.min.js"
+    }
+  },
+  "Instances": [
+    {
+        "Name": "NCI-ActivityNotificationWidget-Global",
+        "Description": "Customization of default instance for NCI",
+        "Icon": "far fa-bell",
+        "Id": "bda833d9-3657-608e-9ffa-92bc25c8a900",
+        "Properties": [
+            {
+                "name": "widgetframework",
+                "value": "react"
+            },
+            {
+                "name": "pollinginterval",
+                "value": "45"
+            }
+        ],
+        "SelectedView": "NCI-default",
+        "AvailableViews": [],
+        "HiddenFields": []
+    }],
+    "Options": {
+        "IsPartialDefinition": true,
+        "IsDashboardWidget": false,
+        "IsAppManagerWidget": false
+    }
+}

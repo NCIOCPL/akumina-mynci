@@ -1,0 +1,1 @@
+The widgets archive holds the original versions of widgets where we had to recreate the entire widget instead of simply modifying a view or configuration.

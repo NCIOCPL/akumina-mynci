@@ -1,0 +1,60 @@
+{
+    "Definition": {
+        "Name": "NCILeftNavWidget",
+        "Description": "",
+        "Class": "Client.Widgets.NCILeftNavWidget",
+        "ContentTypes": [],
+        "Version": "",
+        "Dependencies": [],
+        "Properties": [
+            {
+                "name": "navlist",
+                "friendlyname": "Navigation List",
+                "value": "",
+                "type": "string"
+            },
+            {
+                "name": "casesensetiveurlmatching",
+                "friendlyname": "Case-Sensitive URL Matching (T/F)",
+                "value": "",
+                "type": "Boolean"
+            }
+        ],
+        "Views": [
+            {
+                "Name": "NCI Default Left Nav View",
+                "Path": "/{AssetLibraryName}/DigitalWorkPlace/Content/Templates/ncileftnavwidget/ncidefaultview.html",
+                "Id": "de9ce70f-a3d2-411e-b05f-7b04d11e53a7"
+            }
+        ],
+        "JS": {
+            "Default": "/{AssetLibraryName}/DigitalWorkPlace/JS/widgets/ncileftnavwidget.js"
+        }
+    },
+    "Instances": [
+        {
+            "Name": "Left Navigation Widget",
+            "Description": "Reflects the current position in the nav hierarchy.",
+            "Icon": "fa fa-cog",
+            "Id": "550ddab9-9020-4b13-8672-7adc3fa375fd",
+            "Properties": [
+                {
+                    "name": "navlist",
+                    "value": "FoundationTopNavigation_AK"
+                },
+                {
+                    "name": "casesensetiveurlmatching",
+                    "value": "false"
+                }
+            ],
+            "SelectedView": "NCI Default Left Nav View",
+            "AvailableViews": [],
+            "HiddenFields": []
+        }
+    ],
+    "Options": {
+        "IsPartialDefinition": false,
+        "IsDashboardWidget": false,
+        "IsAppManagerWidget": false
+    }
+}

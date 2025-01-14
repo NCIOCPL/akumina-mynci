@@ -1,0 +1,74 @@
+<lists>
+	<list name="PROVISIONING_LIST_FOR_CONTENT_TYPES_AK_(CAN_BE_DELETED)" contentType="NCIAkuminaArticle,NCIAkuminaBlogs,NCIAkuminaCalendar,NCIAkuminaInternalPage" noCrawl="TRUE" />
+	<list name="QuickApps_AK" contentType="AkuminaLanguage,AkuminaApps,AkuminaQuickLinks" noCrawl="TRUE">		
+		<Data>
+			<Rows>
+				<Row>
+					<Field Name="Title">Teams</Field>
+					<Field Name="AppIcon">{SiteUrl}/Images_AK/teams.png</Field>
+					<Field Name="AppUrl">https://teams.microsoft.com/</Field>
+					<Field Name="IsRequired">true</Field>
+					<Field Name="AkId">1</Field>
+                    <Field Name="AkLanguageCode">en-US</Field>
+                    <Field Name="AkLanguageId">1,033</Field>
+				</Row>
+				<Row>
+					<Field Name="Title">Outlook</Field>
+					<Field Name="AppIcon">{SiteUrl}/Images_AK/outlook.png</Field>
+					<Field Name="AppUrl">https://outlook.office.com/mail/</Field>
+					<Field Name="IsRequired">true</Field>
+					<Field Name="AkId">2</Field>
+					<Field Name="AkLanguageCode">en-US</Field>
+					<Field Name="AkLanguageId">1,033</Field>
+				</Row>
+				<Row>
+					<Field Name="Title">Word</Field>
+					<Field Name="AppIcon">{SiteUrl}/Images_AK/word-icon.png</Field>
+					<Field Name="AppUrl">https://www.office.com/launch/word/</Field>
+					<Field Name="IsRequired">true</Field>
+					<Field Name="AkId">3</Field>
+					<Field Name="AkLanguageCode">en-US</Field>
+					<Field Name="AkLanguageId">1,033</Field>
+				</Row>
+				<Row>
+					<Field Name="Title">Planner</Field>
+					<Field Name="AppIcon">{SiteUrl}/Images_AK/planner.png</Field>
+					<Field Name="AppUrl">https://tasks.office.com/</Field>
+					<Field Name="IsRequired">true</Field>
+					<Field Name="AkId">4</Field>
+					<Field Name="AkLanguageCode">en-US</Field>
+					<Field Name="AkLanguageId">1,033</Field>
+				</Row>
+				<Row>
+					<Field Name="Title">PowerPoint</Field>
+					<Field Name="AppIcon">{SiteUrl}/Images_AK/ppt.png</Field>
+					<Field Name="AppUrl">https://www.office.com/launch/powerpoint/</Field>
+					<Field Name="IsRequired">true</Field>
+					<Field Name="AkId">5</Field>
+					<Field Name="AkLanguageCode">en-US</Field>
+					<Field Name="AkLanguageId">1,033</Field>
+				</Row>
+				<Row>
+					<Field Name="Title">To Do</Field>
+					<Field Name="AppIcon">{SiteUrl}/Images_AK/todo.png</Field>
+					<Field Name="AppUrl">https://to-do.office.com/</Field>
+					<Field Name="IsRequired">true</Field>
+					<Field Name="AkId">6</Field>
+					<Field Name="AkLanguageCode">en-US</Field>
+					<Field Name="AkLanguageId">1,033</Field>
+				</Row>
+				<Row>
+					<Field Name="Title">Help Desk</Field>
+					<Field Name="AppIcon">{SiteUrl}/Images_AK/initiative.png</Field>
+					<Field Name="AppUrl">https://www.askhr.com/</Field>
+					<Field Name="IsRequired">true</Field>
+					<Field Name="AkId">7</Field>
+					<Field Name="AkLanguageCode">en-US</Field>
+					<Field Name="AkLanguageId">1,033</Field>
+				</Row>
+			</Rows>
+		</Data>
+	</list>
+	<list name="LatestPhotos_NCI" contentType="AkuminaLanguage,Item,AkuminaImageGallery" noCrawl="FALSE" />
+	<list name="TipOfTheWeek_NCI" contentType="AkuminaSearch,AkuminaPersona,AkuminaArticle,NCIAkuminaArticle" noCrawl="FALSE" />
+</lists>

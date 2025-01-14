@@ -1,0 +1,222 @@
+React.createElement(
+    "div",
+    { className: "ia-events interAction ia-widget-wrapper" },
+    ConfigurationErrorMessage ? React.createElement(
+        "span",
+        null,
+        ConfigurationErrorMessage
+    ) : React.createElement(
+        React.Fragment,
+        null,
+        SearchTextComponent,
+        React.createElement(
+            "div",
+            { className: "ia-grid-utility-container" },
+            React.createElement(
+                "div",
+                { className: "ia-grid-utility-left-col" },
+                React.createElement(
+                    "div",
+                    { className: "ia-list-action" },
+                    SearchCriteria && SearchCriteria.length > 0 && React.createElement(
+                        React.Fragment,
+                        null,
+                        React.createElement(
+                            "div",
+                            { className: "ia-filter-selector" },
+                            React.createElement(
+                                "span",
+                                { className: "ia-filter-text" },
+                                Akumina.Digispace.Language.TryGetText("fs.eventswidget.filterby"),
+                                ":"
+                            ),
+                            SearchCriteria.map(radiofilter => {
+                                return React.createElement(
+                                    React.Fragment,
+                                    null,
+                                    React.createElement(
+                                        "a",
+                                        { href: "javascript:void(0)", className: "ia-filter-option " + (radiofilter.IsSelected ? " fs-js-active" : ""), role: "button", onClick: () => SearchBasedOnSelectedCriteria(null, radiofilter, true) },
+                                        radiofilter.Name
+                                    ),
+                                    radiofilter.Value == EnumFilteringCriteria.UserInterest && React.createElement(
+                                        "button",
+                                        { className: "ia-filter-option ia-button-icon ia-group-button-icon " + (radiofilter.IsSelected ? " fs-js-active" : ""), onClick: () => OpenEditPreferencesPopup() },
+                                        React.createElement("i", { className: "fa-regular fa-sliders", title: Akumina.Digispace.Language.TryGetText("fs.common.changepreferences") })
+                                    )
+                                );
+                            })
+                        )
+                    ),
+                    React.createElement("div", { rel: "Search Refiner", "class": "ak-widget fs-js-search-refiner-widget", id: "398d1678-60dd-4758-a8df-e8b1b4464a4a" })
+                )
+            )
+        ),
+        IsFetching ? React.createElement(
+            "div",
+            { className: "ia-loading-state" },
+            React.createElement(
+                "div",
+                { className: "ia-skeleton-wrapper ia-skeleton-7-col" },
+                React.createElement(
+                    "div",
+                    { className: "ia-skeleton-col" },
+                    React.createElement("div", { className: "ia-skeleton-media" })
+                ),
+                React.createElement(
+                    "div",
+                    { className: "ia-skeleton-col" },
+                    React.createElement("div", { className: "ia-skeleton-media" })
+                ),
+                React.createElement(
+                    "div",
+                    { className: "ia-skeleton-col" },
+                    React.createElement("div", { className: "ia-skeleton-media" })
+                ),
+                React.createElement(
+                    "div",
+                    { className: "ia-skeleton-col" },
+                    React.createElement("div", { className: "ia-skeleton-media" })
+                ),
+                React.createElement(
+                    "div",
+                    { className: "ia-skeleton-col" },
+                    React.createElement("div", { className: "ia-skeleton-media" })
+                ),
+                React.createElement(
+                    "div",
+                    { className: "ia-skeleton-col" },
+                    React.createElement("div", { className: "ia-skeleton-media" })
+                ),
+                React.createElement(
+                    "div",
+                    { className: "ia-skeleton-col" },
+                    React.createElement("div", { className: "ia-skeleton-media" })
+                ),
+                React.createElement(
+                    "div",
+                    { className: "ia-skeleton-col" },
+                    React.createElement("div", { className: "ia-skeleton-media" })
+                ),
+                React.createElement(
+                    "div",
+                    { className: "ia-skeleton-col" },
+                    React.createElement("div", { className: "ia-skeleton-media" })
+                ),
+                React.createElement(
+                    "div",
+                    { className: "ia-skeleton-col" },
+                    React.createElement("div", { className: "ia-skeleton-media" })
+                ),
+                React.createElement(
+                    "div",
+                    { className: "ia-skeleton-col" },
+                    React.createElement("div", { className: "ia-skeleton-media" })
+                ),
+                React.createElement(
+                    "div",
+                    { className: "ia-skeleton-col" },
+                    React.createElement("div", { className: "ia-skeleton-media" })
+                ),
+                React.createElement(
+                    "div",
+                    { className: "ia-skeleton-col" },
+                    React.createElement("div", { className: "ia-skeleton-media" })
+                ),
+                React.createElement(
+                    "div",
+                    { className: "ia-skeleton-col" },
+                    React.createElement("div", { className: "ia-skeleton-media" })
+                )
+            )
+        ) : React.createElement(
+            React.Fragment,
+            null,
+            React.createElement(
+                "div",
+                { className: "ia-cal-utility" },
+                React.createElement(
+                    "div",
+                    { className: "ia-cal-header ia-button-row" },
+                    React.createElement(
+                        "div",
+                        { className: "ia-cal-month-nav" },
+                        React.createElement(
+                            "button",
+                            { role: "button", className: "ia-cal-prev ia-button-light", title: Akumina.Digispace.Language.TryGetText("calendar.previousmonth") },
+                            React.createElement("i", { className: "fa fa-chevron-left", "aria-label": Akumina.Digispace.Language.TryGetText("calendar.previousmonth") })
+                        ),
+                        React.createElement(
+                            "button",
+                            { role: "button", className: "ia-cal-next ia-button-light", title: Akumina.Digispace.Language.TryGetText("calendar.nextmonth") },
+                            React.createElement("i", { className: "fa fa-chevron-right", "aria-label": Akumina.Digispace.Language.TryGetText("calendar.nextmonth") })
+                        )
+                    ),
+                    React.createElement(
+                        "button",
+                        { className: "ia-cal-today ia-button-light" },
+                        Akumina.Digispace.Language.TryGetText("fs.eventswidget.today")
+                    )
+                ),
+                React.createElement(
+                    "h2",
+                    { className: "h3 ia-cal-current-month desktop" },
+                    MonthFullName,
+                    " ",
+                    Year
+                )
+            ),
+            React.createElement(
+                "div",
+                { className: "ia-cal-calendars" },
+                React.createElement(
+                    "div",
+                    { className: "ia-cal-grid" },
+                    React.createElement("div", { className: "ia-calendar-grid" })
+                )
+            ),
+            React.createElement(
+                "div",
+                { className: "ia-event-list" },
+                React.createElement(
+                    "div",
+                    { className: "ia-event-list-wrapper" },
+                    Events.map(event => {
+                        return React.createElement(
+                            "div",
+                            { className: "ia-event-info" + (event.Featured ? " ia-featured-event" : " ia-regular-event") + (event.AllDay ? " ia-allday-event" : !event.IsOneDayEvent ? " ia-multiday-timed-event" : " ia-timed-event") },
+                            React.createElement(
+                                "div",
+                                { className: "ia-event-date" },
+                                React.createElement(
+                                    "div",
+                                    null,
+                                    event.DisplayStartDate
+                                ),
+                                !event.IsOneDayEvent && React.createElement(
+                                    "div",
+                                    null,
+                                    event.DisplayEndDate
+                                ),
+                                React.createElement(
+                                    "div",
+                                    null,
+                                    event.Duration
+                                )
+                            ),
+                            React.createElement(
+                                "div",
+                                { className: "ia-event-name" },
+                                React.createElement(
+                                    "a",
+                                    { className: Akumina.Digispace.ConfigurationContext.IsSPAMode ? "ak-spalink" : "", href: event.Url },
+                                    event.Title
+                                )
+                            )
+                        );
+                    })
+                )
+            )
+        )
+    )
+);

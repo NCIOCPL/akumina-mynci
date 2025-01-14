@@ -1,0 +1,128 @@
+{{#if HasContent}}
+<article class="ia-calendar-detail ia-widget-wrapper ak-item" ak-item="{{Id}}">
+    <div class="ia-calendar-header">
+      <h1 class="h2">
+        {{Title}}
+      </h1>
+    </div>
+    <div class="row">
+      <div class="col-md-8 ia-article-section-left">
+        {{#if ThumbnailUrl}}
+        <div class="ia-article-img">
+          {{#if Featured}}
+          <div class="ia-tag-collection">
+            <div class="ia-tag-featured">
+              {{translate "fs.eventdetailwidget.featured"}}
+            </div>
+          </div>
+          {{/if}}
+          <img class="img-fluid" src="{{ThumbnailUrl}}"/>
+        </div>
+        {{/if}}
+        <div class="ia-article-description">
+          <div>{{{Body}}}</div>
+        </div>
+        <div class="ia-button-row">
+          <button class="ia-button-primary ia-event-detail-ics">{{translate "fs.eventdetailwidget.downloadevent"}}</button>
+        </div>
+      </div>
+      <div class="col-md-4 ia-article-section-right">
+        <div class="ia-calender-attributes">
+          <div class="ia-calender-datetime-location">
+            <div class="ia-calender-date-time">
+              <p>{{DisplayStartDate}}{{#unless IsOneDayEvent}}-{{DisplayEndDate}}{{/unless}}</p>
+              <p>{{#if AllDay}}{{translate "fs.eventdetailwidget.allday"}}{{else}}{{DisplayTimeRange}}{{#if IsOneDayEvent}}{{#if DurationDisplay}} ({{DurationDisplay}}){{/if}}{{/if}}{{/if}}</p>
+            </div>
+          </div>
+          {{#if MeetingUrl}}
+          <div class="ia-calendar-teams-link">
+            <a target="_blank" href="{{MeetingUrl}}"><span class="ia-logo-icons-24px ia-logo-nci-meeting"></span>{{translate "fs.eventdetailwidget.jointeamsmeeting"}}</a>
+          </div>
+          {{/if}}
+          {{#if Location}}
+          <div class="ia-calender-datetime-location ia-calender-location">
+              <span>{{Location}}</span>
+          </div>
+          {{/if}}
+
+        </div>
+
+
+
+
+
+
+        <div class="event-display-contacts expanded-fields-contacts" style="display: none; {{#if NCIContactPerson1_ID}} display: block;{{/if}} {{#if NCIContactPerson2_ID}} display: block;{{/if}}">
+          <h3>{{translate "customfields.contacts"}}:</h3>
+
+          <div class="contact-box">
+              {{#if NCIContactPerson1_ID}}
+              <div>
+                  <div class="ia-article-author-status">
+                      <div class="ia-article-author-img ia-user-teams-presence-container">
+                          <div class="contact-profile-image">
+                            <div id="profPhotoLink1"></div>
+                          </div>
+                      </div>
+                      <div>
+                        <a id="profInfoLink1" class="ia-author-name fs-js-publisher" href="" target="_blank">{{NCIContactPerson1_Title}}</a>
+                      </div>
+                  </div>
+                  
+              </div>
+              {{/if}} 
+              {{#if NCIContactPerson2_ID}}
+              <div>
+
+                  <div class="ia-article-author-status">
+                      <div class="ia-article-author-img ia-user-teams-presence-container">
+                          <div class="contact-profile-image">
+                            <div id="profPhotoLink2"></div>
+                          </div>
+                      </div>
+                      <div>
+                        <a id="profInfoLink2" class="ia-author-name fs-js-publisher" href="" target="_blank">{{NCIContactPerson2_Title}}</a>
+                      </div>
+                  </div>
+                  
+              </div>
+              {{/if}} 
+          </div>
+      </div>
+
+      {{#if NCIOrgOwner}}
+      <div class="event-display-organization expanded-fields-organization">
+          <h3>{{translate "customfields.manager"}}:</h3>
+          {{#each NCIOrgOwner}}
+              <div>{{{this.Label}}}</div>
+          {{/each}}
+      </div>
+      {{/if}} 
+
+
+
+
+      <script>
+          $(document).ready(function() {
+              GetNCIProfileInfoUrl("{{NCIContactPerson1_EMail}}", "#profInfoLink1");
+              GetNCIProfileInfoUrl("{{NCIContactPerson2_EMail}}", "#profInfoLink2");
+              GetNCIProfilePictureUrl("{{NCIContactPerson1_EMail}}", "#profPhotoLink1");
+              GetNCIProfilePictureUrl("{{NCIContactPerson2_EMail}}", "#profPhotoLink2");   
+          })();
+      </script>
+    
+
+
+
+
+        <div class="ia-chip-collection">
+        {{#each Categories}}
+            <span class="ia-chip">{{this}}</span>
+            {{/each}}
+        </div>
+      </div>
+    </div>
+  </article>
+  {{else}}
+    {{translate "fs.eventdetailwidget.eventnotfound"}}
+  {{/if}}

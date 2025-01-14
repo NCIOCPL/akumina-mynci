@@ -1,0 +1,325 @@
+{
+  "Definition": {
+    "Name": "NewsWidget",
+    "Description": "Displays new articles based on user preferences",
+    "Class": "Akumina.AddIn.NewsWidget",
+    "ContentTypes": [
+      "AkuminaArticle"
+    ],
+    "Version": "{CurrentBuildVersion}",
+    "Icon": "far fa-newspaper",
+    "Dependencies": [],
+    "Properties": [{
+        "name": "widgetframework",
+        "friendlyname": "{fs.newswidget.friendlynames.friendlyname_widgetframework}",
+        "value": "react",
+        "type": "string"
+      },
+      {
+        "name": "widgettitle",
+        "friendlyname": "{fs.newswidget.friendlynames.friendlyname_widgettitle}",
+        "value": "{fs.newswidget.title}",
+        "type": "string"
+      },
+      {
+        "name": "querytext",
+        "friendlyname": "{fs.newswidget.friendlynames.friendlyname_querytext}",
+        "value": "(ContentTypeId:0x0100A75A29C9F7894C83AA451364A226C855*)(ArchiveDate>{Now})(PublishDate<{Now})",
+        "type": "string"
+      },
+      {
+        "name": "selectfields",
+        "friendlyname": "{propertyfriendlynames.friendlyname_selectfields}",
+        "value": "",
+        "type": "string"
+      },
+      {
+        "name": "searchacrosssites",
+        "friendlyname": "{fs.newswidget.friendlynames.friendlyname_searchacrosssites}",
+        "value": false,
+        "type": "bool"
+      },
+      {
+        "name": "enablerefiners",
+        "friendlyname": "{fs.newswidget.friendlynames.friendlyname_enablerefiners}",
+        "value": "",
+        "type": "bool"
+      },
+      {
+        "name": "searchrefiners",
+        "friendlyname": "{fs.newswidget.friendlynames.friendlyname_searchrefiners}",
+        "value": {},
+        "type": "json"
+      },
+      {
+        "name": "refinercondition",
+        "friendlyname": "{fs.newswidget.friendlynames.friendlyname_refinercondition}",
+        "value": {
+          "And": "and",
+          "Or": "or"
+        },
+        "type": "choice"
+      },
+      {
+        "name": "displaycount",
+        "friendlyname": "{propertyfriendlynames.friendlyname_itemstodisplay}",
+        "value": "8",
+        "type": "int"
+      },
+      {
+        "name": "enablepaging",
+        "friendlyname": "{propertyfriendlynames.friendlyname_enablepaging}",
+        "value": false,
+        "type": "bool"
+      },
+      {
+        "name": "enableinterests",
+        "friendlyname": "{fs.newswidget.friendlynames.friendlyname_enableinterests}",
+        "value": false,
+        "type": "bool"
+      },
+      {
+        "name": "enabletopreacted",
+        "friendlyname": "{fs.newswidget.friendlynames.friendlyname_enabletopreacted}",
+        "value": false,
+        "type": "bool"
+      },
+      {
+        "name": "enablepopular",
+        "friendlyname": "{fs.newswidget.friendlynames.friendlyname_enablepopular}",
+        "value": false,
+        "type": "bool"
+      },
+      {
+        "name": "enableallnews",
+        "friendlyname": "{fs.newswidget.friendlynames.friendlyname_enableallnews}",
+        "value": false,
+        "type": "bool"
+      },
+      {
+        "name": "islanguageneutral",
+        "friendlyname": "{propertyfriendlynames.friendlyname_islanguageneutral}",
+        "value": false,
+        "type": "bool"
+      },
+      {
+        "name": "sortby",
+        "friendlyname": "{propertyfriendlynames.friendlyname_sortby}",
+        "value": "",
+        "type": "string"
+      },
+      {
+        "name": "isdeptspecific",
+        "friendlyname": "{propertyfriendlynames.friendlyname_isdeptspecific}",
+        "value": false,
+        "type": "bool"
+      },
+      {
+        "name": "cacheinterval",
+        "friendlyname": "{propertyfriendlynames.friendlyname_cacheinterval}",
+        "value": "-1",
+        "type": "int"
+      },
+      {
+        "name": "callbackmethod",
+        "friendlyname": "{propertyfriendlynames.friendlyname_callbackmethod}",
+        "value": "",
+        "type": "string"
+      },
+      {
+        "name": "uicallbackmethod",
+        "friendlyname": "{propertyfriendlynames.friendlyname_uicallbackmethod}",
+        "value": "",
+        "type": "string"
+      }
+    ],
+    "Views": [
+      {
+        "Name": "tipoftheweek",
+        "Path": "/{AssetLibraryName}/digitalworkplace/content/templates/newswidget/tipoftheweek.html",
+        "Id": "d7f1edec-62fc-408d-9813-4e8de13955f0"
+      },
+      {
+        "Name": "ncinewslistingpage",
+        "Path": "/{AssetLibraryName}/digitalworkplace/content/templates/newswidget/newslistingpage.html",
+        "Id": "61ad19a4-ac05-4749-8686-554430b97d15"
+      },
+      {
+        "Name": "FeaturedNews",
+        "Path": "/{AssetLibraryName}/digitalworkplace/content/templates/newswidget/featurednews.html",
+        "Id": "9bffc5c7-6cbb-4d52-80e7-b4c50eb54344"
+      },
+      {
+        "Name": "NciHomePageTipOfTheWeekRailWidgetView",
+        "Path": "/{AssetLibraryName}/digitalworkplace/content/templates/newswidget/nci-homepage-tip-of-the-week-rail-widget-view.html",
+        "Id": "eb57cf26-880d-40dc-91da-506ff0a5f0ac"
+      }  
+    ],
+    "JS": {
+      "Default": "/{AssetLibraryName}/digitalworkplace/js/widgets/digitalworkplace.core.newswidget.min.js"
+    }
+  },
+  "Instances": [{
+    "Name": "Tip of the Week",
+    "Description": "NCI tip of the week on home page ",
+    "Icon": "fa fa-cog",
+    "Id": "263e492a-68fe-48d7-81bf-f75dffb84df5",
+    "Properties": [{
+        "name": "widgetframework",
+        "value": "react"
+      },
+      {
+        "name": "widgettitle",
+        "value": "Tip of the Week"
+      },
+      {
+        "name": "querytext",
+        "value": "(ContentTypeId:0x0100A75A29C9F7894C83AA451364A226C855*)(ArchiveDate>{Now})(PublishDate<{Now})(owstaxidmetadataalltagsinfo:\"Tip of the week\")"
+      },
+      {
+        "name": "selectfields",
+        "value": "ListID,ListItemID,PublishDate,ImageOWSURLH,Title,owstaxidmetadataalltagsinfo,FeaturedOWSBOOL,PublisherOWSUSER,ThumbnailURLOWSURLH,ServerRedirectedURL,VideoOWSURLH,ReadTimeOWSNMBR,WebId,SiteId,OriginalPath,HitHighlightedSummary,SPSummary"
+      },
+      {
+        "name": "searchacrosssites",
+        "value": false
+      },
+      {
+        "name": "enablerefiners",
+        "value": false
+      },
+      {
+        "name": "searchrefiners",
+        "value": {
+          "termStoreId": "",
+          "terms": [{
+            "managedPropertyName": "SPTags",
+            "displayName": "common.tags",
+            "id": "",
+            "taxonomyIsTermSet": false,
+            "termSetName": "Category"
+          }, {
+            "managedPropertyName": "Departments",
+            "displayName": "common.departments",
+            "id": "",
+            "taxonomyIsTermSet": false,
+            "termSetName": "Category"
+          }, {
+            "managedPropertyName": "Region",
+            "displayName": "common.regions",
+            "id": "",
+            "taxonomyIsTermSet": false,
+            "termSetName": "Category"
+          }],
+          "dateFilter": {
+            "name": "",
+            "displayName": ""
+          }
+        }
+      },
+      {
+        "name": "refinercondition",
+        "value": "or"
+      },
+      {
+        "name": "displaycount",
+        "value": 4
+      },
+      {
+        "name": "enablepaging",
+        "value": false
+      },
+      {
+        "name": "enableinterests",
+        "value": false
+      }
+
+    ],
+    "SelectedView": "FeaturedNews",
+    "AvailableViews": ["NciHomePageTipOfTheWeekRailWidgetView","tipoftheweek","ncinewslistingpage","FeaturedNews"],
+    "HiddenFields": []
+  },
+
+  {
+    "Name": "Tip of the Week List",
+    "Description": "Tip of the week news listing for tiplist.aspx",
+    "Icon": "fa fa-cog",
+    "Id": "62d4da7c-afc3-4b8f-b1d7-8a9f735c3ae4",
+    "Properties": [
+      {
+        "name": "widgetframework",
+        "value": "react"
+      },
+      {
+        "name": "widgettitle",
+        "value": "Tip of the Week"
+      },
+      {
+        "name": "querytext",
+        "value": "(ContentTypeId:0x0100A75A29C9F7894C83AA451364A226C855*)(ArchiveDate>{Now})(PublishDate<{Now})(owstaxidmetadataalltagsinfo:\"Tip of the week\")"
+      },
+      {
+        "name": "selectfields",
+        "value": "ListID,ListItemID,PublishDate,ImageOWSURLH,Title,owstaxidmetadataalltagsinfo,FeaturedOWSBOOL,PublisherOWSUSER,ThumbnailURLOWSURLH,ServerRedirectedURL,VideoOWSURLH,ReadTimeOWSNMBR,WebId,SiteId,OriginalPath,HitHighlightedSummary,SPDescription"
+      },
+      {
+        "name": "searchacrosssites",
+        "value": false
+      },
+      {
+        "name": "enablerefiners",
+        "value": false
+      },
+      {
+        "name": "searchrefiners",
+        "value": {
+          "termStoreId": "9f6b3be8-ba1a-4111-ae41-3d7d6617b251",
+          "termSetName": "Category",
+          "terms": [
+            {
+              "name": "Departments",
+              "displayName": "common.departments",
+              "displayType": "Tree",
+              "id": "ef90fc48-1b8a-4242-bbda-df722c8b3a47"
+            },
+            {
+              "name": "Region",
+              "displayName": "common.regions",
+              "displayType": "Tree",
+              "id": "5b1272bd-6012-4a2a-a5c7-8b718ec23521"
+            },
+            {
+              "name": "SPTags",
+              "displayName": "common.tags",
+              "displayType": "Tags",
+            "id": "f7fece51-494f-48df-824d-f21cdd9a0146"
+          }
+        ]}
+      },
+      {
+        "name": "refinercondition",
+        "value": "or"
+      },
+      {
+        "name": "displaycount",
+        "value": 8
+      },
+      {
+        "name": "enablepaging",
+        "value": true
+      },
+      {
+        "name": "enableinterests",
+        "value": false
+      }],
+      "SelectedView": "ncinewslistingpage",
+      "AvailableViews": [],
+      "HiddenFields": []
+      }
+    ],  
+  "Options": {
+    "IsPartialDefinition": true,
+    "IsDashboardWidget": false,
+    "IsAppManagerWidget": false
+  }
+}

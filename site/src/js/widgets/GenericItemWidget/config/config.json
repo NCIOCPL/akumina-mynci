@@ -1,0 +1,41 @@
+{
+  "Definition": {
+    "Name": "GenericItemWidget",
+    "Description": "A flexible widget which can work with any content type (list structure) to retrieve data for a single list item that is then passed to a View to render on the site.",
+    "Class": "Akumina.AddIn.GenericItemWidget",
+    "ContentTypes": [],
+    "Version": "{CurrentBuildVersion}",
+    "Icon": "fa fa-list",
+    "Properties": [],
+    "Views": [
+      {
+        "Name": "nciorgdirectory",
+        "Path": "/{AssetLibraryName}/DigitalWorkPlace/Content/Templates/GenericItemWidget/nciorgdirectory.html",
+        "Id": "cc5c6adb-3e0b-4e8d-9a07-d2fb64b30cc4"
+      }
+    ],
+    "JS": {
+      "Default": "/{AssetLibraryName}/DigitalWorkPlace/JS/widgets/digitalworkplace.core.genericitemwidget.min.js"
+    }
+  },
+    "Instances": 
+    [
+      {
+        "Name": "NCI Organization Directory",
+        "Id": "05fd9ed4-fcd8-44db-8525-93ed8506cc74",
+        "Description": "Displays the results of a search including results list and filters",
+        "Icon": "fa fa-search",
+        "SelectedView": "nciorgdirectory",
+        "AvailableViews": ["nciorgdirectory"],
+        "Properties": [
+          {
+            "name": "propcallbackmethod",
+            "value": "NCIGenericItemPropcallback"          
+          }
+        ]
+      }
+    ],
+    "Options": {
+        "IsPartialDefinition": true
+    }
+}
