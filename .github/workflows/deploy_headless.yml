@@ -1,0 +1,21 @@
+name: Deploy Headless Site
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        type: environment
+
+jobs:
+  deploy:
+    name: Deploy
+    runs-on: windows-latest
+    environment: ${{inputs.environment}}
+    
+    steps:
+      ## Checkout the code
+      - name: Checkout branch
+        uses: actions/checkout@v3
+
+      - run: |
+          "Hello World!"
+    
