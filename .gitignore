@@ -26,6 +26,10 @@
 !.pa11yci.js
 
 # === Rules for release artifacts ===
+*.env
+!template.env
+
+# === Rules for release artifacts ===
 /*.tar.*
 /*.pkg
 /SHASUMS*.txt*
