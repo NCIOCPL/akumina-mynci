@@ -1,0 +1,64 @@
+name: "Setup"
+description: "Setup an Akumina deployment environment"
+inputs: 
+    deployment_type:
+        type: string
+        # Documentation: https://akumina.github.io/docs/Site-Deployer-Version-6-0
+        description: Akumina code deployment type
+        required: true
+
+runs:
+  using: "composite"
+  steps:
+
+    - name: Install jq
+      working-directory: site
+      shell: pwsh
+      run: |
+        Invoke-WebRequest -Uri "https://github.com/stedolan/jq/releases/download/jq-1.6/jq-win64.exe" -OutFile "jq.exe"
+        New-Item -ItemType Directory -Force $env:USERPROFILE\Documents\PowerShell
+        New-Item -ItemType File -Force $env:USERPROFILE\Documents\PowerShell\profile.ps1
+        Add-Content $Profile.CurrentUserAllHosts 'Set-Alias jq "${pwd}\jq.exe"'
+
+    - name: Setup Node
+      uses: actions/setup-node@v4
+      with:
+          node-version-file: "site/.nvmrc"
+          cache: 'npm'
+          cache-dependency-path: "site/package-lock.json"
+    
+    - name: Run NPM
+      working-directory: site
+      shell: pwsh
+      run: npm ci
+
+    # Temporarily using v1506 from the wiki while we wait for them to add the release
+    - name: Install Akumina SiteDeployer
+      working-directory: site
+      shell: pwsh
+      run: |
+          Invoke-WebRequest -Uri "https://github.com/user-attachments/files/18969562/6.0.2301.1506-Akumina.SiteDeployer.zip" -OutFile "sd.zip"
+          $ExtractPath = "tools"
+          if (-not (Test-Path -Path $ExtractPath)) {
+              New-Item -ItemType Directory -Path $ExtractPath | Out-Null
+          }
+          Expand-Archive -Path "sd.zip" -DestinationPath $ExtractPath -Force
+          Remove-Item -Path "sd.zip"
+
+    - name: Modify deployment type
+      working-directory: site
+      shell: pwsh
+      run: |
+          $deployment_type = $env:DEPLOYMENT_TYPE
+          if ([string]::IsNullOrWhiteSpace($deployment_type)) {
+          # If no string is provided, assume "all" and set everything to false
+          "You must provide a deployment type to proceed."
+          } else {
+          # Split the string on commas and update the JSON file accordingly
+          $deployment_types = $deployment_type -split ","
+          foreach ($dt in $deployment_types) {
+              jq --arg dt $dt '.Options[$dt] = true' akumina.sitedeployer.config.json > tmpfile ; Move-Item -Path tmpfile -Destination akumina.sitedeployer.config.json -Force
+          }
+          }
+      env:
+          DEPLOYMENT_TYPE: ${{ inputs.deployment_type }}

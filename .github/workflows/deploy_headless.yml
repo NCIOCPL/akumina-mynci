@@ -4,10 +4,6 @@ on:
     inputs:
       environment:
         type: environment
-      deployment_type:
-        type: string
-        description: Which Akumina code to deploy
-        required: true
 
 jobs:
   deploy:
@@ -19,76 +15,24 @@ jobs:
         working-directory: site
 
     steps:
-      ## Checkout the code
+      # Checkout the code
       - name: Checkout branch
         uses: actions/checkout@v3
 
-      ## Configure the deployment type based on workflow input
-      - name: Install jq
-        run: |
-          Invoke-WebRequest -Uri "https://github.com/stedolan/jq/releases/download/jq-1.6/jq-win64.exe" -OutFile "jq.exe"
-          New-Item -ItemType Directory -Force $env:USERPROFILE\Documents\PowerShell
-          New-Item -ItemType File -Force $env:USERPROFILE\Documents\PowerShell\profile.ps1
-          Add-Content $Profile.CurrentUserAllHosts 'Set-Alias jq "${pwd}\jq.exe"'
-      - name: Modify deployment type
-        shell: pwsh
-        run: |
-          $deployment_type = $env:DEPLOYMENT_TYPE
-          if ([string]::IsNullOrWhiteSpace($deployment_type)) {
-            # If no string is provided, assume "all" and set everything to false
-            "You must provide a deployment type to proceed."
-          } else {
-            # Split the string on commas and update the JSON file accordingly
-            $deployment_types = $deployment_type -split ","
-            foreach ($dt in $deployment_types) {
-              jq --arg dt $dt '.Options[$dt] = true' akumina.sitedeployer.config.json > tmpfile ; Move-Item -Path tmpfile -Destination akumina.sitedeployer.config.json -Force
-            }
-          }
-        env:
-          DEPLOYMENT_TYPE: ${{ inputs.deployment_type }}
-
-      ## Setup node and npm caching
-      - name: Setup Node
-        uses: actions/setup-node@v4
+      # Sets up our deployment 
+      - uses: "./.github/workflows/composite/setup"
         with:
-          node-version-file: "site/.nvmrc"
-          cache: 'npm'
-          cache-dependency-path: site/package-lock.json
-      - name: Run NPM
-        run: npm install
+          deployment_type: "cdnassets"
 
-      ## Install SiteDeployer
-      - name: Install Akumina SiteDeployer
-        run: |
-          Invoke-WebRequest -Uri "https://github.com/akumina/SiteDeployer/releases/download/6.0.2301.1505/6.0.2301.1505-Akumina.SiteDeployer.zip" -OutFile "sd.zip"
-          $ExtractPath = "tools"
-          if (-not (Test-Path -Path $ExtractPath)) {
-              New-Item -ItemType Directory -Path $ExtractPath | Out-Null
-          }
-          Expand-Archive -Path "sd.zip" -DestinationPath $ExtractPath -Force
-          Remove-Item -Path "sd.zip"
-        shell: pwsh
-
-      ## Build the package
+      # Runs webpack to copy the source to the build folder
       - name: Build
         run: npm run build
 
+      # Runs akumina-widget-builder with the cdnpackage option to prep widgets for deployment
       - name: CDN Package
         run: npm run cdnpackage
 
-      - name: Upload built artifact
-        uses: actions/upload-artifact@v4
-        with:
-          path: site/build
-
-      ## Deploy the code
-      #
-      # See documentation:
-      # - https://akumina.github.io/docs/Site-Deployer-Overview.html
-      # - https://github.com/akumina/SiteDeployer
-      # - https://akumina.github.io/docs/Widget-Development-Configuring-akumina-sitedeployer-config
-      # - https://akumina.github.io/docs/Site-Deployer-Continuous-Site-Package-Deployment-via-a-console-app.html
-      # 
+      # Runs site deployer
       # We have chosen to use the tools/deploy.js script which reads from akumina.sitedeployer.config.json
       - name: Deploy to CDN
         run: npm run deploy
@@ -97,7 +41,11 @@ jobs:
           azurestorageaccountkey: ${{ secrets.azure_storage_account_key }}
           azurestorageaccountname: ${{ vars.azure_storage_account_name }}
           azurestoragecontainer: ${{ vars.azure_storage_account_container }}
-          clientid: na
-          clientsecret: na
           spdirectory: DigitalWorkplace
-          envdir: ${{ github.workspace }}\site\build\
+          envdir: build
+
+      # Stores an artifact copy on the workflow run
+      - name: Upload built artifact
+        uses: actions/upload-artifact@v4
+        with:
+          path: site/build
