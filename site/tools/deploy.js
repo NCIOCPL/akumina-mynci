@@ -16,6 +16,8 @@ const envParams = Object.entries(process.env).filter(([key, value]) =>
         `${o[0]} ${o[1]}`).join(' ')
 
 try {
+    console.log("Running:")
+    console.log('.\\tools\\Akumina.SiteDeployer.exe options ' + options + ' ' + envParams)
     exeCute('.\\tools\\Akumina.SiteDeployer.exe options ' + options + ' ' + envParams);
 } catch (ex) {
     console.error('Error executing the SiteDeployer.exe, check console');
