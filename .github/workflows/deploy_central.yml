@@ -36,7 +36,7 @@ jobs:
 
       ## Build the package
       - name: Build
-        run: npm run build
+        run: npm run build${{ inputs.environment == 'Prod' && '-prod-ci' || ''}}
 
       - name: Package
       # TO-DO: Find out of if the tokenMap is really needed

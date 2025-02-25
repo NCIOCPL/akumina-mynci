@@ -1,1 +1,1 @@
-Placeholder for dist/packages folder
+Placeholder for files and folders
