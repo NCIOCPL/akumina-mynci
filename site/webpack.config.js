@@ -1,6 +1,7 @@
 var path = require('path');
 var webpack = require('webpack');
 var fs = require('fs');
+var os = require('os');
 var Terser = require("terser");
 var CleanCSS = require('clean-css');
 
@@ -98,6 +99,49 @@ function copyFile(source, target) {
     fs.writeFileSync(targetFile, content);
 }
 
+
+/**
+ * Combines JS files in a folder into a single specified file. If the specified file already exists, appends 
+ * everything from the folder to it. Optionally minifies at the end.
+ * 
+ * @param {string} source - The source folder path.
+ * @param {string} base - The file to be used as a base for the others to be appended to.
+ * @param {string} target - The target file or directory path.
+ * @returns {void}
+ */
+function combineFolder(source, base) {
+    if (!fs.existsSync(source) || !fs.lstatSync(source).isDirectory()) {
+        throw new Error(`Source folder "${source}" does not exist or is not a directory.`);
+    }
+
+    // Create a temporary directory
+    const tempDir = fs.mkdtempSync(path.join(os.tmpdir(), 'combine-'));
+    const tempFile = path.join(tempDir, path.basename(base));
+
+    let combinedContent = '';
+    combinedContent = fs.readFileSync(base, 'utf8');
+
+    // Read and append all JS files from source folder
+    const files = fs.readdirSync(source).filter(file => file.endsWith('.js'));
+    for (const file of files) {
+        const filePath = path.join(source, file);
+        try {
+            const fileContent = fs.readFileSync(filePath, 'utf8');
+            combinedContent += `\n${fileContent}`;
+            console.log(`Appending ${filePath} to ${base}`);
+        } catch (err) {
+            console.error(`Error reading file ${filePath}: ${err.message}`);
+        }
+    }
+
+    // Write the combined content to the temporary file
+    fs.writeFileSync(tempFile, combinedContent);
+    console.log(`Temporary combined file created: ${tempFile}`);
+
+    return tempFile;
+}
+
+
 /**
  * Recursively copies files and folders from source to target. 
  * If directories exist in the source, they are created in the target and their contents are copied recursively.
@@ -124,9 +168,12 @@ function copyFolderRecursively(source, target) {
 // Copy individual files
 copyFile('src/css/digitalworkplace.custom.css', 'build/sitedefinitions/Client/CDNAssets/css/digitalworkplace.custom.css');
 copyFile('src/css/digitalworkplace.custom.css', 'build/sitedefinitions/Client/Branding/css/digitalworkplace.custom.css');
-copyFile('src/js/library/digitalworkplace.custom.js', 'build/sitedefinitions/Client/CDNAssets/js/digitalworkplace.custom.js');
-copyFile('src/js/library/digitalworkplace.custom.js', 'build/sitedefinitions/Client/Branding/js/digitalworkplace.custom.js');
 copyFile('src/MasterPage/virtualmasterpagehivevisiblemenu.html', 'build/sitedefinitions/Client/CDNAssets/Content/Templates/MasterPage/virtualmasterpagehivevisiblemenu.html');
+
+// Create our digitalworkplace.custom.js
+let digitalWorkplaceFile = combineFolder('src/js/library/custom', 'src/js/library/digitalworkplace.custom.js', )
+copyFile(digitalWorkplaceFile, 'build/sitedefinitions/Client/CDNAssets/js/digitalworkplace.custom.js');
+copyFile(digitalWorkplaceFile, 'build/sitedefinitions/Client/Branding/js/digitalworkplace.custom.js');
 
 // Copy language files
 //var languageList = ["de-de", "el-gr", "en-us", "es-es", "fr-fr", "it-it", "nl-be", "nl-nl", "pl-pl", "pt-br", "pt-pt", "tr-tr", "zh-cn"];
@@ -178,6 +225,7 @@ var genWidgetsConfig = function (widgetName) {
 
     return {
         name: "core",
+        mode: isProduction ? "production" : "development",
         entry: widgetSrcDir + '/' + widgetName + '/js/widgets/' + widgetName + ext,
         output: o,
         externals: {
