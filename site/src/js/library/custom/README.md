@@ -1,0 +1,1 @@
+Files added to this folder will be rolled into `digitalworkplace.custom.js` by the webpack configuration. Files should be named based on the widget that they relate to. Files should be independent of one another so that specific order does not matter.
