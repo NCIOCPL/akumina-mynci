@@ -1,0 +1,37 @@
+name: "Modify Deployment Type"
+description: "Change the deployment type in the akumina.sitedeployer.config.json file"
+inputs: 
+    deployment_type:
+        type: string
+        # Documentation: https://akumina.github.io/docs/Site-Deployer-Version-6-0
+        description: Akumina code deployment type
+        required: true
+
+runs:
+  using: "composite"
+  steps:
+
+    - name: Modify deployment type
+      working-directory: site
+      shell: pwsh
+      run: |
+          $deployment_type = $env:DEPLOYMENT_TYPE
+
+          # If no string is provided, assume "all" and set everything to false
+          if ([string]::IsNullOrWhiteSpace($deployment_type)) {
+            "You must provide a deployment type to proceed."
+            exit 1
+          }
+
+          # First, set all options to false in case a previous run messed with them
+          jq '.Options |= with_entries(.value = false)' akumina.sitedeployer.config.json > tmpfile
+          Move-Item -Path tmpfile -Destination akumina.sitedeployer.config.json -Force
+         
+          # Split the input on commas and update the JSON file accordingly
+          $deployment_types = $deployment_type -split ","
+          foreach ($dt in $deployment_types) {
+              jq --arg dt $dt '.Options[$dt] = true' akumina.sitedeployer.config.json > tmpfile
+              Move-Item -Path tmpfile -Destination akumina.sitedeployer.config.json -Force
+          }
+      env:
+          DEPLOYMENT_TYPE: ${{ inputs.deployment_type }}

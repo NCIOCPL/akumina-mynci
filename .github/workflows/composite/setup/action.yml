@@ -1,11 +1,5 @@
 name: "Setup"
 description: "Setup an Akumina deployment environment"
-inputs: 
-    deployment_type:
-        type: string
-        # Documentation: https://akumina.github.io/docs/Site-Deployer-Version-6-0
-        description: Akumina code deployment type
-        required: true
 
 runs:
   using: "composite"
@@ -44,21 +38,3 @@ runs:
           }
           Expand-Archive -Path "sd.zip" -DestinationPath $ExtractPath -Force
           Remove-Item -Path "sd.zip"
-
-    - name: Modify deployment type
-      working-directory: site
-      shell: pwsh
-      run: |
-          $deployment_type = $env:DEPLOYMENT_TYPE
-          if ([string]::IsNullOrWhiteSpace($deployment_type)) {
-          # If no string is provided, assume "all" and set everything to false
-          "You must provide a deployment type to proceed."
-          } else {
-          # Split the string on commas and update the JSON file accordingly
-          $deployment_types = $deployment_type -split ","
-          foreach ($dt in $deployment_types) {
-              jq --arg dt $dt '.Options[$dt] = true' akumina.sitedeployer.config.json > tmpfile ; Move-Item -Path tmpfile -Destination akumina.sitedeployer.config.json -Force
-          }
-          }
-      env:
-          DEPLOYMENT_TYPE: ${{ inputs.deployment_type }}
