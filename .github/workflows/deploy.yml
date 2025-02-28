@@ -1,6 +1,18 @@
 name: Deploy Site
+run-name: Deploy Site - CDN${{ inputs.deploy-widgets && ', Widgets' || '' }}${{ inputs.deploy-lists && ', Lists' || '' }}
 on:
   workflow_dispatch:
+    inputs:
+      environment:
+        type: environment
+      deploy-widgets:
+        description: Pack and deploy widgets
+        type: boolean
+        default: false
+      deploy-lists:
+        description: Deploy lists (TBD)
+        type: boolean
+        default: false
 
 jobs:
   deploy:
@@ -12,7 +24,88 @@ jobs:
         working-directory: site
 
     steps:
+      ########## Preparation ##########
 
       # Checkout the code
       - name: Checkout branch
         uses: actions/checkout@v3
+
+      # Sets up our deployment 
+      - uses: "./.github/workflows/composite/setup"
+
+      # Package the widgets (must run before build)
+      - name: Package Widgets
+        if: inputs.deploy-widgets
+        # TO-DO: Implement tokenMap
+        #run: npm run package ${{ inputs.widget_name }} -- --tokenMap ${{ inputs.token_map }}
+        run: npm run package
+
+      # Runs webpack to copy the source to the build folder
+      - name: Build
+        run: npm run build${{ inputs.environment == 'Prod' && '-prod-ci' || ''}}
+
+      ########## Deploy CDN Assets ##########
+
+      # Assumption is that we always want to update these because deploying widgets needs the widget views on the CDN.
+
+      # Set the deployment type
+      - uses: "./.github/workflows/composite/deployment_type"
+        with:
+          deployment_type: "cdnassets"
+
+      # Runs akumina-widget-builder with the cdnpackage option to prep widgets for deployment
+      - name: Package Widgets for CDN
+        if: inputs.deploy-widgets
+        run: npm run cdnpackage
+
+      # Runs site deployer
+      - name: Deploy to CDN
+        run: npm run deploy
+        env:
+          assetdirectory: Client
+          azurestorageaccountkey: ${{ secrets.azure_storage_account_key }}
+          azurestorageaccountname: ${{ vars.azure_storage_account_name }}
+          azurestoragecontainer: ${{ vars.azure_storage_account_container }}
+          spdirectory: DigitalWorkplace
+          envdir: build
+
+      ########## Deploy Widgets ##########
+
+        #run: npm run package ${{ inputs.widget_name }} -- --tokenMap ${{ inputs.token_map }}
+
+      # Set the deployment type
+      - uses: "./.github/workflows/composite/deployment_type"
+        if: inputs.deploy-widgets
+        with:
+          deployment_type: "widgets"
+
+      # Runs site deployer
+      - name: Deploy Widgets
+        if: inputs.deploy-widgets
+        run: npm run deploy
+        env:
+          assetdirectory: Client
+          clientid: ${{ secrets.client_id}}
+          clientsecret: ${{ secrets.client_secret }}
+          # Current assumption is that all widget instances are deployed to the Delivery site
+          # If we ever go multi-site then we will have to reconsider if this is the correct mechanism
+          spurl: ${{ vars.delivery_sp_url }}
+          centralspurl: ${{ vars.central_sp_url }}
+          spdirectory: DigitalWorkplace
+          langid: 1033
+          appmanagerurl: ${{ vars.appmanager_url }}
+          akquerykey: ${{ secrets.ak_query_key }}
+          ml: true
+          envdir: build
+      
+      ########## Deploy Lists ##########
+
+      # TBD
+
+      ########## Cleanup ##########
+
+      # Stores an artifact copy on the workflow run
+      - name: Upload built artifact
+        uses: actions/upload-artifact@v4
+        with:
+          path: site/build
