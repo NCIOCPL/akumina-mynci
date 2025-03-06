@@ -1,0 +1,33 @@
+name: Deploy Pre-Prod
+run-name: Deploy Pre-Prod via Merge Queue
+on:
+  pull_request:
+  merge_group:
+    types: [checks_requested ]
+  workflow_dispatch:
+
+# Only run one instance of this workflow at a time, period
+concurrency:
+  group: ${{ github.workflow }}
+  cancel-in-progress: true
+
+jobs:
+  deploy-pre-prod:
+    if: github.event_name != 'pull_request'
+    name: Deploy to Pre-Prod
+    uses: ./.github/workflows/deploy.yml
+    with: 
+      environment: Pre-Prod
+      deploy-widgets: true
+      deploy-lists: false
+    secrets: inherit
+
+  approve:
+    name: Approve Merge Queue
+    runs-on: ubuntu-latest
+    environment: QA Approval
+    needs:
+      - deploy-pre-prod
+    steps:
+      - name: Approve
+        run: echo "Merge Approved!"

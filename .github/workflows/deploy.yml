@@ -1,5 +1,5 @@
 name: Deploy Site
-run-name: Deploy Site - CDN${{ inputs.deploy-widgets && ', Widgets' || '' }}${{ inputs.deploy-lists && ', Lists' || '' }}
+run-name: Deploy Site to ${{ inputs.environment }} - CDN${{ inputs.deploy-widgets && ', Widgets' || '' }}${{ inputs.deploy-lists && ', Lists' || '' }}
 on:
   workflow_dispatch:
     inputs:
@@ -13,10 +13,22 @@ on:
         description: Deploy lists (TBD)
         type: boolean
         default: false
+  workflow_call:
+    inputs:
+      environment:
+        type: string
+      deploy-widgets:
+        description: Pack and deploy widgets
+        type: boolean
+        default: false
+      deploy-lists:
+        description: Deploy lists (TBD)
+        type: boolean
+        default: false
 
 jobs:
   deploy:
-    name: Deploy
+    name: Deploy Code
     runs-on: windows-latest
     environment: ${{inputs.environment}}
     defaults:
