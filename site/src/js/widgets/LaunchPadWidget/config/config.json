@@ -1,0 +1,88 @@
+{
+  "Definition": {
+    "Name": "LaunchPadWidget",
+    "Description": "",
+    "Class": "Akumina.AddIn.LaunchPadWidget",
+    "ContentTypes": [],
+    "Version": "",
+    "Dependencies": [],
+    "Properties": [],
+    "Views": [
+      {
+        "Name": "Launch Pad NCI View",
+        "Path": "/{AssetLibraryName}/DigitalWorkPlace/Content/Templates/LaunchPadWidget/launchpadview_nci.html",
+        "Id": "8c1b8b94-a341-4b42-b271-7a47015c809a"
+      }
+    ],
+    "JS": {
+      "Default": "/{AssetLibraryName}/DigitalWorkPlace/JS/widgets/launchpadwidget.js"
+    }
+  },
+  "Instances": [
+    {
+      "Name": "NCI Home Page QuickLinks",
+      "Description": "Displays list of Apps available to the current user in Mission Control. Provides the ability to add apps to the list.",
+      "Icon": "fa fa-cog",
+      "Id": "6ff2e254-2506-4ed0-9b24-70c321c3fecf",
+      "Properties": [
+        {
+          "name": "listname",
+          "value": "NCI Homepage Quicklinks"
+        },
+        {
+          "name": "selectfields",
+          "value": "Id,Title,AppIcon,AppUrl,Departments,IsRequired,Region"
+        },
+        {
+          "name": "groupby",
+          "value": {
+            "termStoreId": "9f6b3be8-ba1a-4111-ae41-3d7d6617b251",
+            "termSetName": "Category",
+            "terms": {
+              "name": "Departments",
+              "displayName": "Departments",
+              "columnName": "Departments",
+              "id": "19b184fe-a269-44fc-a939-b590dd9379ea"
+            }
+          }
+        },
+        {
+          "name": "filtervalue",
+          "value": ""
+        },
+        {
+          "name": "userpreference",
+          "value": true
+        },
+        {
+          "name": "itemstodisplay",
+          "value": 100
+        },
+        {
+          "name": "callbackmethod",
+          "value": ""
+        },
+        {
+          "name": "cacheinterval",
+          "value": -1
+        },
+        {
+          "name": "uicallbackmethod",
+          "value": ""
+        },
+        {
+          "name": "sitecollectionurl",
+          "value": ""
+        }
+      ],
+      "SelectedView": "Launch Pad NCI View",
+      "AvailableViews": [],
+      "HiddenFields": []
+    }
+  ],
+  "Options": {
+    "IsPartialDefinition": true,
+    "IsDashboardWidget": false,
+    "IsAppManagerWidget": false
+  }
+}

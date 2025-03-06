@@ -1,0 +1,87 @@
+{
+  "Definition": {
+    "Name": "BlogDetailWidget",
+    "Description": "",
+    "Class": "Akumina.AddIn.BlogDetailWidget",
+    "ContentTypes": [],
+    "Version": "",
+    "Dependencies": [],
+    "Properties": [],
+    "Views": [
+      {
+        "Name": "bloglatestdetail",
+        "Path": "/{AssetLibraryName}/DigitalWorkPlace/Content/Templates/BlogDetailWidget/bloglatestdetail.html",
+        "Id": "bc50b0c2-f487-ec49-b70b-d70b259efd0e"
+      }
+    ],
+    "JS": {
+      "Default": "/{AssetLibraryName}/DigitalWorkPlace/JS/widgets/blogdetailwidget.js"
+    }
+  },
+  "Instances": [
+    {
+      "Name": "Blog Details",
+      "Description": "Displays blog article detail",
+      "Icon": "fa fa-cog",
+      "Id": "0E19175D-FFB7-4B2F-B10B-6D380D198442",
+      "Properties": [
+        {
+          "name": "widgetframework",
+          "value": "react"
+        },
+        {
+          "name": "listname",
+          "value": "Blogs_AK"
+        },
+        {
+          "name": "selectfields",
+          "value": "ID,Created,Title,Body,Image,Video,Modified,Publish_x0020_Date,Publisher,Region,Departments,Tags,Author,ReadTime,ContentTypeId,FriendlyUrl,Archive_x0020_Date,Summary,Thumbnail_x0020_URL"
+        },
+        {
+          "name": "relatedtagstaxonomy",
+          "value": [
+            {
+              "columnName": "Tags",
+              "managedPropertyName": "SPTags",
+              "taxonomyIsTermSet": false
+            },
+            {
+              "columnName": "Departments",
+              "managedPropertyName": "Departments",
+              "taxonomyIsTermSet": false
+            },
+            {
+              "columnName": "Region",
+              "managedPropertyName": "Region",
+              "taxonomyIsTermSet": false
+            }
+          ]
+        },
+        {
+          "name": "usereactionslegacyview",
+          "value": false
+        },
+        {
+          "name": "cacheinterval",
+          "value": ""
+        },
+        {
+          "name": "callbackmethod",
+          "value": "blogDetailWidget_data"
+        },
+        {
+          "name": "uicallbackmethod",
+          "value": ""
+        }
+      ],
+      "SelectedView": "bloglatestdetail",
+      "AvailableViews": [],
+      "HiddenFields": []
+    }
+  ],
+  "Options": {
+    "IsPartialDefinition": true,
+    "IsDashboardWidget": false,
+    "IsAppManagerWidget": false
+  }
+}

@@ -1,0 +1,257 @@
+{
+  "Definition": {
+    "Name": "GenericSearchListWidget",
+    "Description": "Provides a type ahead search that allows the user to search the entire site for relevant pages, documents from any  page within the site (requires 3 characters of input for initiate search)",
+    "Class": "Akumina.AddIn.GenericSearchListWidget",
+    "Version": "{CurrentBuildVersion}",
+    "Icon": "fa fa-search",
+    "Properties": [
+      {
+        "name": "selectfields",
+        "friendlyname": "{propertyfriendlynames.friendlyname_selectfields}",
+        "value": "",
+        "type": "string"
+      },
+      {
+        "name": "ispaging",
+        "friendlyname": "{propertyfriendlynames.friendlyname_enablepaging}",
+        "value": "",
+        "type": "bool"
+      },
+      {
+        "name": "pagesize",
+        "friendlyname": "{propertyfriendlynames.friendlyname_itemsperpage}",
+        "value": "10",
+        "type": "int"
+      },
+      {
+        "name": "query",
+        "friendlyname": "{propertyfriendlynames.friendlyname_query}",
+        "value": "",
+        "type": "string"
+      },
+      {
+        "name": "refiners",
+        "friendlyname": "{propertyfriendlynames.friendlyname_refiners}",
+        "value": [],
+        "type": "json"
+      },
+      {
+        "name": "xrank",
+        "friendlyname": "{propertyfriendlynames.friendlyname_xrank}",
+        "value": "",
+        "type": "string"
+      },
+      {
+        "name": "callbackmethod",
+        "friendlyname": "{propertyfriendlynames.friendlyname_callbackmethod}",
+        "value": "",
+        "type": "string"
+      },
+      {
+        "name": "cacheinterval",
+        "friendlyname": "{propertyfriendlynames.friendlyname_cacheinterval}",
+        "value": "-1",
+        "type": "int"
+      },
+      {
+        "name": "uicallbackmethod",
+        "friendlyname": "{propertyfriendlynames.friendlyname_uicallbackmethod}",
+        "value": "",
+        "type": "string"
+      },
+      {
+        "name": "sortlist",
+        "friendlyname": "{propertyfriendlynames.friendlyname_sortlist}",
+        "value": "",
+        "type": "string"
+      },
+      {
+        "name": "sitecollectionurl",
+        "friendlyname": "{propertyfriendlynames.friendlyname_sitecollectionurl}",
+        "value": "",
+        "type": "siteselector"
+      },
+      {
+        "name": "searchonfirstload",
+        "friendlyname": "{propertyfriendlynames.friendlyname_searchonfirstload}",
+        "value": true,
+        "type": "bool"
+      },
+      {
+        "name": "searchscope",
+        "friendlyname": "{propertyfriendlynames.friendlyname_searchscope}",
+        "value": {
+          "Search This Site": "searchThisSite",
+          "Search Across Sites": "searchAcrossSites",
+          "Search Across Sites With Current Site Boosted": "searchWithCurrentSiteBoosted"
+        },
+        "type": "choice"
+      },
+      {
+        "name": "fetchpromotedresult",
+        "friendlyname": "{propertyfriendlynames.friendlyname_fetchpromotedresult}",
+        "value": false,
+        "type": "bool"
+      },
+      {
+        "name": "fetchdocuments",
+        "friendlyname": "{propertyfriendlynames.friendlyname_fetchdocuments}",
+        "value": true,
+        "type": "bool"
+      },
+      {
+        "name": "fetchpages",
+        "friendlyname": "{propertyfriendlynames.friendlyname_fetchpages}",
+        "value": true,
+        "type": "bool"
+      },
+      {
+        "name": "fetchpeople",
+        "friendlyname": "{propertyfriendlynames.friendlyname_fetchpeople}",
+        "value": false,
+        "type": "bool"
+      },
+      {
+        "name": "fetchmedia",
+        "friendlyname": "{propertyfriendlynames.friendlyname_fetchmedia}",
+        "value": false,
+        "type": "bool"
+      },
+      {
+        "name": "trimduplicates",
+        "friendlyname": "{propertyfriendlynames.friendlyname_trimduplicates}",
+        "value": true,
+        "type": "bool"
+      },
+      {
+        "name": "facets",
+        "friendlyname": "{peopledirectory.friendlyname_facets}",
+        "value": [
+          {
+            "facetName": "department",
+            "facetDisplayName": "Department"
+          },
+          {
+            "facetName": "officelocation",
+            "facetDisplayName": "Office Location"
+          }
+        ],
+        "type": "json"
+      },
+      {
+        "name": "typeaheaddefaulttab",
+        "friendlyname": "{propertyfriendlynames.friendlyname_typeaheaddefaulttab}",
+        "value": {
+          "Pages Tab": "pages",
+          "All Tab": "all"
+        },
+        "type": "choice"
+      },
+      {
+        "name": "supporteddocumentextensions",
+        "friendlyname": "{propertyfriendlynames.friendlyname_supporteddocumentextensions}",
+        "value": "zip,txt,doc,docx,xls,xlsx,ppt,pptx,pdf",
+        "type": "string"
+      },
+      {
+        "name": "querycallbackmethod",
+        "friendlyname": "{propertyfriendlynames.friendlyname_querycallbackmethod}",
+        "value": "",
+        "type": "string"
+      },
+      {
+        "name": "spsortfield",
+        "friendlyname": "{propertyfriendlynames.friendlyname_sortfield}",
+        "value": { "PropertyName": "", "DisplayName": ""},
+        "type": "json"
+      },
+      {
+        "name": "spsortorder",
+        "friendlyname": "{propertyfriendlynames.friendlyname_sortorder}",
+        "value": {
+          "Ascending": "asc",
+          "Descending": "desc"
+        },
+        "type": "choice"
+      },
+      {
+        "name": "extendlookin",
+        "friendlyname": "{propertyfriendlynames.friendlyname_extendlookin}",
+        "value": [],
+        "type": "json"
+      }
+    ],
+    "Views": [
+      {
+        "Name": "NCIOrgDirectorySearchResults",
+        "Path": "/{AssetLibraryName}/DigitalWorkPlace/Content/Templates/GenericSearchListWidget/NCIOrgDirectorySearchResults.html",
+        "Id": "ddd05527-93af-46f8-8d76-bc9923987170"
+      }
+    ],
+    "JS": {
+      "Default": "/{AssetLibraryName}/DigitalWorkPlace/JS/widgets/digitalworkplace.core.genericsearchlistwidget.min.js"
+    }
+  },
+  "Instances": [
+    {
+      "Name": "NCI Org Directory Search Results",
+      "Id": "425ed999-9be0-4780-8206-39383f6b0627",
+      "Description": "Displays the results of a search including results list and filters",
+      "Icon": "fa fa-search",
+      "SelectedView": "NCIOrgDirectorySearchResults",
+      "AvailableViews": ["NCIOrgDirectorySearchResults"],
+      "Properties": [
+        {
+          "name": "selectfields",
+          "value": "HitHighlightedSummary,Title,Path,ListID,LastModifiedTime,DocId,DisplayAuthor,SPWebUrl,SPSiteURL,PageDataTitleOWSTEXT,ContentType,IsDocument,ServerRedirectedEmbedURL,FileExtension,SiteTitle,SPModifiedBy,SPCreatedBy,EditorOWSUSER,AuthorOWSUSER,PageDataTitle,PageDataSiteId,owstaxidmetadataalltagsinfo,ServerRedirectedURL,LinkOWSURLH,ImageOWSURLH,BodyOWSMTXT,EventTitleOWSTEXT,LocationOWSTEXT,CategoryOWSCHCS,EventRecurrence,IsAllDayEvent,EventDateOWSDATE,EndDateOWSDATE,ListItemId,SPArchiveDate,SPPublishDate,DefaultEncodingURL,FileType,MediaServiceMetadata,Size,SitePath,SiteId,WebId,PictureThumbnailURL,Region,Departments,SPTags"
+        },
+        {
+          "name": "ispaging",
+          "value": "true"
+        },
+        {
+          "name": "pagesize",
+          "value": "12"
+        },
+        {
+          "name": "query",
+          "value": "{searchboxquery}* {QueryString.scope} (SPSiteURL:{SiteCollection} (((FileExtension:zip OR FileExtension:txt OR FileExtension:doc OR FileExtension:docx OR FileExtension:xls OR FileExtension:xlsx OR FileExtension:ppt OR FileExtension:pptx OR FileExtension:pdf)(IsDocument:\"True\")) OR (contentclass:\"STS_ListItem\" Path:\"{SiteCollection}/Lists/PageData_AK/*\" {AkLanguageId:{Site.LanguageId}})))"
+        },
+        {
+          "name": "callbackmethod",
+          "value": "OrganizationDirectorySearchResultsCallBack"
+        },
+        {
+          "name": "cacheinterval",
+          "value": "0"
+        },
+        {
+          "name": "searchscope",
+          "value": "searchThisSite"
+        },
+        {
+          "name": "refiners",
+          "value": []
+        },
+        {
+          "name": "sortlist",
+          "value": ""
+        },
+        {
+          "name": "taxonomydetails",
+          "friendlyname": "{propertyfriendlynames.friendlyname_taxonomydetails}",
+          "value": {},
+          "type": "json"
+        },
+        {
+          "name": "querycallbackmethod",
+          "value": "NCIGenericSearchPropcallback"          
+        }
+      ]
+    }
+  ],
+  "Options": {
+      "IsPartialDefinition": true
+  }
+}

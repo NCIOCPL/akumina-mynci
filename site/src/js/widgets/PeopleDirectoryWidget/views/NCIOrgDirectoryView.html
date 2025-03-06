@@ -1,0 +1,537 @@
+﻿<div class="aksearchexclude ia-people-directory ia-widget-wrapper">
+    {{#if Loading}}
+    <div className="ia-loading-state">
+        <div class="ia-skeleton-wrapper">
+            <div class="ia-skeleton-col">
+                <div class="ia-skeleton-media"></div>
+                <div class="ia-skeleton-heading"></div>
+                <div class="ia-skeleton-body">
+                    <div class="ia-skeleton-text"></div>
+                    <div class="ia-skeleton-text"></div>
+                    <div class="ia-skeleton-text"></div>
+                    <div class="ia-skeleton-text"></div>
+                </div>
+            </div>
+            <div class="ia-skeleton-col">
+                <div class="ia-skeleton-media"></div>
+                <div class="ia-skeleton-heading"></div>
+                <div class="ia-skeleton-body">
+                    <div class="ia-skeleton-text"></div>
+                    <div class="ia-skeleton-text"></div>
+                    <div class="ia-skeleton-text"></div>
+                    <div class="ia-skeleton-text"></div>
+                </div>
+            </div>
+            <div class="ia-skeleton-col">
+                <div class="ia-skeleton-media"></div>
+                <div class="ia-skeleton-heading"></div>
+                <div class="ia-skeleton-body">
+                    <div class="ia-skeleton-text"></div>
+                    <div class="ia-skeleton-text"></div>
+                    <div class="ia-skeleton-text"></div>
+                    <div class="ia-skeleton-text"></div>
+                </div>
+            </div>
+            <div class="ia-skeleton-col">
+                <div class="ia-skeleton-media"></div>
+                <div class="ia-skeleton-heading"></div>
+                <div class="ia-skeleton-body">
+                    <div class="ia-skeleton-text"></div>
+                    <div class="ia-skeleton-text"></div>
+                    <div class="ia-skeleton-text"></div>
+                    <div class="ia-skeleton-text"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{else}}
+    <div class="ia-people-directory-section nciorg">
+        <!-- <div class="ia-people-search ia-people-search">
+            <div class="ia-people-search-wrapper">
+                <div class="ia-radio-button-keyword fs-js-searchOptionSelect">
+                    <label class="ia-radio-wrapper ia-secondary-radio-button">
+                        <input type="radio" checked class="radio" name="keyword" value="namesearch">
+                        <span class="ia-radio"></span>
+                        <span class=" ia-radio-label">{{translate "peopledirectory.namesearch"}}</span>
+                    </label>
+                    <label class="ia-radio-wrapper ia-secondary-radio-button">
+                        <input type="radio" class="radio" name="keyword" value="keywordsearch">
+                        <span class="ia-radio"></span>
+                        <span class=" ia-radio-label">{{translate "peopledirectory.keywordsearch"}}</span>
+                    </label>
+                </div>
+                <div class="row searchoptionHolder" id="namesearch">
+                    <div class="col-md-6">
+                        <div class="ia-form-row">
+                            <div class="ia-value">
+                                <input id="firstName" placeholder="{{translate "peopledirectory.firstnameplaceholder"}}"
+                                       aria-label="{{translate "peopledirectory.firstnameplaceholder"}}." type="text"
+                                       class="ia-firstNameSearchBox" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="ia-form-row">
+                            <div class="ia-value">
+                                <input id="lastName" placeholder="{{translate "peopledirectory.lastnameplaceholder"}}"
+                                       aria-label="{{translate "peopledirectory.lastnameplaceholder"}}." type="text"
+                                       class="ia-lastNameSearchBox" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="searchoptionHolder" id="keywordsearch">
+                    <div class="ia-form-row">
+                        <div class="ia-value ia-text-button-icon-group">
+                            <input id="keywordSearch"
+                                   placeholder="{{translate "peopledirectory.keywordsearchplaceholder"}}"
+                                   aria-label="{{translate "peopledirectory.keywordsearchplaceholder"}}." type="text"
+                                   class="ia-keywordSearchBox" />
+                            <a href="#" class="searchKeywordIcon ia-button-icon"
+                               aria-label="{{translate 'common.search'}}">
+                                <i class="fa fa-search" aria-hidden="true"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+
+        <!-- <div class="ia-people-results-view-list">
+            {{#if DisplayAZSelector}}
+            <div class="ia-people-az">
+                <span>Quick filters:</span>
+                <ul class="ia-people-az-list">
+                    <li class="ak-selected">
+                        <a data-selector="All"
+                           href="javascript:void(0)">{{translate "peopledirectory.all"}}</a>
+                    </li>
+                    {{#each Alphabets}}
+                    <li><a href="javascript:void(0)">{{this}}</a></li>
+                    {{/each}}
+                </ul>
+            </div>
+            {{/if}}
+            <div class="ia-people-results-view">
+                <button class="ia-people-results-byGrid ia-active"
+                        aria-label="{{translate 'peopledirectory.gridview'}}">
+                    <i class="fa-solid fa-grid" aria-hidden="true"></i>
+                </button>
+                <span class="ia-button-separator"></span>
+                <button class="ia-people-results-byList"
+                        aria-label="{{translate 'peopledirectory.listview'}}">
+                    <i class="fa-solid fa-list" aria-hidden="true"></i>
+                </button>
+            </div>
+        </div> -->
+        
+        
+        <div class="ia-people-filter-section">
+            {{#unless FilterAsProperty}}
+            <div class="ia-people-filters">
+                <div class="ia-people-filter-trigger"
+                     aria-label="{{translate 'peopledirectory.togglefilter'}}">
+                    <span class="ia-filter-toggle"></span>
+                    {{translate 'peopledirectory.togglefilter'}}
+                </div>
+                <div class="ia-people-filter-wrapper">
+                    <div class="ia-people-filter-label">
+                        {{translate "peopledirectory.filters"}}
+                    </div>
+                    <div class="ia-people-filter">                        
+                        <div id="filtertreenav">                            
+                        </div>   
+                        <div id="filterpeoplefinder">
+                            {{#each RefinementFilters}}
+                            <div class="ia-people-filter-header" data-filtername="{{FilterName}}">
+                                <h3 class="h4">{{FilterHeader}}</h3>
+                                <a href="javascript:void(0)" class="">
+                                    <i class="fa-regular fa-angle-up" aria-label="toggle look in"></i>
+                                </a>
+                            </div>
+                            <div class="ia-people-filter-options">
+                                {{#if this.FilterOptions}}
+                                <div class="ia-form-row">
+                                    {{#each this.FilterOptions}}
+                                    <label class="ia-checkbox-wrapper">
+                                        <input type="checkbox" id="{{this.id}}" value="{{this.value}}" />
+                                        <span class="ia-checkbox"></span>
+                                        <span class="ia-checkbox-label">{{this.value}}</span>
+                                    </label>
+                                    {{/each}}
+                                </div>
+                                {{else}}
+                                <div>{{translate "peopledirectory.datanotavailable"}}.</div>
+                                {{/if}}
+                            </div>
+                            {{/each}}
+                        </div>
+                    </div>
+                    <!-- {{#each RefinementFilters}}
+                    <div class="ia-people-filter">
+                        <div class="ia-people-filter-header"
+                             data-filtername="{{FilterName}}">
+                            <h3 class="h4">{{FilterHeader}}</h3>
+                            <a href="javascript:void(0)" class="">
+                                <i class="fa-regular fa-angle-up" aria-label="toggle look in"></i>
+                            </a>
+                        </div>
+                     
+                    </div>
+                    {{/each}} -->
+                </div>
+            </div>
+            {{/unless}}          
+            <div id="organizationdirectorytabwidget" style="width: 1150px;">
+                <!-- <div rel="NCI TAB Organization Directory" class="ak-widget" id="0348f7ba-10bf-42a7-aec0-612a510f7425"></div> -->
+            </div>
+            {{#if FilterAsProperty}}
+            <div class="ia-people-results" style="display: none;">
+                {{#if SelectedLetter}}
+                <p>
+                    {{translate "peopledirectory.peoplewith"}} {{SearchType}}
+                    {{translate "peopledirectory.matchingnames"}} {{SelectedLetter}}
+                </p>
+                {{/if}}
+                <div class="ia-loading-panel ia-hide">
+                    <!-- change class to ia-show to show this loading panel -->
+                    <div class="ia-loader"></div>
+                </div>
+                <div class="ia-people-results-list ia-card">
+                    <table class="tablesaw tablesaw-stack ia-people-results-table" data-mode="stack">
+                        <thead>
+                            <tr>
+                                <th width="25%">{{translate "peopledirectory.namecolumn"}}</th>
+                                <th width="40%">{{translate "peopledirectory.titlecolumn"}}</th>
+                                <th width="20%">{{translate "peopledirectory.officecolumn"}}</th>
+                                <th width="15%">{{translate "peopledirectory.contact"}}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!--{{#each People}}-->
+                            <tr>
+                                <td>
+                                        {{#if ../DisplayFL}}
+										<a href="javascript:void(0)" data-email="{{userprincipalname}}" data-id="{{Id}}" class="ia-profile-detail-link fs-js-profile-name">
+											<div class="ia-user-teams-presence-container">
+												<img class="ia-people-list-avatar ed-user-image" src="{{pictureurl}}"
+													 data-user="{{userprincipalname}}"
+													 alt="Profile picture of {{givenname}} {{surname}}." />
+                                                     <div data-email-id="{{userprincipalname}}" id="userPresence" title="" class="ia-user-profile-by-status fs-js-user-profile-by-status"></div>
+											</div>
+											<span>{{givenname}} {{surname}}</span>
+										</a>
+										{{else}}
+										<a href="javascript:void(0)" data-email="{{userprincipalname}}" data-id="{{Id}}" class="ia-profile-detail-link">
+											<div class="ia-user-teams-presence-container">
+												<img class="ia-people-list-avatar ed-user-image" src="{{pictureurl}}"
+													 data-user="{{userprincipalname}}"
+													 alt="Profile picture of {{givenname}} {{surname}}." />
+                                                     <div data-email-id="{{userprincipalname}}" id="userPresence" title="" class="ia-user-profile-by-status fs-js-user-profile-by-status"></div>
+											</div>
+											<span>{{surname}}, {{givenname}}</span>
+										</a>
+										{{/if}}
+                                </td>
+                                <td>{{jobtitle}}</td>
+                                <td>{{officelocation}}</td>
+                                <td>
+                                    <ul class="ia-contact-links">
+                                        <li>
+                                            {{#if businessphones}}
+                                            <a href="tel:{{businessphones}}">
+                                                <i class="fa fa-phone"
+                                                   aria-hidden="true"></i>
+                                            </a>
+                                            {{/if}}
+                                        </li>
+                                        <li>
+                                            {{#if mail}}
+                                            <a href="mailto:{{mail}}"><i class="fa fa-envelope-o"></i></a>
+                                            {{else}}
+                                            <a href="mailto:{{userprincipalname}}"><i class="fa fa-envelope-o"></i></a>
+                                            {{/if}}
+                                        </li>
+                                        <li>
+                                            {{#if mail}}
+                                            <a class="ia-ms-teams" href="https://teams.microsoft.com/l/chat/0/0?users={{mail}}"
+                                               target="_blank"></a>
+                                            {{/if}}
+                                        </li>
+                                        
+
+                                    </ul>
+                                    
+
+                                </td>
+                            </tr>
+                            <!--{{/each}}-->
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="ia-people-results-grid">
+                    {{#each People}}
+                    <div class="ia-profile-container ia-card">
+                        <div class="ia-profile-avatar">
+                        </div>
+                        <div data-id="{{Id}}" class="ia-user-teams-presence-container">
+                            <img src="{{pictureurl}}" data-user="{{userprincipalname}}"
+                                 alt="Profile picture of {{givenname}} {{surname}}." class="ed-user-image ia-ed-user-image" />
+                            <div data-email-id="{{userprincipalname}}" id="userPresence" title="" class="ia-user-profile-by-status fs-js-user-profile-by-status"></div>
+                        </div>
+                        {{#if mail}}
+                        <a class="ia-msteams"
+                           href="https://teams.microsoft.com/l/chat/0/0?users={{mail}}"
+                           target="_blank"
+                           aria-label="{{translate 'peopledirectory.contact'}} {{givenname}} {{surname}} with Microsoft Teams."></a>
+                        {{/if}}
+                        <div class="ia-profile-details">
+                            <div data-id="{{Id}}" href="#user-popup" class=""
+                                 aria-label="{{translate 'peopledirectory.moreinfoprefix'}} {{givenname}} {{surname}}">
+                                {{#if ../DisplayFL}}
+                                <a href="javascript:void(0)" data-email="{{userprincipalname}}" class="ia-profile-name fs-js-profile-name">{{givenname}} {{surname}}</a>
+                                {{else}}
+                                <a href="javascript:void(0)" data-email="{{userprincipalname}}" class="ia-profile-name fs-js-profile-name">{{surname}}, {{givenname}}</a>
+                                {{/if}}
+                                {{#if jobtitle}}
+                                <div class="ia-profile-title">{{jobtitle}}</div>
+                                {{/if}}
+                                {{#if usageLocation}}
+                                <div class="ia-profile-location">
+                                    {{translate "peopledirectory.userlocation"}}:
+                                    {{usageLocation}}
+                                </div>
+                                {{/if}}
+                                {{#if mail}}
+                                <div class="ia-link-item">
+                                    <a href="mailto:{{mail}}"
+                                       aria-label="{{mail}}">{{mail}}</a>
+                                </div>
+                                {{else}}
+                                <div class="ia-link-item">
+                                    <a href="mailto:{{userprincipalname}}"
+                                       aria-label="{{userprincipalname}}">{{userprincipalname}}</a>
+                                </div>
+                                {{/if}}
+                                {{#if businessphones}}
+                                <div class="ia-link-item">
+                                    <a href="tel:{{businessphones}}"
+                                       aria-label="{{businessphones}}">{{businessphones}}</a>
+                                </div>
+                                {{/if}}
+                                {{#if customfieldstring6}}
+                                <div class="ia-profile-dept">
+                                    {{translate "NCI.profile.classification"}}: {{customfieldstring6}}
+                                </div>
+                                {{/if}}
+                                {{#if department}}
+                                <div class="ia-profile-dept">
+                                    {{translate "peopledirectory.userdepartment"}}: {{department}}
+                                </div>
+                                {{/if}}
+                                {{#if officelocation}}
+                                <div class="ia-profile-office">
+                                    {{translate "peopledirectory.useroffice"}}: {{officelocation}}
+                                </div>
+                                {{/if}}
+                                {{#if manager_displayname}}
+                                <div class="ia-profile-manager">
+                                    {{translate "peopledirectory.manager"}}: {{manager_displayname}}
+                                </div>
+                                {{/if}}
+                            </div>
+                        </div>
+                    </div>
+                    {{/each}}
+                </div>
+                {{#if People.length}}
+                <div class="showMoreResults ia-button-row justify-content-center">
+                    <a href="#" class="ia-button ia-button-big">{{translate "common.showmoreresults"}}</a>
+                </div>
+                {{else}}
+                <div class="text-center">{{translate "common.noresultsfound"}}...</div>
+                {{/if}}
+            </div>
+            {{else}}
+            <div class="ia-people-results" style="display: none;">
+                {{#if SelectedLetter}}
+                <p>{{translate "peopledirectory.peoplematchingnames"}}</p>
+                {{/if}}
+                <div class="ia-loading-panel ia-hide">
+                    <!-- change class to ia-show to show this loading panel -->
+                    <div class="ia-loader"></div>
+                </div>
+                <div class="ia-people-results-list ia-card">
+                    <table class="tablesaw tablesaw-stack ia-people-results-table" data-mode="stack">
+                        <thead>
+                            <tr>
+                                <th width="25%">{{translate "peopledirectory.namecolumn"}}</th>
+                                <th width="40%">{{translate "peopledirectory.titlecolumn"}}</th>
+                                <th width="20%">{{translate "peopledirectory.officecolumn"}}</th>
+                                <th width="15%">{{translate "peopledirectory.contact"}}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!--{{#each People}}-->
+                            <tr>
+                                <td>
+                                     {{#if ../DisplayFL}}
+										<a href="javascript:void(0)" data-email="{{userprincipalname}}" data-id="{{Id}}" class="ia-profile-detail-link fs-js-profile-name">
+											<div class="ia-user-teams-presence-container">
+												<img class="ia-people-list-avatar ed-user-image" src="{{pictureurl}}"
+													 data-user="{{userprincipalname}}"
+													 alt="Profile picture of {{givenname}} {{surname}}." />
+                                                     <div data-email-id="{{userprincipalname}}" id="userPresence" title="" class="ia-user-profile-by-status fs-js-user-profile-by-status"></div>
+											</div>
+											<span>{{givenname}} {{surname}}</span>
+										</a>
+										{{else}}
+										<a href="javascript:void(0)" data-email="{{userprincipalname}}" data-id="{{Id}}" class="ia-profile-detail-link fs-js-profile-name">
+											<div class="ia-user-teams-presence-container">
+												<img class="ia-people-list-avatar ed-user-image" src="{{pictureurl}}"
+													 data-user="{{userprincipalname}}"
+													 alt="Profile picture of {{givenname}} {{surname}}." />
+                                                     <div data-email-id="{{userprincipalname}}" id="userPresence" title="" class="ia-user-profile-by-status fs-js-user-profile-by-status"></div>
+											</div>
+											<span>{{surname}}, {{givenname}}</span>
+										</a>
+										{{/if}}
+                                </td>
+                                <td>{{jobtitle}}</td>
+                                <td>{{officelocation}}</td>
+                                <td>
+                                    <ul class="ia-contact-links">
+                                        <li>
+                                            {{#if businessphones}}
+                                            <a href="tel:{{businessphones}}"
+                                               aria-label="{{translate 'common.call'}} {{givenname}} {{surname}}.">
+                                                <i class="fa fa-phone" aria-hidden="true"></i>
+                                            </a>
+                                            {{/if}}
+                                        </li>
+                                        <li>
+                                            {{#if mail}}
+                                            <a href="mailto:{{mail}}"
+                                               aria-label="{{translate 'peoplelist.email'}} {{givenname}} {{surname}}.">
+                                                <i class="fa fa-envelope-o"></i>
+                                            </a>
+                                            {{else}}
+                                            <a href="mailto:{{userprincipalname}}"
+                                               aria-label="{{translate 'peoplelist.email'}} {{givenname}} {{surname}}.">
+                                                <i class="fa fa-envelope-o"></i>
+                                            </a>
+                                            {{/if}}
+                                        </li>
+                                        <li>
+                                            {{#if mail}}
+                                            <a class="ia-ms-teams" href="https://teams.microsoft.com/l/chat/0/0?users={{mail}}"
+                                               target="_blank"
+                                               aria-label="{{translate 'peopledirectory.contact'}} {{givenname}} {{surname}} with Microsoft Teams."></a>
+                                            {{/if}}
+                                        </li>
+                                        
+
+                                    </ul>
+                                    
+
+                                </td>
+                            </tr>
+                            <!--{{/each}}-->
+                        </tbody>
+                    </table>
+                </div>
+                <div class="ia-people-results-grid">
+                    {{#each People}}
+                    <div class="ia-profile-container ia-card">
+                        <div class="ia-profile-avatar">
+                        </div>
+                        <div data-id="{{Id}}" class="ia-user-teams-presence-container">
+                            <img src="{{pictureurl}}" data-user="{{userprincipalname}}"
+                                 alt="Profile picture of {{givenname}} {{surname}}." class="ed-user-image ia-ed-user-image" />
+                                 <div data-email-id="{{userprincipalname}}" id="userPresence" title="" class="ia-user-profile-by-status fs-js-user-profile-by-status"></div>
+                        </div>
+                        {{#if mail}}
+                        <a class="ia-msteams"
+                           href="https://teams.microsoft.com/l/chat/0/0?users={{mail}}"
+                           target="_blank"
+                           aria-label="{{translate 'peopledirectory.contact'}} {{givenname}} {{surname}} with Microsoft Teams."></a>
+                        {{/if}}
+                        <div class="ia-profile-details">
+                            <div data-id="{{Id}}" href="#user-popup" class=""
+                                 aria-label="{{translate 'peopledirectory.moreinfoprefix'}} {{givenname}} {{surname}}">
+                                {{#if ../DisplayFL}}
+                                <a href="javascript:void(0)" data-email="{{userprincipalname}}" class="ia-profile-name fs-js-profile-name">{{givenname}} {{surname}}</a>
+                                {{else}}
+                                <a href="javascript:void(0)" data-email="{{userprincipalname}}" class="ia-profile-name fs-js-profile-name">{{surname}}, {{givenname}}</a>
+                                {{/if}}
+                                {{#if jobtitle}}
+                                <div class="ia-profile-title">{{jobtitle}}</div>
+                                {{/if}}
+                                {{#if usageLocation}}
+                                <div class="ia-profile-location">
+                                    {{translate "peopledirectory.userlocation"}}:
+                                    {{usageLocation}}
+                                </div>
+                                {{/if}}
+                                {{#if mail}}
+                                <div class="ia-link-item">
+                                    <a href="mailto:{{mail}}"
+                                       aria-label="{{mail}}">{{mail}}</a>
+                                </div>
+                                {{else}}
+                                <div class="ia-link-item">
+                                    <a href="mailto:{{userprincipalname}}"
+                                       aria-label="{{userprincipalname}}">{{userprincipalname}}</a>
+                                </div>
+                                {{/if}}
+                                {{#if businessphones}}
+                                <div class="ia-link-item">
+                                    <a href="tel:{{businessphones}}"
+                                       aria-label="{{businessphones}}">{{businessphones}}</a>
+                                </div>
+                                {{/if}}
+                                {{#if department}}
+                                <div class="ia-profile-dept">
+                                    {{translate "peopledirectory.userdepartment"}}: {{department}}
+                                </div>
+                                {{/if}}
+                                {{#if officelocation}}
+                                <div class="ia-profile-office">
+                                    {{translate "peopledirectory.useroffice"}}: {{officelocation}}
+                                </div>
+                                {{/if}}
+                                {{#if manager_displayname}}
+                                <div class="ia-profile-manager">
+                                    {{translate "peopledirectory.manager"}}: {{manager_displayname}}
+                                </div>
+                                {{/if}}
+                            </div>
+                        </div>
+                    </div>
+                    {{/each}}
+                </div>
+                {{#if People.length}}
+                <div class="showMoreResults ia-button-row justify-content-center">
+                    <a href="#" class="ia-button ia-button-big">{{translate "common.showmore"}}</a>
+                </div>
+                {{else}}
+                <div class="text-center">{{translate "common.noresultsfound"}}...</div>
+                {{/if}}
+            </div>
+            {{/if}}
+        </div>       
+    </div>   
+    {{/if}}
+</div>
+<input type="hidden" id="selectedfilter"></input>
+<script>
+    $(document).ready(function () {
+        $('.ia-people-filter-wrapper .ia-people-filter-header > a').click(function () {
+            $(this).toggleClass('ia-arrow');
+            $(this).parent().next().slideToggle(500);
+        });
+        RenderChildWidgets('#organizationdirectorytabwidget');        
+    });
+    window.LoadOrganizationDirectoryTreeFilter();
+</script>

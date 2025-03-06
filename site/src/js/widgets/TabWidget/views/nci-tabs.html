@@ -1,0 +1,25 @@
+<div class="ia-tab-widget-container fs-js-tab-widget-container ia-widget-wrapper nci-tabs" style="display: none;">
+    <div class="ak-tabwidget-container {{#if ShowWidgetTitle}}  {{/if}}"> 
+        {{#if ShowWidgetTitle}}
+        <div>
+            <i aria-hidden="true"></i>
+            <h3>{{WidgetTitle}}</h3> 
+        </div>
+        {{/if}}
+        <nav role="navigation" class="ia-transformer-tab-nav">
+            <ul class="ak-tabwidget-tabs-container ia-flex-tabs ia-tabs fs-js-tab">
+                {{#Items}}
+                <li class="ia-tab-item"><a href="#ak-tabwidget-tabs-{{id}}">{{title}}</a></li>
+                {{/Items}}
+            </ul>
+        </nav>
+        {{#Items}}
+        <div id="ak-tabwidget-tabs-{{id}}" class="ak-tabwidget-tab-content ak-tabwidget-tab-content-{{id}}">
+            <div class="ak-widget" id="{{id}}"></div>
+        </div>
+        {{/Items}}
+    </div>
+</div>
+<script>
+    //NCITABOrganizationDirectory();    
+</script>

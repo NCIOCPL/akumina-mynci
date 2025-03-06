@@ -1,0 +1,68 @@
+<div class="d-flex flex-column w-100 h-100 important-dates-modern">
+    <div class="row">
+        <div class="row">
+            <i class="fa fa-{{WebPartIcon}}" aria-hidden="true"></i>
+            <h3 class="ia-header--title">{{Title}}</h3>
+        </div>
+    </div>
+    <div class="row content-container-wrapper">
+        {{#if Loading}}
+        <div class="ak-event-list ia-modern-card--inner">
+            <div class="ak-item mt-3 dates-item-card">
+                <div class="col-2 day-tile">
+                    <div></div>
+                    <div></div>
+                </div>
+                <div class="col-1"></div>
+                <div class="col-10 d-flex flex-column justify-content-between">
+                    <div> </div>
+                    <div class="mt-3">
+                        <div></div>
+                        <div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {{else}}
+        <div class="ak-event-list ia-modern-card--inner">
+            {{#HasItems}} {{#Items}}
+            <div ak-item="{{ItemId}}" class="ak-item d-flex mt-3 dates-item-card">
+                <div class="col-2 day-tile">
+                    <div>{{akdateformat DateMonth "shortmonth"}}</div>
+                    <div>{{akdateformat DateDay "date"}}</div>
+                </div>
+                <div class="col-1"></div>
+                <div class="col-9 d-flex flex-column justify-content-between">
+                    <div>
+                        {{#HasLink}}
+                        <h4 class="ak-events-title"><a class="{{IsSPALink}}" href="{{AddSPALink LinkSrc}}" target="{{Target}}" target="{{Target}}">{{Location}}</a></h4>
+                        {{/HasLink}}
+                        {{^HasLink}}
+                        <h4 class="ak-events-title">{{LinkText}}</h4>
+                        {{/HasLink}}
+                    </div>
+                    <div class="mt-3">
+                        <div class="display-date">
+                            {{DisplayStartDate}}
+                        </div>
+                        <div class="event-time-range">
+                            {{DisplayTimeRange}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {{/Items}} {{/HasItems}}
+        </div>
+    </div>
+    <div class="row mt-3">
+        {{#if showAllLink}}
+        <div class="d-flex justify-content-end">
+            <a class="ia-button {{IsSPALink}}" href="{{AddSPALink ViewAllLink}}">
+                {{translate "importantdates.allevents"}}
+                <i class="fa fa-chevron-right ia-chevron"></i>
+            </a>
+        </div>
+        {{/if}}
+        {{/if}}
+    </div>
+</div>

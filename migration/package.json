@@ -1,0 +1,30 @@
+{
+  "name": "mynci-migration",
+  "version": "0.0.1",
+  "description": "Scripts to move myNCI content into SharePoint sites.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NCIOCPL/akumina-mynci.git"
+  },
+  "author": "NCIOCPL",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/NCIOCPL/akumina-mynci/issues"
+  },
+  "homepage": "https://github.com/NCIOCPL/akumina-mynci#readme",
+  "dependencies": {
+    "@pnp/nodejs-commonjs": "^2.15.0",
+    "@pnp/sp-commonjs": "^2.15.0",
+    "@xmldom/xmldom": "^0.8.10",
+    "dotenv": "^16.3.1",
+    "mime": "^4.0.1",
+    "mime-types": "^2.1.35",
+    "pnp-auth": "^2.0.0",
+    "xml2js": "^0.6.2"
+  },
+  "type": "module"
+}

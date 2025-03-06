@@ -1,0 +1,86 @@
+{
+  "Definition": {
+    "Name": "EventDetailWidget",
+    "Description": "",
+    "Class": "Akumina.AddIn.EventDetailWidget",
+    "ContentTypes": [],
+    "Version": "",
+    "Dependencies": [],
+    "Properties": [],
+    "Views": [
+      {
+        "Name": "ncicalendardetail",
+        "Path": "/{AssetLibraryName}/DigitalWorkPlace/Content/Templates/eventdetailwidget/ncicalendardetail.html",
+        "Id": "220b8212-7dd2-49d6-bf5c-231f159de3f0"
+      }
+    ],
+    "JS": {
+      "Default": "/{AssetLibraryName}/DigitalWorkPlace/JS/widgets/eventdetailwidget.js"
+    }
+  },
+  "Instances": [
+    {
+      "Name": "Event Details",
+      "Description": "Displays event details",
+      "Icon": "fa fa-cog",
+      "Id": "a279943c-6d2d-4703-871c-8fdd695f24c7",
+      "Properties": [
+        {
+          "name": "listname",
+          "value": "Calendar_AK"
+        },
+        {
+          "name": "selectfields",
+          "value": "Body,BannerUrl,Category,Created,NCIDeadline,Departments,Description,EndDate,EventTitle,Title,NCIExternalLink,NCIOrgOwner,Featured,FreeBusy,FriendlyUrl,Geolocation,NCILeftNavView,Location,Meeting_x0020_URL,Region,EventDate,StaticUrl,Tags,Thumbnail_x0020_URL,NCIContactPerson1/ID,NCIContactPerson1/Title,NCIContactPerson1/EMail,NCIContactPerson2/ID,NCIContactPerson2/Title,NCIContactPerson2/EMail,NCIContactPerson1/GUID,NCIContactPerson2/GUID"
+        },
+        {
+          "name": "expandfields",
+          "value": "NCIContactPerson1,NCIContactPerson2"
+        },
+        {
+          "name": "usefriendlyurl",
+          "value": true
+        },
+        {
+          "name": "relatedtagstaxonomy",
+          "value": [
+            {
+              "columnName": "Tags",
+              "displayName": "{common.tags}",
+              "managedPropertyName": "SPTags",
+              "taxonomyIsTermSet": false
+            },
+            {
+              "columnName": "Departments",
+              "displayName": "{common.departments}",
+              "managedPropertyName": "Departments",
+              "taxonomyIsTermSet": false
+            },
+            {
+              "columnName": "Region",
+              "diplayName": "{common.regions}",
+              "managedPropertyName": "Region",
+              "taxonomyIsTermSet": false
+            }
+          ]
+        },
+        {
+          "name": "callbackmethod",
+          "value": ""
+        },
+        {
+          "name": "uicallbackmethod",
+          "value": ""
+        }
+      ],
+      "SelectedView": "ncicalendardetail",
+      "AvailableViews": [],
+      "HiddenFields": []
+    }
+  ],
+  "Options": {
+    "IsPartialDefinition": true,
+    "IsDashboardWidget": false,
+    "IsAppManagerWidget": false
+  }
+}

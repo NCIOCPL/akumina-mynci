@@ -1,0 +1,50 @@
+{
+    "Definition": {
+        "Name": "Sample",
+        "Description": "",
+        "Class": "Client.Widgets.Sample",
+        "ContentTypes": [],
+        "Version": "",
+        "Dependencies": [],
+        "Properties": [
+            {
+                "name": "myproperty",
+                "friendlyname": "Tool Tip Property",
+                "value": "",
+                "type": "string"
+            }
+        ],
+        "Views": [
+            {
+                "Name": "default",
+                "Path": "/{AssetLibraryName}/DigitalWorkPlace/Content/Templates/Sample/default.html",
+                "Id": "0fc9326c-dda5-eae6-f14b-e00717579013"
+            }
+        ],
+        "JS": {
+            "Default": "/{AssetLibraryName}/DigitalWorkPlace/JS/widgets/sample.js"
+        }
+    },
+    "Instances": [
+        {
+            "Name": "Sample stub instance",
+            "Description": "Sample instance description",
+            "Icon": "fa fa-cog",
+            "Id": "6b2aa2b2-bb3d-c9a5-e7f6-a3fb8ad0140b",
+            "Properties": [
+                {
+                    "name": "myproperty",
+                    "value": "myfirstvalue"
+                }
+            ],
+            "SelectedView": "default",
+            "AvailableViews": [],
+            "HiddenFields": []
+        }
+    ],
+    "Options": {
+        "IsPartialDefinition": false,
+        "IsDashboardWidget": false,
+        "IsAppManagerWidget": false
+    }
+}

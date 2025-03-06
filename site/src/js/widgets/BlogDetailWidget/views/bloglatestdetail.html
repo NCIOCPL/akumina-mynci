@@ -1,0 +1,203 @@
+React.createElement(
+    React.Fragment,
+    null,
+    isfetching ? React.createElement(
+        "div",
+        { className: "ia-loading-state" },
+        React.createElement(
+            "div",
+            { "class": "ia-skeleton-wrapper ia-skeleton-1-col" },
+            React.createElement(
+                "div",
+                { "class": "ia-skeleton-col" },
+                React.createElement("div", { "class": "ia-skeleton-heading" }),
+                React.createElement("div", { "class": "ia-skeleton-heading" }),
+                React.createElement(
+                    "div",
+                    { "class": "ia-skeleton-body" },
+                    React.createElement("div", { "class": "ia-skeleton-text" }),
+                    React.createElement("div", { "class": "ia-skeleton-text" }),
+                    React.createElement("div", { "class": "ia-skeleton-text" }),
+                    React.createElement("div", { "class": "ia-skeleton-text" }),
+                    React.createElement("div", { "class": "ia-skeleton-text" }),
+                    React.createElement("div", { "class": "ia-skeleton-text" }),
+                    React.createElement("div", { "class": "ia-skeleton-text" }),
+                    React.createElement("div", { "class": "ia-skeleton-text" }),
+                    React.createElement("div", { "class": "ia-skeleton-text" }),
+                    React.createElement("div", { "class": "ia-skeleton-text" })
+                ),
+                React.createElement("div", { "class": "ia-skeleton-heading" }),
+                React.createElement(
+                    "div",
+                    { "class": "ia-skeleton-body" },
+                    React.createElement("div", { "class": "ia-skeleton-text" }),
+                    React.createElement("div", { "class": "ia-skeleton-text" }),
+                    React.createElement("div", { "class": "ia-skeleton-text" }),
+                    React.createElement("div", { "class": "ia-skeleton-text" }),
+                    React.createElement("div", { "class": "ia-skeleton-text" }),
+                    React.createElement("div", { "class": "ia-skeleton-text" }),
+                    React.createElement("div", { "class": "ia-skeleton-text" }),
+                    React.createElement("div", { "class": "ia-skeleton-text" }),
+                    React.createElement("div", { "class": "ia-skeleton-text" }),
+                    React.createElement("div", { "class": "ia-skeleton-text" })
+                )
+            )
+        )
+    ) : hasdata ? React.createElement(
+        "article",
+        { className: "ia-article ia-widget-wrapper ak-item", "ak-item": newsarticle.listitemid },
+        React.createElement(
+            "header",
+            { className: "ia-article-header" },
+            React.createElement(
+                "div",
+                { className: "row" },
+                (newsarticle.videoplayer || newsarticle.image.url) && React.createElement(
+                    "div",
+                    { className: "col-md-6" },
+                    newsarticle.videoplayer ? React.createElement(
+                        "div",
+                        { className: "ia-article-header-left" },
+                        newsarticle.videoplayer
+                    ) : React.createElement("div", { className: "ia-article-header-left", style: { backgroundImage: `url(${newsarticle.image.url})` } })
+                ),
+                React.createElement(
+                    "div",
+                    { className: newsarticle.videoplayer || newsarticle.image.url ? "col-md-6" : "col-md-8 ia-article-no-image" },
+                    React.createElement(
+                        "div",
+                        { className: "blog-header" },
+                        React.createElement(
+                            "div",
+                            { className: "ia-article-header-right" },
+                            React.createElement(
+                                "div",
+                                { className: "ia-tag-collection" },
+                                newsarticle.featured && React.createElement(
+                                    "span",
+                                    { className: "ia-tag-featured" },
+                                    Akumina.Digispace.Language.TryGetText("fs.newswidget.featured")
+                                )
+                            ),
+                            React.createElement(
+                                "h2",
+                                null,
+                                newsarticle.title
+                            ),
+                            React.createElement(
+                                "div",
+                                { className: "ia-social-info" },
+                                React.createElement(
+                                    "div",
+                                    { className: "ia-social-info-top" },
+                                    React.createElement(
+                                        "div",
+                                        { className: "ia-article-author-status" },
+                                        React.createElement(
+                                            "div",
+                                            null,
+                                            React.createElement(
+                                                "div",
+                                                { className: "ia-tag ia-article-tag" },
+                                                newsarticle.publisheddate ? newsarticle.publisheddate : ""
+                                            )
+                                        )
+                                    ),
+                                    React.createElement(
+                                        "div",
+                                        { className: "ia-social-info-top-icon social-tab" },
+                                        React.createElement(
+                                            "a",
+                                            { href: "javascript:void(0)", className: "ia-share-buttons fs-share-email share-button shareButton", "aria-label": Akumina.Digispace.Language.TryGetText("fs.common.shareemail"), title: Akumina.Digispace.Language.TryGetText("fs.common.shareemail") },
+                                            React.createElement("i", { className: "fa-regular fa-envelope", "aria-hidden": "true" })
+                                        ),
+                                        newsarticle.shareable && React.createElement("a", { href: "javascript:void(0)", className: "ia-share-buttons ak-twitter ia-twitter", "aria-label": Akumina.Digispace.Language.TryGetText("fs.common.sharemstwitter"), title: Akumina.Digispace.Language.TryGetText("fs.common.sharemstwitter") })
+                                    )
+                                ),
+                                React.createElement(
+                                    "div",
+                                    { className: "ia-social-info-bottom" },
+                                    React.createElement(
+                                        "div",
+                                        { className: "ia-reaction-container" },
+                                        React.createElement(
+                                            "div",
+                                            { className: "ia-available-reactions" },
+                                            newsarticle.reactionbuttons
+                                        ),
+                                        React.createElement(
+                                            "div",
+                                            { className: "ia-social-info-bottom-icon ia-available-reactions" },
+                                            newsarticle.reactionstats
+                                        )
+                                    )
+                                )
+                            )
+                        )
+                    )
+                )
+            )
+        ),
+        React.createElement(
+            "section",
+            { className: "ia-article-section" },
+            React.createElement(
+                "div",
+                { className: "row" },
+                React.createElement(
+                    "div",
+                    { className: "col-md-8 ia-article-section-left" },
+                    newsarticle.videoplayer && newsarticle.image.url && React.createElement("div", { className: "ia-article-img", style: { backgroundImage: `url(${newsarticle.image.url})` } }),
+                    React.createElement(
+                        "p",
+                        null,
+                        newsarticle.summary
+                    ),
+                    React.createElement(
+                        "div",
+                        { className: "ia-content-info" },
+                        React.createElement("div", { dangerouslySetInnerHTML: { __html: newsarticle.body } })
+                    ),
+                    newsarticle.categories && React.createElement(
+                        React.Fragment,
+                        null,
+                        React.createElement(
+                            "div",
+                            { "class": "ia-related-tags" },
+                            React.createElement(
+                                "h3",
+                                null,
+                                Akumina.Digispace.Language.TryGetText("fs.newsdetailwidget.relatedtags")
+                            ),
+                            React.createElement(
+                                "div",
+                                { className: "ia-chip-collection" },
+                                newsarticle.categories.map(category => React.createElement(
+                                    "a",
+                                    { href: "javascript:void(0)", className: "ia-chip", onClick: e => {
+                                            OnTagClick(e, category);
+                                        } },
+                                    category.value
+                                ))
+                            )
+                        )
+                    ),
+                    React.createElement(
+                        "div",
+                        { className: "ak-widget-wrapper" },
+                        React.createElement("div", { rel: "ActivityCommentWidget", className: "ak-widget fs-js-newsdetail-child", id: "745560f4-2a1c-e5e6-8915-36047a8cf646" })
+                    )
+                ),
+                React.createElement(
+                    "div",
+                    { className: "col-md-4" },
+                    React.createElement("div", { rel: "Related Posts", className: "ak-widget fs-js-newsdetail-child fs-js-related-news-widget ia-article-section-right", id: "0eb2fc50-03ca-4f3d-8352-cb3a0ab4c82c" })
+                )
+            )
+        )
+    ) : React.createElement(
+        "div",
+        { className: "ia-card ia-widget-padding-inline" },
+        Akumina.Digispace.Language.TryGetText("fs.newsdetailwidget.noarticlefound")
+    )
+);

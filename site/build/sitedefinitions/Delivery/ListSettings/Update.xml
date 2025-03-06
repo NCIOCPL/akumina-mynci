@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<lists>  
+	<list name="Blogs_AK" contentType="AkuminaSearch,AkuminaLanguage,AkuminaPersona,NCIAkuminaBlogs" noCrawl="FALSE"></list>
+	<list name="Calendar_AK" contentType="AkuminaSearch,AkuminaLanguage,AkuminaPersona,Event,NCIAkuminaCalendar" noCrawl="FALSE"></list>
+	<list name="FoundationNews_AK" contentType="AkuminaSearch,AkuminaLanguage,AkuminaPersona,Event,NCIAkuminaArticle" noCrawl="FALSE"></list>
+	<list name="InternalPages_AK" contentType="AkuminaSearch,AkuminaLanguage,AkuminaPersona,NCIAkuminaInternalPage" noCrawl="FALSE"></list>
+</lists>

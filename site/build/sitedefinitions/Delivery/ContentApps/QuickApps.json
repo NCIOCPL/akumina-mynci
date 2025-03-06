@@ -1,0 +1,67 @@
+{
+    "AppName": "Quick Apps",
+    "AppID": "c8f99b81-b776-4e3f-b63b-3664d4887e5b",
+    "AppType": "Author",
+    "AppIcon": "fa fa-newspaper-o",
+    "AppUsage": "Component",
+    "AuthRoles": [ "{Owners}"],
+    "ListName": "NCI Homepage Quicklinks",
+    "Links": [],
+    "ImageLibraryName": "Images_AK",
+    "EnableComments": false,
+    "HideAddNewItem": false,
+    "HideDeleteItem": false,
+    "EnableAutoTranslate": true,
+    "CheckTitleUniqueness": false,
+    "EnableCreatedByFilter": false,
+    "EnablePermissionSettings": false,
+    "EnableSocialReactions": false,
+    "EnablePersonas": false,
+    "IsPersonaSettingsRequired": false,
+    "EnableContentDistributionSetting": false,
+    "Fields": [
+        {
+            "IsVisible": true,
+            "IsMetaDataField": "false",
+            "Name": "Title",
+            "IsAutoTranslate": false,
+            "DisplayOrder": "0"
+        },
+        {
+            "IsVisible": true,
+            "IsMetaDataField": "false",
+            "Name": "Approval Status",
+            "IsAutoTranslate": false,
+            "DisplayOrder": "1"
+        },
+        {
+            "IsVisible": true,
+            "IsMetaDataField": "false",
+            "Name": "Created By",
+            "IsAutoTranslate": false,
+            "DisplayOrder": "2"
+        },
+        {
+            "IsVisible": true,
+            "IsMetaDataField": "false",
+            "Name": "Created",
+            "IsAutoTranslate": false,
+            "DisplayOrder": "3"
+        },
+        {
+            "IsVisible": true,
+            "IsMetaDataField": "false",
+            "Name": "Modified By",
+            "IsAutoTranslate": false,
+            "DisplayOrder": "4"
+        },
+        {
+            "IsVisible": true,
+            "IsMetaDataField": "false",
+            "Name": "Modified",
+            "IsAutoTranslate": false,
+            "DisplayOrder": "5"
+        }
+    ],
+    "Previews": []
+}

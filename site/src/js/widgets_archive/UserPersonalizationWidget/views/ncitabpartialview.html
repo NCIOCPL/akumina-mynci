@@ -1,0 +1,88 @@
+{{#if LoadingTabContent}}
+<div class="ia-loading-state fs-js-active">
+    <div class="ia-skeleton-wrapper ia-skeleton-1-col">
+        <div class="ia-skeleton-col">
+            <div class="ia-skeleton-media"></div>
+            <div class="ia-skeleton-heading"></div>
+            <div class="ia-skeleton-body">
+                <div class="ia-skeleton-text"></div>
+                <div class="ia-skeleton-text"></div>
+                <div class="ia-skeleton-text"></div>
+                <div class="ia-skeleton-text"></div>
+            </div>
+        </div>
+    </div>
+</div>
+{{else}}
+{{#Items}}
+<div id='fs-js-tab-content-{{id}}' class="fs-js-tab-content-element fs-active">
+    {{#ifCondition displayType '==' "Tags"}}
+    <div class="ia-form-row ia-haft-width">
+        <div class="ia-value ia-text-icon-group">
+            <input class="ia-js-personalization-search" id="personalizationSearchTags" type="text" placeholder="{{translate 'common.search'}}" value="{{inputValue}}"/>
+            <i class="fa fa-search" aria-hidden="true"></i>
+        </div>
+    </div>
+    <div class="ia-chip-collection fs-js-tab-content-chip-collection">
+        {{#children}}
+        <div id={{id}} data-name='{{name}}' data-defaultlabel="{{defaultLabel.Name}}" class="ia-chip ia-chip-tertiary {{#if Selected}} ia-active {{/if}}">
+            <span>{{name}}</span>
+            <button  class="ia-chip-action">
+                <i data-name='{{name}}' data-defaultlabel="{{defaultLabel.Name}}" data-id='{{id}}' class="far fa-times-circle ia-remove-tag fs-js-chip-action-wrapper" aria-label="{{translate 'fs.common.removechip'}}"></i>
+                <i data-name='{{name}}' data-defaultlabel="{{defaultLabel.Name}}" data-id='{{id}}' class="fa-regular fa-circle-plus ia-add-tag fs-js-chip-action-wrapper" aria-label="{{translate 'fs.common.addchip'}}"></i>
+            </button>
+        </div>
+        {{/children}}
+    </div>
+    {{else}}
+    <div class="ia-form-row ia-haft-width">
+        <div class="ia-value ia-text-icon-group">
+            <input class="ia-js-personalization-search" id="personalizationSearch" type="text" placeholder="{{translate 'common.search'}}" value="{{inputValue}}"/>
+            <i class="fa fa-search" aria-hidden="true"></i>
+        </div>
+    </div>
+    {{#children}}
+    <div class="ia-accordion {{#if isExpanded}} fs-expanded {{/if}}">
+        {{#if children}}
+        <div id={{id}} data-name='{{name}}' data-defaultlabel="{{defaultLabel.Name}}" class="ia-accordion-header">
+            <button class="ia-accordion-toggle fs-js-accordion-toggle"><i class="fas fa-chevron-up"></i></button>
+            <label data-name='{{name}}' data-defaultlabel="{{defaultLabel.Name}}" data-id='{{id}}' class="ia-checkbox-wrapper">
+                <input {{#if Selected}} checked {{/if}} {{#unless isAvailableForTagging}} disabled {{/unless}} type="checkbox"
+                    data-name='{{name}}' data-defaultlabel="{{defaultLabel.Name}}" data-id='{{id}}'
+                    class="fs-js-checkbox-wrapper">
+                <span class="ia-checkbox"></span>
+                <span class="ia-checkbox-label">{{name}}</span>
+            </label>
+        </div>
+        <div class="ia-accordion-content">
+            <div class="ia-groups">
+                {{#if children}}
+                {{#children}}
+                <div id={{id}} data-name='{{name}}' data-defaultlabel="{{defaultLabel.Name}}" class="ia-group-item {{#if Selected}} fs-selected {{/if}}">
+                    <label data-name='{{name}}' data-defaultlabel="{{defaultLabel.Name}}" data-id='{{id}}' class="ia-checkbox-wrapper">
+                        <input {{#if Selected}} checked {{/if}} {{#unless isAvailableForTagging}} disabled {{/unless}} type="checkbox" data-name='{{name}}' data-defaultlabel="{{defaultLabel.Name}}" data-id='{{id}}'
+                            class="fs-js-checkbox-wrapper-child" />
+                        <span class="ia-checkbox"></span>
+                        <span class="ia-checkbox-label">{{name}}</span>
+                    </label>
+                </div>
+                {{/children}}
+                {{/if}}
+            </div>
+        </div>
+        {{else}}
+        <div id={{id}} data-name='{{name}}' data-defaultlabel="{{defaultLabel.Name}}" class="ia-accordion-single-parent">
+            <label data-name='{{name}}' data-defaultlabel="{{defaultLabel.Name}}" data-id='{{id}}' class="ia-checkbox-wrapper">
+                <input {{#if Selected}} checked {{/if}} {{#unless isAvailableForTagging}} disabled {{/unless}} type="checkbox" data-name='{{name}}' data-defaultlabel="{{defaultLabel.Name}}" data-id='{{id}}'
+                    class="fs-js-checkbox-wrapper">
+                <span class="ia-checkbox"></span>
+                <span class="ia-checkbox-label">{{name}}</span>
+            </label>
+        </div>
+        {{/if}}
+    </div>
+    {{/children}}
+    {{/ifCondition}}
+</div>
+{{/Items}}
+{{/if}}

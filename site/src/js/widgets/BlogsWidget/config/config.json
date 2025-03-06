@@ -1,0 +1,265 @@
+{
+  "Definition": {
+    "Name": "BlogsWidget",
+    "Description": "",
+    "Class": "Akumina.AddIn.BlogsWidget",
+    "ContentTypes": [],
+    "Version": "",
+    "Dependencies": [],
+    "Properties": [],
+    "Views": [
+      {
+        "Name": "blogslatestlistingversion",
+        "Path": "/{AssetLibraryName}/DigitalWorkPlace/Content/Templates/BlogsWidget/blogslatestlistingversion.html",
+        "Id": "147ee000-8728-4b3d-bcb5-1007b0d683b8"
+      },
+      {
+        "Name": "blogslatesthomeversion",
+        "Path": "/{AssetLibraryName}/DigitalWorkPlace/Content/Templates/BlogsWidget/blogslatesthomeversion.html",
+        "Id":"03b63f18-957c-49b2-af66-595d85eb0639"
+      }
+    ],
+    "JS": {
+      "Default": "/{AssetLibraryName}/DigitalWorkPlace/JS/widgets/blogswidget.js"
+    }
+  },
+  "Instances": [
+    {
+      "Name": "Hive Blogs Listing",
+      "Description": "Displays all the top 8 blogs news with ability to view more",
+      "Icon": "fa fa-cog",
+      "Id": "a66c4b10-f06b-4534-8bb2-ca916f70f799",
+      "Properties": [
+        {
+          "name": "widgetframework",
+          "value": "react"
+        },
+        {
+          "name": "widgettitle",
+          "value": "{fs.blogswidget.title}"
+        },
+        {
+          "name": "querytext",
+          "value": "(ContentTypeId:0x010400E07131D958AE4448B52C7C427A76B6D4*)(ArchiveDate>{Now})"
+        },
+        {
+          "name": "selectfields",
+          "value": "ListID,ListItemID,PublishDate,ImageOWSURLH,Title,owstaxidmetadataalltagsinfo,PublisherOWSUSER,ThumbnailURLOWSURLH,ServerRedirectedURL,VideoOWSURLH,ReadTimeOWSNMBR,WebId,SiteId,OriginalPath,SPWebUrl"
+        },
+        {
+          "name": "searchacrosssites",
+          "value": true
+        },
+        {
+          "name": "enablerefiners",
+          "value": true
+        },
+        {
+          "name": "searchrefiners",
+          "value": {
+            "termStoreId": "9f6b3be8-ba1a-4111-ae41-3d7d6617b251",
+            "terms": [
+              {
+                "managedPropertyName": "SPTags",
+                "displayName": "common.tags",
+                "id": "f7fece51-494f-48df-824d-f21cdd9a0146",
+                "taxonomyIsTermSet": false,
+                "termSetName": "Category"
+              },
+              {
+                "managedPropertyName": "Departments",
+                "displayName": "common.departments",
+                "id": "ef90fc48-1b8a-4242-bbda-df722c8b3a47",
+                "taxonomyIsTermSet": false,
+                "termSetName": "Category"
+              },
+              {
+                "managedPropertyName": "Region",
+                "displayName": "common.regions",
+                "id": "5b1272bd-6012-4a2a-a5c7-8b718ec23521",
+                "taxonomyIsTermSet": false,
+                "termSetName": "Category"
+              }
+            ]
+          }
+        },
+        {
+          "name": "refinercondition",
+          "value": "And"
+        },
+        {
+          "name": "itemstodisplay",
+          "value": 8
+        },
+        {
+          "name": "ispaging",
+          "value": true
+        },
+        {
+          "name": "enableinterests",
+          "value": ""
+        },
+        {
+          "name": "enabletopreacted",
+          "value": ""
+        },
+        {
+          "name": "enablepopular",
+          "value": ""
+        },
+        {
+          "name": "enableallnews",
+          "value": ""
+        },
+        {
+          "name": "islanguageneutral",
+          "value": ""
+        },
+        {
+          "name": "sortby",
+          "value": "PublishDate"
+        },
+        {
+          "name": "cacheinterval",
+          "value": -1
+        },
+        {
+          "name": "callbackmethod",
+          "value": ""
+        },
+        {
+          "name": "cacheinterval",
+          "value": -1
+        },
+        {
+          "name": "uicallbackmethod",
+          "value": -1
+        }
+      ],
+      "SelectedView": "blogslatestlistingversion",
+      "AvailableViews": [],
+      "HiddenFields": []
+    },
+    {
+      "Name": "Hive Blogs Global",
+      "Description": "Displays blog news items associated with a blog news list",
+      "Icon": "fa fa-cog",
+      "Id": "6c9c2fd5-323e-4c25-9364-bd0903ef589c",
+      "Properties": [
+        {
+          "name": "widgetframework",
+          "value": "react"
+        },
+        {
+          "name": "widgettitle",
+          "value": ""
+        },
+        {
+          "name": "querytext",
+          "value": "(ContentTypeId:0x010400E07131D958AE4448B52C7C427A76B6D4*)(ArchiveDate>{Now})"
+        },
+        {
+          "name": "selectfields",
+          "value": "ListID,ListItemID,PublishDate,ImageOWSURLH,Title,owstaxidmetadataalltagsinfo,FeaturedOWSBOOL,PublisherOWSUSER,ThumbnailURLOWSURLH,ServerRedirectedURL,VideoOWSURLH,ReadTimeOWSNMBR,WebId,SiteId,OriginalPath,SPWebUrl"
+        },
+        {
+          "name": "searchacrosssites",
+          "value": true
+        },
+        {
+          "name": "enablerefiners",
+          "value": false
+        },
+        {
+          "name": "searchrefiners",
+          "value": {
+            "termStoreId": "",
+            "terms": [
+              {
+                "managedPropertyName": "SPTags",
+                "displayName": "common.tags",
+                "id": "f7fece51-494f-48df-824d-f21cdd9a0146",
+                "taxonomyIsTermSet": false,
+                "termSetName": "Category"
+              },
+              {
+                "managedPropertyName": "Departments",
+                "displayName": "common.departments",
+                "id": "ef90fc48-1b8a-4242-bbda-df722c8b3a47",
+                "taxonomyIsTermSet": false,
+                "termSetName": "Category"
+              },
+              {
+                "managedPropertyName": "Region",
+                "displayName": "common.regions",
+                "id": "5b1272bd-6012-4a2a-a5c7-8b718ec23521",
+                "taxonomyIsTermSet": false,
+                "termSetName": "Category"
+              }
+            ]
+          }
+        },
+        {
+          "name": "refinercondition",
+          "value": "And"
+        },
+        {
+          "name": "itemstodisplay",
+          "value": 8
+        },
+        {
+          "name": "ispaging",
+          "value": true
+        },
+        {
+          "name": "enableinterests",
+          "value": ""
+        },
+        {
+          "name": "enabletopreacted",
+          "value": ""
+        },
+        {
+          "name": "enablepopular",
+          "value": ""
+        },
+        {
+          "name": "enableallnews",
+          "value": ""
+        },
+        {
+          "name": "islanguageneutral",
+          "value": ""
+        },
+        {
+          "name": "sortby",
+          "value": "PublishDate"
+        },
+        {
+          "name": "cacheinterval",
+          "value": -1
+        },
+        {
+          "name": "callbackmethod",
+          "value": ""
+        },
+        {
+          "name": "cacheinterval",
+          "value": -1
+        },
+        {
+          "name": "uicallbackmethod",
+          "value": ""
+        }
+      ],
+      "SelectedView": "blogslatesthomeversion",
+      "AvailableViews": [],
+      "HiddenFields": []
+    }
+  ],
+  "Options": {
+    "IsPartialDefinition": true,
+    "IsDashboardWidget": false,
+    "IsAppManagerWidget": false
+  }
+}
