@@ -1244,6 +1244,11 @@ and Important Events (Upcoming Events)
     -webkit-line-clamp: 3;
 }
 
+/* Sets email string to lowercase */
+#ed-mail {
+    text-transform: lowercase;
+}
+
 /* Needs to be removed for org chart when fixed */
 .ak-theme-ncitheme .ak-widget.fs-js-my-org-instance:has(.ia-my-org) {
 	display: none;
