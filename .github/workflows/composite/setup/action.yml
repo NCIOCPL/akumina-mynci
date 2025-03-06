@@ -31,7 +31,7 @@ runs:
       working-directory: site
       shell: pwsh
       run: |
-          Invoke-WebRequest -Uri "https://github.com/user-attachments/files/18969562/6.0.2301.1506-Akumina.SiteDeployer.zip" -OutFile "sd.zip"
+          Invoke-WebRequest -Uri "https://github.com/akumina/SiteDeployer/releases/download/6.0.2301.1508/6.0.2301.1508-Akumina.SiteDeployer.zip" -OutFile "sd.zip"
           $ExtractPath = "tools"
           if (-not (Test-Path -Path $ExtractPath)) {
               New-Item -ItemType Directory -Path $ExtractPath | Out-Null
