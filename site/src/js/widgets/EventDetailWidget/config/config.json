@@ -31,7 +31,7 @@
         },
         {
           "name": "selectfields",
-          "value": "Body,BannerUrl,Category,Created,NCIDeadline,Departments,Description,EndDate,EventTitle,Title,NCIExternalLink,NCIOrgOwner,Featured,FreeBusy,FriendlyUrl,Geolocation,NCILeftNavView,Location,Meeting_x0020_URL,Region,EventDate,StaticUrl,Tags,Thumbnail_x0020_URL,NCIContactPerson1/ID,NCIContactPerson1/Title,NCIContactPerson1/EMail,NCIContactPerson2/ID,NCIContactPerson2/Title,NCIContactPerson2/EMail,NCIContactPerson1/GUID,NCIContactPerson2/GUID"
+          "value": "BannerUrl,Body,Category,Created,Departments,Description,Duration,EndDate,EventDate,fAllDayEvent,EventTitle,Featured,fRecurrence,FreeBusy,FriendlyUrl,ID,Geolocation,Location,Meeting_x0020_URL,NCIContactPerson1/EMail,NCIContactPerson1/GUID,NCIContactPerson1/ID,NCIContactPerson1/Title,NCIContactPerson2/EMail,NCIContactPerson2/GUID,NCIContactPerson2/ID,NCIContactPerson2/Title,NCIDeadline,NCIExternalLink,NCILeftNavView,NCIOrgOwner,RecurrenceData,Region,StaticUrl,Tags,Thumbnail_x0020_URL,Title,XMLTZone,"
         },
         {
           "name": "expandfields",
