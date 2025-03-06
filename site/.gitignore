@@ -5,7 +5,6 @@ build/sitedefinitions/Client/CDNAssets/Content/Templates/Masterpage
 build/sitedefinitions/Client/CDNAssets/css/digitalworkplace.custom.css
 build/sitedefinitions/Client/CDNAssets/js/digitalworkplace.custom.js
 build/sitedefinitions/Client/CDNAssets/Content/language/*
-build/**/README.md
 
 # Exclude the distribution widgets
 dist/widgets/*
