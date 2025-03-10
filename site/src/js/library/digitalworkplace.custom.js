@@ -1,39 +1,45 @@
 // NCI-162: Added to speed application of theme to reduce visual inconsistencies on load
 var AdditionalSteps = AdditionalSteps || {};
-if ((typeof AdditionalSteps.MoreSteps) === 'undefined') {
-    AdditionalSteps.MoreSteps = {
-        Init: function () {
-          $("body").addClass("ak-theme-ncitheme");  // Node if theme changes, this ref will need to change.
-            var steps = [];
-            return steps;
-        }
-    }
+if (typeof AdditionalSteps.MoreSteps === 'undefined') {
+  AdditionalSteps.MoreSteps = {
+    Init: function () {
+      $('body').addClass('ak-theme-ncitheme'); // Node if theme changes, this ref will need to change.
+      var steps = [];
+      return steps;
+    },
+  };
 }
 
 // Is this used?
-Handlebars.registerHelper('SearchProperty', function (itemCells, prop, options) {
+Handlebars.registerHelper(
+  'SearchProperty',
+  function (itemCells, prop, options) {
     for (var i = 0; i < itemCells.length; i++)
-                   if (prop.toLowerCase() == itemCells[i].Name.toLowerCase())
-                                  return itemCells[i].Value;
-    return "";
-});
+      if (prop.toLowerCase() == itemCells[i].Name.toLowerCase())
+        return itemCells[i].Value;
+    return '';
+  }
+);
 
-
-window.FireWhen = function(id, condition, callback, testInterval) {
-	if (condition == null){
-		return;
-	}
-	var conditionMet = condition();
-	if (conditionMet) {
-		clearTimeout(window[id]);
-		Akumina.AddIn.Logger.WriteInfoLog('FireWhen:conditionMet:' + id);
-		callback.apply(this, Array.prototype.slice.call(arguments, 4));
-	} else {
-		clearTimeout(window[id]);
-		window[id] = window.setTimeout(function(args) {
-			window.FireWhen.apply(this, args);
-		}, testInterval, arguments);
-	}
+window.FireWhen = function (id, condition, callback, testInterval) {
+  if (condition == null) {
+    return;
+  }
+  var conditionMet = condition();
+  if (conditionMet) {
+    clearTimeout(window[id]);
+    Akumina.AddIn.Logger.WriteInfoLog('FireWhen:conditionMet:' + id);
+    callback.apply(this, Array.prototype.slice.call(arguments, 4));
+  } else {
+    clearTimeout(window[id]);
+    window[id] = window.setTimeout(
+      function (args) {
+        window.FireWhen.apply(this, args);
+      },
+      testInterval,
+      arguments
+    );
+  }
 };
 
 // Remove in future
@@ -41,48 +47,57 @@ window.FireWhen = function(id, condition, callback, testInterval) {
 //     debugger;
 // }
 
-window.GetNCIProfileInfoUrl = function(targetId) { 
-    var emailUpn = $(targetId).attr('data-manager');
-    if (typeof emailUpn == 'string') {
-        Akumina.Digispace.Utilities.GetEmployeeDetailUrl(emailUpn).then((newUrl) => {
-            var pathPart = newUrl.substring(newUrl.toLowerCase().lastIndexOf("/sitepages"));
-            var completeUrl = AkHeadlessUrl + "/#" + pathPart;
-            $(targetId).attr("href", completeUrl);
-        });
-    }
-}
+window.GetNCIProfileInfoUrl = function (targetId) {
+  var emailUpn = $(targetId).attr('data-manager');
+  if (typeof emailUpn == 'string') {
+    Akumina.Digispace.Utilities.GetEmployeeDetailUrl(emailUpn).then(
+      (newUrl) => {
+        var pathPart = newUrl.substring(
+          newUrl.toLowerCase().lastIndexOf('/sitepages')
+        );
+        var completeUrl = AkHeadlessUrl + '/#' + pathPart;
+        $(targetId).attr('href', completeUrl);
+      }
+    );
+  }
+};
 
 // Used in NewsDetail, CalendarDetail, and InternalPages
-window.GetNCIProfilePictureUrl = function(targetId) {
-    var emailUpn = $(targetId).attr('data-manager');
-    if (typeof emailUpn == 'string') {
-        var newUrl = Akumina.Digispace.Utilities.GetUserPictureUrl(emailUpn);
-        newUrl = "url(" + newUrl + ")";
-        $(targetId).css("background-image", newUrl);
-    }
-}
+window.GetNCIProfilePictureUrl = function (targetId) {
+  var emailUpn = $(targetId).attr('data-manager');
+  if (typeof emailUpn == 'string') {
+    var newUrl = Akumina.Digispace.Utilities.GetUserPictureUrl(emailUpn);
+    newUrl = 'url(' + newUrl + ')';
+    $(targetId).css('background-image', newUrl);
+  }
+};
 
-
-window.Client = typeof window.Client === "object" ? window.Client : {};
+window.Client = typeof window.Client === 'object' ? window.Client : {};
 
 // This inserts the Adobe script link into the DOM
 var script = document.createElement('script');
 script.setAttribute('async', 'async');
-if (_configContextInfo["adobe-analytics-tracker"] != null) {
-    script.setAttribute('src', _configContextInfo["adobe-analytics-tracker"]);
-    document.head.prepend(script);
-}
-else if(window.location.host == "mynci-preprod.cancer.gov") {
-    script.setAttribute('src', 'https://assets.adobedtm.com/6a4249cd0a2c/cbc52400d29b/launch-54f3716fa1f1-development.min.js');
-    document.head.prepend(script);
-}
-else if(window.location.host == "mynci.cancer.gov") {
-    script.setAttribute('src', 'https://assets.adobedtm.com/6a4249cd0a2c/cbc52400d29b/launch-8c72e1b653fe.min.js');
-    document.head.prepend(script);
-}
-else {
-    script.setAttribute('src', 'https://assets.adobedtm.com/6a4249cd0a2c/cbc52400d29b/launch-54f3716fa1f1-development.min.js');
-    document.head.prepend(script);
+if (_configContextInfo['adobe-analytics-tracker'] != null) {
+  script.setAttribute('src', _configContextInfo['adobe-analytics-tracker']);
+  document.head.prepend(script);
+} else if (window.location.host == 'mynci-preprod.cancer.gov') {
+  script.setAttribute(
+    'src',
+    'https://assets.adobedtm.com/6a4249cd0a2c/cbc52400d29b/launch-54f3716fa1f1-development.min.js'
+  );
+  document.head.prepend(script);
+} else if (window.location.host == 'mynci.cancer.gov') {
+  script.setAttribute(
+    'src',
+    'https://assets.adobedtm.com/6a4249cd0a2c/cbc52400d29b/launch-8c72e1b653fe.min.js'
+  );
+  document.head.prepend(script);
+} else {
+  script.setAttribute(
+    'src',
+    'https://assets.adobedtm.com/6a4249cd0a2c/cbc52400d29b/launch-54f3716fa1f1-development.min.js'
+  );
+  document.head.prepend(script);
 }
 
 //top nav clickable text
@@ -111,8 +126,14 @@ var megamenuAnchorClickTimer = setInterval(function(){
 */
 
 // Accessibility fix to add lang attribute
-window.On_Page_Loaded = function(){
-   $('html').attr('lang', Akumina.Digispace.UserContext.LanguageCode.toLowerCase()); 
-   NCIDescriptionProcessed ='';
-}
-Akumina.Digispace.AppPart.Eventing.Subscribe('/page/loaded/', window.On_Page_Loaded);
+window.On_Page_Loaded = function () {
+  $('html').attr(
+    'lang',
+    Akumina.Digispace.UserContext.LanguageCode.toLowerCase()
+  );
+  NCIDescriptionProcessed = '';
+};
+Akumina.Digispace.AppPart.Eventing.Subscribe(
+  '/page/loaded/',
+  window.On_Page_Loaded
+);
