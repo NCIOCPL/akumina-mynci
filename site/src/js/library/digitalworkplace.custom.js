@@ -1,20 +1,8 @@
-import { blogDetailWidget_helper } from './custom/BlogDetailWidget.js';
-import { employeeDetailWidget_helper } from './custom/EmployeeDetailWidget.js';
-import { latestMediaWidget_helper } from './custom/LatestMediaWidget.js';
-import { newsDetailWidget_helper } from './custom/NewsDetailWidget.js';
-import { peopleDirectoryWidget_helper } from './custom/PeopleDirectoryWidget.js';
-
-// NCI-162: Added to speed application of theme to reduce visual inconsistencies on load
-var AdditionalSteps = AdditionalSteps || {};
-if (typeof AdditionalSteps.MoreSteps === 'undefined') {
-  AdditionalSteps.MoreSteps = {
-    Init: function () {
-      $('body').addClass('ak-theme-ncitheme'); // Node if theme changes, this ref will need to change.
-      var steps = [];
-      return steps;
-    },
-  };
-}
+import { blogDetailWidget_helper } from './modules/BlogDetailWidget.js';
+import { employeeDetailWidget_helper } from './modules/EmployeeDetailWidget.js';
+import { latestMediaWidget_helper } from './modules/LatestMediaWidget.js';
+import { newsDetailWidget_helper } from './modules/NewsDetailWidget.js';
+import { peopleDirectoryWidget_helper } from './modules/PeopleDirectoryWidget.js';
 
 // Is this used?
 Handlebars.registerHelper(

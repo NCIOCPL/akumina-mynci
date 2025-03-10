@@ -1,158 +1,75 @@
-var path = require('path');
-var webpack = require('webpack');
-var fs = require('fs');
-var os = require('os');
+const path = require('path');
+const webpack = require('webpack');
+const fs = require('fs');
 const TerserPlugin = require('terser-webpack-plugin');
-var Terser = require('terser');
-var CleanCSS = require('clean-css');
 const FileManagerPlugin = require('filemanager-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 
-var widgetSrcDir = './src/js/widgets';
+// File merge plugin we will need below to combine two files
+class FileMergeWebpackPlugin {
+  constructor({ files, destination, removeSourceFiles }) {
+    this.files = files;
+    this.destination = destination;
+    this.removeSourceFiles = removeSourceFiles;
+  }
+
+  apply(compiler) {
+    compiler.hooks.afterEmit.tap('FileMergeWebpackPlugin', () => {
+      const fileBuffers = [];
+
+      this.files
+        .filter((file) => fs.existsSync(file))
+        .forEach((file) => fileBuffers.push(fs.readFileSync(file)));
+      
+      const dir = path.dirname(this.destination);
+      fs.mkdirSync(dir, { recursive: true });
+      fs.writeFileSync(this.destination, Buffer.concat(fileBuffers), {
+        encoding: 'UTF-8',
+      });
+
+      if (this.removeSourceFiles) {
+        this.files.forEach((file) => fs.unlinkSync(file));
+      }
+    });
+  }
+}
+
+const widgetSrcDir = './src/js/widgets';
 //Make sure this value matches the 'Class' section of the config.json of your widgets
 //If jsClientName is 'MyNamespace' then your 'Class' should be 'MyNamespace.Widgets'
-var jsClientName = 'Client'; //[ClientName].Widgets.WidgetName
-var useTypeScript = true;
+const jsClientName = 'Client'; //[ClientName].Widgets.WidgetName
+const useTypeScript = true;
 
-var isProduction = process.env.NODE_ENV === 'prod';
-
-/**
- * Minifies JavaScript content using Terser.
- *
- * @param {string} content - The JavaScript content to minify.
- * @returns {string} The minified JavaScript content, or the original content if minification fails.
- */
-function minifyJsContent(content) {
-  let result = Terser.minify(content);
-  if (result.error) {
-    console.error('Terser minification error:', result.error);
-    return content; // Return unminified content if minification fails
-  }
-  return result.code;
-}
-
-/**
- * Minifies CSS content using CleanCSS.
- *
- * @param {string} cssContent - The CSS content to minify.
- * @returns {string} The minified CSS content.
- */
-function minifyCssContent(cssContent) {
-  const minified = new CleanCSS().minify(cssContent);
-  return minified.styles;
-}
-
-/**
- * Ensures that the directory structure for a given path exists.
- * Creates directories one by one if they do not exist.
- *
- * @param {string} dirPath - The directory path to ensure existence for.
- * @returns {void}
- */
-function ensureDirectoryExistence(dirPath) {
-  console.log('Created ' + dirPath);
-  fs.mkdirSync(dirPath, { recursive: true });
-}
-
-/**
- * Copies a file from source to target. If the target is a directory, the file is copied into it with the same filename.
- * If the file is a JavaScript or CSS file and we are in production mode, it is minified before copying.
- *
- * @param {string} source - The source file path.
- * @param {string} target - The target file or directory path.
- * @returns {void}
- */
-function copyFile(source, target) {
-  var targetFile = target;
-
-  if (fs.existsSync(target) && fs.lstatSync(target).isDirectory()) {
-    targetFile = path.join(target, path.basename(source));
-  }
-
-  // Ensure the target directory exists
-  const targetDir = path.dirname(targetFile);
-  ensureDirectoryExistence(targetDir);
-
-  try {
-    content = fs.readFileSync(source, 'utf8');
-  } catch (err) {
-    console.error(`Error reading file ${source}: ${err.message}`);
-    return;
-  }
-
-  if (isProduction && source.endsWith('.js')) {
-    console.log(`Minifying and copying ${source} -> ${targetFile}`);
-    content = minifyJsContent(content);
-  } else if (isProduction && source.endsWith('.css')) {
-    console.log(`Minifying and copying ${source} -> ${targetFile}`);
-    content = minifyCssContent(content);
-  } else {
-    console.log(`Copying ${source} -> ${targetFile}`);
-  }
-
-  fs.writeFileSync(targetFile, content);
-}
-
-/**
- * Recursively copies files and folders from source to target.
- * If directories exist in the source, they are created in the target and their contents are copied recursively.
- *
- * @param {string} source - The source directory path.
- * @param {string} target - The target directory path.
- * @returns {void}
- */
-function copyFolderRecursively(source, target) {
-  ensureDirectoryExistence(target);
-
-  fs.readdirSync(source).forEach((file) => {
-    const srcPath = path.join(source, file);
-    const destPath = path.join(target, file);
-
-    if (fs.lstatSync(srcPath).isDirectory()) {
-      copyFolderRecursively(srcPath, destPath); // Recurse into directories
-    } else {
-      copyFile(srcPath, destPath); // Copy files
-    }
-  });
-}
-
-// Copy individual files
-copyFile(
-  'src/css/digitalworkplace.custom.css',
-  'build/sitedefinitions/Client/CDNAssets/css/digitalworkplace.custom.css'
-);
-copyFile(
-  'src/css/digitalworkplace.custom.css',
-  'build/sitedefinitions/Client/Branding/css/digitalworkplace.custom.css'
-);
-copyFile(
-  'src/MasterPage/virtualmasterpagehivevisiblemenu.html',
-  'build/sitedefinitions/Client/CDNAssets/Content/Templates/MasterPage/virtualmasterpagehivevisiblemenu.html'
-);
+const isProduction = process.env.NODE_ENV === 'prod';
 
 // Copy language files
-//var languageList = ["de-de", "el-gr", "en-us", "es-es", "fr-fr", "it-it", "nl-be", "nl-nl", "pl-pl", "pt-br", "pt-pt", "tr-tr", "zh-cn"];
-var languageList = ['en-us'];
-languageList.forEach((language) => {
-  copyFile(
-    `src/js/library/language/${language}.js`,
-    `build/sitedefinitions/Client/CDNAssets/content/language/${language}.js`
-  );
-  copyFile(
-    `src/js/library/language/foundation-${language}.js`,
-    `build/sitedefinitions/Client/CDNAssets/content/language/foundation-${language}.js`
-  );
-  copyFile(
-    `src/js/library/language/${language}.js`,
-    `build/sitedefinitions/Client/branding/content/language/${language}.js`
-  );
-  copyFile(
-    `src/js/library/language/foundation-${language}.js`,
-    `build/sitedefinitions/Client/branding/content/language/foundation-${language}.js`
-  );
-});
-
-// Copy content folders
-copyFolderRecursively('src/content', 'build/sitedefinitions/Client/CDNAssets');
+//const languageList = ["de-de", "el-gr", "en-us", "es-es", "fr-fr", "it-it", "nl-be", "nl-nl", "pl-pl", "pt-br", "pt-pt", "tr-tr", "zh-cn"];
+const languageList = ['en-us'];
+const languageCopyConfig = languageList.flatMap((language) => [
+  {
+    source: path.join(__dirname, `src/js/library/language/${language}.js`),
+    destination: path.join(
+      __dirname,
+      `build/sitedefinitions/Client/CDNAssets/content/language/${language}.js`
+    ),
+  },
+  //{
+  //  source: path.join(__dirname, `src/js/library/language/foundation-${language}.js`),
+  //  destination: path.join(__dirname, `build/sitedefinitions/Client/CDNAssets/content/language/foundation-${language}.js`),
+  //},
+  {
+    source: path.join(__dirname, `src/js/library/language/${language}.js`),
+    destination: path.join(
+      __dirname,
+      `build/sitedefinitions/Client/branding/content/language/${language}.js`
+    ),
+  },
+  //{
+  //  source: path.join(__dirname, `src/js/library/language/foundation-${language}.js`),
+  //  destination: path.join(__dirname, `build/sitedefinitions/Client/branding/content/language/foundation-${language}.js`),
+  //},
+]);
 
 /**
  * Generates the Webpack configuration for a specific widget, determining whether to use TypeScript
@@ -223,7 +140,6 @@ var genWidgetsConfig = function (widgetName) {
               terserOptions: {
                 compress: true,
                 mangle: true,
-                extractComments: false,
               },
             }),
           ],
@@ -233,35 +149,166 @@ var genWidgetsConfig = function (widgetName) {
 };
 
 /**
- * Generates Webpack configuration for all widgets in the source directory.
+ * Generates Webpack configuration for our code + all widgets in the source directory.
  *
- * @returns {Array} - An array of Webpack configuration objects for each widget found in the source directory.
+ * @returns {Array} - An array of Webpack configuration objects
  */
 module.exports = function () {
   var webpackConfigs = [];
-  // Add the main configuration
+
+  // Add the main JS configuration + other file copies
+  webpackConfigs.push(
+    {
+      entry: {
+        beforePageLoad: './src/js/library/BeforePageLoad.js',
+      },
+      output: {
+        filename: 'BeforePageLoad.js',
+        path: path.resolve(__dirname, 'dist/js/'),
+        iife: false, // Don't wrap this code in anything
+      },
+      mode: isProduction ? 'production' : 'development',
+      devtool: false,
+      optimization: isProduction
+        ? {
+            minimize: true,
+            minimizer: [
+              new TerserPlugin({
+                terserOptions: {
+                  compress: true,
+                  mangle: true,
+                },
+              }),
+            ],
+          }
+        : {},
+    },
+    {
+      entry: './src/js/library/digitalworkplace.custom.js',
+      output: {
+        filename: 'digitalworkplace.custom.js',
+        path: path.resolve(__dirname, 'dist/js/'),
+      },
+      mode: isProduction ? 'production' : 'development',
+      devtool: false,
+      resolve: {
+        extensions: ['.ts', '.js'], // Ensure proper extensions are resolved
+      },
+      optimization: isProduction
+        ? {
+            minimize: true,
+            minimizer: [
+              new TerserPlugin({
+                terserOptions: {
+                  compress: true,
+                  mangle: true,
+                },
+              }),
+            ],
+          }
+        : {},
+      plugins: [
+        new FileMergeWebpackPlugin({
+          destination:
+            'build/sitedefinitions/Client/CDNAssets/js/digitalworkplace.custom.js',
+          removeSourceFiles: true,
+          files: [
+            'dist/js/BeforePageLoad.js',
+            'dist/js/digitalworkplace.custom.js',
+          ],
+        }),
+        new FileManagerPlugin({
+          events: {
+            onEnd: {
+              copy: [
+                // Copy JS to a secondary location
+                {
+                  source: path.join(
+                    __dirname,
+                    'build/sitedefinitions/Client/CDNAssets/js/'
+                  ),
+                  destination: path.join(
+                    __dirname,
+                    'build/sitedefinitions/Client/Branding/js/'
+                  ),
+                },
+                // Copy Master Page
+                {
+                  source: path.join(__dirname, 'src/MasterPage/'),
+                  destination: path.join(
+                    __dirname,
+                    'build/sitedefinitions/Client/CDNAssets/Content/Templates/MasterPage/'
+                  ),
+                },
+                // Copy content templates
+                {
+                  source: path.join(__dirname, 'src/content/'),
+                  destination: path.join(
+                    __dirname,
+                    'build/sitedefinitions/Client/CDNAssets/'
+                  ),
+                },
+                // Copy language files
+                ...languageCopyConfig,
+              ],
+            },
+          },
+        }),
+      ],
+    }
+  );
+
+  // CSS
   webpackConfigs.push({
-    entry: './src/js/library/digitalworkplace.custom.js',
+    entry: './src/css/digitalworkplace.custom.css',
     output: {
-      filename: 'digitalworkplace.custom.js',
       path: path.resolve(
         __dirname,
-        'build/sitedefinitions/Client/CDNAssets/js/'
+        'build/sitedefinitions/Client/CDNAssets/css/'
       ),
     },
+    module: {
+      rules: [
+        {
+          test: /\.css$/,
+          use: [MiniCssExtractPlugin.loader, 'css-loader'],
+        },
+        {
+          test: /\.(png|jpg|jpeg|gif|svg)$/,
+          type: 'asset/resource',
+          generator: {
+            filename: 'images/[name][ext]',
+          },
+        },
+      ],
+    },
+    mode: isProduction ? 'production' : 'development',
+    devtool: false,
     plugins: [
+      new MiniCssExtractPlugin({
+        filename: 'digitalworkplace.custom.css',
+      }),
       new FileManagerPlugin({
         events: {
           onEnd: {
             copy: [
+              // Copy CSS to a secondary location
               {
                 source: path.join(
                   __dirname,
-                  'build/sitedefinitions/Client/CDNAssets/js/'
+                  'build/sitedefinitions/Client/CDNAssets/css/'
                 ),
                 destination: path.join(
                   __dirname,
-                  'build/sitedefinitions/Client/Branding/js/'
+                  'build/sitedefinitions/Client/Branding/css/'
+                ),
+              },
+              // Copy Theme CSS
+              {
+                source: path.join(__dirname, 'src/css/themes/'),
+                destination: path.join(
+                  __dirname,
+                  'build/sitedefinitions/Client/CDNAssets/css/themes/'
                 ),
               },
             ],
@@ -269,25 +316,15 @@ module.exports = function () {
         },
       }),
     ],
-    mode: isProduction ? 'production' : 'development',
-    devtool: false,
-    resolve: {
-      extensions: ['.ts', '.js'], // Ensure proper extensions are resolved
-    },
     optimization: isProduction
       ? {
           minimize: true,
-          minimizer: [
-            new TerserPlugin({
-              terserOptions: {
-                compress: true,
-                mangle: true,
-              },
-            }),
-          ],
+          minimizer: [new CssMinimizerPlugin()],
         }
       : {},
   });
+
+  // Add in the widget configs
   fs.readdirSync(widgetSrcDir).forEach(function (file) {
     if (file.indexOf('.') == -1) {
       webpackConfigs.push(genWidgetsConfig(file));
