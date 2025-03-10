@@ -2,8 +2,10 @@ var path = require('path');
 var webpack = require('webpack');
 var fs = require('fs');
 var os = require('os');
+const TerserPlugin = require('terser-webpack-plugin');
 var Terser = require('terser');
 var CleanCSS = require('clean-css');
+const FileManagerPlugin = require('filemanager-webpack-plugin');
 
 var widgetSrcDir = './src/js/widgets';
 //Make sure this value matches the 'Class' section of the config.json of your widgets
@@ -91,49 +93,6 @@ function copyFile(source, target) {
 }
 
 /**
- * Combines JS files in a folder into a single specified file. If the specified file already exists, appends
- * everything from the folder to it. Optionally minifies at the end.
- *
- * @param {string} source - The source folder path.
- * @param {string} base - The file to be used as a base for the others to be appended to.
- * @param {string} target - The target file or directory path.
- * @returns {void}
- */
-function combineFolder(source, base) {
-  if (!fs.existsSync(source) || !fs.lstatSync(source).isDirectory()) {
-    throw new Error(
-      `Source folder "${source}" does not exist or is not a directory.`
-    );
-  }
-
-  // Create a temporary directory
-  const tempDir = fs.mkdtempSync(path.join(os.tmpdir(), 'combine-'));
-  const tempFile = path.join(tempDir, path.basename(base));
-
-  let combinedContent = '';
-  combinedContent = fs.readFileSync(base, 'utf8');
-
-  // Read and append all JS files from source folder
-  const files = fs.readdirSync(source).filter((file) => file.endsWith('.js'));
-  for (const file of files) {
-    const filePath = path.join(source, file);
-    try {
-      const fileContent = fs.readFileSync(filePath, 'utf8');
-      combinedContent += `\n${fileContent}`;
-      console.log(`Appending ${filePath} to ${base}`);
-    } catch (err) {
-      console.error(`Error reading file ${filePath}: ${err.message}`);
-    }
-  }
-
-  // Write the combined content to the temporary file
-  fs.writeFileSync(tempFile, combinedContent);
-  console.log(`Temporary combined file created: ${tempFile}`);
-
-  return tempFile;
-}
-
-/**
  * Recursively copies files and folders from source to target.
  * If directories exist in the source, they are created in the target and their contents are copied recursively.
  *
@@ -168,20 +127,6 @@ copyFile(
 copyFile(
   'src/MasterPage/virtualmasterpagehivevisiblemenu.html',
   'build/sitedefinitions/Client/CDNAssets/Content/Templates/MasterPage/virtualmasterpagehivevisiblemenu.html'
-);
-
-// Create our digitalworkplace.custom.js
-let digitalWorkplaceFile = combineFolder(
-  'src/js/library/custom',
-  'src/js/library/digitalworkplace.custom.js'
-);
-copyFile(
-  digitalWorkplaceFile,
-  'build/sitedefinitions/Client/CDNAssets/js/digitalworkplace.custom.js'
-);
-copyFile(
-  digitalWorkplaceFile,
-  'build/sitedefinitions/Client/Branding/js/digitalworkplace.custom.js'
 );
 
 // Copy language files
@@ -278,6 +223,7 @@ var genWidgetsConfig = function (widgetName) {
               terserOptions: {
                 compress: true,
                 mangle: true,
+                extractComments: false,
               },
             }),
           ],
@@ -292,11 +238,60 @@ var genWidgetsConfig = function (widgetName) {
  * @returns {Array} - An array of Webpack configuration objects for each widget found in the source directory.
  */
 module.exports = function () {
-  var widgetConfigArray = [];
+  var webpackConfigs = [];
+  // Add the main configuration
+  webpackConfigs.push({
+    entry: './src/js/library/digitalworkplace.custom.js',
+    output: {
+      filename: 'digitalworkplace.custom.js',
+      path: path.resolve(
+        __dirname,
+        'build/sitedefinitions/Client/CDNAssets/js/'
+      ),
+    },
+    plugins: [
+      new FileManagerPlugin({
+        events: {
+          onEnd: {
+            copy: [
+              {
+                source: path.join(
+                  __dirname,
+                  'build/sitedefinitions/Client/CDNAssets/js/'
+                ),
+                destination: path.join(
+                  __dirname,
+                  'build/sitedefinitions/Client/Branding/js/'
+                ),
+              },
+            ],
+          },
+        },
+      }),
+    ],
+    mode: isProduction ? 'production' : 'development',
+    devtool: false,
+    resolve: {
+      extensions: ['.ts', '.js'], // Ensure proper extensions are resolved
+    },
+    optimization: isProduction
+      ? {
+          minimize: true,
+          minimizer: [
+            new TerserPlugin({
+              terserOptions: {
+                compress: true,
+                mangle: true,
+              },
+            }),
+          ],
+        }
+      : {},
+  });
   fs.readdirSync(widgetSrcDir).forEach(function (file) {
     if (file.indexOf('.') == -1) {
-      widgetConfigArray.push(genWidgetsConfig(file));
+      webpackConfigs.push(genWidgetsConfig(file));
     }
   });
-  return widgetConfigArray;
+  return webpackConfigs;
 };

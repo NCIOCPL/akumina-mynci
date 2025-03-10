@@ -11,12 +11,15 @@ export default [
   {
     files: ['**/*.js'],
     languageOptions: {
-      sourceType: 'script',
+      sourceType: 'module',
       globals: {
         jQuery: 'readonly',
         $: 'readonly', // also jQuery
         Handlebars: 'readonly',
         Akumina: 'readonly',
+        _configContextInfo: 'readonly', // Akumina
+        RenderChildWidgets: 'readonly', // Akumina
+        AkHeadlessUrl: 'readonly' // Akumina
       },
     },
     // There are some libraries available to the scripts that are not imported.
