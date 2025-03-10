@@ -1,3 +1,9 @@
+import { blogDetailWidget_helper } from './custom/BlogDetailWidget.js';
+import { employeeDetailWidget_helper } from './custom/EmployeeDetailWidget.js';
+import { latestMediaWidget_helper } from './custom/LatestMediaWidget.js';
+import { newsDetailWidget_helper } from './custom/NewsDetailWidget.js';
+import { peopleDirectoryWidget_helper } from './custom/PeopleDirectoryWidget.js';
+
 // NCI-162: Added to speed application of theme to reduce visual inconsistencies on load
 var AdditionalSteps = AdditionalSteps || {};
 if (typeof AdditionalSteps.MoreSteps === 'undefined') {
@@ -131,9 +137,14 @@ window.On_Page_Loaded = function () {
     'lang',
     Akumina.Digispace.UserContext.LanguageCode.toLowerCase()
   );
-  NCIDescriptionProcessed = '';
 };
 Akumina.Digispace.AppPart.Eventing.Subscribe(
   '/page/loaded/',
   window.On_Page_Loaded
 );
+
+blogDetailWidget_helper();
+employeeDetailWidget_helper();
+latestMediaWidget_helper();
+newsDetailWidget_helper();
+peopleDirectoryWidget_helper();
