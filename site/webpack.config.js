@@ -47,17 +47,8 @@ function minifyCssContent(cssContent) {
  * @returns {void}
  */
 function ensureDirectoryExistence(dirPath) {
-    // Once we hit node 10 this all can be replaced with fs.mkdirSync(dirPath, { recursive: true });
-    const parts = dirPath.split('/');
-
-    // Try creating the directories one by one
-    for (let i = 1; i <= parts.length; i++) {
-        const currentPath = parts.slice(0, i).join(path.sep);
-        if (!fs.existsSync(currentPath)) {
-            fs.mkdirSync(currentPath);
-            console.log("Created " + currentPath) 
-        }
-    }
+    console.log("Created " + dirPath) 
+    fs.mkdirSync(dirPath, { recursive: true });
 }
 
 /**
@@ -246,21 +237,19 @@ var genWidgetsConfig = function (widgetName) {
         module: {
             rules: [{ test: /\.ts?$/, loader: 'ts-loader' }]
         },
-        // terser-webpack-plugin has to be seperately installed with webpack 4 and doesn't play nicely with Node 8
-        // Removing until we upgrade Node versions
-        //optimization: isProduction
-        //    ? {
-        //        minimize: true,
-        //        minimizer: [
-        //            new TerserPlugin({
-        //                terserOptions: {
-        //                    compress: true,
-        //                    mangle: true,
-        //                },
-        //            }),
-        //        ],
-        //    }
-        //    : {}
+        optimization: isProduction
+            ? {
+                minimize: true,
+                minimizer: [
+                    new TerserPlugin({
+                        terserOptions: {
+                            compress: true,
+                            mangle: true,
+                        },
+                    }),
+                ],
+            }
+            : {}
     };
 };
 
