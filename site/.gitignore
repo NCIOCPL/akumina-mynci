@@ -2,9 +2,10 @@
 # Exclude things copied in via webpack
 build/sitedefinitions/Client/Branding/*
 build/sitedefinitions/Client/CDNAssets/*
+build/sitedefinitions/Client/WidgetPackages/*
 
 # Exclude the distribution widgets
-dist/widgets/*
+dist/*
 
 # Exclude the tools
 tools/*

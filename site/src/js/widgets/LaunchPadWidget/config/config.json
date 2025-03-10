@@ -36,13 +36,13 @@
         {
           "name": "groupby",
           "value": {
-            "termStoreId": "9f6b3be8-ba1a-4111-ae41-3d7d6617b251",
+            "termStoreId": "{GHA_termsetCategoryToken}",
             "termSetName": "Category",
             "terms": {
               "name": "Departments",
               "displayName": "Departments",
               "columnName": "Departments",
-              "id": "19b184fe-a269-44fc-a939-b590dd9379ea"
+              "id": "{GHA_termDepartmentsToken}"
             }
           }
         },
