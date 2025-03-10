@@ -3,13 +3,12 @@
     "Name": "NewsWidget",
     "Description": "Displays new articles based on user preferences",
     "Class": "Akumina.AddIn.NewsWidget",
-    "ContentTypes": [
-      "AkuminaArticle"
-    ],
+    "ContentTypes": ["AkuminaArticle"],
     "Version": "{CurrentBuildVersion}",
     "Icon": "far fa-newspaper",
     "Dependencies": [],
-    "Properties": [{
+    "Properties": [
+      {
         "name": "widgetframework",
         "friendlyname": "{fs.newswidget.friendlynames.friendlyname_widgetframework}",
         "value": "react",
@@ -153,170 +152,182 @@
         "Name": "NciHomePageTipOfTheWeekRailWidgetView",
         "Path": "/{AssetLibraryName}/digitalworkplace/content/templates/newswidget/nci-homepage-tip-of-the-week-rail-widget-view.html",
         "Id": "eb57cf26-880d-40dc-91da-506ff0a5f0ac"
-      }  
+      }
     ],
     "JS": {
       "Default": "/{AssetLibraryName}/digitalworkplace/js/widgets/digitalworkplace.core.newswidget.min.js"
     }
   },
-  "Instances": [{
-    "Name": "Tip of the Week",
-    "Description": "NCI tip of the week on home page ",
-    "Icon": "fa fa-cog",
-    "Id": "263e492a-68fe-48d7-81bf-f75dffb84df5",
-    "Properties": [{
-        "name": "widgetframework",
-        "value": "react"
-      },
-      {
-        "name": "widgettitle",
-        "value": "Tip of the Week"
-      },
-      {
-        "name": "querytext",
-        "value": "(ContentTypeId:0x0100A75A29C9F7894C83AA451364A226C855*)(ArchiveDate>{Now})(PublishDate<{Now})(owstaxidmetadataalltagsinfo:\"Tip of the week\")"
-      },
-      {
-        "name": "selectfields",
-        "value": "ListID,ListItemID,PublishDate,ImageOWSURLH,Title,owstaxidmetadataalltagsinfo,FeaturedOWSBOOL,PublisherOWSUSER,ThumbnailURLOWSURLH,ServerRedirectedURL,VideoOWSURLH,ReadTimeOWSNMBR,WebId,SiteId,OriginalPath,HitHighlightedSummary,SPSummary"
-      },
-      {
-        "name": "searchacrosssites",
-        "value": false
-      },
-      {
-        "name": "enablerefiners",
-        "value": false
-      },
-      {
-        "name": "searchrefiners",
-        "value": {
-          "termStoreId": "",
-          "terms": [{
-            "managedPropertyName": "SPTags",
-            "displayName": "common.tags",
-            "id": "",
-            "taxonomyIsTermSet": false,
-            "termSetName": "Category"
-          }, {
-            "managedPropertyName": "Departments",
-            "displayName": "common.departments",
-            "id": "",
-            "taxonomyIsTermSet": false,
-            "termSetName": "Category"
-          }, {
-            "managedPropertyName": "Region",
-            "displayName": "common.regions",
-            "id": "",
-            "taxonomyIsTermSet": false,
-            "termSetName": "Category"
-          }],
-          "dateFilter": {
-            "name": "",
-            "displayName": ""
+  "Instances": [
+    {
+      "Name": "Tip of the Week",
+      "Description": "NCI tip of the week on home page ",
+      "Icon": "fa fa-cog",
+      "Id": "263e492a-68fe-48d7-81bf-f75dffb84df5",
+      "Properties": [
+        {
+          "name": "widgetframework",
+          "value": "react"
+        },
+        {
+          "name": "widgettitle",
+          "value": "Tip of the Week"
+        },
+        {
+          "name": "querytext",
+          "value": "(ContentTypeId:0x0100A75A29C9F7894C83AA451364A226C855*)(ArchiveDate>{Now})(PublishDate<{Now})(owstaxidmetadataalltagsinfo:\"Tip of the week\")"
+        },
+        {
+          "name": "selectfields",
+          "value": "ListID,ListItemID,PublishDate,ImageOWSURLH,Title,owstaxidmetadataalltagsinfo,FeaturedOWSBOOL,PublisherOWSUSER,ThumbnailURLOWSURLH,ServerRedirectedURL,VideoOWSURLH,ReadTimeOWSNMBR,WebId,SiteId,OriginalPath,HitHighlightedSummary,SPSummary"
+        },
+        {
+          "name": "searchacrosssites",
+          "value": false
+        },
+        {
+          "name": "enablerefiners",
+          "value": false
+        },
+        {
+          "name": "searchrefiners",
+          "value": {
+            "termStoreId": "",
+            "terms": [
+              {
+                "managedPropertyName": "SPTags",
+                "displayName": "common.tags",
+                "id": "",
+                "taxonomyIsTermSet": false,
+                "termSetName": "Category"
+              },
+              {
+                "managedPropertyName": "Departments",
+                "displayName": "common.departments",
+                "id": "",
+                "taxonomyIsTermSet": false,
+                "termSetName": "Category"
+              },
+              {
+                "managedPropertyName": "Region",
+                "displayName": "common.regions",
+                "id": "",
+                "taxonomyIsTermSet": false,
+                "termSetName": "Category"
+              }
+            ],
+            "dateFilter": {
+              "name": "",
+              "displayName": ""
+            }
           }
+        },
+        {
+          "name": "refinercondition",
+          "value": "or"
+        },
+        {
+          "name": "displaycount",
+          "value": 4
+        },
+        {
+          "name": "enablepaging",
+          "value": false
+        },
+        {
+          "name": "enableinterests",
+          "value": false
         }
-      },
-      {
-        "name": "refinercondition",
-        "value": "or"
-      },
-      {
-        "name": "displaycount",
-        "value": 4
-      },
-      {
-        "name": "enablepaging",
-        "value": false
-      },
-      {
-        "name": "enableinterests",
-        "value": false
-      }
+      ],
+      "SelectedView": "FeaturedNews",
+      "AvailableViews": [
+        "NciHomePageTipOfTheWeekRailWidgetView",
+        "tipoftheweek",
+        "ncinewslistingpage",
+        "FeaturedNews"
+      ],
+      "HiddenFields": []
+    },
 
-    ],
-    "SelectedView": "FeaturedNews",
-    "AvailableViews": ["NciHomePageTipOfTheWeekRailWidgetView","tipoftheweek","ncinewslistingpage","FeaturedNews"],
-    "HiddenFields": []
-  },
-
-  {
-    "Name": "Tip of the Week List",
-    "Description": "Tip of the week news listing for tiplist.aspx",
-    "Icon": "fa fa-cog",
-    "Id": "62d4da7c-afc3-4b8f-b1d7-8a9f735c3ae4",
-    "Properties": [
-      {
-        "name": "widgetframework",
-        "value": "react"
-      },
-      {
-        "name": "widgettitle",
-        "value": "Tip of the Week"
-      },
-      {
-        "name": "querytext",
-        "value": "(ContentTypeId:0x0100A75A29C9F7894C83AA451364A226C855*)(ArchiveDate>{Now})(PublishDate<{Now})(owstaxidmetadataalltagsinfo:\"Tip of the week\")"
-      },
-      {
-        "name": "selectfields",
-        "value": "ListID,ListItemID,PublishDate,ImageOWSURLH,Title,owstaxidmetadataalltagsinfo,FeaturedOWSBOOL,PublisherOWSUSER,ThumbnailURLOWSURLH,ServerRedirectedURL,VideoOWSURLH,ReadTimeOWSNMBR,WebId,SiteId,OriginalPath,HitHighlightedSummary,SPDescription"
-      },
-      {
-        "name": "searchacrosssites",
-        "value": false
-      },
-      {
-        "name": "enablerefiners",
-        "value": false
-      },
-      {
-        "name": "searchrefiners",
-        "value": {
-          "termStoreId": "9f6b3be8-ba1a-4111-ae41-3d7d6617b251",
-          "termSetName": "Category",
-          "terms": [
-            {
-              "name": "Departments",
-              "displayName": "common.departments",
-              "displayType": "Tree",
-              "id": "ef90fc48-1b8a-4242-bbda-df722c8b3a47"
-            },
-            {
-              "name": "Region",
-              "displayName": "common.regions",
-              "displayType": "Tree",
-              "id": "5b1272bd-6012-4a2a-a5c7-8b718ec23521"
-            },
-            {
-              "name": "SPTags",
-              "displayName": "common.tags",
-              "displayType": "Tags",
-            "id": "f7fece51-494f-48df-824d-f21cdd9a0146"
+    {
+      "Name": "Tip of the Week List",
+      "Description": "Tip of the week news listing for tiplist.aspx",
+      "Icon": "fa fa-cog",
+      "Id": "62d4da7c-afc3-4b8f-b1d7-8a9f735c3ae4",
+      "Properties": [
+        {
+          "name": "widgetframework",
+          "value": "react"
+        },
+        {
+          "name": "widgettitle",
+          "value": "Tip of the Week"
+        },
+        {
+          "name": "querytext",
+          "value": "(ContentTypeId:0x0100A75A29C9F7894C83AA451364A226C855*)(ArchiveDate>{Now})(PublishDate<{Now})(owstaxidmetadataalltagsinfo:\"Tip of the week\")"
+        },
+        {
+          "name": "selectfields",
+          "value": "ListID,ListItemID,PublishDate,ImageOWSURLH,Title,owstaxidmetadataalltagsinfo,FeaturedOWSBOOL,PublisherOWSUSER,ThumbnailURLOWSURLH,ServerRedirectedURL,VideoOWSURLH,ReadTimeOWSNMBR,WebId,SiteId,OriginalPath,HitHighlightedSummary,SPDescription"
+        },
+        {
+          "name": "searchacrosssites",
+          "value": false
+        },
+        {
+          "name": "enablerefiners",
+          "value": false
+        },
+        {
+          "name": "searchrefiners",
+          "value": {
+            "termStoreId": "{GHA_termsetCategoryToken}",
+            "termSetName": "Category",
+            "terms": [
+              {
+                "name": "Departments",
+                "displayName": "common.departments",
+                "displayType": "Tree",
+                "id": "{GHA_termLocationsToken}"
+              },
+              {
+                "name": "Region",
+                "displayName": "common.regions",
+                "displayType": "Tree",
+                "id": "{GHA_termDepartmentsToken}"
+              },
+              {
+                "name": "SPTags",
+                "displayName": "common.tags",
+                "displayType": "Tags",
+                "id": "{GHA_termTagsToken}"
+              }
+            ]
           }
-        ]}
-      },
-      {
-        "name": "refinercondition",
-        "value": "or"
-      },
-      {
-        "name": "displaycount",
-        "value": 8
-      },
-      {
-        "name": "enablepaging",
-        "value": true
-      },
-      {
-        "name": "enableinterests",
-        "value": false
-      }],
+        },
+        {
+          "name": "refinercondition",
+          "value": "or"
+        },
+        {
+          "name": "displaycount",
+          "value": 8
+        },
+        {
+          "name": "enablepaging",
+          "value": true
+        },
+        {
+          "name": "enableinterests",
+          "value": false
+        }
+      ],
       "SelectedView": "ncinewslistingpage",
       "AvailableViews": [],
       "HiddenFields": []
-      }
-    ],  
+    }
+  ],
   "Options": {
     "IsPartialDefinition": true,
     "IsDashboardWidget": false,
