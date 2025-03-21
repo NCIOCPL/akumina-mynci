@@ -1094,6 +1094,11 @@ and Important Events (Upcoming Events)
 
           People Directory Tab
 ****************************************/
+/* Font size for Employee Card names */
+#organizationdirectorytabwidget a.ia-profile-name.fs-js-profile-name {
+    font-size: 18px;
+}
+
 /* spacing for People Directory tab in Organization Directory */
 .ak-theme-ncitheme .ia-people-directory .ia-people-directory-section .ia-people-filter-section #organizationdirectorytabwidget .ia-people-results .ia-people-results-grid.ia-active {
 	width: calc(100vw - 150px);
@@ -1180,6 +1185,10 @@ and Important Events (Upcoming Events)
  
  Also used in Org Directory - People Tab
 ****************************************/
+/* makes email lowercase for Org and People Directory cards */
+.dir-mail a, .people-dir-mail a {
+    text-transform: lowercase;
+}
 
 /* changes People profile details back to correct color */
 .ia-profile-details {
@@ -1222,6 +1231,11 @@ and Important Events (Upcoming Events)
 
 .ia-people-directory-section.nciorg .ia-people-filter-section .ia-people-filters {
     display: block !important;
+}
+
+/* Font size for People Directory email, phone, department */
+.people-finder .ia-link-item a, .people-finder .ia-profile-dept {
+    font-size: 16px;
 }
 
 
