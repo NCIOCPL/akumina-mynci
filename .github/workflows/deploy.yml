@@ -33,12 +33,49 @@ jobs:
       # Sets up our deployment 
       - uses: "./.github/workflows/composite/setup"
 
-      # Package the widgets (must run before build)
-      - name: Package Widgets
+
+      ########## Widget Package ##########
+
+      # Update widget tokens
+      # Our own solution instead of --tokenMap because we need to replace values inside a JSON object
+      # and Akumina's solution only supports string values
+      - name: Update widget tokens
+        id: tokens
         if: inputs.deploy-widgets
-        # TO-DO: Implement tokenMap
-        #run: npm run package ${{ inputs.widget_name }} -- --tokenMap ${{ inputs.token_map }}
+        shell: pwsh
+        env:
+          WIDGET_TOKENS: ${{ vars.WIDGET_TOKENS }}
+        run: |
+          $mappingJson = $env:WIDGET_TOKENS
+          $mapping = $mappingJson | ConvertFrom-Json
+
+          $TargetDirectory = "src/js/widgets"
+          $files = Get-ChildItem -Path $TargetDirectory -Recurse -Filter "*.json"
+
+          foreach ($file in $files) {
+              $content = Get-Content $file.FullName -Raw
+              $fileReplacements = 0
+              foreach ($key in $mapping.PSObject.Properties.Name) {
+                  $searchKey = "GHA_$key"
+                  $value = $mapping.$key
+                  if ($content -match [regex]::Escape($searchKey)) {
+                    $content = $content -replace [regex]::Escape($searchKey), $value
+                    $fileReplacements++
+                  }
+              }
+              if ($fileReplacements -gt 0) {
+                Set-Content -Path $file.FullName -Value $content
+                Write-Host "$fileReplacements token(s) replaced with values from GHA environment in $($file.FullName)."
+              }
+          }
+        
+      # Package the widgets (must run before build)
+      - name: Package widgets
+        if: inputs.deploy-widgets
+        # npm run package -- --tokenMap "${{ steps.tokens.outputs.WIDGET_TOKEN_STRING }}" 
         run: npm run package
+
+      ########## Build ##########
 
       # Runs webpack to copy the source to the build folder
       - name: Build
@@ -54,7 +91,7 @@ jobs:
           deployment_type: "cdnassets"
 
       # Runs akumina-widget-builder with the cdnpackage option to prep widgets for deployment
-      - name: Package Widgets for CDN
+      - name: Package widgets for CDN
         if: inputs.deploy-widgets
         run: npm run cdnpackage
 
@@ -80,7 +117,7 @@ jobs:
           deployment_type: "widgets"
 
       # Runs site deployer
-      - name: Deploy Widgets
+      - name: Deploy widgets
         if: inputs.deploy-widgets
         run: npm run deploy
         env:
