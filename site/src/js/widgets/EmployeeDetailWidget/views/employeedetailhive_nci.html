@@ -25,7 +25,7 @@
 {{else}}
 <div class="ia-profile fs-js-profile ia-widget-wrapper">
     <div class="row ia-profile-details">
-        <div class="col-lg-8">
+        <div class="col-lg-12">
             <!-- March 18 - unused code for profile_avatar from employeedetailhive_new
              <img
                         class="ak-thumbnail-image"
@@ -47,13 +47,14 @@
             </div>
             <div class="profile_info ia-profile-detail-info">
                 <div class="ia-profile-detail-name">
-                    <h1 class="title">{{givenname}} {{surname}}</h1>
+                    <h1 class="title">{{givenname}} {{surname}} [{{graph.customfieldstring6}}]</h1>
                     {{#if jobtitle}}
                     <div class="ia-key-value">
                         <div class="ia-value">{{jobtitle}}</div>
                     </div>
                     {{/if}}
                 </div>
+                <br />
                 <div class="ia-profile-detail-others-info">
 
                     
@@ -65,15 +66,17 @@
                             <a href="mailto: {{mail}}"><span id="ed-mail">{{mail}}</span></a>
                         </div>
                     </div>
+                    <br />
                     
                     
                     {{/if}}
                     <div class="ia-key-value">
                         <label class="ia-key">{{translate "NCI.profile.phone"}}:</label>
                         <div class="ia-value">
-                            <a href="tel: {{mobilephone}}"><span id="ed-mobile">{{graph.customfieldstring5}}</span></a>
+                            <a href="tel: {{mobilephone}}"><span id="ed-mobile">{{formatPhone graph.customfieldstring5}}</span></a>
                         </div>
                     </div>
+                    <br />
 
 
                     {{#if graph.officelocation}}
@@ -81,15 +84,16 @@
                         <label class="ia-key">{{translate "NCI.profile.location"}}:</label>
                         <div class="ia-value ia-location">{{formatAddress graph.officelocation}}</div>
                     </div>
+                    <br />
                     {{/if}}
 
 
-                    {{#if graph.customfieldstring6}}
+                    <!-- {{#if graph.customfieldstring6}}
                     <div class="ia-key-value">
                         <label class="ia-key">{{translate "NCI.profile.classification"}}:</label>
                         <div class="ia-value">{{graph.customfieldstring6}}</div>
                     </div>
-                    {{/if}}
+                    {{/if}} -->
 
 
                     {{#if office}}
@@ -98,7 +102,10 @@
                         <label class="ia-key"><i class="fa-regular fa-location-dot"></i></label>
                         <div class="ia-value">{{office}}</div> -->
                         <label class="ia-key">{{translate "NCI.profile.organization"}}:</label>
-                        <div class="ia-value">{{OrganizationSpaces office}}</div>
+                        <div class="ia-value org-container">
+                            <div class="ia-value branch-name">{{graph.customfieldstring4}}</div>
+                            <div class="ia-value dept-tree">{{OrganizationSpaces office}}</div>
+                        </div>
                     </div>
                     {{/if}}
 
@@ -146,28 +153,127 @@
             </div>
             <div class="ia-profile-information">
                 <div class="ia-about-me">
-                    <div class="ia-about-me-content">
+                    {{#if CanEditData}}
+                    <div id="aboutMeContainer" class="ia-about-me-content">
                         <h2 class="h3">
                             {{translate "peoplelist.aboutme"}}
                         </h2>
                         <div class="empContent">
                             <p id="ed-aboutme">{{{aboutme}}}</p>
                         </div>
-                        <div class="ia-hide" style="padding-bottom: 12px;">{{translate "peoplelist.editprofileadd"}} {{translate "peoplelist.youraboutme"}} </div>
+                        <div class="ia-hide fs-js-empty-about">{{translate "peoplelist.editprofileadd"}} {{translate "peoplelist.youraboutme"}} </div>
                     </div>
-                    <div class="ia-about-me-content">
+                    {{else}}
+                    {{#if aboutme}}
+                    <div id="aboutMeContainer" class="ia-about-me-content">
+                        <h2 class="h3">
+                            {{translate "peoplelist.aboutme"}}
+                        </h2>
+                        <div class="empContent">
+                            <p id="ed-aboutme">{{{aboutme}}}</p>
+                        </div>
+                    </div>
+                    {{else}}
+                    <div class="about-me-section__empty"></div>
+                    {{/if}}
+                    {{/if}}
+
+                    {{#if CanEditData}}
+                    <div id='certificationsContainer' class="ia-about-me-content ia-profile-background-info">
+                        <h2 class="h3">
+                            {{translate "peoplelist.certifications"}}
+                        </h2>
+                        {{#if certificationsItems.length}}
+                        <ul>
+                            {{#certificationsItems}}
+                            <li>{{this}}</li>
+                            {{/certificationsItems}}
+                        </ul>
+                        {{else}}
+                        <div class="fs-js-empty-certs">
+                            {{translate "peoplelist.editprofileadd"}} {{translate "peoplelist.yourcertifications"}}
+                        </div>
+                        {{/if}}
+                    </div>
+                    {{else}}
+                    {{#if certificationsItems.length}}
+                    <div id='certificationsContainer' class="ia-about-me-content ia-profile-background-info">
+                        <h2 class="h3">
+                            {{translate "peoplelist.certifications"}}
+                        </h2>
+                        <ul>
+                            {{#certificationsItems}}
+                            <li>{{this}}</li>
+                            {{/certificationsItems}}
+                        </ul>
+                    </div>
+                    {{else}}
+                    <div class="certifications-section__empty"></div>
+                    {{/if}}
+                    {{/if}}
+
+                    {{#if CanEditData}}
+                    <div id='techskillsContainer' class="ia-about-me-content ia-profile-background-info">
+                        <h2 class="h3">
+                            {{translate "peoplelist.techskills"}}
+                        </h2>
+                        {{#if skillsItems.length}}
+                        <ul>
+                            {{#skillsItems}}
+                            <li>{{this}}</li>
+                            {{/skillsItems}}
+                        </ul>
+                        {{else}}
+                        <div class="fs-js-empty-skills">
+                            {{translate "peoplelist.editprofileadd"}} {{translate "peoplelist.yourtechskills"}}
+                        </div>
+                        {{/if}}
+                    </div>
+                    {{else}}
+                    {{#if skillsItems.length}}
+                    <div id='techskillsContainer' class="ia-about-me-content ia-profile-background-info">
+                        <h2 class="h3">
+                            {{translate "peoplelist.techskills"}}
+                        </h2>
+                        <ul>
+                            {{#skillsItems}}
+                            <li>{{this}}</li>
+                            {{/skillsItems}}
+                        </ul>
+                    </div>
+                    {{else}}
+                    <div class="techSkills-section__empty"></div>
+                    {{/if}}
+                    {{/if}}
+
+                    {{#if CanEditData}}
+                    <div id="hobbiesContent" class="ia-about-me-content">
                         <h2 class="h3">
                             {{translate "peoplelist.hobbies"}}
                         </h2>
                         <div class="empContent">
                             <p id="ed-hobbies">{{{hobbies}}}</p>
                         </div>
-                        <div class="ia-hide" style="padding-bottom: 12px;">{{translate "peoplelist.editprofileadd"}} {{translate "peoplelist.yourhobbies"}} </div>
+                        <div class="ia-hide fs-js-empty-hobbies" style="padding-bottom: 12px;">{{translate "peoplelist.editprofileadd"}} {{translate "peoplelist.yourhobbies"}} </div>
                     </div>
+                    {{else}}
+                    {{#if hobbies}}
+                    <div id="hobbiesContent" class="ia-about-me-content">
+                        <h2 class="h3">
+                            {{translate "peoplelist.hobbies"}}
+                        </h2>
+                        <div class="empContent">
+                            <p id="ed-hobbies">{{{hobbies}}}</p>
+                        </div>
+                    </div>
+                    {{else}}
+                    <div class="hobbies-section__empty"></div>
+                    {{/if}}
+                    {{/if}}
                 </div>
             </div>
         </div>
-        <div class="col-lg-4">
+        <!-- <div class="col-lg-4">
             <div class="ia-card ia-profile-card">
                 <div id='certificationsContainer' class="ia-profile-background-info">
                     <h2 class="h3">
@@ -218,7 +324,7 @@
                     {{/if}}
                 </div>
             </div>
-            <!--<div class="fs-profile-background fs-profile-chart">
+            <div class="fs-profile-background fs-profile-chart">
                 <h2 class="h3">
                     {{translate "peoplelist.manager"}}
                 </h2>
@@ -229,9 +335,9 @@
                 {{else}}
                 <p>{{translate "peoplelist.nomanagerfound"}}</p>
                 {{/if}}
-            </div>-->
+            </div> 
             <div rel="MyOrgTreeWidget-Hive" class="ak-widget fs-js-my-org-instance" id="9cb54975-0b16-4a88-9c73-d608c41e4554"></div>
-        </div>
+        </div> -->
     </div>
 </div>
 {{/if}}
