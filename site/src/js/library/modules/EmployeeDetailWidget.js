@@ -1,4 +1,5 @@
 export function employeeDetailWidget_helper() {
+
   // Adds spaces around forward slashes
   Handlebars.registerHelper('OrganizationSpaces', function (organization) {
     if (typeof organization == 'string') {
@@ -12,5 +13,19 @@ export function employeeDetailWidget_helper() {
   Handlebars.registerHelper('formatAddress', function (text) {
     // Replace all occurrences of $ with a line break
     return new Handlebars.SafeString(text.replace(/\$/g, '<br>'));
+  });
+
+  // Hides +1 in phone number
+  Handlebars.registerHelper('formatPhone', function (phone) {
+    return phone.replace('+1 ', '');
+  });
+
+  Handlebars.registerHelper('formatBranchName', function (branchName) {
+    if (typeof branchName == 'string') {
+      var formattedBranch = branchName.toLowerCase();
+      return formattedBranch;
+    } else {
+      return branchName;
+    }
   });
 }
