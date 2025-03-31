@@ -217,7 +217,7 @@
 										</a>
 										{{/if}}
                                 </td>
-                                <td>{{jobtitle}}</td>
+                                <!-- <td>{{jobtitle}}</td> -->
                                 <td>{{officelocation}}</td>
                                 <td>
                                     <ul class="ia-contact-links">
@@ -269,17 +269,17 @@
                            target="_blank"
                            aria-label="{{translate 'peopledirectory.contact'}} {{givenname}} {{surname}} with Microsoft Teams."></a>
                         {{/if}}
-                        <div class="ia-profile-details">
+                        <div class="ia-profile-details people-finder">
                             <div data-id="{{Id}}" href="#user-popup" class=""
                                  aria-label="{{translate 'peopledirectory.moreinfoprefix'}} {{givenname}} {{surname}}">
                                 {{#if ../DisplayFL}}
-                                <a href="javascript:void(0)" data-email="{{userprincipalname}}" class="ia-profile-name fs-js-profile-name">{{givenname}} {{surname}}</a>
+                                <a href="javascript:void(0)" data-email="{{userprincipalname}}" class="ia-profile-name fs-js-profile-name">{{givenname}} {{surname}} [{{customfieldstring6}}]</a>
                                 {{else}}
-                                <a href="javascript:void(0)" data-email="{{userprincipalname}}" class="ia-profile-name fs-js-profile-name">{{surname}}, {{givenname}}</a>
+                                <a href="javascript:void(0)" data-email="{{userprincipalname}}" class="ia-profile-name fs-js-profile-name">{{surname}}, {{givenname}} [{{customfieldstring6}}]</a>
                                 {{/if}}
-                                {{#if jobtitle}}
+                                <!-- {{#if jobtitle}}
                                 <div class="ia-profile-title">{{jobtitle}}</div>
-                                {{/if}}
+                                {{/if}} -->
                                 {{#if usageLocation}}
                                 <div class="ia-profile-location">
                                     {{translate "peopledirectory.userlocation"}}:
@@ -287,12 +287,12 @@
                                 </div>
                                 {{/if}}
                                 {{#if mail}}
-                                <div class="ia-link-item">
+                                <div class="ia-link-item people-dir-mail">
                                     <a href="mailto:{{mail}}"
                                        aria-label="{{translate 'peoplelist.email'}} {{givenname}} {{surname}}.">{{mail}}</a>
                                 </div>
                                 {{else}}
-                                <div class="ia-link-item">
+                                <div class="ia-link-item people-dir-mail">
                                     <a href="mailto:{{userprincipalname}}"
                                        aria-label="{{translate 'peoplelist.email'}} {{givenname}} {{surname}}.">{{userprincipalname}}</a>
                                 </div>
@@ -303,9 +303,15 @@
                                        aria-label="{{translate 'common.call'}} {{givenname}} {{surname}}.">{{businessphones}}</a>
                                 </div>
                                 {{/if}}
+                                <!-- {{#if customfieldstring6}}
+                                <div class="ia-profile-dept">
+                                    {{translate "NCI.profile.classification"}}: {{customfieldstring6}}
+                                </div>
+                                {{/if}} -->
+                                <!-- {{translate "peopledirectory.userdepartment"}}:  -->
                                 {{#if department}}
                                 <div class="ia-profile-dept">
-                                    {{translate "peopledirectory.userdepartment"}}: {{department}}
+                                    {{department}}
                                 </div>
                                 {{/if}}
                                 {{#if officelocation}}
@@ -376,7 +382,7 @@
 										</a>
 										{{/if}}
                                 </td>
-                                <td>{{jobtitle}}</td>
+                                <!-- <td>{{jobtitle}}</td> -->
                                 <td>{{officelocation}}</td>
                                 <td>
                                     <ul class="ia-contact-links">
@@ -435,17 +441,17 @@
                            target="_blank"
                            aria-label="{{translate 'peopledirectory.contact'}} {{givenname}} {{surname}} with Microsoft Teams."></a>
                         {{/if}}
-                        <div class="ia-profile-details">
+                        <div class="ia-profile-details people-finder">
                             <div data-id="{{Id}}" href="#user-popup" class=""
                                  aria-label="{{translate 'peopledirectory.moreinfoprefix'}} {{givenname}} {{surname}}">
                                 {{#if ../DisplayFL}}
-                                <a href="javascript:void(0)" data-email="{{userprincipalname}}" class="ia-profile-name fs-js-profile-name">{{givenname}} {{surname}}</a>
+                                <a href="javascript:void(0)" data-email="{{userprincipalname}}" class="ia-profile-name fs-js-profile-name">{{givenname}} {{surname}} [{{customfieldstring6}}]</a>
                                 {{else}}
-                                <a href="javascript:void(0)" data-email="{{userprincipalname}}" class="ia-profile-name fs-js-profile-name">{{surname}}, {{givenname}}</a>
+                                <a href="javascript:void(0)" data-email="{{userprincipalname}}" class="ia-profile-name fs-js-profile-name">{{surname}}, {{givenname}} [{{customfieldstring6}}]</a>
                                 {{/if}}
-                                {{#if jobtitle}}
+                                <!-- {{#if jobtitle}}
                                 <div class="ia-profile-title">{{jobtitle}}</div>
-                                {{/if}}
+                                {{/if}} -->
                                 {{#if usageLocation}}
                                 <div class="ia-profile-location">
                                     {{translate "peopledirectory.userlocation"}}:
@@ -453,12 +459,12 @@
                                 </div>
                                 {{/if}}
                                 {{#if mail}}
-                                <div class="ia-link-item">
+                                <div class="ia-link-item people-dir-mail">
                                     <a href="mailto:{{mail}}"
                                        aria-label="{{translate 'peoplelist.email'}} {{givenname}} {{surname}}.">{{mail}}</a>
                                 </div>
                                 {{else}}
-                                <div class="ia-link-item">
+                                <div class="ia-link-item people-dir-mail">
                                     <a href="mailto:{{userprincipalname}}"
                                        aria-label="{{translate 'peoplelist.email'}} {{givenname}} {{surname}}.">{{userprincipalname}}</a>
                                 </div>
@@ -469,9 +475,10 @@
                                        aria-label="{{translate 'common.call'}} {{givenname}} {{surname}}.">{{businessphones}}</a>
                                 </div>
                                 {{/if}}
+                                <!-- {{translate "peopledirectory.userdepartment"}}:  -->
                                 {{#if department}}
                                 <div class="ia-profile-dept">
-                                    {{translate "peopledirectory.userdepartment"}}: {{department}}
+                                    {{department}}
                                 </div>
                                 {{/if}}
                                 {{#if officelocation}}

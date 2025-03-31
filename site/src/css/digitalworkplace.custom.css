@@ -1,4 +1,6 @@
-/* font */
+/************************************
+*             Font
+************************************/
 .tippy-box .tippy-content,
 .ia-page-wrapper,
 blockquote.ia-blockquote:before,blockquote.ia-blockquote:after,
@@ -14,37 +16,22 @@ body{
     font-family: "Open Sans", sans-serif !important;
 }
 
-/* footer */
 
-.ak-theme-ncitheme .ia-footer .ia-top-footer {
-    background-color: var(--nci-night-blue);
-}
-
-.ak-theme-ncitheme .ia-footer .ia-top-footer span,
-.ak-theme-ncitheme .ia-footer .ia-top-footer a {
-    color: var(--fs-white) !important;
-}
-
-.ak-theme-ncitheme .ia-footer .ia-top-footer.ia-load-form-link a,
-.ak-theme-ncitheme .ia-footer .ia-top-footer.ia-load-form-link span {
-    color: var(--fs-primary-color) !important;
-}
-
-
-/*hide akumina branding start*/
-
-
-.ak-theme-ncitheme .ia-masanory-grid .ia-card.ia-default{
+/************************************
+*     To Hide Akumina Branding 
+************************************/
+.ak-theme-ncitheme .ia-masanory-grid .ia-card.ia-default {
     background-image: unset;
 }
-.ak-theme-ncitheme .ia-masanory-grid .ia-card.ia-default .ia-card-image{
+
+.ak-theme-ncitheme .ia-masanory-grid .ia-card.ia-default .ia-card-image {
     background-image: unset;
 }
 
 /*for smaller square*/
 
 .ak-theme-ncitheme .ia-related-news-item .ia-item-img.ia-default-image,
-.ak-theme-ncitheme .ia-masanory-grid .ia-card.ia-default .ia-card-image{
+.ak-theme-ncitheme .ia-masanory-grid .ia-card.ia-default .ia-card-image {
     background-image: none;
     background-color: var(--nci-red);
     mask-image: url(images/no-image-triangles.svg);
@@ -68,49 +55,51 @@ body{
     height: 100%;
     width: 100%;
 }
-*/
-.ak-theme-ncitheme .ia-masanory-grid.ia-list-view .ia-card.ia-default::before{
-    position: unset;
-}
-/*
+
 .ak-theme-ncitheme .ia-masanory-grid.ia-list-view .ia-card.ia-default .ia-card-image{
     display: none;
 }
 */
-#HomeNewsEventsTabs .ia-card .ia-card-footer .ia-post-by{
+
+.ak-theme-ncitheme .ia-masanory-grid.ia-list-view .ia-card.ia-default::before {
+    position: unset;
+}
+
+#HomeNewsEventsTabs .ia-card .ia-card-footer .ia-post-by {
 	display: none !important;
 }
 
-.ia-tab-widget-container.nci-tabs .ia-tab-item a:after{
+.ia-tab-widget-container.nci-tabs .ia-tab-item a:after {
     display: none !important;
 }
 
-.ia-tab-widget-container.nci-tabs .ia-tabs{
+.ia-tab-widget-container.nci-tabs .ia-tabs {
     border-bottom: none;
 }
 
-
-.ia-tab-widget-container.nci-tabs .ia-tab-item a{
+.ia-tab-widget-container.nci-tabs .ia-tab-item a {
     margin-bottom: 20px;
 }
-.nci-tabs-news .make-hidden{
+
+.nci-tabs-news .make-hidden {
     display: none !important;
 }
-.ia-tab-widget-container.nci-tabs .ia-masanory-grid-view-toggle{
+
+.ia-tab-widget-container.nci-tabs .ia-masanory-grid-view-toggle {
     top: -50px;
 }
 
 
-/*sidebar lists*/
-.ia-item-img img[src*="css/images/card-default.svg"]{
+/* sidebar lists */
+.ia-item-img img[src*="css/images/card-default.svg"] {
     visibility: hidden;
 }
 
-.ia-item-img:has(img[src*="css/images/card-default.svg"]){
+.ia-item-img:has(img[src*="css/images/card-default.svg"]) {
     background-color: var(--fs-white);
 }
 
-.ia-item-img:has(img[src*="css/images/card-default.svg"])::before{
+.ia-item-img:has(img[src*="css/images/card-default.svg"])::before {
     background-color: #bb0e3d;
     background-color: var(--nci-red);
     mask-image: url(images/no-image-triangles.svg);
@@ -124,171 +113,110 @@ body{
     width: 100%;
 }
 
-/*hide akumina branding end*/
 
-
-/* tip of the week, important events, and announcement items */
-
-.leadership-slw .display-date,
-.ak-theme-ncitheme .event-display-date,
-.ak-theme-ncitheme .event-time-range,
-.ak-theme-ncitheme .w-100.mt-auto span {
-    font-size: 14px !important;
-    color: var(--nci-gray) !important;
+/************************************
+*           General Fixes
+************************************/
+.ak-theme-ncitheme .assessibility-hidden-text {
+    display: none;
 }
 
-.ak-theme-ncitheme .d-flex.flex-column.w-100.h-100 .mt-2.p-2 p {
-    padding-top: 7px;
+.ak-theme-ncitheme .ia-content-wrapper:before {
+    background-color: #f1f1f1;
+    background-image: none;
+    display: none !important;
 }
 
-
-
-/*latest from leadership*/
-.leadership-slw .ia-slw-article-desc{
-    color: var(--fs-text-color);
-    font-size: 16px;
-}
-
-.leadership-slw .ia-slw-thumbails-lists.ia-card{
-    height: "500px";
-    overflow-y: auto;
+/* fix slw top spacing */
+/*.ia-slw-featured.ia-slw.ia-widget-wrapper,*/
+.ak-theme-ncitheme .ia-apps-list.ia-apps-selected-list,
+.important-dates-modern,
+.news-home-page,
+.featured-photos-widget.ia-widget-wrapper,
+.ia-slw.ia-widget-wrapper{
+    margin-bottom: var(--fs-widgets-bottom-spacing);
 }
 
 
-
-/* top navigation mega menu */
-
-.ak-theme-ncitheme .ia-mega-menu .ia-menu-level-1-link.fa-chevron-down::before{
-	content: none;
-}
-/* closed */
-.ak-theme-ncitheme .ia-mega-menu .ia-menu-level-1-link.fs-js-expand-menu i.fa-chevron-up::before {
-	content: "\f078";
-}
-/* expanded*/
-.ak-theme-ncitheme .ia-mega-menu .ia-menu-level-1-link.fs-js-collapse-menu i.fa-chevron-up::before {
-	content: "\f077";
+/************************************
+*              Header
+************************************/
+.ak-theme-ncitheme .fs-header .ia-top-header .ia-logo-wrapper img {
+	max-width: 90%
 }
 
+/* fix scaling */
+.ia-page-wrapper.ia-mega-menu-always-open .fs-header .ia-top-header {
+    padding: 12px 24px !important;
+}
+
+/************************************
+*               Footer
+************************************/
+.ak-theme-ncitheme .ia-footer .ia-top-footer {
+    background-color: var(--nci-night-blue);
+}
+
+.ak-theme-ncitheme .ia-footer .ia-top-footer span,
+.ak-theme-ncitheme .ia-footer .ia-top-footer a {
+    color: var(--fs-white) !important;
+}
+
+.ak-theme-ncitheme .ia-footer .ia-top-footer.ia-load-form-link a,
+.ak-theme-ncitheme .ia-footer .ia-top-footer.ia-load-form-link span {
+    color: var(--fs-primary-color) !important;
+}
+
+/************************************
+*        Site Alerts Banner
+************************************/
+.ak-theme-ncitheme .ia-site-alerts {
+    margin-bottom: var(--fs-widgets-bottom-spacing);
+    margin-bottom: calc(36px + var(--fs-gutter-space));
+}
+
+/************************************
+*     Top Navigation Mega Menu
+************************************/
 .ak-theme-ncitheme .ia-mega-menu {
     background-color: var(--fs-white);
     color: var(--nci-mid-gray);
 }
 
-.ak-theme-ncitheme .ia-mega-menu a{
+.ak-theme-ncitheme .ia-mega-menu a {
     color: var(--nci-mid-gray);
 }
 .ak-theme-ncitheme .ia-mega-menu i {
     color: inherit;
 }
 
-
-@media screen and (min-width: 1205px){
-        
-    .ak-theme-ncitheme .ia-mega-menu-wrapper .ia-mega-menu .ia-menu-level-2,
-    .ak-theme-ncitheme .ia-mega-menu-wrapper .ia-mega-menu .ia-menut-level-3 {
-        color: var(--fs-white);
-    }
-        
-    .ak-theme-ncitheme .ia-mega-menu .ia-menu-submenu-wrapper a,
-    .ak-theme-ncitheme .ia-mega-menu .ia-menu-submenu-wrapper i{
-        color: var(--fs-white) !important;
-    }
-
-
-    .ak-theme-ncitheme .ia-mega-menu-wrapper .ia-mega-menu .ia-menu-level-1 .ia-menu-level-1-link{
-        margin-bottom: 0px;
-        padding-bottom: 5px;
-        padding: 15px;
-    }
-
-    .ak-theme-ncitheme .ia-mega-menu .ia-menu-level-1>.ia-has-submenu:has(.ia-menu-submenu-wrapper.fs-is-open) .ia-menu-level-1-link{
-        background-color: var(--fs-mega-menu-sub-bg-color);
-    }
-
-    .ak-theme-ncitheme .ia-mega-menu .ia-menu-level-1>.ia-has-submenu:has(.ia-menu-submenu-wrapper.fs-is-open) .ia-menu-level-1-link a,
-    .ak-theme-ncitheme .ia-mega-menu .ia-menu-level-1>.ia-has-submenu:has(.ia-menu-submenu-wrapper.fs-is-open) .ia-menu-level-1-link i{
-        color: var(--fs-white) !important;
-    }
-    .ak-theme-ncitheme .ia-mega-menu-wrapper .ia-mega-menu .ia-menu-level-1 .ia-menu-level-1-link>a.fs-selected:after{
-        display: none;
-    }
-    .ak-theme-ncitheme .ia-mega-menu-wrapper .ia-mega-menu .ia-menu-level-1 .ia-menu-level-1-link>a.fs-selected:hover:after{
-        background-color: white;
-        display: block;
-    }
-
-    .ak-theme-ncitheme .ia-page-wrapper.ia-mega-menu-always-open .ia-mega-menu-wrapper .ia-mega-menu .ia-menu-level-2 .ia-menu-level-2-link,
-    .ak-theme-ncitheme .ia-page-wrapper.ia-mega-menu-always-open .ia-mega-menu-wrapper .ia-mega-menu .ia-menu-level-3 .ia-menu-level-3-link {
-        color: var(--fs-white);
-    }
-
-
-}
-
-@media screen and (max-width: 1204px) {
-    .ak-theme-ncitheme .ia-mega-menu-wrapper .ia-mega-menu .ia-menu-submenu-wrapper{
-        background-color: unset;
-    }
-        
-    .ak-theme-ncitheme .ia-mega-menu .ia-menu-submenu-wrapper a{
-        color: var(--nci-mid-gray);
-    }
-
-    .ak-theme-ncitheme .ia-mega-menu .ia-menu-submenu-wrapper a:hover,
-    .ak-theme-ncitheme .ia-mega-menu .ia-menu-submenu-wrapper i:hover 
-    .ak-theme-ncitheme .ia-mega-menu .ia-menu-submenu-wrapper a:hover i {
-        color: var(--fs-white);
-    }
-
-    .ak-theme-ncitheme .ia-page-wrapper.ia-mega-menu-always-open .ia-mega-menu-wrapper .ia-mega-menu .ia-menu-level-2 .ia-menu-level-2-link,
-    .ak-theme-ncitheme .ia-page-wrapper.ia-mega-menu-always-open .ia-mega-menu-wrapper .ia-mega-menu .ia-menu-level-3 .ia-menu-level-3-link {
-        color: var(--nci-mid-gray);
-    }
-
-    .ak-theme-ncitheme .ia-page-wrapper.ia-mega-menu-always-open .ia-mega-menu-wrapper .ia-mega-menu .ia-menu-level-2 .ia-menu-level-2-link:hover,
-    .ak-theme-ncitheme .ia-page-wrapper.ia-mega-menu-always-open .ia-mega-menu-wrapper .ia-mega-menu .ia-menu-level-3 .ia-menu-level-3-link:hover {
-        color: var(--fs-white);
-    }
-
-
-
-    /*fix mobile scroll*/
-    .ia-page-wrapper.ia-mega-menu-always-open .ia-mega-menu-wrapper .ia-close-menu {
-        position: fixed;
-    }
-    .ia-page-wrapper.ia-mega-menu-always-open .ia-mega-menu-wrapper .ia-mega-menu.fs-is-open{
-        overflow-y: auto;
-        max-height: 100%;
-        padding-bottom: 36px;
-    }
-    .ia-page-wrapper.ia-mega-menu-always-open .ia-mega-menu-wrapper .ia-mega-menu .ia-menu-level-2{
-        max-height: unset;
-    }
-    /*fix mobile scroll*/
-}
-
-.ak-theme-ncitheme .ia-mega-menu-wrapper .ia-mega-menu .ia-menu-level-2 .ia-menu-level-2-link:after,
-.ak-theme-ncitheme .ia-mega-menu-wrapper .ia-mega-menu .ia-menu-level-3 .ia-menu-level-3-link:after {
-    display: none;
-}
-
-.ak-theme-ncitheme .ia-mega-menu-wrapper .ia-mega-menu .ia-menu-level-2 .ia-menu-level-2-link:hover,
-.ak-theme-ncitheme .ia-mega-menu-wrapper .ia-mega-menu .ia-menu-level-3 .ia-menu-level-3-link:hover {
-    text-decoration-line: underline;
-    background-color: var(--fs-primary-color);
-}
-
-.ak-theme-ncitheme .ia-page-wrapper.ia-mega-menu-always-open .ia-mega-menu-wrapper .ia-mega-menu .ia-menu-level-2 .ia-menu-level-2-link {
-    font-size: 20px;
-}
-
-.ak-theme-ncitheme .ia-page-wrapper.ia-mega-menu-always-open .ia-mega-menu-wrapper .ia-mega-menu .ia-menu-level-3 .ia-menu-level-3-link {
-    font-size: 16px;
-}
-
 .ak-theme-ncitheme .ia-mega-menu-wrapper .ia-mega-menu .ia-menu-submenu-wrapper.fs-is-open {
     display: inline-block;
+}
+
+/* fix scaling */
+.ia-page-wrapper.ia-mega-menu-always-open .ia-mega-menu-wrapper .ia-menu-toggle {
+    color: var(--fs-dark-primary-color) !important;
+    top: -75px !important;
+}
+
+.ak-theme-ncitheme .ia-mega-menu .ia-menu-level-1-link.fa-chevron-down::before {
+	content: none;
+}
+
+/* closed */
+.ak-theme-ncitheme .ia-mega-menu .ia-menu-level-1-link.fs-js-expand-menu i.fa-chevron-up::before {
+	content: "\f078";
+}
+
+/* expanded*/
+.ak-theme-ncitheme .ia-mega-menu .ia-menu-level-1-link.fs-js-collapse-menu i.fa-chevron-up::before {
+	content: "\f077";
+}
+
+.ak-theme-ncitheme .ia-page-wrapper.ia-mega-menu-always-open .ia-mega-menu-wrapper .ia-mega-menu .ia-menu-level-1 > li {
+    padding-right: 12px !important;
+    margin-right: 0px !important;
 }
 
 .ak-theme-ncitheme .ia-mega-menu-wrapper .ia-mega-menu .ia-menu-level-1 .ia-menu-level-1-link {
@@ -303,22 +231,192 @@ body{
     color: var(--fs-primary-color);
 }
 
-/* top navigation mega menu */
-
-
-
-
-
-
-
-
-.ak-theme-ncitheme .ia-content-wrapper:before {
-    background-color: #f1f1f1;
-    background-image: none;
-    display: none !important;
+.ak-theme-ncitheme .ia-page-wrapper.ia-mega-menu-always-open .ia-mega-menu-wrapper .ia-mega-menu .ia-menu-level-2 .ia-menu-level-2-link {
+    font-size: 20px;
 }
 
-/* calendar */
+.ak-theme-ncitheme .ia-mega-menu-wrapper .ia-mega-menu .ia-menu-level-2 .ia-menu-level-2-link:after,
+.ak-theme-ncitheme .ia-mega-menu-wrapper .ia-mega-menu .ia-menu-level-3 .ia-menu-level-3-link:after {
+    display: none;
+}
+
+.ak-theme-ncitheme .ia-mega-menu-wrapper .ia-mega-menu .ia-menu-level-2 .ia-menu-level-2-link:hover,
+.ak-theme-ncitheme .ia-mega-menu-wrapper .ia-mega-menu .ia-menu-level-3 .ia-menu-level-3-link:hover {
+    text-decoration-line: underline;
+    background-color: var(--fs-primary-color);
+}
+
+.ak-theme-ncitheme .ia-page-wrapper.ia-mega-menu-always-open .ia-mega-menu-wrapper .ia-mega-menu .ia-menu-level-3 .ia-menu-level-3-link {
+    font-size: 16px;
+}
+
+/* Desktop and above Media Query */
+
+@media screen and (min-width: 1205px) {
+
+    .ak-theme-ncitheme .ia-mega-menu .ia-menu-submenu-wrapper a,
+    .ak-theme-ncitheme .ia-mega-menu .ia-menu-submenu-wrapper i {
+        color: var(--fs-white) !important;
+    }
+
+    /* Menu Level 1 */
+    .ak-theme-ncitheme .ia-mega-menu-wrapper .ia-mega-menu .ia-menu-level-1 .ia-menu-level-1-link {
+        margin-bottom: 0px;
+        padding-bottom: 5px;
+        padding: 15px;
+    }
+
+    .ak-theme-ncitheme .ia-mega-menu .ia-menu-level-1>.ia-has-submenu:has(.ia-menu-submenu-wrapper.fs-is-open) .ia-menu-level-1-link {
+        background-color: var(--fs-mega-menu-sub-bg-color);
+    }
+
+    .ak-theme-ncitheme .ia-mega-menu .ia-menu-level-1>.ia-has-submenu:has(.ia-menu-submenu-wrapper.fs-is-open) .ia-menu-level-1-link a,
+    .ak-theme-ncitheme .ia-mega-menu .ia-menu-level-1>.ia-has-submenu:has(.ia-menu-submenu-wrapper.fs-is-open) .ia-menu-level-1-link i {
+        color: var(--fs-white) !important;
+    }
+
+    .ak-theme-ncitheme .ia-mega-menu-wrapper .ia-mega-menu .ia-menu-level-1 .ia-menu-level-1-link>a.fs-selected:after {
+        display: none;
+    }
+
+    .ak-theme-ncitheme .ia-mega-menu-wrapper .ia-mega-menu .ia-menu-level-1 .ia-menu-level-1-link>a.fs-selected:hover:after {
+        background-color: white;
+        display: block;
+    }
+        
+    /* Menu Level 2 and Menu Level 3 */
+    .ak-theme-ncitheme .ia-mega-menu-wrapper .ia-mega-menu .ia-menu-level-2,
+    .ak-theme-ncitheme .ia-mega-menu-wrapper .ia-mega-menu .ia-menut-level-3 {
+        color: var(--fs-white);
+    }
+
+    .ak-theme-ncitheme .ia-page-wrapper.ia-mega-menu-always-open .ia-mega-menu-wrapper .ia-mega-menu .ia-menu-level-2 .ia-menu-level-2-link,
+    .ak-theme-ncitheme .ia-page-wrapper.ia-mega-menu-always-open .ia-mega-menu-wrapper .ia-mega-menu .ia-menu-level-3 .ia-menu-level-3-link {
+        color: var(--fs-white);
+    }
+}
+
+/* Below Desktop Media Query */
+
+@media screen and (max-width: 1204px) {
+    .ak-theme-ncitheme .ia-mega-menu-wrapper .ia-mega-menu .ia-menu-submenu-wrapper {
+        background-color: unset;
+    }
+        
+    .ak-theme-ncitheme .ia-mega-menu .ia-menu-submenu-wrapper a {
+        color: var(--nci-mid-gray);
+    }
+
+    .ak-theme-ncitheme .ia-mega-menu .ia-menu-submenu-wrapper a:hover,
+    .ak-theme-ncitheme .ia-mega-menu .ia-menu-submenu-wrapper i:hover 
+    .ak-theme-ncitheme .ia-mega-menu .ia-menu-submenu-wrapper a:hover i {
+        color: var(--fs-white);
+    }
+
+    /* fixes  mobile scroll */
+    .ia-page-wrapper.ia-mega-menu-always-open .ia-mega-menu-wrapper .ia-close-menu {
+        position: fixed;
+    }
+
+    /* fixes  mobile scroll */
+    .ia-page-wrapper.ia-mega-menu-always-open .ia-mega-menu-wrapper .ia-mega-menu.fs-is-open {
+        overflow-y: auto;
+        max-height: 100%;
+        padding-bottom: 36px;
+    }
+
+    /* fixes mobile scroll */
+    .ia-page-wrapper.ia-mega-menu-always-open .ia-mega-menu-wrapper .ia-mega-menu .ia-menu-level-2 {
+        max-height: unset;
+    }
+
+    .ak-theme-ncitheme .ia-page-wrapper.ia-mega-menu-always-open .ia-mega-menu-wrapper .ia-mega-menu .ia-menu-level-2 .ia-menu-level-2-link,
+    .ak-theme-ncitheme .ia-page-wrapper.ia-mega-menu-always-open .ia-mega-menu-wrapper .ia-mega-menu .ia-menu-level-3 .ia-menu-level-3-link {
+        color: var(--nci-mid-gray);
+    }
+
+    .ak-theme-ncitheme .ia-page-wrapper.ia-mega-menu-always-open .ia-mega-menu-wrapper .ia-mega-menu .ia-menu-level-2 .ia-menu-level-2-link:hover,
+    .ak-theme-ncitheme .ia-page-wrapper.ia-mega-menu-always-open .ia-mega-menu-wrapper .ia-mega-menu .ia-menu-level-3 .ia-menu-level-3-link:hover {
+        color: var(--fs-white);
+    }
+}
+
+
+/************************************
+*           Breadcrumbs
+************************************/
+.breadcrumb.ia-breadcrumb {
+    overflow: hidden;
+}
+
+.breadcrumb.ia-breadcrumb li {
+    overflow: hidden;
+    overflow-wrap: break-word;
+    max-width: 100%;
+}
+
+/* wcag fix for breadcrumbs */
+.ak-theme-ncitheme .ia-breadcrumb .breadcrumb-item {
+	color: var(--fs-dark-primary-color);
+}
+
+
+/************************************
+*      Quick Links HomePage Apps
+
+            Mission Control
+************************************/
+.ak-theme-ncitheme .ia-mission-control.fs-js-active:before {
+    background-color: var(--fs-white);
+}
+
+.ak-theme-ncitheme .ia-apps-list.ia-apps-selected-list {
+    margin-top: 0;
+}
+
+.ak-theme-ncitheme .ia-misson-control-wrapper .ia-apps-list.ia-apps-selected-list {
+    margin-top: 36px;
+    margin-bottom: 44px;
+}
+
+
+/************************************
+*   Latest From Leadership Widget
+************************************/
+.leadership-slw .ia-slw-article-desc {
+    color: var(--fs-text-color);
+    font-size: 16px;
+}
+
+.leadership-slw .ia-slw-thumbails-lists.ia-card {
+    height: "500px";
+    overflow-y: auto;
+}
+
+
+/************************************
+* Tip of the Week, Announcement Items,
+and Important Events (Upcoming Events)
+************************************/
+/* latest from leadership doesn't have display date anymore */
+.leadership-slw .display-date,
+.ak-theme-ncitheme .event-display-date,
+.ak-theme-ncitheme .event-time-range,
+.ak-theme-ncitheme .w-100.mt-auto span {
+    font-size: 14px !important;
+    color: var(--nci-gray) !important;
+}
+
+.ak-theme-ncitheme .d-flex.flex-column.w-100.h-100 .mt-2.p-2 p {
+    padding-top: 7px;
+}
+
+
+/************************************
+*             Calendar
+
+         Also called Events
+************************************/
 .ak-theme-ncitheme .fc-event.ia-regular-event .fc-content:before,
 .ak-theme-ncitheme .fc-event.ia-featured-event .fc-content:before {
     background-color: var(--fs-primary-color);
@@ -370,7 +468,7 @@ body{
     border-bottom: 0 !important;
 }
 
-.ak-theme-ncitheme .ia-calendar-grid.fc.fc-ltr.fc-unthemed .fc-view-container .fc-body td{
+.ak-theme-ncitheme .ia-calendar-grid.fc.fc-ltr.fc-unthemed .fc-view-container .fc-body td {
     border-right: 1px solid var(--nci-light-gray) !important;
     border-left: 1px solid var(--nci-light-gray) !important;
 }
@@ -391,170 +489,46 @@ body{
     border-color: var(--nci-light-gray);
 }
 
-/*details*/
+
+/************************************
+*       Calendar Details Page
+
+   Also called Events Detail Page
+************************************/
 .ak-theme-ncitheme .ia-calendar-detail .ia-article-section-right .ia-calender-attributes,
 .ak-theme-ncitheme .ia-calendar-detail.ia-widget-wrapper,
 .ak-theme-ncitheme .ia-calendar-detail.ia-widget-wrapper .ia-article-description,
-.ak-theme-ncitheme .ia-page-wrapper .ak-foundation-page-wrapper.ia-content-wrapper{
+.ak-theme-ncitheme .ia-page-wrapper .ak-foundation-page-wrapper.ia-content-wrapper {
     overflow: hidden;
 }
-
 
 .ak-theme-ncitheme .ia-calendar-detail .ia-calendar-header .h2,
 .ak-theme-ncitheme .ia-calendar-detail.ia-widget-wrapper .ia-article-description,
 .ak-theme-ncitheme .ia-calendar-detail .ia-article-section-right .ia-calender-attributes .ia-calender-datetime-location,
-.ak-theme-ncitheme .ia-calendar-detail .ia-article-section-right .ia-calender-attributes .ia-calender-datetime-location span{
+.ak-theme-ncitheme .ia-calendar-detail .ia-article-section-right .ia-calender-attributes .ia-calender-datetime-location span {
     overflow: hidden;
     overflow-wrap: break-word;
 }
 
+/* Reference to logo which NCI wants to use for meetings on the EventDetail page */
+.ia-logo-nci-meeting {
+    /*background-color: #f1f1f1;*/
+    background-image: url('./images/nci-calendar-icon-v3.png') !important;
+}
+
+.ak-theme-ncitheme .ia-calendar-detail .ia-article-section-right .ia-calender-attributes .ia-calendar-teams-link a .ia-logo-icons-24px {
+    margin-left: -4px;
+}
+
+/* might be for image resizing? can't find where ia-content-info is */
 .ak-theme-ncitheme .ia-article .ia-article-section .ia-content-info img {
 	height: fit-content;
 }
 
-.breadcrumb.ia-breadcrumb{
-    overflow: hidden;
-}
-.breadcrumb.ia-breadcrumb li{
-    overflow: hidden;
-    overflow-wrap: break-word;
-    max-width: 100%;
-}
 
-
-
-/* orgchart */
-.ak-theme-ncitheme .ia-org-chart .ia-org-chart-user-icons a.ia-ms-teams {
-    filter: hue-rotate(240deg);
-}
-/* people directory */
-.ak-theme-ncitheme .ia-people-directory .ia-people-directory-section .ia-people-filter-section .ia-people-results .ia-people-results-grid .ia-profile-container .ia-msteams::before {
-    filter: hue-rotate(300deg);
-}
- .ak-theme-ncitheme .ia-people-directory .ia-people-directory-section .ia-people-filter-section .ia-people-results .ia-people-results-grid .ia-profile-container .ia-profile-avatar {
-    background: var(--fs-accent-color) url(images/icon-profile-default-bg.svg) no-repeat center center;
-}
-
-.ak-theme-ncitheme #organizationdirectorytabwidget nav>ul>.slick-list.draggable .slick-track{
-	transform: translate3d(0,0,0) !important;
-}
-
-.ak-theme-ncitheme .ia-people-directory .ia-people-directory-section .ia-people-filter-section .ia-people-results .ia-people-results-grid .ia-profile-container .ia-profile-details .ia-profile-office,
-.ak-theme-ncitheme .ia-people-directory .ia-people-directory-section .ia-people-filter-section .ia-people-results .ia-people-results-grid .ia-profile-container .ia-profile-details .ia-profile-dept,
-.ak-theme-ncitheme .ia-people-directory .ia-people-directory-section .ia-people-filter-section .ia-people-results .ia-people-results-grid .ia-profile-container .ia-profile-details .ia-profile-title,
-.ak-theme-ncitheme .ia-people-directory .ia-people-directory-section .ia-people-filter-section .ia-people-results .ia-people-results-grid .ia-profile-container .ia-profile-details .ia-profile-manager {
-	opacity: 1;
-
-}
-
-/* Org Directory People Directory spacing */
-.ak-theme-ncitheme .ia-people-directory .ia-people-directory-section .ia-people-filter-section #organizationdirectorytabwidget .ia-people-results .ia-people-results-grid.ia-active {
-	width: calc(100vw - 150px);
-}
-
-.ia-people-directory .ia-people-directory-section .ia-people-filter-section #organizationdirectorytabwidget .ia-people-results .ia-people-results-grid .ia-profile-container {
-	padding: 12px
-}
-
-@media screen and (min-width: 770px) {
-	.ak-theme-ncitheme .ia-people-directory .ia-people-directory-section .ia-people-filter-section #organizationdirectorytabwidget .ia-people-results .ia-people-results-grid.ia-active {
-		width: calc(100vw - 200px);
-	}
-
-	.ia-people-directory .ia-people-directory-section .ia-people-filter-section #organizationdirectorytabwidget .ia-people-results .ia-people-results-grid .ia-profile-container {
-		padding: calc(var(--fs-gutter-space) / 2);
-	}
-}
-
-@media screen and (min-width: 992px) {
-	.ak-theme-ncitheme .ia-people-directory .ia-people-directory-section .ia-people-filter-section #organizationdirectorytabwidget .ia-people-results .ia-people-results-grid.ia-active {
-		width: calc(100vw - 480px);
-	}
-}
-
-@media screen and (min-width: 1025px) {
-	.ak-theme-ncitheme .ia-people-directory .ia-people-directory-section .ia-people-filter-section #organizationdirectorytabwidget .ia-people-results .ia-people-results-grid.ia-active {
-		width: calc(100vw - 490px);
-	}
-}
-
-@media screen and (min-width: 1600px) {
-    .ak-theme-ncitheme .ia-people-directory .ia-people-directory-section .ia-people-filter-section #organizationdirectorytabwidget .ia-people-results .ia-people-results-grid.ia-active {
-        width: calc(100vw - 550px);
-    }
-}
-
-@media screen and (min-width: 1700px) {
-    .ak-theme-ncitheme .ia-people-directory .ia-people-directory-section .ia-people-filter-section #organizationdirectorytabwidget .ia-people-results .ia-people-results-grid.ia-active {
-        width: calc(100vw - 600px);
-    }
-}
-
-@media screen and (min-width: 1750px) {
-    .ak-theme-ncitheme .ia-people-directory .ia-people-directory-section .ia-people-filter-section #organizationdirectorytabwidget .ia-people-results .ia-people-results-grid.ia-active {
-        width: calc(100vw - 800px);
-    }
-}
-/* Org Directory People Directory spacing */
-
-/* Employee Profile */
-.ak-theme-ncitheme .ia-profile .ia-profile-details .ia-profile-detail-info .ia-profile-detail-others-info{
-    display: block;
-}
-
-.ak-theme-ncitheme .ia-profile .ia-profile-details .ia-profile-detail-info .ia-profile-detail-name{
-    margin-bottom: 8px;
-}
-
-
-
-/*hides filtering if no filter content*/
-.ia-people-directory-section .ia-people-filter-section{
-    grid-template-columns: 1fr !important;
-}
-.ia-people-directory-section .ia-people-filter-section .ia-people-filters{
-    display: none !important;
-}
-
-
-.ia-people-directory-section.nciorg .ia-people-filter-section{
-    grid-template-columns: 1fr 3fr !important;
-}
-.ia-people-directory-section.nciorg .ia-people-filter-section .ia-people-filters{
-    display: block !important;
-}
-
-.ak-theme-ncitheme .fs-header .ia-top-header .ia-logo-wrapper img {
-	max-width: 90%
-}
-
-/* fix scaling */
-.ia-page-wrapper.ia-mega-menu-always-open .fs-header .ia-top-header {
-    padding: 12px 24px !important;
-}
-
-.ia-page-wrapper.ia-mega-menu-always-open .ia-mega-menu-wrapper .ia-menu-toggle{
-    color: var(--fs-dark-primary-color) !important;
-    top: -75px !important;
-}
-
-/* mission control */
-.ak-theme-ncitheme .ia-mission-control.fs-js-active:before {
-    background-color: var(--fs-white);
-}
-
-
-
-
-
-
-
-
-
-.ak-theme-ncitheme .ia-post-by.ia-post-by-blogs-home {
-    border: none !important;
-}
-
+/************************************
+*          Featured Photos
+************************************/
 .ak-theme-ncitheme .slider {
     width: 100%;
     margin: 0 auto 20px;
@@ -565,34 +539,38 @@ body{
     position: relative;
     height: 300px;
 }
-.ak-theme-ncitheme .featured-photos-widget .ia-header--title{
+.ak-theme-ncitheme .featured-photos-widget .ia-header--title {
     margin-bottom: 1rem;
 }
 
-
 /*slick slide version*/
-.featured-photos-widget .photoSlide{
+.featured-photos-widget .photoSlide {
     height: 300px;
     background-position: center;
     background-size: cover;
 }
-.featured-photos-widget .slick-dots{
+
+.featured-photos-widget .slick-dots {
     transform: translateY(40px);
 }
-.featured-photos-widget .slick-dots button::before{
+
+.featured-photos-widget .slick-dots button::before {
     display: none;
 }
-.featured-photos-widget .slick-dots li{
+
+.featured-photos-widget .slick-dots li {
     height: 10px;
     width: 10px;
 }
-.featured-photos-widget .slick-dots button{
+
+.featured-photos-widget .slick-dots button {
     background-color: none;
     border: 1px solid black;
     border-radius: 1000px;
     height: 10px;
     width: 10px;
 }
+
 .featured-photos-widget .slick-dots .slick-active button{
     background-color: black;
 }
@@ -602,7 +580,8 @@ body{
     border-radius: 0;
     opacity: 1;
     background: #0007;
-} 
+}
+
 .featured-photos-widget .slick-prev:focus,
 .featured-photos-widget .slick-prev:hover,
 .featured-photos-widget .slick-prev{
@@ -610,6 +589,7 @@ body{
     background: linear-gradient(90deg, #0007 0%, #0000 100%);
     outline: none;
 }
+
 .featured-photos-widget .slick-next:focus,
 .featured-photos-widget .slick-next:hover,
 .featured-photos-widget .slick-next{
@@ -622,8 +602,6 @@ body{
     font-size: 20px;
 }
 /*slick slide version*/
-
-
 
 /*
 .ak-theme-ncitheme .slider .photos img {
@@ -639,10 +617,9 @@ body{
     opacity: 1;
 }
 */
-.photo-gallery-view-all-container{
+.photo-gallery-view-all-container {
     margin-top: 1rem;
 }
-
 
 .ak-theme-ncitheme .prev:before, .ak-theme-ncitheme .next:before {
     color: #fff;
@@ -661,116 +638,162 @@ body{
     content: '>';
     right: 10px;
 }
-#ak-tabwidget-tabs-PeopleTab .ia-people-results{display:block !important}
 
-
-
-
-/*expanded field contacts*/
-
-.internal-display-contacts,
-.internal-display-organization,
-.event-display-contacts,
-.event-display-organization,
-.newsdetail-display-contacts,
-.newsdetail-display-organization,
-
-.expanded-fields-contacts,
-.expanded-fields-organization{
-    margin-bottom: 30px;
-    color: black;
-}
-
-.expanded-fields-contacts{
-    margin-top: 30px;
-}
-
-.newsdetail-display-contact{
-    margin-top: 0;
+#ak-tabwidget-tabs-PeopleTab .ia-people-results {
+    display:block !important
 }
 
 
+/************************************
+* General Card Styling for ALL cards
+************************************/
+.ia-card {
+	color: #000000 !important;
+}
+
+.ia-card a:not(.ak-spalink, .ia-profile-name, .share-button) {
+	color: #01679d !important;
+}
 
 
-.expanded-fields-contacts .contact-box{
+/************************************
+*       General Card Styling
+
+   Important Dates (Upcoming Events), 
+      News HomePage, Featured News
+************************************/
+/* Card Containers */
+.featured-news .content-container-wrapper {
+    margin-top: 1rem;
+}
+
+.important-dates-modern .content-container-wrapper>div {
+    padding-right: 0;
+}
+
+.important-dates-modern .content-container-wrapper,
+.news-home-page .content-container-wrapper {
+    margin-top: 1rem;
+    overflow-y: auto; 
+    height: 500px;
+}
+
+/* Card Bodies */
+.important-dates-modern .dates-item-card {
+    background-color: white; 
+    padding: 10px; 
+    border: 1px solid var(--fs-text-color-light-bg); 
+    border-radius: 5px;
+    min-height: 100px;
+
+    margin-top: 0 !important;
+    margin-bottom: 8px !important;
+}
+
+.news-home-page .news-item-card,
+.featured-news .news-item-card {
+    background-color: white; 
+    padding: 10px;;
+    border: 1px solid var(--fs-text-color-light-bg);
+    border-radius: 5px;;
+    min-height: 100px;
+
     display: flex;
-    justify-content: flex-start;
-    width: 100%;
-    flex-wrap: wrap;
-    flex-grow: 1;
-}
-.expanded-fields-contacts .contact-box>div{
-    width: 50%;
-    min-width: 200px;
-    margin-bottom: 10px;
+    flex-direction: column;
+    align-items: flex-start;
+
+    margin-top: 0 !important;
+    margin-bottom: 8px !important;
 }
 
-
-.expanded-fields-contacts h3,
-.expanded-fields-organization h3{
-	font-size: 24px;
-    margin-bottom: 12px;
+/* Card Contents */
+.important-dates-modern .dates-item-card .day-tile {
+    background-color: var(--fs-text-color-light-bg); 
+    max-height: 75px; color: white; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    flex-direction: column;
 }
 
-
-.expanded-fields-contacts .contact-profile-image{
-    width: 36px;
-    height: 36px;
-    border-radius: 50px;
-    overflow: hidden;
-    
-    background-position: center;
-    background-size: cover;
-    
-    background-image: url('./images/profile.png');
+.important-dates-modern .news-item-card .display-date-light {
+    font-size: 12px; 
+    color: grey;
 }
-.expanded-fields-contacts .contact-profile-image div{
-    width: 100%;
-    height: 100%;
-    
-    background-position: center;
-    background-size: cover;
+
+.important-dates-modern .dates-item-card .display-date,
+.news-home-page .news-item-card .display-date,
+.featured-news .news-item-card .display-date {
+    font-size: 14px;
 }
 
 
+/************************************
+*          Featured News
+************************************/
+.ak-theme-ncitheme .ak-summarylinks-container .ia-slw-featured.ia-slw.ia-widget-wrapper .ia-slw-featured-items .col-12.col-md-6.col-lg-4.ak-slw-item {
+	padding-bottom: 24px;
+}
 
-.expanded-fields-contacts .ia-author-name,
-.expanded-fields-organization div{
-	font-size: 18px;
+
+/************************************
+*  Staff Spotlights HomePage Widget
+
+    (Blogs List Homepage Widget)
+************************************/
+#HomeNewsEventsTabs.ia-news-list.ia-widget-wrapper.custom-event-list>h2:first-of-type{
+	position: absolute;
+}
+#HomeNewsEventsTabs.ia-news-list.ia-widget-wrapper.custom-event-list:has(.ia-grid-utility-container .ia-grid-utility-left-col .ia-list-action .fs-js-search-refiner-widget div)>h2:first-of-type{
+    position: unset;
+}
+
+#HomeNewsEventsTabs.ia-news-list.ia-widget-wrapper.custom-event-list .ia-masanory-grid .ia-card,
+#HomeNewsEventsTabs.ia-news-list.nci-tabs-news .ia-masanory-grid .ia-card {
+	height: 430px;
+}
+
+#HomeNewsEventsTabs.ia-news-list.nci-tabs-news .blog-header {
+	display: flex;
+}
+
+#HomeNewsEventsTabs.ia-news-list.nci-tabs-news .ia-masanory-grid-view-toggle {
+	margin-right: 0;
+	margin-left: auto;
+}
+
+/* WCAG fix - touches both Homepage and Listing page */
+.ak-theme-ncitheme .ia-news-list .ia-tag-collection {
+	display: none;
+}
+
+
+/************************************
+*       Staff Spotlights Page
+
+          (Blogs List Page)
+************************************/
+.ak-theme-ncitheme .ia-post-by.ia-post-by-blogs-home {
+    border: none !important;
+}
+
+/* Staff Spotlight Page*/
+.ak-theme-ncitheme .ia-tab-widget-container .ui-state-active a, 
+.ak-theme-ncitheme .ia-tab-widget-container .ui-widget-content .ui-state-active a, 
+.ak-theme-ncitheme .ia-tab-widget-container .ui-widget-header .ui-state-active a, 
+.ak-theme-ncitheme .ia-tab-widget-container .fs-tab-item.ia-tab-active a{
     font-weight: 600;
-
-    font-weight: 400;
-    font-size: 16px;
+    font-size: clamp(25px, 25px, 25px);
+    padding-bottom: calc(var(--fs-gutter-space) / 3);
 }
 
 
-.expanded-fields-contacts .ia-article-author-status{
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    
-    -webkit-box-align: center;
-    -ms-flex-align: center;
-    align-items: center;
-    gap: 14px;
-    /*text-transform: uppercase;*/
-}
+/************************************
+*           News Detail
 
-
-
-.newsdetail-display-contacts,
-.newsdetail-display-organization{
-    padding-left: calc(var(--fs-gutter-space) / 2);
-}
-@media (max-width: 768px) {
-    .newsdetail-display-contacts,
-    .newsdetail-display-organization{ padding-left: 0;}
-}
-
-
-
-
-/* news detail */
+        Detail Page for Blogs
+  (Announcements & Staff Spotlights)
+************************************/
 .ak-theme-ncitheme .teams-share-button img,
 .ak-theme-ncitheme .ia-article .ia-article-header .ia-article-header-right .ia-social-info .ia-social-info-top .ia-social-info-top-icon a {
     filter: hue-rotate(270deg);
@@ -793,300 +816,158 @@ body{
 .ak-theme-ncitheme .ia-article .ia-article-header .ia-article-header-right .ia-social-info .ia-social-info-top .ia-social-info-top-icon a.ia-share-buttons.ia-twitter {
 	margin-left: 0px;
 }
-/* news detail */
 
-
-/* blogs listing */
-#HomeNewsEventsTabs.ia-news-list.ia-widget-wrapper.custom-event-list>h2:first-of-type{
-	position: absolute;
-}
-#HomeNewsEventsTabs.ia-news-list.ia-widget-wrapper.custom-event-list:has(.ia-grid-utility-container .ia-grid-utility-left-col .ia-list-action .fs-js-search-refiner-widget div)>h2:first-of-type{
-    position: unset;
-}
-
-#HomeNewsEventsTabs.ia-news-list.ia-widget-wrapper.custom-event-list .ia-masanory-grid .ia-card,
-#HomeNewsEventsTabs.ia-news-list.nci-tabs-news .ia-masanory-grid .ia-card {
-	height: 430px;
-}
-
-#HomeNewsEventsTabs.ia-news-list.nci-tabs-news .blog-header {
-	display: flex;
-}
-
-#HomeNewsEventsTabs.ia-news-list.nci-tabs-news .ia-masanory-grid-view-toggle {
-	margin-right: 0;
-	margin-left: auto;
-}
-
-/*spotlight blogs widget title size*/
-.ak-theme-ncitheme .ia-tab-widget-container .ui-state-active a, 
-.ak-theme-ncitheme .ia-tab-widget-container .ui-widget-content .ui-state-active a, 
-.ak-theme-ncitheme .ia-tab-widget-container .ui-widget-header .ui-state-active a, 
-.ak-theme-ncitheme .ia-tab-widget-container .fs-tab-item.ia-tab-active a{
-    font-weight: 600;
-    font-size: clamp(25px, 25px, 25px);
-    padding-bottom: calc(var(--fs-gutter-space) / 3);
-}
-
-
-
-
-/* fix slw top spacing */
-/*.ia-slw-featured.ia-slw.ia-widget-wrapper,*/
-.ak-theme-ncitheme .ia-apps-list.ia-apps-selected-list,
-.important-dates-modern,
-.news-home-page,
-.featured-photos-widget.ia-widget-wrapper,
-.ia-slw.ia-widget-wrapper{
-    margin-bottom: var(--fs-widgets-bottom-spacing);
-}
-
-.ak-theme-ncitheme .ak-summarylinks-container .ia-slw-featured.ia-slw.ia-widget-wrapper .ia-slw-featured-items .col-12.col-md-6.col-lg-4.ak-slw-item {
-	padding-bottom: 24px;
-}
-
-
-.ak-theme-ncitheme .ia-apps-list.ia-apps-selected-list{
-    margin-top: 0;
-}
-
-
-.ak-theme-ncitheme .ia-misson-control-wrapper .ia-apps-list.ia-apps-selected-list{
-    margin-top: 36px;
-    margin-bottom: 44px;
-}
-
-
-.ak-theme-ncitheme .ia-site-alerts{
-    margin-bottom: var(--fs-widgets-bottom-spacing);
-    margin-bottom: calc(36px + var(--fs-gutter-space));
-}
-
-/*homepage apps*/
-
-
-/*card containers*/
-.important-dates-modern .content-container-wrapper,
-.news-home-page .content-container-wrapper{
-    margin-top: 1rem;
-    overflow-y: auto; 
-    height: 500px;
-}
-.important-dates-modern .content-container-wrapper>div{
-    padding-right: 0;
-}
-.featured-news .content-container-wrapper{
-    margin-top: 1rem;
-}
-
-
-/*card bodies*/
-.important-dates-modern .dates-item-card{
-    background-color: white; 
-    padding: 10px; 
-    border: 1px solid var(--fs-text-color-light-bg); 
-    border-radius: 5px;
-    min-height: 100px;
-
-    margin-top: 0 !important;
-    margin-bottom: 8px !important;
-}
-
-.news-home-page .news-item-card,
-.featured-news .news-item-card{
-    background-color: white; 
-    padding: 10px;;
-    border: 1px solid var(--fs-text-color-light-bg);
-    border-radius: 5px;;
-    min-height: 100px;
-
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-
-    margin-top: 0 !important;
-    margin-bottom: 8px !important;
-}
-
-/*card contents*/
-.important-dates-modern .dates-item-card .day-tile{
-    background-color: var(--fs-text-color-light-bg); 
-    max-height: 75px; color: white; 
-    display: flex; 
-    align-items: center; 
-    justify-content: center; 
-    flex-direction: column;
-}
-
-.important-dates-modern .dates-item-card .display-date,
-.news-home-page .news-item-card .display-date,
-.featured-news .news-item-card .display-date{
-    font-size: 14px;
-}
-
-.important-dates-modern .news-item-card .display-date-light{
-    font-size: 12px; 
-    color: grey;
-}
-
-
-
-/* OrganizationDirectoryPage */
-.ia-people-filter-section
-{
-    font-size: 14px;
-}
-
-.ia-people-filter{
-    width:330px;
-}
-
-#filtertreenav .truncate {
-    display: inline-block;
-    max-width: 38ch; /* limit to 50 characters */
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-}
-#filterpeoplefinder
-{
-    display:none;
-}
-/* OrganizationDirectoryPage */
-#organizationdirectorytabwidget .ia-tab-item a
-{
-	font-size: clamp(25px, 3vw, 36px) !important;
-}
-
-#organizationdirectorytabwidget .ia-refiners-list
-{
-    display: none;
-}
-#organizationdirectorytabwidget .fs-search-result-wrapper
-{
-    display: block;
-}
-
-
-
-/* left nav widget */
-.left-nav-wrapper{
-    padding-top: 1px;
-}
-
-.left-nav-wrapper .left-nav-items{
-    border-top: 1px solid var(--nci-light-gray);
-}
-
-.left-nav-wrapper .left-nav-items .left-nav-item{
-    border-bottom: 1px solid var(--nci-light-gray);
-    display: flex;
-    flex-wrap: nowrap;
-    flex-direction: row;
-    align-items: center;
-    justify-content: flex-start;
-    gap: 1px;
-}
-.left-nav-wrapper .left-nav-items .left-nav-item a{
-    color: var(--nci-gray);
-    text-decoration: none;
-    font-size: 18px;
-    padding: 8px 12px;
-    display: block;
-}
-.left-nav-wrapper .left-nav-items .left-nav-item .selection-indicator{
-	height: 100%;
-    width: 6px;
-    display: block;
-    min-height: 34px;
-    border-radius: 4px;
-}
-
-.left-nav-wrapper .left-nav-items .left-nav-item.selected-true a{
-    color: var(--nci-light-blue);
-    font-weight: 600;
-}
-.left-nav-wrapper .left-nav-items .left-nav-item.selected-true .selection-indicator{
-    background-color: var(--nci-light-blue);
-}
-
-.left-nav-wrapper .left-nav-items .left-nav-item a.node-level-1{
-    padding-left: 12px;
-    color: var(--nci-light-blue);
-    font-weight: 600;
-	font-size: 20px;
-}
-.left-nav-wrapper .left-nav-items .left-nav-item a.node-level-2{
-    padding-left: 24px;
-}
-.left-nav-wrapper .left-nav-items .left-nav-item a.node-level-3{
-    padding-left: 36px;
-}
-.left-nav-wrapper .left-nav-items .left-nav-item a.node-level-4{
-    padding-left: 48px;
-}
-.left-nav-wrapper .left-nav-items .left-nav-item a.node-level-5{
-    padding-left: 60px;
-}
-
-/* WCAG fixes */
-
-.ak-theme-ncitheme .ia-breadcrumb .breadcrumb-item {
-	color: var(--fs-dark-primary-color);
-}
-
-.ak-theme-ncitheme .ia-news-list .ia-tag-collection {
-	display: none;
-}
-
+/* WCAG fix */
 .ak-theme-ncitheme .ia-article .ia-article-header .ia-article-header-right .ia-article-tag {
 	opacity: 1;
-}
-
-.ak-theme-ncitheme .ia-my-org .ia-my-org-user .ia-my-org-user-title {
-	color: var(--fs-dark-primary-color)
-}
-
-/* WCAG fixes */
-
-
-/*People directory*/
-.ia-people-directory .ia-profile-details .ia-profile-office{
-    display: none !important
-}
-
-/* Reference to logo which NCI wants to use for meetings on the EventDetail page */
-.ia-logo-nci-meeting {
-    /*background-color: #f1f1f1;*/
-    background-image: url('./images/nci-calendar-icon-v3.png') !important;
 }
 
 .ak-theme-ncitheme .ia-article .ia-article-section .ia-article-section-left {
     overflow-wrap: break-word !important;
 }
 
-.ak-theme-ncitheme .ia-article .ia-article-header .ia-article-header-right h2{
+.ak-theme-ncitheme .ia-article .ia-article-header .ia-article-header-right h2 {
     -webkit-box-orient: unset !important;
 }
 
-.ak-theme-ncitheme .ia-page-wrapper.ia-mega-menu-always-open .ia-mega-menu-wrapper .ia-mega-menu .ia-menu-level-1 > li {
-    padding-right: 12px !important;
-    margin-right: 0px !important;
+/************************************
+*    News Detail - Expanded field
+
+    Right Sidebar on Detail Pages
+************************************/
+@media (max-width: 768px) {
+    .newsdetail-display-contacts,
+    .newsdetail-display-organization{ padding-left: 0;}
 }
 
-.ak-theme-ncitheme .ia-calendar-detail .ia-article-section-right .ia-calender-attributes .ia-calendar-teams-link a .ia-logo-icons-24px {
-    margin-left: -4px;
+.newsdetail-display-contacts,
+.newsdetail-display-organization {
+    padding-left: calc(var(--fs-gutter-space) / 2);
+}
+
+/*expanded field contacts*/
+
+.internal-display-contacts,
+.internal-display-organization,
+.event-display-contacts,
+.event-display-organization,
+.newsdetail-display-contacts,
+.newsdetail-display-organization,
+.expanded-fields-contacts,
+.expanded-fields-organization {
+    margin-bottom: 30px;
+    color: black;
+}
+
+.expanded-fields-contacts {
+    margin-top: 30px;
+}
+
+.newsdetail-display-contact {
+    margin-top: 0;
+}
+
+.expanded-fields-contacts .contact-box {
+    display: flex;
+    justify-content: flex-start;
+    width: 100%;
+    flex-wrap: wrap;
+    flex-grow: 1;
+}
+.expanded-fields-contacts .contact-box>div {
+    width: 50%;
+    min-width: 200px;
+    margin-bottom: 10px;
+}
+
+.expanded-fields-contacts h3,
+.expanded-fields-organization h3{
+	font-size: 24px;
+    margin-bottom: 12px;
+}
+
+.expanded-fields-contacts .contact-profile-image {
+    width: 36px;
+    height: 36px;
+    border-radius: 50px;
+    overflow: hidden;
+    
+    background-position: center;
+    background-size: cover;
+    
+    background-image: url('./images/profile.png');
+}
+
+.expanded-fields-contacts .contact-profile-image div {
+    width: 100%;
+    height: 100%;
+    
+    background-position: center;
+    background-size: cover;
+}
+
+.expanded-fields-contacts .ia-author-name,
+.expanded-fields-organization div {
+	font-size: 18px;
+    font-weight: 600;
+
+    font-weight: 400;
+    font-size: 16px;
+}
+
+.expanded-fields-contacts .ia-article-author-status {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    gap: 14px;
+    /*text-transform: uppercase;*/
 }
 
 
+/************************************
+*   Organization Directory Page
+************************************/
+/* Content tab*/
+#organizationdirectorytabwidget .ia-refiners-list {
+    display: none;
+}
 
-/************************************/
-/* BEGIN NCI-SUPPLIED CSS ADDITIONS */
-/************************************/
+/* Content tab body */
+#organizationdirectorytabwidget .fs-search-result-wrapper {
+    display: block;
+}
 
-/* changes background color of Org Directory filter box to white */
-.ia-people-directory .ia-people-directory-section .ia-people-filter-section .ia-people-filters .ia-people-filter-wrapper {
-	background: var(--fs-white) !important;
+/* Slick track is Overview, People, and Content tabs */
+.ak-theme-ncitheme #organizationdirectorytabwidget nav>ul>.slick-list.draggable .slick-track {
+	transform: translate3d(0,0,0) !important;
+}
+
+/* Tab item is Overview, People, and Content tabs */
+#organizationdirectorytabwidget .ia-tab-item a {
+	font-size: clamp(25px, 3vw, 36px) !important;
+}
+
+
+/************************************
+*   Organization Directory Page
+
+        Organization Filter
+    (also called People Filter)
+************************************/
+.ak-theme-ncitheme .ia-org-chart .ia-org-chart-user-icons a.ia-ms-teams {
+    filter: hue-rotate(240deg);
+}
+
+.ia-people-filter-section {
+    font-size: 14px;
+}
+
+.ia-people-filter {
+    width: 330px;
 }
 
 /* removes ellipsis and truncated overflow to allow text to extend to next line */
@@ -1096,6 +977,21 @@ body{
     overflow: visible;
     white-space: break-spaces;
     margin-right: 6px;
+    text-overflow: ellipsis;
+    /* OLD
+    max-width: 38ch; limit to 50 characters 
+    overflow: hidden;
+    white-space: nowrap;
+    */
+}
+
+#filterpeoplefinder {
+    display: none;
+}
+
+/* changes background color of Org Directory filter box to white */
+.ia-people-directory .ia-people-directory-section .ia-people-filter-section .ia-people-filters .ia-people-filter-wrapper {
+	background: var(--fs-white) !important;
 }
 
 .ia-people-filter-wrapper {
@@ -1193,9 +1089,262 @@ body{
 }
 
 
-/* adjusting these media queries prevents overflow of the Org Directory
-	People cards on the larger breakpoints */
+/****************************************
+*             Org Directory
 
+          People Directory Tab
+****************************************/
+/* Font size for Employee Card names */
+#organizationdirectorytabwidget a.ia-profile-name.fs-js-profile-name {
+    font-size: 18px;
+}
+
+/* spacing for People Directory tab in Organization Directory */
+.ak-theme-ncitheme .ia-people-directory .ia-people-directory-section .ia-people-filter-section #organizationdirectorytabwidget .ia-people-results .ia-people-results-grid.ia-active {
+	width: calc(100vw - 150px);
+}
+
+.ia-people-directory .ia-people-directory-section .ia-people-filter-section #organizationdirectorytabwidget .ia-people-results .ia-people-results-grid .ia-profile-container {
+	padding: 12px
+}
+
+/* adjusting these media queries prevents overflow of the Org Directory People cards on the larger breakpoints */
+@media screen and (min-width: 770px) {
+	.ak-theme-ncitheme .ia-people-directory .ia-people-directory-section .ia-people-filter-section #organizationdirectorytabwidget .ia-people-results .ia-people-results-grid.ia-active {
+		width: calc(100vw - 200px);
+	}
+
+	.ia-people-directory .ia-people-directory-section .ia-people-filter-section #organizationdirectorytabwidget .ia-people-results .ia-people-results-grid .ia-profile-container {
+		padding: calc(var(--fs-gutter-space) / 2);
+	}
+}
+
+@media screen and (min-width: 992px) {
+	.ak-theme-ncitheme .ia-people-directory .ia-people-directory-section .ia-people-filter-section #organizationdirectorytabwidget .ia-people-results .ia-people-results-grid.ia-active {
+		width: calc(100vw - 480px);
+	}
+}
+
+@media screen and (min-width: 1025px) {
+    .ak-theme-ncitheme .ia-people-directory .ia-people-directory-section .ia-people-filter-section #organizationdirectorytabwidget .ia-people-results .ia-people-results-grid.ia-active {
+        width: calc(100vw - 500px);
+    }
+}
+
+@media screen and (min-width: 1600px) {
+    .ak-theme-ncitheme .ia-people-directory .ia-people-directory-section .ia-people-filter-section #organizationdirectorytabwidget .ia-people-results .ia-people-results-grid.ia-active {
+        width: calc(100vw - 500px);
+        max-width: 95%;
+    }
+}
+
+@media screen and (min-width: 1700px) {
+    .ak-theme-ncitheme .ia-people-directory .ia-people-directory-section .ia-people-filter-section #organizationdirectorytabwidget .ia-people-results .ia-people-results-grid.ia-active {
+        width: calc(100vw - 500px);
+        max-width: 95%;
+    }
+}
+
+@media screen and (min-width: 1750px) {
+    .ak-theme-ncitheme .ia-people-directory .ia-people-directory-section .ia-people-filter-section #organizationdirectorytabwidget .ia-people-results .ia-people-results-grid.ia-active {
+        width: calc(100vw - 100px);
+        max-width: 95%;
+    }
+}
+
+/* Old Media Query Code
+
+@media screen and (min-width: 1025px) {
+	.ak-theme-ncitheme .ia-people-directory .ia-people-directory-section .ia-people-filter-section #organizationdirectorytabwidget .ia-people-results .ia-people-results-grid.ia-active {
+		width: calc(100vw - 490px);
+	}
+}
+
+@media screen and (min-width: 1600px) {
+    .ak-theme-ncitheme .ia-people-directory .ia-people-directory-section .ia-people-filter-section #organizationdirectorytabwidget .ia-people-results .ia-people-results-grid.ia-active {
+        width: calc(100vw - 550px);
+    }
+}
+
+@media screen and (min-width: 1700px) {
+    .ak-theme-ncitheme .ia-people-directory .ia-people-directory-section .ia-people-filter-section #organizationdirectorytabwidget .ia-people-results .ia-people-results-grid.ia-active {
+        width: calc(100vw - 600px);
+    }
+} 
+
+@media screen and (min-width: 1750px) {
+    .ak-theme-ncitheme .ia-people-directory .ia-people-directory-section .ia-people-filter-section #organizationdirectorytabwidget .ia-people-results .ia-people-results-grid.ia-active {
+        width: calc(100vw - 800px);
+    }
+}
+*/
+
+
+/****************************************
+*           People Directory
+ 
+ Also used in Org Directory - People Tab
+****************************************/
+/* makes email lowercase for Org and People Directory cards */
+.dir-mail a, .people-dir-mail a {
+    text-transform: lowercase;
+}
+
+/* changes People profile details back to correct color */
+.ia-profile-details {
+	color: var(--fs-card-link-color) !important;
+}
+
+.ia-people-directory .ia-profile-details .ia-profile-office {
+    display: none !important
+}
+
+.ak-theme-ncitheme .ia-people-directory .ia-people-directory-section .ia-people-filter-section .ia-people-results .ia-people-results-grid .ia-profile-container .ia-msteams::before {
+    filter: hue-rotate(300deg);
+}
+
+ .ak-theme-ncitheme .ia-people-directory .ia-people-directory-section .ia-people-filter-section .ia-people-results .ia-people-results-grid .ia-profile-container .ia-profile-avatar {
+    background: var(--fs-accent-color) url(images/icon-profile-default-bg.svg) no-repeat center center;
+}
+
+.ak-theme-ncitheme .ia-people-directory .ia-people-directory-section .ia-people-filter-section .ia-people-results .ia-people-results-grid .ia-profile-container .ia-profile-details .ia-profile-office,
+.ak-theme-ncitheme .ia-people-directory .ia-people-directory-section .ia-people-filter-section .ia-people-results .ia-people-results-grid .ia-profile-container .ia-profile-details .ia-profile-dept,
+.ak-theme-ncitheme .ia-people-directory .ia-people-directory-section .ia-people-filter-section .ia-people-results .ia-people-results-grid .ia-profile-container .ia-profile-details .ia-profile-title,
+.ak-theme-ncitheme .ia-people-directory .ia-people-directory-section .ia-people-filter-section .ia-people-results .ia-people-results-grid .ia-profile-container .ia-profile-details .ia-profile-manager {
+	opacity: 1;
+
+}
+
+/* Hides filtering if no filter content */
+.ia-people-directory-section .ia-people-filter-section {
+    grid-template-columns: 1fr !important;
+}
+
+.ia-people-directory-section .ia-people-filter-section .ia-people-filters {
+    display: none !important;
+}
+
+
+.ia-people-directory-section.nciorg .ia-people-filter-section {
+    grid-template-columns: 1fr 3fr !important;
+}
+
+.ia-people-directory-section.nciorg .ia-people-filter-section .ia-people-filters {
+    display: block !important;
+}
+
+/* Font size for People Directory email, phone, department */
+.people-finder .ia-link-item a, .people-finder .ia-profile-dept {
+    font-size: 16px;
+}
+
+
+/************************************
+*        Employee Detail Page
+************************************/
+.ak-theme-ncitheme .ia-profile .ia-profile-details .ia-profile-detail-info .ia-profile-detail-others-info{
+    display: block;
+}
+
+.ak-theme-ncitheme .ia-profile .ia-profile-details .ia-profile-detail-info .ia-profile-detail-name{
+    margin-bottom: 8px;
+}
+
+.ak-theme-ncitheme .ia-my-org .ia-my-org-user .ia-my-org-user-title {
+	color: var(--fs-dark-primary-color)
+}
+
+.ak-theme-ncitheme .ia-profile .ia-profile-details .ia-profile-detail-info .ia-profile-detail-others-info .ia-key-value .ia-value.ia-location {	
+    -webkit-line-clamp: 3;
+}
+
+/* Sets email string to lowercase */
+#ed-mail {
+    text-transform: lowercase;
+}
+
+/* Needs to be removed for org chart when fixed */
+.ak-theme-ncitheme .ak-widget.fs-js-my-org-instance:has(.ia-my-org) {
+	display: none;
+}
+
+
+/************************************
+*         Left Nav Widget
+
+Internal Pages custom left nav widget
+        Not used currently
+************************************/
+.left-nav-wrapper {
+    padding-top: 1px;
+}
+
+.left-nav-wrapper .left-nav-items {
+    border-top: 1px solid var(--nci-light-gray);
+}
+
+.left-nav-wrapper .left-nav-items .left-nav-item {
+    border-bottom: 1px solid var(--nci-light-gray);
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 1px;
+}
+
+.left-nav-wrapper .left-nav-items .left-nav-item a {
+    color: var(--nci-gray);
+    text-decoration: none;
+    font-size: 18px;
+    padding: 8px 12px;
+    display: block;
+}
+
+.left-nav-wrapper .left-nav-items .left-nav-item .selection-indicator {
+	height: 100%;
+    width: 6px;
+    display: block;
+    min-height: 34px;
+    border-radius: 4px;
+}
+
+.left-nav-wrapper .left-nav-items .left-nav-item.selected-true a {
+    color: var(--nci-light-blue);
+    font-weight: 600;
+}
+
+.left-nav-wrapper .left-nav-items .left-nav-item.selected-true .selection-indicator {
+    background-color: var(--nci-light-blue);
+}
+
+.left-nav-wrapper .left-nav-items .left-nav-item a.node-level-1 {
+    padding-left: 12px;
+    color: var(--nci-light-blue);
+    font-weight: 600;
+	font-size: 20px;
+}
+
+.left-nav-wrapper .left-nav-items .left-nav-item a.node-level-2 {
+    padding-left: 24px;
+}
+
+.left-nav-wrapper .left-nav-items .left-nav-item a.node-level-3 {
+    padding-left: 36px;
+}
+
+.left-nav-wrapper .left-nav-items .left-nav-item a.node-level-4 {
+    padding-left: 48px;
+}
+
+.left-nav-wrapper .left-nav-items .left-nav-item a.node-level-5 {
+    padding-left: 60px;
+}
+
+/* adjusting these media queries prevents overflow of the Org Directory
+	People cards on the larger breakpoints
+
+DUPLICATE
 @media screen and (min-width: 1025px) {
 	.ak-theme-ncitheme .ia-people-directory .ia-people-directory-section .ia-people-filter-section #organizationdirectorytabwidget .ia-people-results .ia-people-results-grid.ia-active {
 		width: calc(100vw - 500px);
@@ -1221,13 +1370,10 @@ body{
         width: calc(100vw - 100px);
 		max-width: 95%;
     }
-}
+} */
 
-.ak-theme-ncitheme .assessibility-hidden-text {
-    display: none;
-}
-
-
+/*
+Duplicate
 .ia-card a:not(.ak-spalink, .ia-profile-name, .share-button) {
 	color: #01679d !important;
 }
@@ -1237,34 +1383,8 @@ body{
 	color: #000000 !important;
 }
 
-/* changes People profile details back to correct color */
+changes People profile details back to correct color
 .ia-profile-details {
 	color: var(--fs-card-link-color) !important;
-}
-
-.ia-card a:not(.ak-spalink, .ia-profile-name, .share-button) {
-	color: #01679d !important;
-}
-
-
-.ia-card {
-	color: #000000 !important;
-}
-
-/* changes People profile details back to correct color */
-.ia-profile-details {
-	color: var(--fs-card-link-color) !important;
-}
-
-.ak-theme-ncitheme .ia-profile .ia-profile-details .ia-profile-detail-info .ia-profile-detail-others-info .ia-key-value .ia-value.ia-location {	
-    -webkit-line-clamp: 3;
-}
-
-/* Needs to be removed for org chart when fixed */
-.ak-theme-ncitheme .ak-widget.fs-js-my-org-instance:has(.ia-my-org) {
-	display: none;
-}
-
-/**********************************/
-/* END NCI-SUPPLIED CSS ADDITIONS */
-/**********************************/
+} 
+*/

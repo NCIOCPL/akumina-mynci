@@ -16,7 +16,7 @@
       {
         "Name": "blogslatesthomeversion",
         "Path": "/{AssetLibraryName}/DigitalWorkPlace/Content/Templates/BlogsWidget/blogslatesthomeversion.html",
-        "Id":"03b63f18-957c-49b2-af66-595d85eb0639"
+        "Id": "03b63f18-957c-49b2-af66-595d85eb0639"
       }
     ],
     "JS": {
@@ -57,26 +57,26 @@
         {
           "name": "searchrefiners",
           "value": {
-            "termStoreId": "9f6b3be8-ba1a-4111-ae41-3d7d6617b251",
+            "termStoreId": "{GHA_termsetCategoryToken}",
             "terms": [
               {
                 "managedPropertyName": "SPTags",
                 "displayName": "common.tags",
-                "id": "f7fece51-494f-48df-824d-f21cdd9a0146",
+                "id": "{GHA_termTagsToken}",
                 "taxonomyIsTermSet": false,
                 "termSetName": "Category"
               },
               {
                 "managedPropertyName": "Departments",
                 "displayName": "common.departments",
-                "id": "ef90fc48-1b8a-4242-bbda-df722c8b3a47",
+                "id": "{GHA_termLocationsToken}",
                 "taxonomyIsTermSet": false,
                 "termSetName": "Category"
               },
               {
                 "managedPropertyName": "Region",
                 "displayName": "common.regions",
-                "id": "5b1272bd-6012-4a2a-a5c7-8b718ec23521",
+                "id": "{GHA_termDepartmentsToken}",
                 "taxonomyIsTermSet": false,
                 "termSetName": "Category"
               }
@@ -173,26 +173,26 @@
         {
           "name": "searchrefiners",
           "value": {
-            "termStoreId": "",
+            "termStoreId": "{GHA_termsetCategoryToken}",
             "terms": [
               {
                 "managedPropertyName": "SPTags",
                 "displayName": "common.tags",
-                "id": "f7fece51-494f-48df-824d-f21cdd9a0146",
+                "id": "{GHA_termTagsToken}",
                 "taxonomyIsTermSet": false,
                 "termSetName": "Category"
               },
               {
                 "managedPropertyName": "Departments",
                 "displayName": "common.departments",
-                "id": "ef90fc48-1b8a-4242-bbda-df722c8b3a47",
+                "id": "{GHA_termLocationsToken}",
                 "taxonomyIsTermSet": false,
                 "termSetName": "Category"
               },
               {
                 "managedPropertyName": "Region",
                 "displayName": "common.regions",
-                "id": "5b1272bd-6012-4a2a-a5c7-8b718ec23521",
+                "id": "{GHA_termDepartmentsToken}",
                 "taxonomyIsTermSet": false,
                 "termSetName": "Category"
               }

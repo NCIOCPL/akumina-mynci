@@ -26,6 +26,13 @@
 <div class="ia-profile fs-js-profile ia-widget-wrapper">
     <div class="row ia-profile-details">
         <div class="col-lg-8">
+            <!-- March 18 - unused code for profile_avatar from employeedetailhive_new
+             <img
+                        class="ak-thumbnail-image"
+                        data-src="backgroundImage"
+                        src="{{ThumbnailImage 'large' backgroundimage}}"
+                    />
+            -->
             <div class="profile_avatar ia-profile-avatar" data-edit="{{CanChangeBackground}}" {{#if backgroundimage}} style="background-image: url('{{backgroundimage}}');background-repeat: no-repeat; background-size: cover;"
                 {{/if}}>
                 <a href="#">
@@ -87,11 +94,37 @@
 
                     {{#if office}}
                     <div class="ia-key-value">
+                        <!-- March 18 - code from employeedetailhive_new for office
+                        <label class="ia-key"><i class="fa-regular fa-location-dot"></i></label>
+                        <div class="ia-value">{{office}}</div> -->
                         <label class="ia-key">{{translate "NCI.profile.organization"}}:</label>
                         <div class="ia-value">{{OrganizationSpaces office}}</div>
                     </div>
                     {{/if}}
 
+                    <!-- March 18 - currently unused code from employeedetailhive_new
+                    Department
+                    {{#if department}}
+                    <div class="ia-key-value">
+                        <label class="ia-key"><i class="fa-regular fa-location-dot"></i></label>
+                        <div class="ia-value">{{department}}</div>
+                    </div> 
+                    {{/if}}
+                    
+                    Birthday
+                    <label class="ia-key"><i class="fa-regular fa-cake-candles"></i></label>
+                        <span id="ed-birthday" data-month="{{birthdaymonth}}"
+                                data-date="{{birthdaydate}}">{{displaybirthday}}</span>
+
+                    Fax
+                    <label class="ia-key"><i class="fa-regular fa-fax"></i></label>
+                        <div class="ia-value"><span id="ed-fax">{{fax}}</span></div>
+
+                    CellPhone
+                    label class="ia-key"><i class="fa-regular fa-mobile"></i></label>
+                        <div class="ia-value">
+                            <a href="tel: {{mobilephone}}"><span id="ed-mobile">{{cellphone}}</span></a>
+                    -->
 
                     
                 </div>
@@ -211,7 +244,9 @@
             <h2>{{translate "fs.employeedetail.editprofile"}}</h2>
             <a  href="javascript:void(0)" class="ia-modal-close fs-modal-close"><i class="fa fa-times" aria-label="{{translate 'fs.common.closemodal'}}"></i></a>
         </header>
-        <section class="ia-modal-content">
+        <section class="ia-modal-content fs-js-profile-detail-modal-content">
+            <!-- March 18 - added .ia-error div from employeedetailhive_new
+            <div id="fs-js-profile-validation-error" class="ia-message ia-error"></div> -->
             <div class="ia-form-row ia-bg-img-row">
                 {{#if CanChangeBackground}}
                 <label id="backgroundlabel">{{translate "fs.employeedetail.background_image_profile_card"}}</label>
@@ -224,7 +259,12 @@
                                    value="image description" />
                         </div>
                         <div>
-                            <img src="{{Image}}" data-spimage="{{SpImageUrl}}" alt="{{translate 'fs.employeedetail.selectBackgroundImageProfileCard'}}" />
+                            <!-- March 18 - employeedetailhive_new has the following for the img tag:
+                             class="ak-thumbnail-image"
+                             data-src={{Image}}
+                             src="{{ThumbnailImage 'medium' Image}}"
+                            -->
+                            <img class="ak-thumbnail-image" src="{{Image}}" data-spimage="{{SpImageUrl}}" alt="{{translate 'fs.employeedetail.selectBackgroundImageProfileCard'}}" />
                         </div>
                     </a>
                     {{/Items}}

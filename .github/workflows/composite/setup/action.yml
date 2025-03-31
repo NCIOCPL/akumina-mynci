@@ -5,15 +5,6 @@ runs:
   using: "composite"
   steps:
 
-    - name: Install jq
-      working-directory: site
-      shell: pwsh
-      run: |
-        Invoke-WebRequest -Uri "https://github.com/stedolan/jq/releases/download/jq-1.6/jq-win64.exe" -OutFile "jq.exe"
-        New-Item -ItemType Directory -Force $env:USERPROFILE\Documents\PowerShell
-        New-Item -ItemType File -Force $env:USERPROFILE\Documents\PowerShell\profile.ps1
-        Add-Content $Profile.CurrentUserAllHosts 'Set-Alias jq "${pwd}\jq.exe"'
-
     - name: Setup Node
       uses: actions/setup-node@v4
       with:
@@ -26,12 +17,11 @@ runs:
       shell: pwsh
       run: npm ci
 
-    # Temporarily using v1506 from the wiki while we wait for them to add the release
     - name: Install Akumina SiteDeployer
       working-directory: site
       shell: pwsh
       run: |
-          Invoke-WebRequest -Uri "https://github.com/user-attachments/files/18969562/6.0.2301.1506-Akumina.SiteDeployer.zip" -OutFile "sd.zip"
+          Invoke-WebRequest -Uri "https://github.com/akumina/SiteDeployer/releases/download/6.0.2301.1508/6.0.2301.1508-Akumina.SiteDeployer.zip" -OutFile "sd.zip"
           $ExtractPath = "tools"
           if (-not (Test-Path -Path $ExtractPath)) {
               New-Item -ItemType Directory -Path $ExtractPath | Out-Null

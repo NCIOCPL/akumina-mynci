@@ -19,19 +19,28 @@ runs:
 
           # If no string is provided, assume "all" and set everything to false
           if ([string]::IsNullOrWhiteSpace($deployment_type)) {
-            "You must provide a deployment type to proceed."
-            exit 1
+              Write-Host "You must provide a deployment type to proceed."
+              exit 1
           }
 
-          # First, set all options to false in case a previous run messed with them
-          jq '.Options |= with_entries(.value = false)' akumina.sitedeployer.config.json > tmpfile
-          Move-Item -Path tmpfile -Destination akumina.sitedeployer.config.json -Force
-         
+          # Read and parse the JSON file
+          $jsonPath = "akumina.sitedeployer.config.json"
+          $json = Get-Content -Raw -Path $jsonPath | ConvertFrom-Json
+
+          # Set all options to false
+          $json.Options.PSObject.Properties | ForEach-Object { $_.Value = $false }
+
           # Split the input on commas and update the JSON file accordingly
           $deployment_types = $deployment_type -split ","
           foreach ($dt in $deployment_types) {
-              jq --arg dt $dt '.Options[$dt] = true' akumina.sitedeployer.config.json > tmpfile
-              Move-Item -Path tmpfile -Destination akumina.sitedeployer.config.json -Force
+              if ($json.Options.PSObject.Properties.Name -contains $dt) {
+                  $json.Options.$dt = $true
+              } else {
+                  Write-Host "Warning: Deployment type '$dt' not found in JSON options."
+              }
           }
+
+          # Save the updated JSON (preserving formatting)
+          $json | ConvertTo-Json -Depth 10 | Set-Content -Path $jsonPath -Encoding UTF8
       env:
           DEPLOYMENT_TYPE: ${{ inputs.deployment_type }}

@@ -10,7 +10,7 @@
       "Views": [
         {
           "Name": "NCI Employee Detail",
-          "Path": "/{AssetLibraryName}/DigitalWorkPlace/Content/Templates/employeedetailwidget/nciemployeedetail.html",
+          "Path": "/{AssetLibraryName}/DigitalWorkPlace/Content/Templates/employeedetailwidget/employeedetailhive_nci.html",
           "Id": "2aa11c44-aa50-4c7f-93de-582c05dad58f"
         }
       ],
