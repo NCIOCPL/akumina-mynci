@@ -24,7 +24,7 @@
         {{#each selectedApps}}
         {{!-- BEGIN #AKUMINA - Limit apps to 12 --}}
         {{#ifCondition @index '<' '12'}}
-        <a href="{{Url}}" target="_blank" class="ia-apps-items {{IsSPALink}}">
+        <a title="{{AppUrl.Description}}" href="{{Url}}" target="_blank" class="ia-apps-items {{IsSPALink}}">
             <div class="ia-apps-img">
                 {{#if hasImage}}
                 <img src="{{Image}}" alt="" />
@@ -45,7 +45,7 @@
                 </div>
                 <div class="ia-apps-title">{{translate "launchpadwidget.close"}}</div>
             </button>
-            <button class="ia-apps-items {{#if ShowAllApps}} fs-hide {{/if}}" id="btnAdd" data-button="addapp" aria-label="add apps">
+            <button class="ia-apps-items {{#if ShowAllApps}} fs-hide {{/if}}" id="btnAdd" data-button="addapp">
                 <div class="ia-apps-img">
                     <i class="fa-regular fa-circle-plus" aria-hidden="true"></i>
                 </div>
@@ -113,11 +113,6 @@
                 {{/if}}
                 {{/each}}
             </div>
-            {{#unless isLastPage}}
-            <div class="ia-button-row text-center">
-                <button class="fs-js-apps-show-more ia-button">{{translate "launchpadwidget.showmore"}}</button>
-            </div>
-            {{/unless}}
         </div>
         {{else}}
         <div>{{translate "launchpadwidget.noapps"}}</div>
