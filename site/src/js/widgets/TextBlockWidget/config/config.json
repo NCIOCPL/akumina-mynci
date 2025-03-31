@@ -20,8 +20,8 @@
       }
     },
     "Instances": [{
-      "Name": "Tip of the Week Header",
-      "Description": "",
+      "Name": "NCI Tip of the Week Header",
+      "Description": "Displays header on the NCI Tip of the Week page",
       "Icon": "fa fa-cog",
       "Id": "0deef6c6-f852-4365-bc25-bb3dc4db6d2d",
       "Properties": [

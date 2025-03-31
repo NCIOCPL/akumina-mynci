@@ -9,8 +9,8 @@
     "Properties": [],
     "Views": [
       {
-        "Name": "bloglatestdetail",
-        "Path": "/{AssetLibraryName}/DigitalWorkPlace/Content/Templates/BlogDetailWidget/bloglatestdetail.html",
+        "Name": "NCI Blog Detail",
+        "Path": "/{AssetLibraryName}/DigitalWorkPlace/Content/Templates/BlogDetailWidget/blogdetail_nci.html",
         "Id": "bc50b0c2-f487-ec49-b70b-d70b259efd0e"
       }
     ],
@@ -20,8 +20,8 @@
   },
   "Instances": [
     {
-      "Name": "Blog Details",
-      "Description": "Displays blog article detail",
+      "Name": "NCI Blog Detail",
+      "Description": "NCI customization that displays blog article detail",
       "Icon": "fa fa-cog",
       "Id": "0E19175D-FFB7-4B2F-B10B-6D380D198442",
       "Properties": [
@@ -74,8 +74,8 @@
           "value": ""
         }
       ],
-      "SelectedView": "bloglatestdetail",
-      "AvailableViews": [],
+      "SelectedView": "NCI Blog Detail",
+      "AvailableViews": ["NCI Blog Detail"],
       "HiddenFields": []
     }
   ],

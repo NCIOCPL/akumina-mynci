@@ -68,6 +68,9 @@ React.createElement(
                         { className: IsListView ? "" : "fs-js-active", onClick: () => {
                                 ToggleView(false);
                             } },
+                        /* BEGIN #AKUMINA - Accessibility fixes */
+                        React.createElement("span", { className: "assessibility-hidden-text" }, "Grid"),
+                        /* END #AKUMINA */
                         React.createElement("i", { className: "fa-solid fa-grid", "aria-label": Akumina.Digispace.Language.TryGetText("fs.common.gridview") })
                     ),
                     React.createElement("span", { className: "ia-button-separator" }),
@@ -76,6 +79,9 @@ React.createElement(
                         { className: IsListView ? "fs-js-active" : "", onClick: () => {
                                 ToggleView(true);
                             } },
+                        /* BEGIN #AKUMINA - Accessibility fixes */
+                        React.createElement("span", { className: "assessibility-hidden-text" }, "List"),
+                        /* END #AKUMINA */
                         React.createElement("i", { className: "fa-solid fa-list", "aria-label": Akumina.Digispace.Language.TryGetText("fs.common.listview") })
                     )
                 )
@@ -163,7 +169,11 @@ React.createElement(
                                 { className: "ia-card" + (Item.DisplayDefaultImage ? " ia-default" : "") + (Item.Featured ? " ia-featured" : "") },
                                 React.createElement(
                                     "div",
+                                    /* BEGIN #AKUMINA - Accessibility Fixes */
+                                    /*
                                     { className: "ia-card-image" + (Item.VideoUrl ? " ia-has-video" : "") },
+                                    */
+                                    { className: "ia-card-image" + (Item.VideoUrl ? " ia-has-video" : ""), style: { backgroundImage: `url(${Item.DisplayDefaultImage ? DefaultImageSrc : Item.ThumbnailUrl ? Item.ThumbnailUrl : Item.ImageUrl})` } },
                                     Item.VideoUrl && React.createElement(
                                         "button",
                                         { className: "ia-video-play", onClick: () => {
@@ -171,12 +181,15 @@ React.createElement(
                                             } },
                                         React.createElement("i", { className: "fa-regular fa-circle-play", "aria-label": Akumina.Digispace.Language.TryGetText("fs.common.playvideo") })
                                     ),
+                                    /*
                                     Item.ThumbnailUrl || Item.ImageUrl ? React.createElement("img", {
                                         "class": "ak-thumbnail-image",
                                         "data-thumbnail-src": Item.ThumbnailUrl,
                                         "data-src": Item.ImageUrl,
                                         src: Item.ThumbnailUrl ? Akumina.Digispace.Utilities.GetThumbnailImage('medium', Item.ThumbnailUrl) : Akumina.Digispace.Utilities.GetThumbnailImage('medium', Item.ImageUrl)
                                     }) : null,
+                                    */
+                                    /* END #AKUMINA */
                                     Item.Featured && React.createElement(
                                         "div",
                                         { className: "ia-featured-tag" },

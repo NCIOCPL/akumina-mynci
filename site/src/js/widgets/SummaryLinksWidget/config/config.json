@@ -9,8 +9,8 @@
       "Properties": [],
       "Views": [
         {
-            "Name": "Linked List with Thumbnails (Leadership)",
-            "Path": "/{AssetLibraryName}/DigitalWorkPlace/Content/Templates/summarylinkswidget/linkedlistwiththumbnails leadership.html",
+            "Name": "NCI Linked List with Thumbnails",
+            "Path": "/{AssetLibraryName}/DigitalWorkPlace/Content/Templates/summarylinkswidget/linkedlistwiththumbnails_nci.html",
             "Id": "a369c292-61db-4367-bab8-7089767fbd43"
         },
         {
@@ -24,8 +24,8 @@
       }
     },
     "Instances": [{
-      "Name": "Latest Leadership",
-      "Description": "",
+      "Name": "NCI Latest Leadership",
+      "Description": "Displays NCI latest leadership posts on the home page",
       "Icon": "fa fa-cog",
       "Id": "9844b7c5-8f23-4ca8-b5a3-00d95d16f6f1",
       "Properties": [
@@ -55,7 +55,7 @@
         }
       ],
       "SelectedView": "Linked List With Thumbnails",
-      "AvailableViews": ["Linked List With Thumbnails", "Linked List with Thumbnails (Leadership)"],
+      "AvailableViews": ["Linked List With Thumbnails", "NCI Linked List with Thumbnails"],
       "HiddenFields": []
     }],
     "Options": {

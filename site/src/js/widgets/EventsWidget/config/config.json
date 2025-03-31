@@ -9,9 +9,14 @@
     "Properties": [],
     "Views": [
       {
-        "Name": "NCIEventsListingPage",
-        "Path": "/{AssetLibraryName}/DigitalWorkPlace/Content/Templates/eventswidget/ncieventlistingpage.html",
+        "Name": "NCI Events Listing Page",
+        "Path": "/{AssetLibraryName}/DigitalWorkPlace/Content/Templates/eventswidget/eventslistingpage_nci.html",
         "Id": "220b8212-7dd2-49d6-bf5c-231f159de3f0"
+      },
+      {
+        "Name": "Events Home Page",
+        "Path": "/{AssetLibraryName}/DigitalWorkPlace/Content/Templates/eventswidget/eventshomepage.html",
+        "Id": "d63c4378-68e0-48e2-8a7c-f39765f3e985"
       }
     ],
     "JS": {
@@ -20,8 +25,8 @@
   },
   "Instances": [
     {
-      "Name": "NCI Event Listing",
-      "Description": "Displays events",
+      "Name": "NCI Event Calendar",
+      "Description": "NCI customized events as calendar",
       "Icon": "fa fa-cog",
       "Id": "32c7b77c-9816-4175-81ee-74552b78ad16",
       "Properties": [
@@ -106,8 +111,99 @@
           "value": "React"
         }
       ],
-      "SelectedView": "NCIEventsListingPage",
-      "AvailableViews": [],
+      "SelectedView": "NCI Events Listing Page",
+      "AvailableViews": ["NCI Events Listing Page", "Events Home Page"],
+      "HiddenFields": []
+    },
+    {
+      "Name": "NCI Event Listing",
+      "Description": "NCI customized events as list",
+      "Icon": "fa fa-cog",
+      "Id": "67dd79b9-57da-4fc5-af9b-8737cf41c3e8",
+      "Properties": [
+        {
+          "name": "widgettitle",
+          "value": "{fs.eventswidget.title}"
+        },
+        {
+          "name": "querytext",
+          "value": "(ContentTypeId:0x010200768EC1616E555F4593FF468D295AF923*)(EventsRollupEndDate>={Now})"
+        },
+        {
+          "name": "searchacrosssites",
+          "value": "true"
+        },
+        {
+          "name": "selectfields",
+          "value": "ListID,ListItemID,Title,owstaxidmetadataalltagsinfo,FeaturedOWSBOOL,EventDate,ServerRedirectedURL,EndDateOWSDATE,MeetingURLOWSTEXT,Location,IsAllDayEvent,SiteId,WebId,EventRecurrence,OriginalPath,SPWebUrl,BodyOWSMTXT"
+        },
+        {
+          "name": "enablerefiners",
+          "value": false
+        },
+        {
+          "name": "expandfields",
+          "value": ""
+        },
+        {
+          "name": "usefriendlyurl",
+          "value": true
+        },
+        {
+          "name": "refinercondition",
+          "value": "And"
+        },
+        {
+          "name": "searchrefiners",
+          "value": " {\"termStoreId\":\"9f6b3be8-ba1a-4111-ae41-3d7d6617b251\",\"terms\":[{\"managedPropertyName\":\"SPTags\",\"displayName\":\"common.tags\",\"id\":\"5507bd66-2de0-4f0a-8510-119b4e9a0153\",\"taxonomyIsTermSet\":false,\"termSetName\":\"Category\"},{\"managedPropertyName\":\"Departments\",\"displayName\":\"common.departments\",\"id\":\"19b184fe-a269-44fc-a939-b590dd9379ea\",\"taxonomyIsTermSet\":false,\"termSetName\":\"Category\"},{\"managedPropertyName\":\"Region\",\"displayName\":\"common.regions\",\"id\":\"19e1ef95-00b2-44aa-8275-00044ad68e13\",\"taxonomyIsTermSet\":false,\"termSetName\":\"Category\"}]}"
+        },
+        {
+          "name": "batchsize",
+          "value": "24"
+        },
+        {
+          "name": "enablepaging",
+          "value": true
+        },
+        {
+          "name": "enableinterests",
+          "value": false
+        },
+        {
+          "name": "enableallevents",
+          "value": true
+        },
+        {
+          "name": "islanguageneutral",
+          "value": false
+        },
+        {
+          "name": "sortby",
+          "value": ""
+        },
+        {
+          "name": "iscalendarview",
+          "value": false
+        },
+        {
+          "name": "cacheinterval",
+          "value": "-1"
+        },
+        {
+          "name": "callbackmethod",
+          "value": ""
+        },
+        {
+          "name": "uicallbackmethod",
+          "value": ""
+        },
+        {
+          "name": "widgetframework",
+          "value": "React"
+        }
+      ],
+      "SelectedView": "Events Home Page",
+      "AvailableViews": ["NCI Events Listing Page", "Events Home Page"],
       "HiddenFields": []
     }
   ],

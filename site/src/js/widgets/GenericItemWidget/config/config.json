@@ -9,7 +9,7 @@
     "Properties": [],
     "Views": [
       {
-        "Name": "nciorgdirectory",
+        "Name": "NCI Org Directory",
         "Path": "/{AssetLibraryName}/DigitalWorkPlace/Content/Templates/GenericItemWidget/nciorgdirectory.html",
         "Id": "cc5c6adb-3e0b-4e8d-9a07-d2fb64b30cc4"
       }
@@ -22,11 +22,12 @@
     [
       {
         "Name": "NCI Organization Directory",
+        "Description": "Builds the NCI organization directory",
         "Id": "05fd9ed4-fcd8-44db-8525-93ed8506cc74",
         "Description": "Displays the results of a search including results list and filters",
         "Icon": "fa fa-search",
-        "SelectedView": "nciorgdirectory",
-        "AvailableViews": ["nciorgdirectory"],
+        "SelectedView": "NCI Org Directory",
+        "AvailableViews": ["NCI Org Directory"],
         "Properties": [
           {
             "name": "propcallbackmethod",
