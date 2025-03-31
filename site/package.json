@@ -1,6 +1,6 @@
 {
   "name": "myNCI",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "description": "myNCI Akumina implementation.",
   "main": "index.js",
   "scripts": {
