@@ -7,8 +7,8 @@
     "Properties": [],
     "Views": [
       {
-        "Name": "NCI-default",
-        "Path": "/{AssetLibraryName}/DigitalWorkPlace/Content/Templates/ActivityNotificationsWidget/nci-default.html",
+        "Name": "NCI Default",
+        "Path": "/{AssetLibraryName}/DigitalWorkPlace/Content/Templates/ActivityNotificationsWidget/default_nci.html",
         "Id": "29b62dd0-0cdf-337d-b254-3571de6496f6"
       }
     ],
@@ -18,8 +18,8 @@
   },
   "Instances": [
     {
-        "Name": "NCI-ActivityNotificationWidget-Global",
-        "Description": "Customization of default instance for NCI",
+        "Name": "NCI Global Activity Notification Widget",
+        "Description": "NCI accessibility fixes and changes",
         "Icon": "far fa-bell",
         "Id": "bda833d9-3657-608e-9ffa-92bc25c8a900",
         "Properties": [
@@ -32,8 +32,8 @@
                 "value": "45"
             }
         ],
-        "SelectedView": "NCI-default",
-        "AvailableViews": [],
+        "SelectedView": "NCI Default",
+        "AvailableViews": ["NCI Default"],
         "HiddenFields": []
     }],
     "Options": {

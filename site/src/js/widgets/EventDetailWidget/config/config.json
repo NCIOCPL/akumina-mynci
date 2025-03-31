@@ -9,8 +9,8 @@
     "Properties": [],
     "Views": [
       {
-        "Name": "ncicalendardetail",
-        "Path": "/{AssetLibraryName}/DigitalWorkPlace/Content/Templates/eventdetailwidget/ncicalendardetail.html",
+        "Name": "NCI Calendar Detail",
+        "Path": "/{AssetLibraryName}/DigitalWorkPlace/Content/Templates/eventdetailwidget/calendardetail_nci.html",
         "Id": "220b8212-7dd2-49d6-bf5c-231f159de3f0"
       }
     ],
@@ -20,8 +20,8 @@
   },
   "Instances": [
     {
-      "Name": "Event Details",
-      "Description": "Displays event details",
+      "Name": "NCI Event Details",
+      "Description": "NCI customized event details",
       "Icon": "fa fa-cog",
       "Id": "a279943c-6d2d-4703-871c-8fdd695f24c7",
       "Properties": [
@@ -73,8 +73,8 @@
           "value": ""
         }
       ],
-      "SelectedView": "ncicalendardetail",
-      "AvailableViews": [],
+      "SelectedView": "NCI Calendar Detail",
+      "AvailableViews": ["NCI Calendar Detail"],
       "HiddenFields": []
     }
   ],

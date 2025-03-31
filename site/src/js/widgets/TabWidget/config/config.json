@@ -16,8 +16,8 @@
         "Id": "5c326954-d994-401c-8a7d-08970036b32b"
       },
       {
-        "Name": "nci tabs",
-        "Path": "/akumina%20library/digitalworkplace/content/templates/tabwidget/nci-tabs.html",
+        "Name": "NCI Tab Widget",
+        "Path": "/akumina%20library/digitalworkplace/content/templates/tabwidget/tabwidget_nci.html",
         "Id": "c5090c4e-d4a2-49d5-8489-b3212e9f003b"
       }
     ],
@@ -28,12 +28,12 @@
     "Instances": 
     [
       {
-        "Name": "NCI Organization Directory TABS",
+        "Name": "NCI Organization Directory Tabs",
         "Id": "e0ad50b2-af6b-4167-9d30-6097ce3ee338",
         "Description": "Displays the results of a search including results list and filters",
         "Icon": "fa fa-search",
-        "SelectedView": "nci tabs",
-        "AvailableViews": ["nci tabs"],
+        "SelectedView": "NCI Tab Widget",
+        "AvailableViews": ["NCI Tab Widget"],
         "Properties": [
           {
             "name": "tabs",

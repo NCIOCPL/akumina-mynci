@@ -9,8 +9,8 @@
       "Properties": [],
       "Views": [
         {
-          "Name": "NCIPhotoGallery",
-          "Path": "/{AssetLibraryName}/DigitalWorkPlace/Content/Templates/MediaWidget/NCIPhotoGallery.html",
+          "Name": "NCI Photo Gallery",
+          "Path": "/{AssetLibraryName}/DigitalWorkPlace/Content/Templates/MediaWidget/media_nci.html",
           "Id": "46863469-aaaa-43a5-8328-a2106928c55d"
         }
     ],
@@ -20,8 +20,8 @@
     },
     "Instances": [
         {
-          "Name": "NCI Photo Gallery",
-          "Description": "",
+          "Name": "NCI Latest NCI Photos Gallery",
+          "Description": "Used to display latest NCI photos in a gallery",
           "Icon": "fa fa-cog",
           "Id": "f31efa69-63c7-49e9-a643-86519b48425e",
           "Properties": [
@@ -93,8 +93,8 @@
                 "value": ""
             }
         ],
-          "SelectedView": "NCIPhotoGallery",
-          "AvailableViews": ["default", "NCIPhotoGallery"],
+          "SelectedView": "NCI Photo Gallery",
+          "AvailableViews": ["NCI Photo Gallery"],
           "HiddenFields": []
         }
     ],

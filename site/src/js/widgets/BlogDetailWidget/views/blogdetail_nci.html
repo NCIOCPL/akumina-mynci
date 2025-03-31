@@ -59,7 +59,23 @@ React.createElement(
                         "div",
                         { className: "ia-article-header-left" },
                         newsarticle.videoplayer
-                    ) : React.createElement("div", { className: "ia-article-header-left", style: { backgroundImage: `url(${newsarticle.image.url})` } })
+                    ) : React.createElement(
+                        "div",
+                        /* BEGIN #AKUMINA - Switch to background image for accessibility */
+                        /*
+                        { className: "ia-article-header-left" },
+                        React.createElement("img", {
+                            "class": "ak-thumbnail-image",
+                            "data-src": newsarticle.image.url,
+                            src: Akumina.Digispace.Utilities.GetThumbnailImage('large', newsarticle.image.url),
+                            alt: ""
+                        })
+                        */
+                        { className: "ia-article-header-left",
+                          style: { backgroundImage: `url(${newsarticle.image.url})` }
+                        }
+                        /* END #AKUMINA */
+                    )
                 ),
                 React.createElement(
                     "div",
@@ -94,12 +110,48 @@ React.createElement(
                                         "div",
                                         { className: "ia-article-author-status" },
                                         React.createElement(
+                                            /* BEGIN #AKUMINA - Remove publisher information */
+                                            /*
+                                            "div",
+                                            { className: "ia-article-author-img ia-user-teams-presence-container" },
+                                            React.createElement("img", { alt: newsarticle.publisher.name, src: newsarticle.publisher.profilepicture }),
+                                            React.createElement("div", { "data-email-id": newsarticle.publisher.email, className: "ia-user-profile-by-status fs-js-user-profile-by-status" })
+                                        ),
+                                        React.createElement(
+                                            "div",
+                                            null,
+                                            newsarticle.publisher && newsarticle.publisher.name && (newsarticle.publisher.userprincipalname ? React.createElement(
+                                                "div",
+                                                { onClick: () => HandlePublisherClick(event, newsarticle.publisher.userprincipalname) },
+                                                React.createElement(
+                                                    "a",
+                                                    { className: "ia-author-name", href: "javascript:void(0);" },
+                                                    newsarticle.publisher.name
+                                                )
+                                            ) : React.createElement(
+                                            */
+                                            /* END #AKUMINA */
                                             "div",
                                             null,
                                             React.createElement(
+                                                /* BEGIN #AKUMINA - Remove publisher name */
+                                                /*
+                                                "span",
+                                                { className: "ia-author-name" },
+                                                newsarticle.publisher.name
+                                            )
+                                        )),
+                                        React.createElement(
+                                                */
+                                                /* END #AKUMINA */
                                                 "div",
                                                 { className: "ia-tag ia-article-tag" },
+                                                /* BEGIN #AKUMINA - Remove read time text */
+                                                /*
+                                                (newsarticle.publisheddate ? newsarticle.publisheddate + " | " : "") + newsarticle.readtimetext
+                                                */
                                                 newsarticle.publisheddate ? newsarticle.publisheddate : ""
+                                                /* END #AKUMINA */
                                             )
                                         )
                                     ),
@@ -111,6 +163,20 @@ React.createElement(
                                             { href: "javascript:void(0)", className: "ia-share-buttons fs-share-email share-button shareButton", "aria-label": Akumina.Digispace.Language.TryGetText("fs.common.shareemail"), title: Akumina.Digispace.Language.TryGetText("fs.common.shareemail") },
                                             React.createElement("i", { className: "fa-regular fa-envelope", "aria-hidden": "true" })
                                         ),
+                                        /* BEGIN #AKUMINA - Remove social elements */
+                                        /*
+                                        React.createElement(
+                                            "div",
+                                            { className: "ia-share-ms-teams-fake" },
+                                            React.createElement("a", { href: "javascript:void(0)", className: "ia-share-buttons ia-share-ms-teams", "aria-hidden": "true" }),
+                                            React.createElement("div", { className: "teams-share-button",
+                                                "data-href": window.location.href,
+                                                "data-icon-px-size": "40",
+                                                "data-msg-text": newsarticle.title, title: Akumina.Digispace.Language.TryGetText("fs.common.sharemsteams"), role: "button", tabindex: "0", "aria-label": Akumina.Digispace.Language.TryGetText("fs.common.sharemsteams") })
+                                        ),
+                                        React.createElement("a", { href: "javascript:void(0)", className: "fs-js-sharetoyammer ia-share-buttons ia-share-yammer", "aria-label": Akumina.Digispace.Language.TryGetText("fs.common.shareyammer"), title: Akumina.Digispace.Language.TryGetText("fs.common.shareyammer") }),
+                                        */
+                                        /* END #AKUMINA */
                                         newsarticle.shareable && React.createElement("a", { href: "javascript:void(0)", className: "ia-share-buttons ak-twitter ia-twitter", "aria-label": Akumina.Digispace.Language.TryGetText("fs.common.sharemstwitter"), title: Akumina.Digispace.Language.TryGetText("fs.common.sharemstwitter") })
                                     )
                                 ),
@@ -130,6 +196,25 @@ React.createElement(
                                             { className: "ia-social-info-bottom-icon ia-available-reactions" },
                                             newsarticle.reactionstats
                                         )
+                                        /* BEGIN #AKUMINA - Remove social elements */
+                                        /*
+                                        ),
+                                        React.createElement(
+                                            "div",
+                                            { className: "ia-social-info-bottom-icon" },
+                                            React.createElement(
+                                                "span",
+                                                { "class": "ia-social-right-icon", title: Akumina.Digispace.Language.TryGetText("fs.common.numberofviews") },
+                                                React.createElement("i", { className: "fa-regular fa-eye", "aria-hidden": "true" }),
+                                                newsarticle.viewscount
+                                            ),
+                                            React.createElement(
+                                                "span",
+                                                { "class": "ia-social-right-icon", title: Akumina.Digispace.Language.TryGetText("fs.common.numberofcomments") },
+                                                React.createElement("i", { "class": "fa-regular fa-comment", "aria-hidden": "true" }),
+                                                newsarticle.commentscount
+                                        */
+                                        /* END #AKUMINA */
                                     )
                                 )
                             )
@@ -147,7 +232,23 @@ React.createElement(
                 React.createElement(
                     "div",
                     { className: "col-md-8 ia-article-section-left" },
-                    newsarticle.videoplayer && newsarticle.image.url && React.createElement("div", { className: "ia-article-img", style: { backgroundImage: `url(${newsarticle.image.url})` } }),
+                    newsarticle.videoplayer && newsarticle.image.url && React.createElement(
+                        "div",
+                        /* BEGIN #AKUMINA - Switch to background image for accessibility */
+                        /*
+                        { className: "ia-article-img" },
+                        React.createElement("img", {
+                            className: "ak-thumbnail-image",
+                            "data-src": newsarticle.image.url,
+                            src: Akumina.Digispace.Utilities.GetThumbnailImage('large', newsarticle.image.url),
+                            alt: ""
+                        })
+                        */
+                        { className: "ia-article-img",
+                          style: { backgroundImage: `url(${newsarticle.image.url})` }
+                        }
+                        /* END #AKUMINA */
+                        ),
                     React.createElement(
                         "p",
                         null,
@@ -191,7 +292,9 @@ React.createElement(
                 React.createElement(
                     "div",
                     { className: "col-md-4" },
+                    /* BEGIN #AKUMINA - Rename Blogs */
                     React.createElement("div", { rel: "Related Posts", className: "ak-widget fs-js-newsdetail-child fs-js-related-news-widget ia-article-section-right", id: "0eb2fc50-03ca-4f3d-8352-cb3a0ab4c82c" })
+                    /* END #AKUMINA */
                 )
             )
         )
