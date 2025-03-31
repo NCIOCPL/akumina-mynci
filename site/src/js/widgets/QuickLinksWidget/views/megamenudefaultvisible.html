@@ -1,0 +1,163 @@
+<div class="ak-widget-item aksearchexclude ia-mega-menu-wrapper fs-js-mega-menu-wrapper">
+    <!--Partial start-->
+    {{#*inline "submenu"}}
+    {{#if IsItem}}
+    <li data-itemlevel="{{ItemLevel}}" data-id="{{Id}}" class="">
+        <a title="{{Description}}" class="{{IsSPALink}} ia-menu-level-{{ItemLevel}}-link fs-js-menu-link" href="{{AddSPALink Link}}"
+           target="{{Target}}" onclick="{{FormLink}}" aria-label="{{Title}}">
+            {{#if Image}}
+            {{#with Image}}
+            <img src="{{Url}}" alt="{{Description}}">
+            {{/with}}
+            {{else}}
+            <i class="fa-regular fa-{{Icon}}" aria-hidden="true"></i>
+            {{/if}}
+            {{Title}}
+        </a>
+    </li>
+    {{else}}
+    <li data-itemlevel="{{ItemLevel}}" data-id="{{Id}}" class="fs-js-has-submenu">
+        <div class="ia-menu-level-{{ItemLevel}}-title">
+            {{Title}}
+        </div>
+        <ul class="fs-js-submenu-ul ia-menu-submenu ia-menu-level-{{MenuLevel}}">
+            {{#each this.Items}}
+            {{> submenu}}
+            {{/each}}
+        </ul>
+    </li>
+    {{/if}}
+    {{/inline}}
+    <!--Partial end-->
+    <button class="ia-menu-toggle fs-js-menu-toggle">
+        <i class="fa-regular fa-bars" aria-hidden="true"></i>
+        <span>{{translate "fs.masterpage.menu"}}</span>
+    </button>
+    <nav class="ia-mega-menu">
+        <button class="ia-close-menu fs-js-menu-toggle">
+            <i class="fa-regular fa-xmark" aria-hidden="true"></i>
+            <span>{{translate "common.close"}}</span>
+        </button>
+        <ul class="ia-menu-level-1">
+            {{#if Loading}}
+            <li class="ia-loading-state">
+                <div class="ia-skeleton-wrapper">
+                    <div class="ia-skeleton-col">
+                        <div class="ia-skeleton-body">
+                            <div class="ia-skeleton-text"></div>
+                            <div class="ia-skeleton-text"></div>
+                        </div>
+                    </div>
+                    <div class="ia-skeleton-col">
+                        <div class="ia-skeleton-body">
+                            <div class="ia-skeleton-text"></div>
+                            <div class="ia-skeleton-text"></div>
+                        </div>
+                    </div>
+                    <div class="ia-skeleton-col">
+                        <div class="ia-skeleton-body">
+                            <div class="ia-skeleton-text"></div>
+                            <div class="ia-skeleton-text"></div>
+                        </div>
+                    </div>
+                    <div class="ia-skeleton-col">
+                        <div class="ia-skeleton-body">
+                            <div class="ia-skeleton-text"></div>
+                            <div class="ia-skeleton-text"></div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            {{else}}
+            {{#Items}}
+            {{#if IsItem}}
+            <li data-itemlevel="{{ItemLevel}}" data-id="{{Id}}" data-heading="{{Title}}" class="">
+                <div class="ia-menu-level-1-link">
+                    <a title="{{Description}}" class="{{IsSPALink}} {{CssClass}} fs-js-menu-link" href="{{AddSPALink Link}}" target="{{Target}}">
+                        {{#if Image}}{{#with Image}}<img src="{{Url}}" alt="{{Description}}">{{/with}}{{else}}<i class="fa-regular fa-{{Icon}}" aria-hidden="true"></i>{{/if}}{{Title}}
+                    </a>
+                </div>
+            </li>
+            {{else}}
+            <li data-itemlevel="{{ItemLevel}}" data-id="{{Id}}" data-heading="{{Title}}"
+                class="ia-has-submenu fs-js-has-submenu">
+                <div class="ia-menu-level-1-link">
+                    {{#if Image}}{{#with Image}}<img src="{{Url}}" alt="{{Description}}">{{/with}}{{else}}{{/if}}
+                    <a title="{{Description}}" href="{{AddSPALink Link}}" target="{{Target}}" class="{{IsSPALink}} {{#if IsActive}} fs-selected {{/if}}"><i class="fa-regular fa-{{Icon}}" aria-hidden="true"></i>{{Title}}</a>
+                    <span>
+                        {{#if IsActive}}
+                        <i tabindex="0" class="fs-js-collapse-menu fa-solid fa-chevron-up"></i>
+                        {{else}}
+                        <i tabindex="0" class="fs-js-expand-menu fa-solid fa-chevron-down"></i>
+                        {{/if}}
+                    </span>
+                </div>
+                <div class="ia-menu-submenu-wrapper fs-js-menu-submenu-wrapper {{#if IsActive}} fs-is-open {{/if}}">
+                    <ul class="fs-js-submenu-ul ia-menu-submenu ia-menu-level-2">
+                        {{#if this.Items}}
+                        {{#each this.Items}}
+                        {{> submenu}}
+                        {{/each}}
+                        {{else}}
+                        <li class="ia-loading-state">
+                            <div class="ia-skeleton-wrapper ia-skeleton-wrapper-menu">
+                                <div class="ia-skeleton-col">
+                                    <div class="ia-skeleton-body">
+                                        <div class="ia-skeleton-text"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="ia-loading-state">
+                            <div class="ia-skeleton-wrapper ia-skeleton-wrapper-menu">
+                                <div class="ia-skeleton-col">
+                                    <div class="ia-skeleton-body">
+                                        <div class="ia-skeleton-text"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="ia-loading-state">
+                            <div class="ia-skeleton-wrapper ia-skeleton-wrapper-menu">
+                                <div class="ia-skeleton-col">
+                                    <div class="ia-skeleton-body">
+                                        <div class="ia-skeleton-text"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="ia-loading-state">
+                            <div class="ia-skeleton-wrapper ia-skeleton-wrapper-menu">
+                                <div class="ia-skeleton-col">
+                                    <div class="ia-skeleton-body">
+                                        <div class="ia-skeleton-text"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        {{/if}}
+                    </ul>
+                    {{#if featuredItem}}
+                    <div class="ia-menu-featured-item">
+                        <div class="ia-featured-tag">Featured</div>
+                        <div class="ia-featured-title">{{featuredItem.Title}}</div>
+                        <div class="ia-featured-description">{{featuredItem.Body}}</div>
+                        <div class="ia-featured-media">
+                            {{#if featuredItem.Image}}
+                            <img src="{{featuredItem.Image.Url}}" alt="" />
+                            {{/if}}
+                            {{#if featuredItem.IsVideo}}
+                            {{#if featuredItem.Link}}
+                            <a href="{{featuredItem.Link.Url}}" target="_blank"><i class="fa-solid fa-circle-play" aria-label="{{translate 'fs.common.playvideo'}}"></i></a>
+                            {{/if}}{{/if}}
+                        </div>
+                    </div>
+                    {{/if}}
+                </div>
+            </li>
+            {{/if}}
+            {{/Items}}
+            {{/if}}
+        </ul>
+    </nav>
+</div>

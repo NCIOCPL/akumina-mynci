@@ -36,7 +36,9 @@ React.createElement(
         React.createElement(
             "div",
             { className: "ia-slw-article-image" },
-            model.Link ? React.createElement("a", { href: model.Link, target: model.LinkTarget, className: Akumina.Digispace.ConfigurationContext.IsSPAMode ? "ak-spalink" : "", style: { backgroundImage: "url('" + model.ImageUrl + "')" }, title: model.Tooltip }) : React.createElement(
+            model.Link ? React.createElement(
+                "a",
+                { href: model.Link, target: model.LinkTarget, className: Akumina.Digispace.ConfigurationContext.IsSPAMode ? "ak-spalink" : "", style: { backgroundImage: "url('" + model.ImageUrl + "')" }, title: model.Tooltip }) : React.createElement(
                 "span",
                 null,
                 model.Title

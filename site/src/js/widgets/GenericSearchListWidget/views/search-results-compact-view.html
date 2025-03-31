@@ -54,19 +54,20 @@
 											<input class="checkbox ak-lookin-checkbox"
 											data-lookin="FetchDocuments" type="checkbox" {{#if
 											LookIn.FetchDocuments}} checked{{/if}} {{#if
-											LookIn.FetchPeople}} disabled{{/if}}>
+											LookIn.FetchPeople}} disabled {{else if LookIn.AllDisabled}} disabled {{/if}}>
 											<span data-filter="Document" class="fs-checkbox-label"
 												>{{translate 'genericsearch.document'}}</span
 											>
 											<span class="ia-checkbox fs-checkbox"></span>
 										</label>
 									</li>
+
 									<li>
 										<label class="ia-checkbox-wrapper fs-checkbox-wrapper">
 											<input class="checkbox ak-lookin-checkbox"
 											data-lookin="FetchPages" type="checkbox" {{#if
 											LookIn.FetchPages}} checked{{/if}} {{#if
-											LookIn.FetchPeople}} disabled{{/if}}>
+											LookIn.FetchPeople}} disabled {{else if LookIn.AllDisabled}} disabled {{/if}}>
 											<span data-filter="Pages" class="fs-checkbox-label"
 												>{{translate 'genericsearch.pages'}}</span
 											>
@@ -79,13 +80,28 @@
 											<input class="checkbox ak-lookin-checkbox"
 											data-lookin="FetchMedia" type="checkbox" {{#if
 											LookIn.FetchMedia}} checked{{/if}} {{#if
-											LookIn.FetchPeople}} disabled{{/if}}>
+											LookIn.FetchPeople}} disabled {{else if LookIn.AllDisabled}} disabled {{/if}}>
 											<span data-filter="Media" class="fs-checkbox-label"
 												>{{translate 'genericsearch.media'}}</span
 											>
 											<span class="ia-checkbox fs-checkbox"></span>
 										</label>
 									</li>
+									{{#LookIn.ExtendLookin}}
+									<li>
+										<label class="ia-checkbox-wrapper fs-checkbox-wrapper">
+											<input class="checkbox ak-lookin-checkbox"
+											data-lookin="{{DisplayName}}" type="checkbox" {{#if
+											Checked}} checked {{else if ../LookIn.AllDisabled}} disabled {{/if}} {{#if
+											../LookIn.FetchPeople}} disabled{{/if}}>
+											<span data-filter="{{DisplayName}}" class="fs-checkbox-label"
+												>{{DisplayName}}</span
+											>
+											<span class="ia-checkbox fs-checkbox"></span>
+										</label>
+									</li>
+									{{/LookIn.ExtendLookin}}
+
 								</ul>
 								{{/unless}}
 							</li>
@@ -93,7 +109,8 @@
 								<label class="ia-checkbox-wrapper fs-checkbox-wrapper">
 									<input class="checkbox ak-lookin-checkbox"
 									data-lookin="FetchPeople" type="checkbox" {{#if
-									LookIn.FetchPeople}} checked{{/if}}>
+									LookIn.FetchPeople}} checked{{/if}} {{#if
+									LookIn.AllDisabled}} disabled{{/if}}>
 									<span data-filter="People" class="fs-checkbox-label"
 										>{{translate 'genericsearch.people'}}</span
 									>
@@ -359,7 +376,12 @@
 						'genericsearch.forDepartmentSite'}}
 						{{WebTitle}}.{{else}}.{{/ifCondition}}
 					</p>
-					{{/if}} {{/ifCondition}} {{/HasItems}}
+					{{/if}} {{/ifCondition}} 
+					{{#if LookIn.ExtendLookin}}
+					<p>{{translate 'genericsearch.extendlookinsearchprompt'}} {{#each LookIn.ExtendLookin}}
+						{{#if @last}} {{translate 'widgetmanager.or'}} {{this.DisplayName}} {{else}} {{#unless @first}},{{/unless}}{{this.DisplayName}}{{/if}}
+					{{/each}}</p>
+					{{/if}}{{/HasItems}}
 				</div>
 				<div class="ia-sort-searched fs-search-sort">
 					{{#HasItems}}
@@ -436,6 +458,11 @@
 					'genericsearch.forDepartmentSite'}} {{WebTitle}} {{/if}} {{translate
 					'genericsearch.tryagain'}}
 				</p>
+				{{#if LookIn.ExtendLookin}}
+					<p>{{translate 'genericsearch.extendlookinsearchprompt'}} {{#each LookIn.ExtendLookin}}
+						{{#if @last}} {{translate 'widgetmanager.or'}} {{this.DisplayName}} {{else}} {{#unless @first}},{{/unless}}{{this.DisplayName}}{{/if}}
+					{{/each}}</p>
+				{{/if}}
 				<h3>{{translate 'genericsearch.searchtips'}}</h3>
 				<ul>
 					<li>{{translate 'genericsearch.checkspelling'}}</li>
@@ -450,14 +477,13 @@
 	{{/if}}
 	<div class="ia-hide fs-js-search-media-video-modal" >
 		<div class="ia-modal-overlay"></div>
-		<div class="ia-modal ia-modal-lower ia-modal-medium ia-search-media-modal">
+		<div class="ia-modal ia-modal-medium ia-search-media-modal">
 			<header class="ia-modal-header">
 				<button class="ia-modal-close">
 					<i class="fa-regular fa-xmark" aria-label="{{translate 'fs.common.closevideo'}}"></i>
 				</button>
 			</header>
-			<section class="ia-modal-content">
-				<video src="" controls=""></video>
+			<section class="ia-modal-content fs-js-media-video-wrapper">
 			</section>
 		</div>
 	</div>
@@ -515,17 +541,23 @@
 	                        {{userprincipalname}}
 	                    </a>
 	                </span> {{/if}} {{#if businessphones}}
-					<span>
-	                    <i class="fa-regular fa-mobile" aria-hidden="true"></i><a href="tel:{{businessphones}}" aria-label="{{translate 'common.call'}} {{givenname}} {{surname}}.">{{businessphones}}</a>
+					<span class="ia-businessphones">
+	                    <i class="fa-regular fa-phone" aria-hidden="true"></i>
+						{{#each businessphones}}
+							<a href="tel:{{this}}" aria-label="{{translate 'common.call'}} {{givenname}} {{surname}}.">{{this}}</a>
+						{{/each}}
 	                </span> {{/if}} {{#if mobilephone}}
 					<span>
-	                    <i class="fa-regular fa-phone" aria-hidden="true"></i><a href="tel:{{mobilephone}}" aria-label="{{translate 'common.call'}} {{givenname}} {{surname}}.">{{mobilephone}}</a>
+	                    <i class="fa-regular fa-mobile" aria-hidden="true"></i><a href="tel:{{mobilephone}}" aria-label="{{translate 'common.call'}} {{givenname}} {{surname}}.">{{mobilephone}}</a>
 	                </span> {{/if}}
 	            </div>
 	            <div class="fs-profile-address">
 	                {{#department}}
 	                    <span><i class="fa-regular fa-building" aria-hidden="true"></i>{{this}}</span>
 	                {{/department}}
+	                {{#if officelocation}}
+	                    <span><i class="fa-regular fa-city" aria-hidden="true"></i>{{officelocation}}</span>
+	                {{/if}}
 	            </div>
 	        </div>
 	        {{#if mail}}
@@ -562,6 +594,9 @@
 		{{else ifCondition ContentType '==' "AkuminaImages"}}
 	    <!-- Images Card -->
 	    {{> MediatItemTemplate context=..}}
+		{{else if CollectionId}}
+		<!-- FAQ Card -->
+		{{> FAQItemTemplate context=..}}
 	    {{else}}
 	    {{> DefaultItemTemplate context=..}}
 	    {{/ifCondition}}
@@ -586,3 +621,4 @@
 <script src="{{TemplateUrlPrefix}}/search-result-compact-view-eventstemplate.html"></script>
 <script src="{{TemplateUrlPrefix}}/search-result-compact-view-itemtemplate.html"></script>
 <script src="{{TemplateUrlPrefix}}/search-result-compact-view-mediatemplate.html"></script>
+<script src="{{TemplateUrlPrefix}}/search-result-compact-view-faqtemplate.html"></script>

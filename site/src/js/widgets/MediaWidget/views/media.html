@@ -300,9 +300,15 @@ React.createElement(
                                 "div",
                                 { className: "ia-media-img-wrapper" },
                                 this.state.mediaDetailItem.VideoPlayer
-                            ) : React.createElement("div", { className: "ia-media-img-wrapper ia-media-img-wrapper-responsive", style: {
-                                    backgroundImage: `url(${this.state.mediaDetailItem.FileUrl})`
-                                } }),
+                            ) : React.createElement(
+                                "div",
+                                { className: "ia-media-img-wrapper ia-media-img-wrapper-responsive" },
+                                React.createElement("img", {
+                                    "class": "ak-thumbnail-image",
+                                    "data-src": this.state.mediaDetailItem.FileUrl,
+                                    src: Akumina.Digispace.Utilities.GetThumbnailImage('large', this.state.mediaDetailItem.FileUrl)
+                                })
+                            ),
                             this.templateModel.ActivityCommentsComponent
                         ),
                         React.createElement(

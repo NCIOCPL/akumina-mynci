@@ -10,8 +10,8 @@
     "Properties": [],
     "Views": [
       {
-        "Name": "NCI-MegaMenuDefaultVisible",
-        "Path": "/{AssetLibraryName}/DigitalWorkPlace/Content/Templates/QuickLinksWidget/ncimegamenudefaultvisible.html",
+        "Name": "NCI Mega Menu",
+        "Path": "/{AssetLibraryName}/DigitalWorkPlace/Content/Templates/QuickLinksWidget/megamenudefaultvisible_nci.html",
         "Id": "93084c1a-bb54-4e10-8386-b3b0d9043d3f"
       }
     ],
@@ -21,7 +21,7 @@
   },
   "Instances": [
     {
-      "Name": "NCI-TopNav-MegaMenu",
+      "Name": "NCI Top Nav Mega Menu",
       "Description": "",
       "Icon": "fa fa-cog",
       "Id": "4f534d73-5afa-45a1-a439-8d1108ac4097",
@@ -75,8 +75,8 @@
           "value": false
         }
       ],
-      "SelectedView": "NCI-MegaMenuDefaultVisible",
-      "AvailableViews": [],
+      "SelectedView": "NCI Mega Menu",
+      "AvailableViews": ["NCI Mega Menu"],
       "HiddenFields": []
     }
   ],

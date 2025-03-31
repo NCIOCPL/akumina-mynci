@@ -9,7 +9,7 @@
     "Properties": [],
     "Views": [
       {
-        "Name": "Launch Pad NCI View",
+        "Name": "NCI Launch Pad View",
         "Path": "/{AssetLibraryName}/DigitalWorkPlace/Content/Templates/LaunchPadWidget/launchpadview_nci.html",
         "Id": "8c1b8b94-a341-4b42-b271-7a47015c809a"
       }
@@ -21,7 +21,7 @@
   "Instances": [
     {
       "Name": "NCI Home Page QuickLinks",
-      "Description": "Displays list of Apps available to the current user in Mission Control. Provides the ability to add apps to the list.",
+      "Description": "Displays list of quick links for user to access.",
       "Icon": "fa fa-cog",
       "Id": "6ff2e254-2506-4ed0-9b24-70c321c3fecf",
       "Properties": [
@@ -75,8 +75,8 @@
           "value": ""
         }
       ],
-      "SelectedView": "Launch Pad NCI View",
-      "AvailableViews": [],
+      "SelectedView": "NCI Launch Pad View",
+      "AvailableViews": ["NCI Launch Pad View"],
       "HiddenFields": []
     }
   ],
