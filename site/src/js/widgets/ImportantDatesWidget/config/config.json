@@ -9,8 +9,8 @@
         "Properties": [],
         "Views": [
             {
-                "Name": "Important Dates NCI",
-                "Path": "/{AssetLibraryName}/digitalworkPlace/content/templates/importantdateswidget/importantdatesmodern nci.html",
+                "Name": "NCI Important Dates",
+                "Path": "/{AssetLibraryName}/digitalworkPlace/content/templates/importantdateswidget/importantdatesmodern_nci.html",
                 "Id": "0402a107-9029-4844-80f0-cde037a75530"
             }
         ],
@@ -21,8 +21,8 @@
         },     
         "Instances": [
             {
-                "Name": "Home Page Upcoming Events",
-                "Description": "Displays list of important dates from site calendar.",
+                "Name": "NCI Home Page Upcoming Events",
+                "Description": "NCI customized list of important dates from site calendar.",
                 "Icon": "fa fa-cog",
                 "Id": "f8133321-9958-40fe-af32-861c6f6c3fbb",
                 "Properties": [
@@ -83,8 +83,8 @@
                         "value": ""
                     }
                 ],
-                "SelectedView": "Important Dates NCI",
-                "AvailableViews": [],
+                "SelectedView": "NCI Important Dates",
+                "AvailableViews": ["NCI Important Dates"],
                 "HiddenFields": []
             }
         ],

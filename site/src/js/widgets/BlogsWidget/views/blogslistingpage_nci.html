@@ -1,9 +1,11 @@
 React.createElement(
     "div",
-    { id: "ia-news-list", className: "ia-news-list ia-widget-wrapper" },
+    /* BEGIN #AKUMINA - NCI Styling */
+    { id: "HomeNewsEventsTabs", className: "ia-news-list ia-widget-wrapper custom-event-list" },
+    /* END #AKUMINA */
     React.createElement(
         "h2",
-        { "class": "pb-3" },
+        null,
         Title
     ),
     ConfigurationErrorMessage ? React.createElement(
@@ -13,10 +15,9 @@ React.createElement(
     ) : React.createElement(
         React.Fragment,
         null,
-        SearchTextComponent,
         React.createElement(
             "div",
-            { className: "ia-grid-utility-container" + (HasDateFilter ? " ia-grid-utility-container-date-filter" : "") },
+            { className: "ia-grid-utility-container" },
             React.createElement(
                 "div",
                 { className: "ia-grid-utility-left-col" },
@@ -32,7 +33,7 @@ React.createElement(
                             React.createElement(
                                 "span",
                                 { className: "ia-filter-text" },
-                                Akumina.Digispace.Language.TryGetText("fs.newswidget.filterby"),
+                                Akumina.Digispace.Language.TryGetText("fs.blogswidget.filterby"),
                                 ":"
                             ),
                             SearchCriteria.map(radiofilter => {
@@ -41,7 +42,7 @@ React.createElement(
                                     null,
                                     React.createElement(
                                         "a",
-                                        { href: "javascript:void(0)", className: "ia-filter-option " + (radiofilter.IsSelected ? " fs-js-active" : "") + (!radiofilter.IsEnabled ? " ia-filter-option-disabled" : ""),
+                                        { className: "ia-filter-option " + (radiofilter.IsSelected ? " fs-js-active" : ""),
                                             role: "button", onClick: () => SearchBasedOnSelectedCriteria(false, undefined, radiofilter, true) },
                                         radiofilter.Name
                                     ),
@@ -68,6 +69,9 @@ React.createElement(
                         { className: IsListView ? "" : "fs-js-active", onClick: () => {
                                 ToggleView(false);
                             } },
+                        /* BEGIN #AKUMINA - Accessibility Fixes */
+                        React.createElement("span", { className: "assessibility-hidden-text" }, "Grid"),
+                        /* END #AKUMINA */
                         React.createElement("i", { className: "fa-solid fa-grid", "aria-label": Akumina.Digispace.Language.TryGetText("fs.common.gridview") })
                     ),
                     React.createElement("span", { className: "ia-button-separator" }),
@@ -76,6 +80,9 @@ React.createElement(
                         { className: IsListView ? "fs-js-active" : "", onClick: () => {
                                 ToggleView(true);
                             } },
+                        /* BEGIN #AKUMINA - Accessibility Fixes */
+                        React.createElement("span", { className: "assessibility-hidden-text" }, "List"),
+                        /* END #AKUMINA */
                         React.createElement("i", { className: "fa-solid fa-list", "aria-label": Akumina.Digispace.Language.TryGetText("fs.common.listview") })
                     )
                 )
@@ -163,7 +170,9 @@ React.createElement(
                                 { className: "ia-card" + (Item.DisplayDefaultImage ? " ia-default" : "") + (Item.Featured ? " ia-featured" : "") },
                                 React.createElement(
                                     "div",
-                                    { className: "ia-card-image" + (Item.VideoUrl ? " ia-has-video" : "") },
+                                    /* BEGIN #AKUMINA - Accessibility Fixes */
+                                    { className: "ia-card-image" + (Item.VideoUrl ? " ia-has-video" : ""),
+                                      style: { backgroundImage: `url(${Item.DisplayDefaultImage ? DefaultImageSrc : Item.ThumbnailUrl ? Item.ThumbnailUrl : Item.ImageUrl})` } },
                                     Item.VideoUrl && React.createElement(
                                         "button",
                                         { className: "ia-video-play", onClick: () => {
@@ -171,16 +180,25 @@ React.createElement(
                                             } },
                                         React.createElement("i", { className: "fa-regular fa-circle-play", "aria-label": Akumina.Digispace.Language.TryGetText("fs.common.playvideo") })
                                     ),
-                                    Item.ThumbnailUrl || Item.ImageUrl ? React.createElement("img", {
+                                    /*
+                                    React.createElement("img", {
                                         "class": "ak-thumbnail-image",
                                         "data-thumbnail-src": Item.ThumbnailUrl,
                                         "data-src": Item.ImageUrl,
-                                        src: Item.ThumbnailUrl ? Akumina.Digispace.Utilities.GetThumbnailImage('medium', Item.ThumbnailUrl) : Akumina.Digispace.Utilities.GetThumbnailImage('medium', Item.ImageUrl)
-                                    }) : null,
+                                        src: Item.ThumbnailUrl ? Akumina.Digispace.Utilities.GetThumbnailImage('medium', Item.ThumbnailUrl) : Akumina.Digispace.Utilities.GetThumbnailImage('medium', Item.ImageUrl),
+                                        alt: ""
+                                    }),
+                                    */
+                                   /* END #AKUMINA */
                                     Item.Featured && React.createElement(
                                         "div",
                                         { className: "ia-featured-tag" },
-                                        Akumina.Digispace.Language.TryGetText("fs.newswidget.featured")
+                                        Akumina.Digispace.Language.TryGetText("fs.blogswidget.featured")
+                                    ),
+                                    Item.IsDeleted && React.createElement(
+                                        "div",
+                                        { className: "ia-deleted-tag" },
+                                        Akumina.Digispace.Language.TryGetText("fs.blogswidget.deleted")
                                     )
                                 ),
                                 React.createElement(
@@ -235,17 +253,24 @@ React.createElement(
                                         { className: "ia-card-footer" },
                                         React.createElement(
                                             "div",
+                                            /* BEGIN #AKUMINA - Remove publisher information */
+                                            { className: "ia-post-by ia-post-by-blogs-home" },
+                                            /*
                                             { className: "ia-post-by" },
                                             Item.Publisher && Item.Publisher.ProfilePicture && React.createElement(
                                                 "div",
                                                 { className: "ia-posted-by-user ia-user-teams-presence-container" },
                                                 React.createElement("img", { className: "fs-js-publisher-image", alt: Item.Publisher.Name,
                                                     src: Item.Publisher.ProfilePicture }),
-                                                React.createElement("div", { "data-email-id": Item.Publisher.Email, className: "ia-user-profile-by-status fs-js-user-profile-by-status" })
+                                                React.createElement("div", { "data-email-id": Item.Publisher.Email, "class": "ia-user-profile-by-status fs-js-user-profile-by-status" })
                                             ),
+                                            */
+                                           /* END #AKUMINA */
                                             React.createElement(
                                                 "div",
                                                 { className: "ia-posted-by-details" },
+                                                /* BEGIN #AKUMINA - Remove publisher information */
+                                                /*
                                                 Item.Publisher && Item.Publisher.Name && (Item.Publisher.userprincipalname ? React.createElement(
                                                     "div",
                                                     { onClick: () => HandlePublisherClick(event, Item.Publisher.userprincipalname) },
@@ -263,6 +288,8 @@ React.createElement(
                                                         Item.Publisher.Name
                                                     )
                                                 )),
+                                                */
+                                               /* END #AKUMINA */
                                                 React.createElement(
                                                     "div",
                                                     { className: "ia-posted-date" },
@@ -270,6 +297,9 @@ React.createElement(
                                                         "span",
                                                         null,
                                                         moment(Item.PublishedDate).format(Akumina.Digispace.SiteContext.DateFormat.monthdatelongyear)
+                                                    /* BEGIN #AKUMINA - Remove social interactions */
+                                                    )
+                                                    /*
                                                     ),
                                                     Item.ReadingTime != null && React.createElement(
                                                         "span",
@@ -306,6 +336,8 @@ React.createElement(
                                                     { className: "ia-post-comments", title: Akumina.Digispace.Language.TryGetText("fs.common.numberofcomments") },
                                                     React.createElement("i", { "class": "fa-regular fa-comment", "aria-hidden": "true" }),
                                                     Item.CommentsCount
+                                                    */
+                                                    /* END #AKUMINA */
                                                 )
                                             )
                                         )
@@ -317,7 +349,7 @@ React.createElement(
                 ) : React.createElement(
                     "p",
                     null,
-                    Akumina.Digispace.Language.TryGetText("fs.newswidget.nonewsfound")
+                    Akumina.Digispace.Language.TryGetText("fs.blogswidget.nonewsfound")
                 )
             ),
             DisplayShowMoreButton && React.createElement(
@@ -326,7 +358,7 @@ React.createElement(
                 React.createElement(
                     "button",
                     { className: "ia-button", onClick: () => ShowMore() },
-                    Akumina.Digispace.Language.TryGetText("fs.newswidget.showmore")
+                    Akumina.Digispace.Language.TryGetText("fs.blogswidget.showmore")
                 )
             )
         )
