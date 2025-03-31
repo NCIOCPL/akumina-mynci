@@ -9,8 +9,8 @@
         "Properties": [],
         "Views": [
             {
-                "Name": "NCI Breadcrumb Widget View",
-                "Path": "/{AssetLibraryName}/digitalworkPlace/content/templates/breadcrumbswidget/breadcrumbs.html",
+                "Name": "NCI Breadcrumb Widget",
+                "Path": "/{AssetLibraryName}/digitalworkPlace/content/templates/breadcrumbswidget/breadcrumbs_nci.html",
                 "Id": "d09d9db3-e9bc-4580-92e4-737f30fe6a48"
             }
         ],
@@ -22,7 +22,7 @@
         "Instances": [
             {
                 "Name": "NCI Breadcrumb Widget",
-                "Description": "",
+                "Description": "NCI customized breadcrumb widget",
                 "Icon": "fa fa-cog",
                 "Id": "0785b3f9-1f8c-4684-9dde-91a9c75c6b23",
                 "Properties": [
@@ -39,8 +39,8 @@
                         "value": true
                     }
                 ],
-                "SelectedView": "NCI Breadcrumb Widget View",
-                "AvailableViews": [],
+                "SelectedView": "NCI Breadcrumb Widget",
+                "AvailableViews": ["NCI Breadcrumb Widget"],
                 "HiddenFields": []
             }
         ],

@@ -106,12 +106,12 @@
     "Views": [
       {
         "Name": "NCI Organization Directory View",
-        "Path": "/{AssetLibraryName}/DigitalWorkPlace/Content/Templates/PeopleDirectoryWidget/NCIOrgDirectoryView.html",
+        "Path": "/{AssetLibraryName}/DigitalWorkPlace/Content/Templates/PeopleDirectoryWidget/peopledirectory_nci_orgdirectory.html",
         "Id": "1ba83029-995f-49c1-a828-b067bbb40ef9"
       },
       {
         "Name": "NCI People Finder",
-        "Path": "/{AssetLibraryName}/DigitalWorkPlace/Content/Templates/PeopleDirectoryWidget/NCIPeopleDIrectoryView.html",
+        "Path": "/{AssetLibraryName}/DigitalWorkPlace/Content/Templates/PeopleDirectoryWidget/peopledirectory_nci_peopledirectory.html",
         "Id": "3294e69f-cc70-4bad-a577-2a4a70d5daa0"
       }
     ],
@@ -122,11 +122,11 @@
   "Instances": [
     {
       "Name": "NCI Organization Directory",
+      "Description": "Displays people within the NCI organization directory for the selected office",
       "Id": "ac5dc749-7e29-4842-8bd2-6177d3a08041",
-      "Description": "Displays searchable list of people with filters from Entra ID/AAD and NED synchronization",
       "Icon": "far fa-address-book",
       "SelectedView": "NCI Organization Directory View",
-      "AvailableViews": [],
+      "AvailableViews": ["NCI Organization Directory View"],
       "HiddenFields": [],
       "Properties": [
         {
@@ -165,11 +165,11 @@
     },
     {
       "Name": "NCI People Directory",
+      "Description": "Displays searchable list of people with filters from Entra ID/AAD and NED synchronization",
       "Id": "a47473cf-b520-4402-9f05-1ea4fb9e6d22",
-      "Description": "NCI's Corporate People Directory",
       "Icon": "far fa-address-book",
       "SelectedView": "NCI People Finder",
-      "AvailableViews": [],
+      "AvailableViews": ["NCI People Finder"],
       "HiddenFields": [],
       "Properties": [
         {

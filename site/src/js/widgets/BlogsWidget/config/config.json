@@ -9,13 +9,13 @@
     "Properties": [],
     "Views": [
       {
-        "Name": "blogslatestlistingversion",
-        "Path": "/{AssetLibraryName}/DigitalWorkPlace/Content/Templates/BlogsWidget/blogslatestlistingversion.html",
+        "Name": "NCI Blogs Listing Page",
+        "Path": "/{AssetLibraryName}/DigitalWorkPlace/Content/Templates/BlogsWidget/blogslistingpage_nci.html",
         "Id": "147ee000-8728-4b3d-bcb5-1007b0d683b8"
       },
       {
-        "Name": "blogslatesthomeversion",
-        "Path": "/{AssetLibraryName}/DigitalWorkPlace/Content/Templates/BlogsWidget/blogslatesthomeversion.html",
+        "Name": "NCI Blogs Home Page",
+        "Path": "/{AssetLibraryName}/DigitalWorkPlace/Content/Templates/BlogsWidget/blogshomepage_nci.html",
         "Id": "03b63f18-957c-49b2-af66-595d85eb0639"
       }
     ],
@@ -25,8 +25,8 @@
   },
   "Instances": [
     {
-      "Name": "Hive Blogs Listing",
-      "Description": "Displays all the top 8 blogs news with ability to view more",
+      "Name": "NCI Blogs Listing",
+      "Description": "NCI customized blog listing page",
       "Icon": "fa fa-cog",
       "Id": "a66c4b10-f06b-4534-8bb2-ca916f70f799",
       "Properties": [
@@ -136,13 +136,13 @@
           "value": -1
         }
       ],
-      "SelectedView": "blogslatestlistingversion",
-      "AvailableViews": [],
+      "SelectedView": "NCI Blogs Listing Page",
+      "AvailableViews": ["NCI Blogs Listing Page"],
       "HiddenFields": []
     },
     {
-      "Name": "Hive Blogs Global",
-      "Description": "Displays blog news items associated with a blog news list",
+      "Name": "NCI Blogs Home Page",
+      "Description": "NCI list of blogs for the home page",
       "Icon": "fa fa-cog",
       "Id": "6c9c2fd5-323e-4c25-9364-bd0903ef589c",
       "Properties": [
@@ -252,8 +252,8 @@
           "value": ""
         }
       ],
-      "SelectedView": "blogslatesthomeversion",
-      "AvailableViews": [],
+      "SelectedView": "NCI Blogs Home Page",
+      "AvailableViews": ["NCI Blogs Home Page"],
       "HiddenFields": []
     }
   ],

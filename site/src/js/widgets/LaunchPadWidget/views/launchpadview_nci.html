@@ -1,4 +1,3 @@
-{{debug}}
 <div class="ia-mission-control-apps">
     {{#if hasError}}
     <div class="alert alert-danger" role="alert">
@@ -23,6 +22,7 @@
     {{else}}
     <div class="ia-apps-list ia-apps-selected-list">
         {{#each selectedApps}}
+        {{!-- BEGIN #AKUMINA - Limit apps to 12 --}}
         {{#ifCondition @index '<' '12'}}
         <a href="{{Url}}" target="_blank" class="ia-apps-items {{IsSPALink}}">
             <div class="ia-apps-img">
@@ -35,7 +35,24 @@
             <div class="ia-apps-title">{{Title}}</div>
         </a>
         {{/ifCondition}}
+        {{!-- END #AKUMINA --}}
         {{/each}}
+        {{!-- BEGIN #AKUMINA - Remove extra buttons --}}
+        {{!--
+            <button class="ia-apps-items  {{#unless ShowAllApps}} fs-hide {{/unless}}" id="btnClose" data-button="close">
+                <div class="ia-apps-img">
+                    <i class="fa-regular fa-circle-xmark" aria-hidden="true"></i>
+                </div>
+                <div class="ia-apps-title">{{translate "launchpadwidget.close"}}</div>
+            </button>
+            <button class="ia-apps-items {{#if ShowAllApps}} fs-hide {{/if}}" id="btnAdd" data-button="addapp" aria-label="add apps">
+                <div class="ia-apps-img">
+                    <i class="fa-regular fa-circle-plus" aria-hidden="true"></i>
+                </div>
+                <div class="ia-apps-title">{{translate "launchpadwidget.addapps"}}</div>
+            </button>
+        --}}
+        {{!-- END #AKUMINA --}}
     </div>
 
     <div class="ia-apps-available-list fs-js-app-list {{#unless ShowAllApps}} fs-hide {{/unless}}">

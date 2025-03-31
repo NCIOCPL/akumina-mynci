@@ -23,7 +23,14 @@
           <div>{{{Body}}}</div>
         </div>
         <div class="ia-button-row">
-          <button class="ia-button-primary ia-event-detail-ics">{{translate "fs.eventdetailwidget.downloadevent"}}</button>
+          <button class="ia-button-primary ia-event-detail-ics">{{translate "fs.eventdetailwidget.downloadevent"}}</button>=
+          {{!-- BEGIN #AKUMINA - Remove multi-event download --}}
+          {{!--
+          {{#if HasRecurrence}}
+            <button class="ia-button ia-event-detail-ics-series">{{translate "eventdetails.downloadeventseries"}}</button>
+          {{/if}}
+          --}}
+          {{!-- END #AKUMINA --}}
         </div>
       </div>
       <div class="col-md-4 ia-article-section-right">
@@ -31,12 +38,16 @@
           <div class="ia-calender-datetime-location">
             <div class="ia-calender-date-time">
               <p>{{DisplayStartDate}}{{#unless IsOneDayEvent}}-{{DisplayEndDate}}{{/unless}}</p>
+              {{!-- BEGIN #AKUMINA - ??? --}}
               <p>{{#if AllDay}}{{translate "fs.eventdetailwidget.allday"}}{{else}}{{DisplayTimeRange}}{{#if IsOneDayEvent}}{{#if DurationDisplay}} ({{DurationDisplay}}){{/if}}{{/if}}{{/if}}</p>
+              {{!-- END #AKUMINA --}}
             </div>
           </div>
           {{#if MeetingUrl}}
           <div class="ia-calendar-teams-link">
+            {{!-- BEGIN #AKUMINA - Accessibility fixes --}}
             <a target="_blank" href="{{MeetingUrl}}"><span class="ia-logo-icons-24px ia-logo-nci-meeting"></span>{{translate "fs.eventdetailwidget.jointeamsmeeting"}}</a>
+            {{!-- END #AKUMINA --}}
           </div>
           {{/if}}
           {{#if Location}}
@@ -44,14 +55,8 @@
               <span>{{Location}}</span>
           </div>
           {{/if}}
-
         </div>
-
-
-
-
-
-
+        {{!-- BEGIN #AKUMINA - Add NCI Contacts --}}
         <div class="event-display-contacts expanded-fields-contacts" style="display: none; {{#if NCIContactPerson1_ID}} display: block;{{/if}} {{#if NCIContactPerson2_ID}} display: block;{{/if}}">
           <h3>{{translate "customfields.contacts"}}:</h3>
 
@@ -88,33 +93,26 @@
               </div>
               {{/if}} 
           </div>
-      </div>
+        </div>
 
-      {{#if NCIOrgOwner}}
-      <div class="event-display-organization expanded-fields-organization">
-          <h3>{{translate "customfields.manager"}}:</h3>
-          {{#each NCIOrgOwner}}
-              <div>{{{this.Label}}}</div>
-          {{/each}}
-      </div>
-      {{/if}} 
+        {{#if NCIOrgOwner}}
+          <div class="event-display-organization expanded-fields-organization">
+              <h3>{{translate "customfields.manager"}}:</h3>
+              {{#each NCIOrgOwner}}
+                  <div>{{{this.Label}}}</div>
+              {{/each}}
+          </div>
+        {{/if}} 
 
-
-
-
-      <script>
-          $(document).ready(function() {
-              GetNCIProfileInfoUrl("{{NCIContactPerson1_EMail}}", "#profInfoLink1");
-              GetNCIProfileInfoUrl("{{NCIContactPerson2_EMail}}", "#profInfoLink2");
-              GetNCIProfilePictureUrl("{{NCIContactPerson1_EMail}}", "#profPhotoLink1");
-              GetNCIProfilePictureUrl("{{NCIContactPerson2_EMail}}", "#profPhotoLink2");   
-          })();
-      </script>
-    
-
-
-
-
+        <script>
+            $(document).ready(function() {
+                GetNCIProfileInfoUrl("{{NCIContactPerson1_EMail}}", "#profInfoLink1");
+                GetNCIProfileInfoUrl("{{NCIContactPerson2_EMail}}", "#profInfoLink2");
+                GetNCIProfilePictureUrl("{{NCIContactPerson1_EMail}}", "#profPhotoLink1");
+                GetNCIProfilePictureUrl("{{NCIContactPerson2_EMail}}", "#profPhotoLink2");   
+            })();
+        </script>
+        {{!-- END #AKUMINA --}}
         <div class="ia-chip-collection">
         {{#each Categories}}
             <span class="ia-chip">{{this}}</span>

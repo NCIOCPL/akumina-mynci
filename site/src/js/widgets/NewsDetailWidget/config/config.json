@@ -9,8 +9,8 @@
     "Properties": [],
     "Views": [
       {
-        "Name": "ncinewsdetail",
-        "Path": "/{AssetLibraryName}/DigitalWorkPlace/Content/Templates/NewsDetailWidget/ncinewsdetail.html",
+        "Name": "NCI News Detail",
+        "Path": "/{AssetLibraryName}/DigitalWorkPlace/Content/Templates/NewsDetailWidget/newsdetail_nci.html",
         "Id": "777d25b7-de24-40bd-8a2a-5b2cfb84a233"
       }
     ],
@@ -20,8 +20,8 @@
   },
   "Instances": [
     {
-      "Name": "News Details",
-      "Description": "Displays news detail",
+      "Name": "NCI News Details",
+      "Description": "NCI customized news detail",
       "Icon": "fa fa-cog",
       "Id": "89fa2ce8-e45f-9232-14dc-a1c3cd0bb1ba",
       "Properties": [
@@ -81,8 +81,8 @@
           "value": "react"
         }
       ],
-      "SelectedView": "ncinewsdetail",
-      "AvailableViews": [],
+      "SelectedView": "NCI News Detail",
+      "AvailableViews": ["NCI News Detail"],
       "HiddenFields": []
     }
   ],

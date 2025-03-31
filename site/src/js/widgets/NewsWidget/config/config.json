@@ -134,24 +134,29 @@
     ],
     "Views": [
       {
-        "Name": "tipoftheweek",
-        "Path": "/{AssetLibraryName}/digitalworkplace/content/templates/newswidget/tipoftheweek.html",
+        "Name": "Default",
+        "Path": "/{AssetLibraryName}/digitalworkplace/content/templates/newswidget/default.html",
         "Id": "d7f1edec-62fc-408d-9813-4e8de13955f0"
       },
       {
-        "Name": "ncinewslistingpage",
+        "Name": "News Listing Page",
         "Path": "/{AssetLibraryName}/digitalworkplace/content/templates/newswidget/newslistingpage.html",
+        "Id": "8f32efa1-a0c6-407f-a619-8dda4f56afcc"
+      },
+      {
+        "Name": "NCI News Listing Page",
+        "Path": "/{AssetLibraryName}/digitalworkplace/content/templates/newswidget/newslistingpage_nci.html",
         "Id": "61ad19a4-ac05-4749-8686-554430b97d15"
       },
       {
-        "Name": "FeaturedNews",
+        "Name": "Featured News",
         "Path": "/{AssetLibraryName}/digitalworkplace/content/templates/newswidget/featurednews.html",
         "Id": "9bffc5c7-6cbb-4d52-80e7-b4c50eb54344"
       },
       {
-        "Name": "NciHomePageTipOfTheWeekRailWidgetView",
-        "Path": "/{AssetLibraryName}/digitalworkplace/content/templates/newswidget/nci-homepage-tip-of-the-week-rail-widget-view.html",
-        "Id": "eb57cf26-880d-40dc-91da-506ff0a5f0ac"
+        "Name": "NCI Featured News",
+        "Path": "/{AssetLibraryName}/digitalworkplace/content/templates/newswidget/featurednews_nci.html",
+        "Id": "dc36381e-2e9b-4e1e-9abb-e5a69c0016eb"
       }
     ],
     "JS": {
@@ -160,7 +165,7 @@
   },
   "Instances": [
     {
-      "Name": "Tip of the Week",
+      "Name": "NCI Tip of the Week",
       "Description": "NCI tip of the week on home page ",
       "Icon": "fa fa-cog",
       "Id": "263e492a-68fe-48d7-81bf-f75dffb84df5",
@@ -239,18 +244,17 @@
           "value": false
         }
       ],
-      "SelectedView": "FeaturedNews",
+      "SelectedView": "Featured News",
       "AvailableViews": [
-        "NciHomePageTipOfTheWeekRailWidgetView",
-        "tipoftheweek",
-        "ncinewslistingpage",
-        "FeaturedNews"
+        "Default",
+        "NCI News Listing Page",
+        "Featured News"
       ],
       "HiddenFields": []
     },
 
     {
-      "Name": "Tip of the Week List",
+      "Name": "NCI Tip of the Week List",
       "Description": "Tip of the week news listing for tiplist.aspx",
       "Icon": "fa fa-cog",
       "Id": "62d4da7c-afc3-4b8f-b1d7-8a9f735c3ae4",
@@ -323,8 +327,8 @@
           "value": false
         }
       ],
-      "SelectedView": "ncinewslistingpage",
-      "AvailableViews": [],
+      "SelectedView": "NCI News Listing Page",
+      "AvailableViews": ["NCI News Listing Page"],
       "HiddenFields": []
     }
   ],
