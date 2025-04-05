@@ -12,26 +12,10 @@
         "Containers": [
             {
                 "id": "container1",
-                "layoutid": "2 Column Large Right",
+                "layoutid": "1 Column",
                 "zones": [
                     {
                         "id": "zone1",
-                        "widgets": [
-                            {
-                                "Title": "Left Navigation Indicator",
-                                "WidgetInstanceId": "550ddab9-9020-4b13-8672-7adc3fa375fd",
-                                "Name": "NCILeftNavWidget",
-                                "Icon": "fa fa-cog",
-                                "Description": "Reflects the current position in the nav hierarchy.",
-                                "Options": "",
-                                "DisplayOrder": "0",
-                                "Grid": "",
-                                "Properties": []
-                            }
-                        ]
-                    },
-                    {
-                        "id": "zone2",
                         "widgets": [
                             {
                                 "Title": "NCI Events Listing",

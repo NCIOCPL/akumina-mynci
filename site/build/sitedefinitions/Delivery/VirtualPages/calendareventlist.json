@@ -1,10 +1,10 @@
 {
-    "Name": "News Detail",
-    "Id": "5f187e3b-d429-4c7b-ac18-64bac61d069b",
+    "Name": "Event List",
+    "Id": "8e5be073-a3da-9b64-140e-f68741d2cfb2",
     "Type": "GenericPage",
     "List": "GenericPages_AK",
     "AdditionalSelectColumns": "",
-    "Url": "newsdetail.aspx",
+    "Url": "calendareventlist.aspx",
     "Personas": [
         "All"
     ],
@@ -18,9 +18,9 @@
                         "id": "zone1",
                         "widgets": [
                             {
-                                "Title": "News Detail",
-                                "WidgetInstanceId": "89fa2ce8-e45f-9232-14dc-a1c3cd0bb1ba",
-                                "Name": "NewsDetailWidget",
+                                "Title": "NCI Events Listing",
+                                "WidgetInstanceId": "67dd79b9-57da-4fc5-af9b-8737cf41c3e8",
+                                "Name": "EventsWidget",
                                 "Icon": "fa fa-cog",
                                 "Description": "Provides a listing of NCI events.",
                                 "Options": "",
