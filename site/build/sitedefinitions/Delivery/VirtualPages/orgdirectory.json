@@ -1,60 +1,107 @@
 {
-    "Name": "Organizational Directory",
-    "Id": "fcbcb858-89b8-4b55-b329-47a7b71a3521",
-    "Type": "GenericPage",
-    "List": "GenericPages_AK",
-    "AdditionalSelectColumns": "",
-    "Url": "orgdirectory.aspx",
-    "Personas": [
-        "All"
-    ],
-    "PageDefinition": {
-        "Containers": [
-            {
-                "id": "container1",
-                "layoutid": "1 Column",
-                "zones": [
-                    {
-                        "id": "zone1",
-                        "widgets": [
-                            {
-                                "Title": "NCI Organizational Directory Widget",
-                                "WidgetInstanceId": "ac5dc749-7e29-4842-8bd2-6177d3a08041",
-                                "Name": "PeopleDirectoryWidget",
-                                "Icon": "fa fa-cog",
-                                "Description": "Provides a way to find people within NCI.",
-                                "Options": "",
-                                "DisplayOrder": "0",
-                                "Grid": "",
-                                "Properties": []
-                            },
-                            {
-                                "Title": "NCI Organizational Tabs Widget",
-                                "WidgetInstanceId": "{NewGuid}",
-                                "DisplayOrder": "1",
-                                "Properties": 
-                                [
-                                    {
-                                        "name": "tabs",
-                                        "value": "[{\"title\":\"Overview\",\"id\":\"05fd9ed4-fcd8-44db-8525-93ed8506cc74\"},{\"title\":\"People\",\"id\":\"PeopleTab\"},{\"title\":\"Content\",\"id\":\"425ed999-9be0-4780-8206-39383f6b0627\"}]"
-                                    },                                
-                                    {
-                                        "name": "displaytemplateurl",
-                                        "value": "/akumina%20library/digitalworkplace/content/templates/tabwidget/nci-tabs.html"
-                                    }
-                                ],
-                                "Name": "TabWidget",
-                                "Icon": "fa fa-exclamation-triangle",
-                                "Description": "TabWidget",
-                                "Options": "",
-                                "Grid": "",
-                                "PageSpecific": true
-                              }
-                        ]
-                    }
-                ]
-            }
-       ]    
-    },
-    "IsLegacyMode": false
+  "Name": "Organizational Directory",
+  "Id": "fcbcb858-89b8-4b55-b329-47a7b71a3521",
+  "Type": "GenericPage",
+  "List": "GenericPages_AK",
+  "AdditionalSelectColumns": "",
+  "Url": "orgdirectory.aspx",
+  "Personas": ["All"],
+  "PageDefinition": {
+    "Containers": [
+      {
+        "id": "container1",
+        "layoutid": "1 Column",
+        "zones": [
+          {
+            "id": "zone1",
+            "widgets": [
+              {
+                "Title": "Org Directory Intro Text",
+                "Description": "Shows header and introductory text above org directory.",
+                "WidgetInstanceId": "904a85a9-3624-cb85-98b3-513a249fe0ae",
+                "Name": "HTMLContentWidget",
+                "Icon": "fa fa-list ul",
+                "DisplayOrder": "0",
+                "Grid": "",
+                "Properties": [
+                  {
+                    "name": "callbackmethod",
+                    "value": ""
+                  },
+                  {
+                    "name": "uicallbackmethod",
+                    "value": ""
+                  },
+                  {
+                    "name": "contentitemid",
+                    "value": "{GHA_contentBlockID_orgDir}"
+                  },
+                  {
+                    "name": "listname",
+                    "value": "GenericHTML_AK"
+                  },
+                  {
+                    "name": "isroot",
+                    "value": ""
+                  },
+                  {
+                    "name": "sitecollectionurl",
+                    "value": ""
+                  },
+                  {
+                    "name": "imagegallerysitecollectionurl",
+                    "value": ""
+                  },
+                  {
+                    "name": "enablelanguagefallback",
+                    "value": ""
+                  },
+                  {
+                    "name": "contentitemakid",
+                    "value": "{GHA_contentBlockID_orgDir}"
+                  },
+                  {
+                    "name": "displaytemplateurl",
+                    "value": "/akumina%20library/DigitalWorkPlace/Content/Templates/HTMLContentWidget/default.html"
+                  },
+                  {
+                    "name": "isonpage",
+                    "value": ""
+                  },
+                  {
+                    "name": "haspageprops",
+                    "value": ""
+                  }
+                ],
+                "PageSpecific": true
+              },
+              {
+                "Title": "NCI Organizational Directory Widget",
+                "WidgetInstanceId": "ac5dc749-7e29-4842-8bd2-6177d3a08041",
+                "Name": "PeopleDirectoryWidget",
+                "Icon": "fa fa-cog",
+                "Description": "Provides a way to find people within NCI.",
+                "Options": "",
+                "DisplayOrder": "1",
+                "Grid": "",
+                "Properties": []
+              },
+              {
+                "Title": "NCI Organizational Tabs Widget",
+                "WidgetInstanceId": "e0ad50b2-af6b-4167-9d30-6097ce3ee338",
+                "Name": "TabWidget",
+                "Icon": "fa fa-exclamation-triangle",
+                "Description": "Displays the results of a search including results list and filters",
+                "DisplayOrder": "2",
+                "Properties": [],
+                "Options": "",
+                "Grid": ""
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "IsLegacyMode": false
 }

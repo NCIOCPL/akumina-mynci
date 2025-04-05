@@ -9,6 +9,10 @@ on:
         description: Pack and deploy widgets
         type: boolean
         default: false
+      deploy-pages:
+        description: Deploy pages
+        type: boolean
+        default: false
       deploy-lists:
         description: Deploy lists (TBD)
         type: boolean
@@ -33,15 +37,13 @@ jobs:
       # Sets up our deployment 
       - uses: "./.github/workflows/composite/setup"
 
-
-      ########## Widget Package ##########
-
-      # Update widget tokens
+      # Update tokens
       # Our own solution instead of --tokenMap because we need to replace values inside a JSON object
-      # and Akumina's solution only supports string values
-      - name: Update widget tokens
+      # and Akumina's solution only supports string values.
+      # Also we want to do this across widgets and pages (local widgets).
+      - name: Update tokens
         id: tokens
-        if: inputs.deploy-widgets
+        if: inputs.deploy-widgets || inputs.deploy-pages
         shell: pwsh
         env:
           WIDGET_TOKENS: ${{ vars.WIDGET_TOKENS }}
@@ -49,14 +51,14 @@ jobs:
           $mappingJson = $env:WIDGET_TOKENS
           $mapping = $mappingJson | ConvertFrom-Json
 
-          $TargetDirectory = "src/js/widgets"
+          $TargetDirectory = "./"
           $files = Get-ChildItem -Path $TargetDirectory -Recurse -Filter "*.json"
 
           foreach ($file in $files) {
               $content = Get-Content $file.FullName -Raw
               $fileReplacements = 0
               foreach ($key in $mapping.PSObject.Properties.Name) {
-                  $searchKey = "GHA_$key"
+                  $searchKey = "{GHA_$key}"
                   $value = $mapping.$key
                   if ($content -match [regex]::Escape($searchKey)) {
                     $content = $content -replace [regex]::Escape($searchKey), $value
@@ -68,7 +70,9 @@ jobs:
                 Write-Host "$fileReplacements token(s) replaced with values from GHA environment in $($file.FullName)."
               }
           }
-        
+      
+      ########## Widget Package ##########
+
       # Package the widgets (must run before build)
       - name: Package widgets
         if: inputs.deploy-widgets
@@ -126,6 +130,31 @@ jobs:
           clientsecret: ${{ secrets.client_secret }}
           # Current assumption is that all widget instances are deployed to the Delivery site
           # If we ever go multi-site then we will have to reconsider if this is the correct mechanism
+          spurl: ${{ vars.delivery_sp_url }}
+          centralspurl: ${{ vars.central_sp_url }}
+          spdirectory: DigitalWorkplace
+          langid: 1033
+          appmanagerurl: ${{ vars.appmanager_url }}
+          akquerykey: ${{ secrets.ak_query_key }}
+          ml: true
+          envdir: build
+      
+      ########## Deploy Pages ##########
+
+      # Set the deployment type
+      - uses: "./.github/workflows/composite/deployment_type"
+        if: inputs.deploy-pages
+        with:
+          deployment_type: "virtualpages,updatepagecache"
+
+      # Runs site deployer
+      - name: Deploy pages
+        if: inputs.deploy-pages
+        run: npm run deploy
+        env:
+          assetdirectory: Delivery
+          clientid: ${{ secrets.client_id}}
+          clientsecret: ${{ secrets.client_secret }}
           spurl: ${{ vars.delivery_sp_url }}
           centralspurl: ${{ vars.central_sp_url }}
           spdirectory: DigitalWorkplace

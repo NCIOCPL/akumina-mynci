@@ -157,6 +157,11 @@
         "Name": "NCI Featured News",
         "Path": "/{AssetLibraryName}/digitalworkplace/content/templates/newswidget/featurednews_nci.html",
         "Id": "dc36381e-2e9b-4e1e-9abb-e5a69c0016eb"
+      },
+      {
+        "Name": "News Home Page",
+        "Path": "/{AssetLibraryName}/digitalworkplace/content/templates/newswidget/newshomepage.html",
+        "Id": "019ab071-d5d2-4c47-b9d4-daa9e8554f23"
       }
     ],
     "JS": {
@@ -252,7 +257,6 @@
       ],
       "HiddenFields": []
     },
-
     {
       "Name": "NCI Tip of the Week List",
       "Description": "Tip of the week news listing for tiplist.aspx",
@@ -329,6 +333,88 @@
       ],
       "SelectedView": "NCI News Listing Page",
       "AvailableViews": ["NCI News Listing Page"],
+      "HiddenFields": []
+    },
+    {
+      "Name": "NCI Home Page Announcements",
+      "Description": "Announcements on the home page",
+      "Icon": "fa fa-cog",
+      "Id": "836629aa-91f9-4a4b-9e45-6cb07e83be41",
+      "Properties": [
+        {
+          "name": "widgetframework",
+          "value": "react"
+        },
+        {
+          "name": "widgettitle",
+          "value": "{fs.newswidget.title}"
+        },
+        {
+          "name": "querytext",
+          "value": "(ContentTypeId:0x0100A75A29C9F7894C83AA451364A226C855*) (ArchiveDate>{Now}) (PublishDate<{Now}) (-owstaxidmetadataalltagsinfo:\"Tip of the week\")"
+        },
+        {
+          "name": "selectfields",
+          "value": "ListID,ListItemID,PublishDate,ImageOWSURLH,Title,owstaxidmetadataalltagsinfo,FeaturedOWSBOOL,PublisherOWSUSER,ThumbnailURLOWSURLH,ServerRedirectedURL,VideoOWSURLH,ReadTimeOWSNMBR,WebId,SiteId,OriginalPath,SPWebUrl,HitHighlightedSummary,SPSummary"
+        },
+        {
+          "name": "searchacrosssites",
+          "value": true
+        },
+        {
+          "name": "enablerefiners",
+          "value": false
+        },
+        {
+          "name": "searchrefiners",
+          "value": {
+            "termStoreId": "{GHA_termsetCategoryToken}",
+            "termSetName": "Category",
+            "terms": [
+              {
+                "name": "Departments",
+                "displayName": "common.departments",
+                "displayType": "Tree",
+                "id": "{GHA_termLocationsToken}"
+              },
+              {
+                "name": "Region",
+                "displayName": "common.regions",
+                "displayType": "Tree",
+                "id": "{GHA_termDepartmentsToken}"
+              },
+              {
+                "name": "SPTags",
+                "displayName": "common.tags",
+                "displayType": "Tags",
+                "id": "{GHA_termTagsToken}"
+              }
+            ]
+          }
+        },
+        {
+          "name": "refinercondition",
+          "value": "and"
+        },
+        {
+          "name": "displaycount",
+          "value": 8
+        },
+        {
+          "name": "enablepaging",
+          "value": false
+        },
+        {
+          "name": "enableinterests",
+          "value": false
+        },
+        {
+            "name": "sortby",
+            "value": "PublishDate"
+        }
+      ],
+      "SelectedView": "News Home Page",
+      "AvailableViews": ["News Home Page"],
       "HiddenFields": []
     }
   ],
