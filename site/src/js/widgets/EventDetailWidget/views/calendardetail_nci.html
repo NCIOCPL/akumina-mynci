@@ -23,10 +23,14 @@
           <div>{{{Body}}}</div>
         </div>
         <div class="ia-button-row">
-          <button class="ia-button-primary ia-event-detail-ics">{{translate "fs.eventdetailwidget.downloadevent"}}</button>
+          <button class="ia-button-primary ia-event-detail-ics">{{translate "fs.eventdetailwidget.downloadevent"}}</button>=
+          {{!-- BEGIN #AKUMINA - Remove multi-event download --}}
+          {{!--
           {{#if HasRecurrence}}
             <button class="ia-button ia-event-detail-ics-series">{{translate "eventdetails.downloadeventseries"}}</button>
           {{/if}}
+          --}}
+          {{!-- END #AKUMINA --}}
         </div>
       </div>
       <div class="col-md-4 ia-article-section-right">
