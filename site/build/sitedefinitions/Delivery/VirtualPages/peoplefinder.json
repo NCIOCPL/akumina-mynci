@@ -1,37 +1,36 @@
 {
-    "Name": "NCI People Finder",
-    "Id": "562827a6-ecca-4828-9680-b7acaec48713",
-    "Type": "GenericPage",
-    "List": "GenericPages_AK",
-    "AdditionalSelectColumns": "",
-    "Url": "peoplefinder.aspx",
-    "Personas": [
-        "All"
-    ],
-    "PageDefinition": {
-        "Containers": [
-            {
-                "id": "container1",
-                "layoutid": "1 Column",
-                "zones": [
-                    {
-                        "id": "zone1",
-                        "widgets": [
-                        {
-                            "Title": "NCI People Directory",
-                            "WidgetInstanceId": "a47473cf-b520-4402-9f05-1ea4fb9e6d22",
-                            "Name": "PeopleDirectoryWidget",
-                            "Icon": "fa fa-cog",
-                            "Description": "",
-                            "Options": "",
-                            "DisplayOrder": "0",
-                            "Grid": "",
-                            "Properties": []
-                        }]
-                    }
-                ]
-            }
-       ]    
-    },
-    "IsLegacyMode": false
+  "Name": "NCI People Finder",
+  "Id": "562827a6-ecca-4828-9680-b7acaec48713",
+  "Type": "GenericPage",
+  "List": "GenericPages_AK",
+  "AdditionalSelectColumns": "",
+  "Url": "peoplefinder.aspx",
+  "Personas": ["All"],
+  "PageDefinition": {
+    "Containers": [
+      {
+        "id": "container1",
+        "layoutid": "1 Column",
+        "zones": [
+          {
+            "id": "zone1",
+            "widgets": [
+              {
+                "Title": "NCI People Directory",
+                "WidgetInstanceId": "a47473cf-b520-4402-9f05-1ea4fb9e6d22",
+                "Name": "PeopleDirectoryWidget",
+                "Icon": "fa fa-cog",
+                "Description": "",
+                "Options": "",
+                "DisplayOrder": "0",
+                "Grid": "",
+                "Properties": []
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "IsLegacyMode": false
 }

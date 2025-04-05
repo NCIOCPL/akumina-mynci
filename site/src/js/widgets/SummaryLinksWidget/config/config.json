@@ -23,41 +23,7 @@
         "Default": "/{AssetLibraryName}/DigitalWorkPlace/JS/widgets/summarylinkswidget.js"
       }
     },
-    "Instances": [{
-      "Name": "NCI Latest Leadership",
-      "Description": "Displays NCI latest leadership posts on the home page",
-      "Icon": "fa fa-cog",
-      "Id": "9844b7c5-8f23-4ca8-b5a3-00d95d16f6f1",
-      "Properties": [
-        {
-          "name": "collectionid",
-          "value": "9fb4a6f3-9c02-afad-4d93-96151195e1a5"
-        },        
-        {
-          "name": "displaycollectionname",
-          "value": true
-        },
-        {
-          "name": "callbackmethod",
-          "value": ""
-        },
-        {
-          "name": "uicallbackmethod",
-          "value": ""
-        },
-        {
-          "name": "widgetframework",
-          "value": "react"
-        },
-        {
-          "name": "disablewidgetpropsedit",
-          "value": true
-        }
-      ],
-      "SelectedView": "Linked List With Thumbnails",
-      "AvailableViews": ["Linked List With Thumbnails", "NCI Linked List with Thumbnails"],
-      "HiddenFields": []
-    }],
+    "Instances": [],
     "Options": {
       "IsPartialDefinition": true,
       "IsDashboardWidget": false,
