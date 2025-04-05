@@ -16,7 +16,8 @@
     "fonts": false,
     "virtualpages": false,
     "cdnassets": false,
-    "addtermsets": false
+    "addtermsets": false,
+    "updatepagecache": false
   },  
   "Args": [
     "version",
@@ -36,6 +37,7 @@
     "azurestorageaccountkey",
     "cdnprefix",
     "multideployment",
-    "centralspurl"
+    "centralspurl",
+    "appmanagerurl"
   ]
 }

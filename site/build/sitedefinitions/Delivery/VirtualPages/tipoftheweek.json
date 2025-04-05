@@ -1,38 +1,36 @@
 {
-    "Name": "Tip of the Week",
-    "Id": "92eb6df7-b4b1-4173-9223-d9b27a8ffb92",
-    "Type": "GenericPage",
-    "List": "GenericPages_AK",
-    "AdditionalSelectColumns": "",
-    "Url": "tipoftheweek.aspx",
-    "Personas": [
-        "All"
-    ],
-    "PageDefinition": {
-        "Containers": [
-            {
-                "id": "container1",
-                "layoutid": "1 Column",
-                "zones": [
-                    {
-                        "id": "zone1",
-                        "widgets": [
-                            {
-                                "Title": "Tip of the Week List",
-                                "WidgetInstanceId": "62d4da7c-afc3-4b8f-b1d7-8a9f735c3ae4",
-                                "Name": "NewsDetailWidget",
-                                "Icon": "fa fa-cog",
-                                "Description": "Displays news items marked as tip-of-the-week.",
-                                "Options": "",
-                                "DisplayOrder": "0",
-                                "Grid": "",
-                                "Properties": []
-                            }
-                        ]
-                    }
-                ]
-            }
-       ]    
-    },
-    "IsLegacyMode": false
+  "Name": "Tip of the Week",
+  "Id": "92eb6df7-b4b1-4173-9223-d9b27a8ffb92",
+  "Type": "GenericPage",
+  "List": "GenericPages_AK",
+  "AdditionalSelectColumns": "",
+  "Url": "tipoftheweek.aspx",
+  "Personas": ["All"],
+  "PageDefinition": {
+    "Containers": [
+      {
+        "id": "container1",
+        "layoutid": "1 Column",
+        "zones": [
+          {
+            "id": "zone1",
+            "widgets": [
+              {
+                "Title": "Tip of the Week List",
+                "WidgetInstanceId": "62d4da7c-afc3-4b8f-b1d7-8a9f735c3ae4",
+                "Name": "NewsDetailWidget",
+                "Icon": "fa fa-cog",
+                "Description": "Displays news items marked as tip-of-the-week.",
+                "Options": "",
+                "DisplayOrder": "0",
+                "Grid": "",
+                "Properties": []
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "IsLegacyMode": false
 }
