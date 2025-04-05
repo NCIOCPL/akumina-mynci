@@ -139,11 +139,6 @@
         "Id": "d7f1edec-62fc-408d-9813-4e8de13955f0"
       },
       {
-        "Name": "News Listing Page",
-        "Path": "/{AssetLibraryName}/digitalworkplace/content/templates/newswidget/newslistingpage.html",
-        "Id": "8f32efa1-a0c6-407f-a619-8dda4f56afcc"
-      },
-      {
         "Name": "NCI News Listing Page",
         "Path": "/{AssetLibraryName}/digitalworkplace/content/templates/newswidget/newslistingpage_nci.html",
         "Id": "61ad19a4-ac05-4749-8686-554430b97d15"
@@ -257,7 +252,6 @@
       ],
       "HiddenFields": []
     },
-
     {
       "Name": "NCI Tip of the Week List",
       "Description": "Tip of the week news listing for tiplist.aspx",
@@ -298,12 +292,6 @@
                 "name": "Departments",
                 "displayName": "common.departments",
                 "displayType": "Tree",
-                "id": "{GHA_termLocationsToken}"
-              },
-              {
-                "name": "Region",
-                "displayName": "common.regions",
-                "displayType": "Tree",
                 "id": "{GHA_termDepartmentsToken}"
               },
               {
@@ -311,6 +299,12 @@
                 "displayName": "common.tags",
                 "displayType": "Tags",
                 "id": "{GHA_termTagsToken}"
+              },
+              {
+                "name": "Region",
+                "displayName": "common.regions",
+                "displayType": "Tree",
+                "id": "{GHA_termLocationsToken}"
               }
             ]
           }
@@ -376,12 +370,6 @@
                 "name": "Departments",
                 "displayName": "common.departments",
                 "displayType": "Tree",
-                "id": "{GHA_termLocationsToken}"
-              },
-              {
-                "name": "Region",
-                "displayName": "common.regions",
-                "displayType": "Tree",
                 "id": "{GHA_termDepartmentsToken}"
               },
               {
@@ -389,6 +377,12 @@
                 "displayName": "common.tags",
                 "displayType": "Tags",
                 "id": "{GHA_termTagsToken}"
+              },
+              {
+                "name": "Region",
+                "displayName": "common.regions",
+                "displayType": "Tree",
+                "id": "{GHA_termLocationsToken}"
               }
             ]
           }
@@ -416,6 +410,88 @@
       ],
       "SelectedView": "NCI News Home Page",
       "AvailableViews": ["NCI News Home Page"],
+      "HiddenFields": []
+    },
+    {
+      "Name": "NCI News List Page",
+      "Description": "Main news listing page widget",
+      "Icon": "fa fa-cog",
+      "Id": "210a306a-0098-46ae-a6e0-6d8f9e5bfb16",
+      "Properties": [
+        {
+          "name": "widgetframework",
+          "value": "react"
+        },
+        {
+          "name": "widgettitle",
+          "value": "{fs.newswidget.lateststories}"
+        },
+        {
+          "name": "querytext",
+          "value": "(ContentTypeId:0x0100A75A29C9F7894C83AA451364A226C855*)(ArchiveDate>{Now})(PublishDate<{Now})(-Tags:\"Tip Of The Week\")"
+        },
+        {
+          "name": "selectfields",
+          "value": "ListID,ListItemID,PublishDate,ImageOWSURLH,Title,owstaxidmetadataalltagsinfo,FeaturedOWSBOOL,PublisherOWSUSER,ThumbnailURLOWSURLH,ServerRedirectedURL,VideoOWSURLH,ReadTimeOWSNMBR,WebId,SiteId,OriginalPath,SPWebUrl"
+        },
+        {
+          "name": "searchacrosssites",
+          "value": true
+        },
+        {
+          "name": "enablerefiners",
+          "value": true
+        },
+        {
+          "name": "searchrefiners",
+          "value": {
+            "termStoreId": "{GHA_termsetCategoryToken}",
+            "termSetName": "Category",
+            "terms": [
+              {
+                "name": "Departments",
+                "displayName": "common.departments",
+                "displayType": "Tree",
+                "id": "{GHA_termDepartmentsToken}"
+              },
+              {
+                "name": "SPTags",
+                "displayName": "common.tags",
+                "displayType": "Tags",
+                "id": "{GHA_termTagsToken}"
+              },
+              {
+                "name": "Region",
+                "displayName": "common.regions",
+                "displayType": "Tree",
+                "id": "{GHA_termLocationsToken}"
+              }
+            ]
+          }
+        },
+        {
+          "name": "refinercondition",
+          "value": "and"
+        },
+        {
+          "name": "displaycount",
+          "value": 8
+        },
+        {
+          "name": "enablepaging",
+          "value": true
+        },
+        {
+          "name": "enableinterests",
+          "value": false
+        },
+        {
+            "name": "sortby",
+            "value": "PublishDate"
+        }
+      ],
+      "SelectedView": "NCI News Listing Page",
+      "AvailableViews": ["NCI News Listing Page"],
       "HiddenFields": []
     }
   ],

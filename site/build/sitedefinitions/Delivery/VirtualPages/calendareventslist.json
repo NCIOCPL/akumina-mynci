@@ -1,10 +1,10 @@
 {
-  "Name": "Inside",
-  "Id": "df2cc819-b701-4fae-b568-4b2b0c1ae581",
+  "Name": "Event Listing Page",
+  "Id": "8e5be073-a3da-9b64-140e-f68741d2cfb2",
   "Type": "GenericPage",
   "List": "GenericPages_AK",
   "AdditionalSelectColumns": "",
-  "Url": "inside.aspx",
+  "Url": "calendareventslist.aspx",
   "Personas": ["All"],
   "PageDefinition": {
     "Containers": [
@@ -16,11 +16,11 @@
             "id": "zone1",
             "widgets": [
               {
-                "Title": "Internal Page",
-                "WidgetInstanceId": "72933d2f-1d5d-4133-a51d-9ebb5cecd7b9",
-                "Name": "InternalPagesWidget",
+                "Title": "NCI Events Listing",
+                "WidgetInstanceId": "67dd79b9-57da-4fc5-af9b-8737cf41c3e8",
+                "Name": "EventsWidget",
                 "Icon": "fa fa-cog",
-                "Description": "Provides information on a specific topic.",
+                "Description": "Provides a listing of NCI events.",
                 "Options": "",
                 "DisplayOrder": "0",
                 "Grid": "",

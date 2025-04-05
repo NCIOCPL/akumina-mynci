@@ -1,0 +1,106 @@
+{
+  "Name": "News List",
+  "Id": "f7c12886-2fb7-48b6-b5cd-bc253d182ae3",
+  "Type": "GenericPage",
+  "List": "GenericPages_AK",
+  "AdditionalSelectColumns": "",
+  "Url": "newslist.aspx",
+  "Personas": ["All"],
+  "PageDefinition": {
+    "Containers": [
+      {
+        "id": "container1",
+        "layoutid": "1 Column",
+        "zones": [
+          {
+            "id": "zone1",
+            "widgets": [
+              {
+                "Title": "NCI Edit Warning",
+                "WidgetInstanceId": "0deef6c6-f852-4365-bc25-bb3dc4db6d2d",
+                "Name": "TextBlockWidget",
+                "Icon": "fa fa-cog",
+                "Description": "Displays a warning not to edit certain pages.",
+                "Options": "",
+                "DisplayOrder": "1",
+                "Grid": "",
+                "Properties": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "container2",
+        "layoutid": "1 Column",
+        "zones": [
+          {
+            "id": "zone1",
+            "widgets": [
+              {
+                "Title": "Page Title",
+                "WidgetInstanceId": "93f33c20-a16b-405c-9489-01644e66f549",
+                "Name": "TextBlockWidget",
+                "Icon": "fa fa-cog",
+                "Description": "Displays the page title.",
+                "Options": "",
+                "DisplayOrder": "1",
+                "Grid": "",
+                "Properties": [
+                  {
+                    "name": "content",
+                    "value": "[{\"languageId\":1033,\"text\":\"<h1 class=\\\"ia-page-title\\\">Announcements</h1>\"}]"
+                  },
+                  {
+                    "name": "displaytemplateurl",
+                    "value": "/Akumina%20Library/DigitalWorkPlace/Content/Templates/TextBlockWidget/default.html"
+                  },
+                  {
+                    "name": "haspageprops",
+                    "value": true
+                  },
+                  {
+                    "name": "callbackmethod",
+                    "value": ""
+                  },
+                  {
+                    "name": "uicallbackmethod",
+                    "value": ""
+                  },
+                  {
+                    "name": "widgetframework",
+                    "value": "react"
+                  }
+                ],
+                "PageSpecific": true
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "container3",
+        "layoutid": "1 Column",
+        "zones": [
+          {
+            "id": "zone1",
+            "widgets": [
+              {
+                "Title": "NCI News Listing",
+                "WidgetInstanceId": "210a306a-0098-46ae-a6e0-6d8f9e5bfb16",
+                "Name": "NewsWidget",
+                "Icon": "fa fa-cog",
+                "Description": "Provides a listing of NCI news announcements.",
+                "Options": "",
+                "DisplayOrder": "0",
+                "Grid": "",
+                "Properties": []
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "IsLegacyMode": false
+}

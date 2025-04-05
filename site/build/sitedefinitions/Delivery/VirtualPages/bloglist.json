@@ -1,38 +1,36 @@
 {
-    "Name": "Blog Listing",
-    "Id": "811f22ed-d528-4f63-b345-3f4e2336915b",
-    "Type": "GenericPage",
-    "List": "GenericPages_AK",
-    "AdditionalSelectColumns": "",
-    "Url": "bloglist.aspx",
-    "Personas": [
-        "All"
-    ],
-    "PageDefinition": {
-        "Containers": [
-            {
-                "id": "container1",
-                "layoutid": "1 Column",
-                "zones": [
-                    {
-                        "id": "zone1",
-                        "widgets": [
-                            {
-                                "Title": "Staff Spotlights",
-                                "WidgetInstanceId": "a66c4b10-f06b-4534-8bb2-ca916f70f799",
-                                "Name": "BlogsWidget",
-                                "Icon": "fa fa-cog",
-                                "Description": "A listing of NCI staff postings.",
-                                "Options": "",
-                                "DisplayOrder": "0",
-                                "Grid": "",
-                                "Properties": []
-                            }
-                        ]
-                    }
-                ]
-            }
-       ]    
-    },
-    "IsLegacyMode": false
+  "Name": "Blog Listing",
+  "Id": "811f22ed-d528-4f63-b345-3f4e2336915b",
+  "Type": "GenericPage",
+  "List": "GenericPages_AK",
+  "AdditionalSelectColumns": "",
+  "Url": "bloglist.aspx",
+  "Personas": ["All"],
+  "PageDefinition": {
+    "Containers": [
+      {
+        "id": "container1",
+        "layoutid": "1 Column",
+        "zones": [
+          {
+            "id": "zone1",
+            "widgets": [
+              {
+                "Title": "Staff Spotlights",
+                "WidgetInstanceId": "a66c4b10-f06b-4534-8bb2-ca916f70f799",
+                "Name": "BlogsWidget",
+                "Icon": "fa fa-cog",
+                "Description": "A listing of NCI staff postings.",
+                "Options": "",
+                "DisplayOrder": "0",
+                "Grid": "",
+                "Properties": []
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "IsLegacyMode": false
 }
