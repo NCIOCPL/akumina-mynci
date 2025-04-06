@@ -1388,3 +1388,19 @@ changes People profile details back to correct color
 	color: var(--fs-card-link-color) !important;
 } 
 */
+
+
+/************************************
+*           Edit Warning
+************************************/
+
+#nci-edit-warning {
+    display: none;
+    font-weight: bold;
+    color: red;
+    text-align: center;
+}
+
+.page-edit-mode #nci-edit-warning {
+    display: block;
+}

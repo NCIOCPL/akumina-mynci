@@ -16,6 +16,28 @@
             "id": "zone1",
             "widgets": [
               {
+                "Title": "NCI Edit Warning",
+                "WidgetInstanceId": "0deef6c6-f852-4365-bc25-bb3dc4db6d2d",
+                "Name": "TextBlockWidget",
+                "Icon": "fa fa-cog",
+                "Description": "Displays a warning not to edit certain pages.",
+                "Options": "",
+                "DisplayOrder": "1",
+                "Grid": "",
+                "Properties": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "container2",
+        "layoutid": "1 Column",
+        "zones": [
+          {
+            "id": "zone1",
+            "widgets": [
+              {
                 "Title": "Employee Detail",
                 "WidgetInstanceId": "5e6c080d-810e-43bb-8862-eb2a20ce03ec",
                 "Name": "EmployeeDetailWidget",

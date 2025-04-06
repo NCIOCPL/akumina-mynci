@@ -16,6 +16,28 @@
             "id": "zone1",
             "widgets": [
               {
+                "Title": "NCI Edit Warning",
+                "WidgetInstanceId": "0deef6c6-f852-4365-bc25-bb3dc4db6d2d",
+                "Name": "TextBlockWidget",
+                "Icon": "fa fa-cog",
+                "Description": "Displays a warning not to edit certain pages.",
+                "Options": "",
+                "DisplayOrder": "1",
+                "Grid": "",
+                "Properties": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "container2",
+        "layoutid": "1 Column",
+        "zones": [
+          {
+            "id": "zone1",
+            "widgets": [
+              {
                 "Title": "Org Directory Intro Text",
                 "Description": "Shows header and introductory text above org directory.",
                 "WidgetInstanceId": "904a85a9-3624-cb85-98b3-513a249fe0ae",

@@ -16,6 +16,28 @@
             "id": "zone1",
             "widgets": [
               {
+                "Title": "NCI Edit Warning",
+                "WidgetInstanceId": "0deef6c6-f852-4365-bc25-bb3dc4db6d2d",
+                "Name": "TextBlockWidget",
+                "Icon": "fa fa-cog",
+                "Description": "Displays a warning not to edit certain pages.",
+                "Options": "",
+                "DisplayOrder": "1",
+                "Grid": "",
+                "Properties": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "container2",
+        "layoutid": "1 Column",
+        "zones": [
+          {
+            "id": "zone1",
+            "widgets": [
+              {
                 "Title": "Latest at NCI",
                 "WidgetInstanceId": "ca2d5c46-80a6-4720-a473-d687887f6fee",
                 "DisplayOrder": "0",
@@ -69,7 +91,7 @@
         ]
       },
       {
-        "id": "container2",
+        "id": "container3",
         "layoutid": "2 Column",
         "zones": [
           {
@@ -107,7 +129,7 @@
         ]
       },
       {
-        "id": "container3",
+        "id": "container4",
         "layoutid": "1 Column",
         "zones": [
           {
@@ -167,7 +189,7 @@
         ]
       },
       {
-        "id": "container4",
+        "id": "container5",
         "layoutid": "1 Column",
         "zones": [
           {
