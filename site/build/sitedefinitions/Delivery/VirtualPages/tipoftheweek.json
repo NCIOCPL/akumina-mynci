@@ -16,6 +16,28 @@
             "id": "zone1",
             "widgets": [
               {
+                "Title": "NCI Edit Warning",
+                "WidgetInstanceId": "0deef6c6-f852-4365-bc25-bb3dc4db6d2d",
+                "Name": "TextBlockWidget",
+                "Icon": "fa fa-cog",
+                "Description": "Displays a warning not to edit certain pages.",
+                "Options": "",
+                "DisplayOrder": "1",
+                "Grid": "",
+                "Properties": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "container2",
+        "layoutid": "1 Column",
+        "zones": [
+          {
+            "id": "zone1",
+            "widgets": [
+              {
                 "Title": "Tip of the Week List",
                 "WidgetInstanceId": "62d4da7c-afc3-4b8f-b1d7-8a9f735c3ae4",
                 "Name": "NewsDetailWidget",
