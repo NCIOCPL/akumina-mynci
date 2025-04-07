@@ -1,3 +1,5 @@
+import { FireWhen } from "./helpers/FireWhen";
+
 export function latestMediaWidget_helper() {
   Handlebars.registerHelper('ThumbnailImage', function (image, options) {
     if (
@@ -122,7 +124,7 @@ export function latestMediaWidget_helper() {
         );
       window['NCI_LatestMediaPhotos_load'] = true;
     }
-    window.FireWhen(
+    FireWhen(
       'NCI_LatestMediaPhotos'.toLocaleLowerCase(),
       function () {
         return jQuery().slick != null;

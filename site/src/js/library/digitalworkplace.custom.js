@@ -15,27 +15,6 @@ Handlebars.registerHelper(
   }
 );
 
-window.FireWhen = function (id, condition, callback, testInterval) {
-  if (condition == null) {
-    return;
-  }
-  var conditionMet = condition();
-  if (conditionMet) {
-    clearTimeout(window[id]);
-    Akumina.AddIn.Logger.WriteInfoLog('FireWhen:conditionMet:' + id);
-    callback.apply(this, Array.prototype.slice.call(arguments, 4));
-  } else {
-    clearTimeout(window[id]);
-    window[id] = window.setTimeout(
-      function (args) {
-        window.FireWhen.apply(this, args);
-      },
-      testInterval,
-      arguments
-    );
-  }
-};
-
 // Remove in future
 // window.NCIAddDebuggerBreak = function (arg1, arg2, arg3, arg4, arg5) {
 //     debugger;
