@@ -1,3 +1,5 @@
+import { FireWhen } from "./helpers/FireWhen";
+
 export function peopleDirectoryWidget_helper() {
   var PushPeopleContainerUnderTab = function () {
     if ($('.ia-people-results').length == 1) {
@@ -92,7 +94,7 @@ export function peopleDirectoryWidget_helper() {
     $('head').append(cssLink);
 
     // Add truncate class
-    window.FireWhen(
+    FireWhen(
       'truncate',
       function () {
         return $('.jstree-anchor').length > 0;
@@ -279,7 +281,7 @@ export function peopleDirectoryWidget_helper() {
   };
   //OrganizationDirectoryPage
   window.NCIDirectoryOrgCallBackUI = function () {
-    window.FireWhen(
+    FireWhen(
       'AddTabsUnderOrgWidget',
       function () {
         return (
@@ -298,7 +300,7 @@ export function peopleDirectoryWidget_helper() {
     );
   };
 
-  window.FireWhen(
+  FireWhen(
     'LoadTabWidget',
     function () {
       return (
@@ -319,7 +321,7 @@ export function peopleDirectoryWidget_helper() {
               NCIDescriptionProcessed != lastProcessed
             ) {
               $(this).attr('loaded', NCIDescriptionProcessed);
-              window.FireWhen(
+              FireWhen(
                 'PeopleTabReady',
                 function () {
                   return $('#ak-tabwidget-tabs-PeopleTab').hasClass(
