@@ -1,3 +1,5 @@
+import { GetNCIProfileInfoUrl, GetNCIProfilePictureUrl } from "./helpers/NciProfileInfo.js";
+
 export function newsDetailWidget_helper() {
   // Rename in future
   // NewsDetailWidget_ui
@@ -8,12 +10,12 @@ export function newsDetailWidget_helper() {
     var profPhoto2 = $('#profPhotoLink2');
 
     if (profInfo1.length > 0 && profPhoto1.length > 0) {
-      window.GetNCIProfileInfoUrl('#profInfoLink1');
-      window.GetNCIProfilePictureUrl('#profPhotoLink1');
+      GetNCIProfileInfoUrl('#profInfoLink1');
+      GetNCIProfilePictureUrl('#profPhotoLink1');
     }
     if (profInfo2.length > 0 && profPhoto2.length > 0) {
-      window.GetNCIProfileInfoUrl('#profInfoLink2');
-      window.GetNCIProfilePictureUrl('#profPhotoLink2');
+      GetNCIProfileInfoUrl('#profInfoLink2');
+      GetNCIProfilePictureUrl('#profPhotoLink2');
     }
   };
 

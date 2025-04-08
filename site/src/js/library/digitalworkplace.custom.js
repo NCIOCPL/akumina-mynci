@@ -41,30 +41,30 @@ window.FireWhen = function (id, condition, callback, testInterval) {
 //     debugger;
 // }
 
-window.GetNCIProfileInfoUrl = function (targetId) {
-  var emailUpn = $(targetId).attr('data-manager');
-  if (typeof emailUpn == 'string') {
-    Akumina.Digispace.Utilities.GetEmployeeDetailUrl(emailUpn).then(
-      (newUrl) => {
-        var pathPart = newUrl.substring(
-          newUrl.toLowerCase().lastIndexOf('/sitepages')
-        );
-        var completeUrl = AkHeadlessUrl + '/#' + pathPart;
-        $(targetId).attr('href', completeUrl);
-      }
-    );
-  }
-};
+// window.GetNCIProfileInfoUrl = function (targetId) {
+//   var emailUpn = $(targetId).attr('data-manager');
+//   if (typeof emailUpn == 'string') {
+//     Akumina.Digispace.Utilities.GetEmployeeDetailUrl(emailUpn).then(
+//       (newUrl) => {
+//         var pathPart = newUrl.substring(
+//           newUrl.toLowerCase().lastIndexOf('/sitepages')
+//         );
+//         var completeUrl = AkHeadlessUrl + '/#' + pathPart;
+//         $(targetId).attr('href', completeUrl);
+//       }
+//     );
+//   }
+// };
 
-// Used in NewsDetail, CalendarDetail, and InternalPages
-window.GetNCIProfilePictureUrl = function (targetId) {
-  var emailUpn = $(targetId).attr('data-manager');
-  if (typeof emailUpn == 'string') {
-    var newUrl = Akumina.Digispace.Utilities.GetUserPictureUrl(emailUpn);
-    newUrl = 'url(' + newUrl + ')';
-    $(targetId).css('background-image', newUrl);
-  }
-};
+// // Used in NewsDetail, CalendarDetail, and InternalPages
+// window.GetNCIProfilePictureUrl = function (targetId) {
+//   var emailUpn = $(targetId).attr('data-manager');
+//   if (typeof emailUpn == 'string') {
+//     var newUrl = Akumina.Digispace.Utilities.GetUserPictureUrl(emailUpn);
+//     newUrl = 'url(' + newUrl + ')';
+//     $(targetId).css('background-image', newUrl);
+//   }
+// };
 
 window.Client = typeof window.Client === 'object' ? window.Client : {};
 
