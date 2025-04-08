@@ -7,131 +7,7 @@
     "Version": "{CurrentBuildVersion}",
     "Icon": "far fa-newspaper",
     "Dependencies": [],
-    "Properties": [
-      {
-        "name": "widgetframework",
-        "friendlyname": "{fs.newswidget.friendlynames.friendlyname_widgetframework}",
-        "value": "react",
-        "type": "string"
-      },
-      {
-        "name": "widgettitle",
-        "friendlyname": "{fs.newswidget.friendlynames.friendlyname_widgettitle}",
-        "value": "{fs.newswidget.title}",
-        "type": "string"
-      },
-      {
-        "name": "querytext",
-        "friendlyname": "{fs.newswidget.friendlynames.friendlyname_querytext}",
-        "value": "(ContentTypeId:0x0100A75A29C9F7894C83AA451364A226C855*)(ArchiveDate>{Now})(PublishDate<{Now})",
-        "type": "string"
-      },
-      {
-        "name": "selectfields",
-        "friendlyname": "{propertyfriendlynames.friendlyname_selectfields}",
-        "value": "",
-        "type": "string"
-      },
-      {
-        "name": "searchacrosssites",
-        "friendlyname": "{fs.newswidget.friendlynames.friendlyname_searchacrosssites}",
-        "value": false,
-        "type": "bool"
-      },
-      {
-        "name": "enablerefiners",
-        "friendlyname": "{fs.newswidget.friendlynames.friendlyname_enablerefiners}",
-        "value": "",
-        "type": "bool"
-      },
-      {
-        "name": "searchrefiners",
-        "friendlyname": "{fs.newswidget.friendlynames.friendlyname_searchrefiners}",
-        "value": {},
-        "type": "json"
-      },
-      {
-        "name": "refinercondition",
-        "friendlyname": "{fs.newswidget.friendlynames.friendlyname_refinercondition}",
-        "value": {
-          "And": "and",
-          "Or": "or"
-        },
-        "type": "choice"
-      },
-      {
-        "name": "displaycount",
-        "friendlyname": "{propertyfriendlynames.friendlyname_itemstodisplay}",
-        "value": "8",
-        "type": "int"
-      },
-      {
-        "name": "enablepaging",
-        "friendlyname": "{propertyfriendlynames.friendlyname_enablepaging}",
-        "value": false,
-        "type": "bool"
-      },
-      {
-        "name": "enableinterests",
-        "friendlyname": "{fs.newswidget.friendlynames.friendlyname_enableinterests}",
-        "value": false,
-        "type": "bool"
-      },
-      {
-        "name": "enabletopreacted",
-        "friendlyname": "{fs.newswidget.friendlynames.friendlyname_enabletopreacted}",
-        "value": false,
-        "type": "bool"
-      },
-      {
-        "name": "enablepopular",
-        "friendlyname": "{fs.newswidget.friendlynames.friendlyname_enablepopular}",
-        "value": false,
-        "type": "bool"
-      },
-      {
-        "name": "enableallnews",
-        "friendlyname": "{fs.newswidget.friendlynames.friendlyname_enableallnews}",
-        "value": false,
-        "type": "bool"
-      },
-      {
-        "name": "islanguageneutral",
-        "friendlyname": "{propertyfriendlynames.friendlyname_islanguageneutral}",
-        "value": false,
-        "type": "bool"
-      },
-      {
-        "name": "sortby",
-        "friendlyname": "{propertyfriendlynames.friendlyname_sortby}",
-        "value": "",
-        "type": "string"
-      },
-      {
-        "name": "isdeptspecific",
-        "friendlyname": "{propertyfriendlynames.friendlyname_isdeptspecific}",
-        "value": false,
-        "type": "bool"
-      },
-      {
-        "name": "cacheinterval",
-        "friendlyname": "{propertyfriendlynames.friendlyname_cacheinterval}",
-        "value": "-1",
-        "type": "int"
-      },
-      {
-        "name": "callbackmethod",
-        "friendlyname": "{propertyfriendlynames.friendlyname_callbackmethod}",
-        "value": "",
-        "type": "string"
-      },
-      {
-        "name": "uicallbackmethod",
-        "friendlyname": "{propertyfriendlynames.friendlyname_uicallbackmethod}",
-        "value": "",
-        "type": "string"
-      }
-    ],
+    "Properties": [],
     "Views": [
       {
         "Name": "Default",
@@ -149,18 +25,13 @@
         "Id": "61ad19a4-ac05-4749-8686-554430b97d15"
       },
       {
-        "Name": "Featured News",
-        "Path": "/{AssetLibraryName}/digitalworkplace/content/templates/newswidget/featurednews.html",
-        "Id": "9bffc5c7-6cbb-4d52-80e7-b4c50eb54344"
-      },
-      {
         "Name": "NCI Featured News",
         "Path": "/{AssetLibraryName}/digitalworkplace/content/templates/newswidget/featurednews_nci.html",
         "Id": "dc36381e-2e9b-4e1e-9abb-e5a69c0016eb"
       },
       {
-        "Name": "News Home Page",
-        "Path": "/{AssetLibraryName}/digitalworkplace/content/templates/newswidget/newshomepage.html",
+        "Name": "NCI News Home Page",
+        "Path": "/{AssetLibraryName}/digitalworkplace/content/templates/newswidget/newshomepage_nci.html",
         "Id": "019ab071-d5d2-4c47-b9d4-daa9e8554f23"
       }
     ],
@@ -249,11 +120,11 @@
           "value": false
         }
       ],
-      "SelectedView": "Featured News",
+      "SelectedView": "NCI Featured News",
       "AvailableViews": [
         "Default",
         "NCI News Listing Page",
-        "Featured News"
+        "NCI Featured News"
       ],
       "HiddenFields": []
     },
@@ -413,8 +284,8 @@
             "value": "PublishDate"
         }
       ],
-      "SelectedView": "News Home Page",
-      "AvailableViews": ["News Home Page"],
+      "SelectedView": "NCI News Home Page",
+      "AvailableViews": ["NCI News Home Page"],
       "HiddenFields": []
     }
   ],

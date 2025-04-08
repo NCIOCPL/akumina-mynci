@@ -23,14 +23,10 @@
           <div>{{{Body}}}</div>
         </div>
         <div class="ia-button-row">
-          <button class="ia-button-primary ia-event-detail-ics">{{translate "fs.eventdetailwidget.downloadevent"}}</button>=
-          {{!-- BEGIN #AKUMINA - Remove multi-event download --}}
-          {{!--
+          <a href="{{DownloadIcsOccurenceUrl}}" class="ia-button-primary ia-event-detail-ics">{{translate "fs.eventdetailwidget.downloadevent"}}</a>
           {{#if HasRecurrence}}
-            <button class="ia-button ia-event-detail-ics-series">{{translate "eventdetails.downloadeventseries"}}</button>
+            <a href="{{DownloadIcsSeriesUrl}}" class="ia-button ia-event-detail-ics-series">{{translate "eventdetails.downloadeventseries"}}</a>
           {{/if}}
-          --}}
-          {{!-- END #AKUMINA --}}
         </div>
       </div>
       <div class="col-md-4 ia-article-section-right">

@@ -325,8 +325,14 @@ React.createElement(
                 { className: "ia-button-row" },
                 React.createElement(
                     "button",
-                    { className: "ia-button", onClick: () => ShowMore() },
-                    Akumina.Digispace.Language.TryGetText("fs.newswidget.showmore")
+                    { className: "ia-button", disabled: DisplayShowMoreButtonSpinner, onClick: () => ShowMore() },
+                    Akumina.Digispace.Language.TryGetText("fs.newswidget.showmore"),
+                    DisplayShowMoreButtonSpinner && React.createElement(
+                        React.Fragment,
+                        null,
+                        "\xA0",
+                        React.createElement("i", { className: "fa-regular fa-sync fa-spin" })
+                    )
                 )
             )
         )
