@@ -4,17 +4,6 @@ import { latestMediaWidget_helper } from './modules/LatestMediaWidget.js';
 import { newsDetailWidget_helper } from './modules/NewsDetailWidget.js';
 import { peopleDirectoryWidget_helper } from './modules/PeopleDirectoryWidget.js';
 
-// Is this used?
-Handlebars.registerHelper(
-  'SearchProperty',
-  function (itemCells, prop, options) {
-    for (var i = 0; i < itemCells.length; i++)
-      if (prop.toLowerCase() == itemCells[i].Name.toLowerCase())
-        return itemCells[i].Value;
-    return '';
-  }
-);
-
 // Remove in future
 // window.NCIAddDebuggerBreak = function (arg1, arg2, arg3, arg4, arg5) {
 //     debugger;
