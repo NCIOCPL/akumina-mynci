@@ -42,24 +42,6 @@ script.setAttribute('async', 'async');
 if (_configContextInfo['adobe-analytics-tracker'] != null) {
   script.setAttribute('src', _configContextInfo['adobe-analytics-tracker']);
   document.head.prepend(script);
-} else if (window.location.host == 'mynci-preprod.cancer.gov') {
-  script.setAttribute(
-    'src',
-    'https://assets.adobedtm.com/6a4249cd0a2c/cbc52400d29b/launch-54f3716fa1f1-development.min.js'
-  );
-  document.head.prepend(script);
-} else if (window.location.host == 'mynci.cancer.gov') {
-  script.setAttribute(
-    'src',
-    'https://assets.adobedtm.com/6a4249cd0a2c/cbc52400d29b/launch-8c72e1b653fe.min.js'
-  );
-  document.head.prepend(script);
-} else {
-  script.setAttribute(
-    'src',
-    'https://assets.adobedtm.com/6a4249cd0a2c/cbc52400d29b/launch-54f3716fa1f1-development.min.js'
-  );
-  document.head.prepend(script);
 }
 
 //top nav clickable text
