@@ -67,7 +67,7 @@
         },
         {
           "name": "callbackmethod",
-          "value": "blogDetailWidget_data"
+          "value": "blogDetail_data_changeDate"
         },
         {
           "name": "uicallbackmethod",
