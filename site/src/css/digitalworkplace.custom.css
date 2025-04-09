@@ -1263,11 +1263,16 @@ and Important Events (Upcoming Events)
     text-transform: lowercase;
 }
 
+/* Aligns bullet points with the "About Me" and "Hobbies and Interests" content  */
+.ia-profile-background-info ul {
+    padding-left: 1rem;
+    margin-bottom: 0;
+}
+
 /* Needs to be removed for org chart when fixed */
 .ak-theme-ncitheme .ak-widget.fs-js-my-org-instance:has(.ia-my-org) {
 	display: none;
 }
-
 
 /************************************
 *         Left Nav Widget
@@ -1388,3 +1393,19 @@ changes People profile details back to correct color
 	color: var(--fs-card-link-color) !important;
 } 
 */
+
+
+/************************************
+*           Edit Warning
+************************************/
+
+#nci-edit-warning {
+    display: none;
+    font-weight: bold;
+    color: red;
+    text-align: center;
+}
+
+.page-edit-mode #nci-edit-warning {
+    display: block;
+}

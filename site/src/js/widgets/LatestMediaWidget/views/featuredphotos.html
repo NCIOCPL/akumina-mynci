@@ -1,5 +1,5 @@
-{{debug}}
-<div ak-item="" class="interAction ak-widget-item featured-photos-widget">
+{{! This view does not match what is from Akumina. It should be updated at some point and then our customized view updated from it. }}
+<div ak-item="" class="interAction ak-widget-item">
     {{#if Loading}}
     <div class="ak-instagram-feed" style="margin:0px !important">
         <div class="ak-instagram-top">
@@ -23,80 +23,43 @@
         </div>
     </div>
     {{else}}
-    <h3 class="ia-header--title">
-        {{translate "genericlist.latestphotos"}}
-    </h3>
-    <div class="slider slider-1">
-        <div class="photos featuredPhotosSlider">
-            {{#if HasItems}}
+    <div class="ak-instagram-feed" style="margin:0px !important">
+        {{#if HasItems}}
+        <div class="ak-instagram-top">
+            <a href="#photo-popup" class="ia-modal-inline-trigger-photo">
+                <img src="{{HeaderImage}}" />
+                <div class="ak-shade-overlay"></div>
+            </a>
+            <span class="ak-instagram-tab">{{translate "genericlist.latestphotos"}}</span>
+        </div>
+        <div class="ak-instagram-item-wrap">
             {{#Items}}
-            {{#ifCondition @index '==' '0'}}
-            <!--
-            <img src="{{Image}}" class="shown" />
-            -->
-            {{else}}
-            <!--
-            <img src="{{Image}}" class="" />
-            -->
-            {{/ifCondition}}
-
-
-            <div class="photoSlide" style="background-image: url({{Image}});">
-
+            <div class="ak-instagram-item">
+                <a href="#photo-popup" class="ia-modal-inline-trigger-photo">
+                    <div class="ak-instagram-image">
+                        <img src="{{Image}}" />
+                    </div>
+                </a>
             </div>
-
             {{/Items}}
-            <!--
-            <div class="buttons">
-                <div class="prev"></div>
-                <div class="next"></div>
+            {{#if showViewMore}}
+            <div class="row">
+                <div class="small-12 columns">
+                    <a href="{{ViewMoreLink}}" class="ak-featured-video-more ak-module-more-link">{{ViewMoreText}} &rsaquo;</a>
+                </div>
             </div>
-            -->
+            {{/if}}
         </div>
         {{else}}
-        <h3>{{translate "genericlist.nofeaturedphotos"}}</h3>
+        <h2>{{translate "genericlist.nofeaturedphotos"}}</h2>
         {{/if}}
-
-        <!--
-        <div class="d-flex justify-content-end photo-gallery-view-all-container">
-            <a class="ia-button {{IsSPALink}}" href="/#/sitepages/photo-gallery.aspx">
-                {{translate "genericlist.viewall"}}
-            </a>
-        </div>
-        -->
-
-        <div class="d-flex justify-content-end photo-gallery-view-all-container">
-            <a class="ia-button {{IsSPALink}}" href="/#/sitepages/photo-gallery.aspx">
-                {{translate "importantdates.allevents"}}
-            </a>
-        </div>
-
-
     </div>
+    <!-- end instagram-feed -->
+
+    {{/if}}
+
 </div>
-<!-- end instagram-feed -->
-{{/if}}
 <script type="text/javascript">
-    //InitializeSlider();
-
-
-    $(document).ready(function () {
-        $('.featuredPhotosSlider').slick({
-            dots: true,
-            infinite: true,
-            slidesToShow: 1,
-            slidesToScroll: 1,
-
-            speed: 500,
-            fade: true,
-            cssEase: 'linear',
-
-            autoplay: true,
-            autoplayspeed: 5000
-        });
-    });
-
-
     $('.ia-modal-inline-trigger-photo').magnificPopup({
         type: 'inline',
         preloader: false,
@@ -107,4 +70,5 @@
     });
     $('.ia-modal-inline-trigger-photo').on('click', function () {
         $('.imagepreview').attr('src', $(this).find('img').attr('src'));
-    });</script>
+    });
+</script>

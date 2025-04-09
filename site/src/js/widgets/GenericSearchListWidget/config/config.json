@@ -184,8 +184,8 @@
     ],
     "Views": [
       {
-        "Name": "NCIOrgDirectorySearchResults",
-        "Path": "/{AssetLibraryName}/DigitalWorkPlace/Content/Templates/GenericSearchListWidget/NCIOrgDirectorySearchResults.html",
+        "Name": "NCI Org Directory Search Results",
+        "Path": "/{AssetLibraryName}/DigitalWorkPlace/Content/Templates/GenericSearchListWidget/search-results-compact-view_nci.html",
         "Id": "ddd05527-93af-46f8-8d76-bc9923987170"
       }
     ],
@@ -197,10 +197,10 @@
     {
       "Name": "NCI Org Directory Search Results",
       "Id": "425ed999-9be0-4780-8206-39383f6b0627",
-      "Description": "Displays the results of a search including results list and filters",
+      "Description": "Displays the results of a search related to an office in the NCI org directory",
       "Icon": "fa fa-search",
-      "SelectedView": "NCIOrgDirectorySearchResults",
-      "AvailableViews": ["NCIOrgDirectorySearchResults"],
+      "SelectedView": "NCI Org Directory Search Results",
+      "AvailableViews": ["NCI Org Directory Search Results"],
       "Properties": [
         {
           "name": "selectfields",

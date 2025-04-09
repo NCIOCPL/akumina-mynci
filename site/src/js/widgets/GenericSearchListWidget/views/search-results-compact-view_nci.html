@@ -1,0 +1,588 @@
+<div class="fs-search-result-content ia-widget-wrapper">
+	{{#if ShowConfigurationMessage}}
+		{{translate 'genericsearch.configmessage'}}
+	{{else}}
+	<div class="ia-search-tile-row fs-search-result-wrapper">
+		<div class="ia-refiners-list fs-refiners-list">
+			<div class="ia-search-filter-header fs-refiner-header">
+				<h2 class="h4">{{translate 'genericsearch.filter'}}</h2>
+				<div class="ia-search-filter-close fs-refiner-close">
+					<a href="javascript:void(0)">
+						<i class="fa-regular fa-xmark" aria-label="{{translate 'genericsearch.closerefiners'}}"></i>
+					</a>
+				</div>
+			</div>
+			<div class="ia-search-filter-actions fs-refiner-actions">
+                <div class="ia-button-row">
+                    <button class="ia-button ak-applyfilter-js">
+                        {{translate 'genericsearch.applyfilters'}}
+                    </button>
+                    <button class="ia-button-text ak-clearfilter-js">
+                        {{translate 'genericsearch.clearfilters'}}
+                    </button>
+                </div>
+			</div>
+			<div
+				class="ia-search-filter-option-container fs-refiner-option-container"
+			>
+				<div class="ia-search-filter-option fs-search-refiner-option">
+					<div
+						class="ia-search-filter-option-header fs-search-refiner-option-header"
+					>
+						<h3 class="h4">{{translate 'genericsearch.lookin'}}</h3>
+						<a href="#!" class="ia-toggle-filter-option active">
+							<i
+								class="fa-regular fa-chevron-down"
+							></i>
+						</a>
+					</div>
+					<div
+						class="ia-search-filter-option-body fs-search-content-content"
+						style="display: block"
+					>
+						<ul class="ia-search-look-in fs-search-look-in">
+							<li>
+								<label>
+									<span data-filter="Document"
+										>{{translate 'genericsearch.sitecontent'}}</span
+									>
+								</label>
+								{{#unless DisableDocumentAndPagesLookin}}
+								<ul>
+									<li>
+										<label class="ia-checkbox-wrapper fs-checkbox-wrapper">
+											<input class="checkbox ak-lookin-checkbox"
+											data-lookin="FetchDocuments" type="checkbox" {{#if
+											LookIn.FetchDocuments}} checked{{/if}} {{#if
+											LookIn.FetchPeople}} disabled{{/if}}>
+											<span data-filter="Document" class="fs-checkbox-label"
+												>{{translate 'genericsearch.document'}}</span
+											>
+											<span class="ia-checkbox fs-checkbox"></span>
+										</label>
+									</li>
+									<li>
+										<label class="ia-checkbox-wrapper fs-checkbox-wrapper">
+											<input class="checkbox ak-lookin-checkbox"
+											data-lookin="FetchPages" type="checkbox" {{#if
+											LookIn.FetchPages}} checked{{/if}} {{#if
+											LookIn.FetchPeople}} disabled{{/if}}>
+											<span data-filter="Pages" class="fs-checkbox-label"
+												>{{translate 'genericsearch.pages'}}</span
+											>
+											<span class="ia-checkbox fs-checkbox"></span>
+										</label>
+									</li>
+
+									<li>
+										<label class="ia-checkbox-wrapper fs-checkbox-wrapper">
+											<input class="checkbox ak-lookin-checkbox"
+											data-lookin="FetchMedia" type="checkbox" {{#if
+											LookIn.FetchMedia}} checked{{/if}} {{#if
+											LookIn.FetchPeople}} disabled{{/if}}>
+											<span data-filter="Media" class="fs-checkbox-label"
+												>{{translate 'genericsearch.media'}}</span
+											>
+											<span class="ia-checkbox fs-checkbox"></span>
+										</label>
+									</li>
+								</ul>
+								{{/unless}}
+							</li>
+							<li>
+								<label class="ia-checkbox-wrapper fs-checkbox-wrapper">
+									<input class="checkbox ak-lookin-checkbox"
+									data-lookin="FetchPeople" type="checkbox" {{#if
+									LookIn.FetchPeople}} checked{{/if}}>
+									<span data-filter="People" class="fs-checkbox-label"
+										>{{translate 'genericsearch.people'}}</span
+									>
+									<span class="ia-checkbox fs-checkbox"></span>
+								</label>
+							</li>
+						</ul>
+					</div>
+				</div>
+				{{#HasRefiners}} {{#Refiners}}
+				<div class="ia-search-filter-option fs-search-refiner-option">
+					<div
+						class="ia-search-filter-option-header fs-search-refiner-option-header"
+					>
+						<h3 class="h4">{{Label}}</h3>
+						<a href="#!" class="ia-toggle-filter-option active">
+							<i class="fa fa-chevron-down"></i>
+						</a>
+					</div>
+					<div
+						class="ia-search-filter-option-body fs-search-content-content"
+						style="display: block"
+					>
+						<input
+							type="text"
+							placeholder="{{translate 'peoplelist.search'}}"
+							class="ia-filter-option-search fs-refiner-search"
+						/>
+						<ul class="ia-search-author ak-module">
+							{{#Entries}}
+							<li class="ia-filter-li">
+								<label class="ia-checkbox-wrapper fs-checkbox-wrapper">
+									<input class="checkbox ak-search-refiner
+									ak-search-refiner-input" data-value="{{RefinementValue}}"
+									data-token="{{RefinementToken}}" data-name="{{./Name}}"
+									type="checkbox" {{#Selected}} checked{{/Selected}} {{#if
+									../../LookIn.FetchPeople}} disabled{{/if}}>
+									<span class="ia-checkbox fs-checkbox"></span>
+									<span class="refinementName fs-checkbox-label"
+										>{{RefinementName}} {{#if
+										ShowRefinementCount}}({{RefinementCount}}){{/if}}</span
+									>
+								</label>
+							</li>
+							{{/Entries}}
+						</ul>
+					</div>
+				</div>
+				{{/Refiners}} {{/HasRefiners}} {{#ifCondition SelectedModifiedRefiner
+				'||' HasItems}} {{#unless LookIn.FetchPeople}}
+				<div class="ia-search-filter-option fs-search-refiner-option">
+					<div
+						class="ia-search-filter-option-header fs-search-refiner-option-header"
+					>
+						<h3 class="h4">{{translate "genericsearch.lastmodifiedon"}}</h3>
+						<a href="#!" class="ia-toggle-filter-option active">
+							<i class="fa fa-chevron-down"></i>
+						</a>
+					</div>
+					<div
+						class="ia-search-filter-option-body fs-search-content-content ia-search-date-filter fs-refiner-date"
+						style="display: block"
+					>
+						<div id="dateFilter">
+							<div class="ia-form-row">
+								<label class="ia-radio-wrapper">
+									<input type="radio" data-days="-1" {{#ifEqual
+									SelectedModifiedRefiner 'anydate' }} checked {{/ifEqual}}
+									class="radio ak-search-refiner ak-search-refiner-input"
+									name="dateFilterRadio">
+									<span class="ia-radio"></span>
+									<span class="refinementName ia-radio-label"
+										>{{translate "genericsearch.anydate"}}</span
+									>
+								</label>
+							</div>
+							<div class="ia-form-row">
+								<label class="ia-radio-wrapper">
+									<input data-days="0" {{#ifEqual SelectedModifiedRefiner
+									'today' }} checked {{/ifEqual}} type="radio" class="radio
+									ak-search-refiner ak-search-refiner-input"
+									name="dateFilterRadio">
+									<span class="ia-radio"></span>
+									<span class="refinementName ia-radio-label"
+										>{{translate "dms.today"}}</span
+									>
+								</label>
+							</div>
+							<div class="ia-form-row">
+								<label class="ia-radio-wrapper">
+									<input data-days="7" {{#ifEqual SelectedModifiedRefiner
+									'lastseven' }} checked {{/ifEqual}} type="radio" class="radio
+									ak-search-refiner ak-search-refiner-input"
+									name="dateFilterRadio">
+									<span class="ia-radio"></span>
+									<span class="refinementName ia-radio-label"
+										>{{translate "dms.last7days"}}</span
+									>
+								</label>
+							</div>
+							<div class="ia-form-row">
+								<label class="ia-radio-wrapper fs-radio-wrapper">
+									<input data-days="30" {{#ifEqual SelectedModifiedRefiner
+									'lastthirty' }} checked {{/ifEqual}} type="radio" class="radio
+									ak-search-refiner ak-search-refiner-input"
+									name="dateFilterRadio">
+									<span class="ia-radio fs-radio"></span>
+									<span class="refinementName ia-radio-label fs-radio-label"
+										>{{translate "dms.last30days"}}</span
+									>
+								</label>
+							</div>
+							<div class="ia-form-row">
+								<label class="ia-radio-wrapper">
+									<input data-days="90" {{#ifEqual SelectedModifiedRefiner
+									'lastninty' }} checked {{/ifEqual}} type="radio" class="radio
+									ak-search-refiner ak-search-refiner-input"
+									name="dateFilterRadio">
+									<span class="ia-radio"></span>
+									<span class="refinementName ia-radio-label"
+										>{{translate "genericsearch.last90days"}}</span
+									>
+								</label>
+							</div>
+							<div class="ia-form-row">
+								<label class="ia-radio-wrapper">
+									<input type="radio" {{#ifEqual SelectedModifiedRefiner
+									'daterange' }} checked {{/ifEqual}} class="radio
+									ak-search-refiner ak-search-refiner-input"
+									name="dateFilterRadio">
+									<span class="ia-radio"></span>
+									<span class="refinementName ia-radio-label"
+										>{{translate "genericsearch.daterange"}}</span
+									>
+								</label>
+							</div>
+						</div>
+						<div id="dataRangeContainer" class="ia-hide fs-custom-date-range">
+							<div class="ia-date-range fs-date-range">
+								<div class="ia-start-date fs-start-date fs-date-field-with-icon">
+									<input
+										type="text"
+										autocomplete="off"
+										class="ia-filter-input-small ia-datepicker"
+										id="searchtxtStrDate"
+										placeholder='{{translate "dms.start"}}'
+									/>
+									<i id="iconStartDate" class="fa-light fa-calendar"></i>
+								</div>
+								<div class="ia-end-date fs-end-date fs-date-field-with-icon">
+									<input
+										type="text"
+										autocomplete="off"
+										class="ia-filter-input-small ia-datepicker"
+										id="searchtxtEndDate"
+										placeholder='{{translate "dms.end"}}'
+									/>
+									<i id="iconEndDate" class="fa-light fa-calendar"></i>
+								</div>
+							</div>
+							<p id="dateError"></p>
+						</div>
+					</div>
+				</div>
+				{{/unless}} {{/ifCondition}} {{#Facets}} {{#if HasFacets}}
+				<div class="ia-search-filter-option fs-search-refiner-option">
+					<div
+						class="ia-search-filter-option-header fs-search-refiner-option-header"
+					>
+						<h3 class="h4">{{FilterHeader}}</h3>
+						<a href="#!" class="ia-toggle-filter-option active">
+							<i class="fa fa-chevron-down"></i>
+						</a>
+					</div>
+					<div
+						class="ia-search-filter-option-body fs-search-content-content"
+						style="display: block"
+					>
+						<input
+							type="text"
+							placeholder="{{translate 'peoplelist.search'}}"
+							class="ia-filter-option-search fs-refiner-search"
+						/>
+						<ul class="ia-search-author ak-module">
+							{{#FilterOptions}}
+							<li class="ia-filter-li">
+									<label class="ia-checkbox-wrapper fs-checkbox-wrapper">
+										<input class="checkbox ak-search-refiner
+										ak-search-refiner-input" data-isfacet="true"
+										data-value="{{value}}" data-token="{{value}}"
+										data-type="{{../FilterName}}" data-name="{{value}}"
+										name="checkbox-8" type="checkbox" {{#Selected}}
+										checked{{/Selected}}>
+										<span class="ia-checkbox fs-checkbox"></span>
+										<span class="refinementName fs-checkbox-label">{{value}} ({{count}})</span>
+									</label>
+							</li>
+							{{/FilterOptions}}
+						</ul>
+					</div>
+				</div>
+				{{/if}} {{/Facets}}
+			</div>
+		</div>
+
+		<div
+			class="ia-search-content-container ia-search-content-list ak-module fs-search-content-container"
+		>
+			<div class="ia-searched-term fs-search-utility">
+				<div class="ia-search-msg fs-search-msg">
+					{{#HasItems}} {{#ifCondition LookIn.FetchPeople '||'
+					IsNotRelevanceSort}}
+					<p>
+						{{translate 'genericsearch.searchfor'}}
+						"<strong>{{SearchTerm}}</strong>" {{translate
+						"genericsearch.returned"}} {{TotalCount}} {{translate
+						"genericsearch.results"}}.
+					</p>
+					{{else}} {{#if isSitesFilter}}
+					<p>
+						{{translate 'genericsearch.searchfor'}}
+						"<strong>{{SearchTerm}}</strong>" {{translate
+						"genericsearch.returned"}} {{TotalCount}} {{translate
+						"genericsearch.results"}}.
+					</p>
+					{{else if SearchAcrossSitesBoosted}}
+					<p>
+						{{translate 'genericsearch.searchfor'}}
+						"<strong>{{SearchTerm}}</strong>" {{translate
+						"genericsearch.returned"}} {{TotalCount}} {{translate
+						"genericsearch.results"}}, {{#if IsSubSite}} {{translate
+						"genericsearch.prioritizedbysite"}} "{{WebTitle}}". {{else}}
+						{{translate "genericsearch.prioritizedby"}} {{/if}}
+						<a
+							href="#!"
+							data-searchScope="SearchAcrossSitesBoosted"
+							class="ak-click-here-js"
+							>{{translate "common.clickhere"}}</a
+						>
+						{{translate "genericsearch.byrelevance"}}.
+					</p>
+					{{else if SearchAcrossSites}}
+					<p>
+						{{translate 'genericsearch.searchfor'}}
+						"<strong>{{SearchTerm}}</strong>" {{translate
+						"genericsearch.returned"}} {{TotalCount}} {{translate
+						"genericsearch.results"}}. {{#if BoostInActive}}
+						<a
+							href="#!"
+							data-searchScope="SearchAcrossSites"
+							class="ak-click-here-js"
+							>{{translate "common.clickhere"}}</a
+						>
+						{{translate "genericsearch.prioritizeresults"}}. {{/if}}
+					</p>
+					{{else}}
+					<p>
+						{{translate 'genericsearch.searchfor'}}
+						"<strong>{{SearchTerm}}</strong>" {{translate
+						"genericsearch.returned"}} {{TotalCount}} {{translate
+						"genericsearch.results"}}{{#ifCondition IsSubSite '||'
+						IsDepartmentRootSite}}{{translate
+						'genericsearch.forDepartmentSite'}}
+						{{WebTitle}}.{{else}}.{{/ifCondition}}
+					</p>
+					{{/if}} {{/ifCondition}} {{/HasItems}}
+				</div>
+				<div class="ia-sort-searched fs-search-sort">
+					{{#HasItems}}
+					<div class="ia-sort fs-sort">
+						<label>{{translate "workspaces.sortby"}}:</label> {{#if
+						LookIn.FetchPeople}}
+						<a href="#!" class="ia-sort-selected"
+							>{{translate "peoplelist.firstname"}}</a
+						>
+						{{else}}
+						<a href="#!" class="ia-sort-selected"
+							>{{translate "genericsearch.createdby"}}</a
+						>
+						{{/if}}
+						<ul class="ia-sort-options fs-sort-options fs-dropdown">
+							{{#SortFields}}
+							<li data-value="{{sortvalue}}">
+								<a href="javascript:void(0)">{{sortName}}</a>
+							</li>
+							{{/SortFields}}
+						</ul>
+					</div>
+					<a href="javascript:void(0)" class="ia-sort-order">
+						<i class="fas fa-sort-alpha-up"></i>
+					</a>
+					{{/HasItems}}
+					<a href="javascript:void(0)" class="ia-filter-open">
+						<i class="fa-regular fa-filter" aria-label="{{translate 'genericsearch.applyfilters'}}"></i>
+					</a>
+				</div>
+			</div>
+			<div
+				class="ia-selected-filters fs-search-selected-refiners fs-chip-collection"
+			>
+				{{#SelectedFilters}}
+				<div class="ia-chip ia-outlined fs-chip">
+					<span class="ia-chip-content fs-chip-label">{{Label}}</span>
+					<button
+						class="ia-remove-chip fs-chip-action"
+						data-value="{{Name}}"
+						data-islookin="{{IsLookIn}}"
+						data-lookin="{{LookinValue}}"
+						data-refinertype="{{RefinerType}}"
+					>
+						<i class="fa-regular fa-xmark" aria-label="{{translate 'fs.common.removechip'}}"></i>
+					</button>
+				</div>
+				{{/SelectedFilters}}
+			</div>
+			{{#HasItems}}
+			<div id="append-search-result-rows" class="fs-search-result-list">
+				<!-- All content type specific partials should be added to their individual files, used in the "Content Type IF Block" and referred as a script tag at the end of this file -->
+			</div>
+
+			<div class="ak-search-paging fs-search-pagination">
+				{{#PagingEnabled}}{{^PagingLastPage}}
+				<button
+					id="btnLoadMore"
+					class="ia-btn-loadmore ak-search-paging-forwardbutton fs-button fs-button-big"
+					data-load="append"
+					role="button"
+				>
+					<span>{{translate 'genericsearch.loadmore'}}</span>
+					<i class="fa-regular fa-arrow-down" aria-hidden="true"></i>
+				</button>
+				{{/PagingLastPage}}{{/PagingEnabled}}
+			</div>
+
+			{{/HasItems}} {{^HasItems}}
+			<div class="ia-search-result-error">
+				<p>
+					{{translate 'genericsearch.searchfor'}}
+					"<strong>{{SearchTerm}}</strong>" {{#if IsSubSite}} {{translate
+					'genericsearch.forDepartmentSite'}} {{WebTitle}} {{/if}} {{translate
+					'genericsearch.tryagain'}}
+				</p>
+				<h3>{{translate 'genericsearch.searchtips'}}</h3>
+				<ul>
+					<li>{{translate 'genericsearch.checkspelling'}}</li>
+					<li>{{translate 'genericsearch.newterm'}}</li>
+					<li>{{translate 'genericsearch.lookinsite'}}</li>
+					<li>{{translate 'genericsearch.changefilters'}}</li>
+				</ul>
+			</div>
+			{{/HasItems}}
+		</div>
+	</div>
+	{{/if}}
+	<div class="ia-hide fs-js-search-media-video-modal" >
+		<div class="ia-modal-overlay"></div>
+		<div class="ia-modal ia-modal-lower ia-modal-medium ia-search-media-modal">
+			<header class="ia-modal-header">
+				<button class="ia-modal-close">
+					<i class="fa-regular fa-xmark" aria-label="{{translate 'fs.common.closevideo'}}"></i>
+				</button>
+			</header>
+			<section class="ia-modal-content">
+				<video src="" controls=""></video>
+			</section>
+		</div>
+	</div>
+</div>
+<script id="partial-items" type="text/x-handlerbars-template">
+	{{{{raw-helper}}}}
+	{{#PromotedItems}}
+		<div class="ia-search-content-wrapper fs-card fs-default-view fs-promoted">
+			<div class="fs-promoted-icon">
+				<i class="fa-regular fa-bullhorn" aria-hidden="true"></i>
+			</div>
+			<div class="ia-search-content-detail-wrapper">
+				<h4>
+					<a class="{{IsSPALink}}" href="{{AddSPALink Url}}">{{Title}}</a>
+				</h4>
+				<div class="fs-promoted-url">
+					<a {{#unless IsDomainUrl}} target="_blank" {{/unless}} href="{{Url}}" class="ia-displayurl" title="{{{Url}}}">{{Url}}</a>
+				</div>
+				<div class="fs-search-promoted-summary">{{{Summary}}}</div>
+			</div>
+			<span class="fs-promoted-tag">{{translate 'genericsearch.promoted'}}</span>
+		</div>
+	{{/PromotedItems}}
+	{{#Users}}
+	    <div class="fs-card ia-search-content-wrapper fs-default-view fs-people-card">
+			<div class="fs-search-content-icon ia-user-teams-presence-container">
+				<img src="{{pictureurl}}" data-user="{{userprincipalname}}" alt="{{translate 'genericsearch.profilepictureof'}} {{givenname}} {{surname}}." class="ed-user-image fs-user-image" />
+				<div data-email-id={{userprincipalname}} class="ia-user-profile-by-status fs-js-user-profile-by-status"></div>
+			</div>
+	        <div class="fs-search-content-detail-wrapper">
+	            <div class="fs-search-content-title">
+	                <h2 class="h4"><a class="{{IsSPALink}}" target="_blank" href="{{profileUrl}}">{{givenname}} {{surname}}</a></h4>
+	            </div>
+	            <ul class="fs-search-content-attributes">
+	                {{#if jobtitle}}
+	                <li>{{jobtitle}}</li>
+	                {{/if}}
+	                <li>
+	                    <label>{{translate 'genericsearch.datejoined'}}:</label><span>{{{dateofjoining}}}</span>
+	                </li>
+	                <li>
+	                    <label>{{translate 'peoplelist.manager'}}:</label><span>{{{manager}}}</span>
+	                </li>
+	            </ul>
+	            <div class="fs-tag-list"></div>
+	            <div class="fs-profile-contact">
+	                {{#if mail}}
+	                <span>
+	                    <i class="fa-regular fa-envelope" aria-hidden="true"></i>
+	                    <a href="mailto:{{mail}}" aria-label="{{translate 'peoplelist.email'}} {{givenname}} {{surname}}.">{{mail}}</a>
+	                </span> {{else}}
+	                <span>
+	                    <i class="fa-regular fa-envelope" aria-hidden="true"></i>
+	                    <a href="mailto:{{userprincipalname}}" aria-label="{{translate 'peoplelist.email'}} {{givenname}} {{surname}}.">
+	                        {{userprincipalname}}
+	                    </a>
+	                </span> {{/if}} {{#if businessphones}}
+					<span>
+	                    <i class="fa-regular fa-mobile" aria-hidden="true"></i><a href="tel:{{businessphones}}" aria-label="{{translate 'common.call'}} {{givenname}} {{surname}}.">{{businessphones}}</a>
+	                </span> {{/if}} {{#if mobilephone}}
+					<span>
+	                    <i class="fa-regular fa-phone" aria-hidden="true"></i><a href="tel:{{mobilephone}}" aria-label="{{translate 'common.call'}} {{givenname}} {{surname}}.">{{mobilephone}}</a>
+	                </span> {{/if}}
+	            </div>
+	            <div class="fs-profile-address">
+	                {{#department}}
+	                    <span><i class="fa-regular fa-building" aria-hidden="true"></i>{{this}}</span>
+	                {{/department}}
+	            </div>
+	        </div>
+	        {{#if mail}}
+	        <div class="fs-search-content-actions">
+				<button class="ia-trigger-search-actions fs-search-trigger-action">
+					<i class="fas fa-ellipsis-v" aria-label="{{translate 'genericsearch.toggleaction'}}"></i>
+				</button>
+				<ul class="ia-search-action-dropdown fs-dropdown">
+					<li>
+						<a target="_blank" href="https://teams.microsoft.com/l/chat/0/0?users={{mail}}" aria-label="{{translate 'hub.peopledirectory.contact'}} {{givenname}} {{surname}} {{translate 'genericsearch.withmicrosoftteamssearch'}}.">{{translate 'genericsearch.connectonteams'}}</a>
+	                </li>
+	            </ul>
+	        </div>
+	        {{/if}}
+	    </div>
+	{{/Users}}
+	{{#Items}}
+	    <!-- Content Type IF Block -->
+	    {{#ifCondition ContentType '==' "AkuminaArticle"}}
+	    <!-- News Card -->
+	    {{> NewsItemTemplate context=..}}
+	    {{else ifCondition ContentType '==' "AkuminaBlogs"}}
+	    <!-- Blogs Card -->
+	    {{> NewsItemTemplate context=..}}
+	    {{else ifCondition ContentType '==' "AkuminaArticle"}}
+	    <!-- Department News Card -->
+	    {{> NewsItemTemplate context=..}}
+	    {{else ifCondition ContentType '==' "AkuminaCalendar"}}
+	    <!-- Event Card -->
+	    {{> EventItemTemplate context=..}}
+		{{else ifCondition ContentType '==' "AkuminaVideos"}}
+	    <!-- Video Card -->
+	    {{> MediatItemTemplate context=..}}
+		{{else ifCondition ContentType '==' "AkuminaImages"}}
+	    <!-- Images Card -->
+	    {{> MediatItemTemplate context=..}}
+	    {{else}}
+	    {{> DefaultItemTemplate context=..}}
+	    {{/ifCondition}}
+	{{/Items}}
+	{{{{/raw-helper}}}}
+</script>
+<script>
+	function fn_ToggleRefiner(el) {
+		$(el).parent().toggleClass("collapsed");
+		$(el).parent().siblings(".ia-refiner-options").slideToggle("slow");
+    }
+
+    $(".ia-filter-open").click(function () {
+        $(".ia-refiners-list").addClass("ia-active");
+    });
+
+    $(".ia-search-filter-close a").click(function () {
+        $(".ia-refiners-list").removeClass("ia-active");
+    });
+</script>
+<script src="{{TemplateUrlPrefix}}/search-result-compact-view-newstemplate.html"></script>
+<script src="{{TemplateUrlPrefix}}/search-result-compact-view-eventstemplate.html"></script>
+<script src="{{TemplateUrlPrefix}}/search-result-compact-view-itemtemplate.html"></script>
+<script src="{{TemplateUrlPrefix}}/search-result-compact-view-mediatemplate.html"></script>

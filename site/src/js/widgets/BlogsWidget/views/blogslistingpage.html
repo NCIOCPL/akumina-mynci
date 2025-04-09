@@ -1,9 +1,9 @@
 React.createElement(
     "div",
-    { id: "ia-news-list", className: "ia-news-list ia-widget-wrapper" },
+    { id: "HomeNewsEventsTabs", className: "ia-news-list ia-widget-wrapper" },
     React.createElement(
         "h2",
-        { "class": "pb-3" },
+        null,
         Title
     ),
     ConfigurationErrorMessage ? React.createElement(
@@ -13,10 +13,9 @@ React.createElement(
     ) : React.createElement(
         React.Fragment,
         null,
-        SearchTextComponent,
         React.createElement(
             "div",
-            { className: "ia-grid-utility-container" + (HasDateFilter ? " ia-grid-utility-container-date-filter" : "") },
+            { className: "ia-grid-utility-container" },
             React.createElement(
                 "div",
                 { className: "ia-grid-utility-left-col" },
@@ -32,7 +31,7 @@ React.createElement(
                             React.createElement(
                                 "span",
                                 { className: "ia-filter-text" },
-                                Akumina.Digispace.Language.TryGetText("fs.newswidget.filterby"),
+                                Akumina.Digispace.Language.TryGetText("fs.blogswidget.filterby"),
                                 ":"
                             ),
                             SearchCriteria.map(radiofilter => {
@@ -41,7 +40,7 @@ React.createElement(
                                     null,
                                     React.createElement(
                                         "a",
-                                        { href: "javascript:void(0)", className: "ia-filter-option " + (radiofilter.IsSelected ? " fs-js-active" : "") + (!radiofilter.IsEnabled ? " ia-filter-option-disabled" : ""),
+                                        { className: "ia-filter-option " + (radiofilter.IsSelected ? " fs-js-active" : ""),
                                             role: "button", onClick: () => SearchBasedOnSelectedCriteria(false, undefined, radiofilter, true) },
                                         radiofilter.Name
                                     ),
@@ -171,16 +170,22 @@ React.createElement(
                                             } },
                                         React.createElement("i", { className: "fa-regular fa-circle-play", "aria-label": Akumina.Digispace.Language.TryGetText("fs.common.playvideo") })
                                     ),
-                                    Item.ThumbnailUrl || Item.ImageUrl ? React.createElement("img", {
+                                    React.createElement("img", {
                                         "class": "ak-thumbnail-image",
                                         "data-thumbnail-src": Item.ThumbnailUrl,
                                         "data-src": Item.ImageUrl,
-                                        src: Item.ThumbnailUrl ? Akumina.Digispace.Utilities.GetThumbnailImage('medium', Item.ThumbnailUrl) : Akumina.Digispace.Utilities.GetThumbnailImage('medium', Item.ImageUrl)
-                                    }) : null,
+                                        src: Item.ThumbnailUrl ? Akumina.Digispace.Utilities.GetThumbnailImage('medium', Item.ThumbnailUrl) : Akumina.Digispace.Utilities.GetThumbnailImage('medium', Item.ImageUrl),
+                                        alt: ""
+                                    }),
                                     Item.Featured && React.createElement(
                                         "div",
                                         { className: "ia-featured-tag" },
-                                        Akumina.Digispace.Language.TryGetText("fs.newswidget.featured")
+                                        Akumina.Digispace.Language.TryGetText("fs.blogswidget.featured")
+                                    ),
+                                    Item.IsDeleted && React.createElement(
+                                        "div",
+                                        { className: "ia-deleted-tag" },
+                                        Akumina.Digispace.Language.TryGetText("fs.blogswidget.deleted")
                                     )
                                 ),
                                 React.createElement(
@@ -241,7 +246,7 @@ React.createElement(
                                                 { className: "ia-posted-by-user ia-user-teams-presence-container" },
                                                 React.createElement("img", { className: "fs-js-publisher-image", alt: Item.Publisher.Name,
                                                     src: Item.Publisher.ProfilePicture }),
-                                                React.createElement("div", { "data-email-id": Item.Publisher.Email, className: "ia-user-profile-by-status fs-js-user-profile-by-status" })
+                                                React.createElement("div", { "data-email-id": Item.Publisher.Email, "class": "ia-user-profile-by-status fs-js-user-profile-by-status" })
                                             ),
                                             React.createElement(
                                                 "div",
@@ -317,7 +322,7 @@ React.createElement(
                 ) : React.createElement(
                     "p",
                     null,
-                    Akumina.Digispace.Language.TryGetText("fs.newswidget.nonewsfound")
+                    Akumina.Digispace.Language.TryGetText("fs.blogswidget.nonewsfound")
                 )
             ),
             DisplayShowMoreButton && React.createElement(
@@ -326,7 +331,7 @@ React.createElement(
                 React.createElement(
                     "button",
                     { className: "ia-button", onClick: () => ShowMore() },
-                    Akumina.Digispace.Language.TryGetText("fs.newswidget.showmore")
+                    Akumina.Digispace.Language.TryGetText("fs.blogswidget.showmore")
                 )
             )
         )

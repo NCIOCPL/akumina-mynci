@@ -9,13 +9,13 @@
     "Properties": [],
     "Views": [
       {
-        "Name": "HomePage-Photos",
-        "Path": "/{AssetLibraryName}/DigitalWorkPlace/Content/Templates/LatestMediaWidget/FeaturedPhotos.html",
+        "Name": "Home Page Photos",
+        "Path": "/{AssetLibraryName}/DigitalWorkPlace/Content/Templates/LatestMediaWidget/featuredphotos.html",
         "Id": "14969547-e36c-499e-916b-d125f759a387"
       },
       {
-        "Name": "NCI-Photos-Carousel",
-        "Path": "/{AssetLibraryName}/DigitalWorkPlace/Content/Templates/LatestMediaWidget/ncifeaturedphotos.html",
+        "Name": "NCI Photos Carousel",
+        "Path": "/{AssetLibraryName}/DigitalWorkPlace/Content/Templates/LatestMediaWidget/featuredphotos_nci.html",
         "Id": "5e867468-6fec-4e10-b9d8-dfc63926d722"
       }
     ],
@@ -25,8 +25,8 @@
   },
   "Instances": [
     {
-      "Name": "Latest NCI Photos",
-      "Description": "",
+      "Name": "NCI Latest NCI Photos",
+      "Description": "Possibly unused?",
       "Icon": "fa fa-cog",
       "Id": "0a46992e-b6f8-4793-b6a1-553a1c7a9414",
       "Properties": [
@@ -83,13 +83,13 @@
           "value": ""
         }
       ],
-      "SelectedView": "HomePage-Photos",
-      "AvailableViews": [],
+      "SelectedView": "Home Page Photos",
+      "AvailableViews": ["Home Page Photos"],
       "HiddenFields": []
     },
     {
-      "Name": "Latest NCI Photos Carousel",
-      "Description": "",
+      "Name": "NCI Latest NCI Photos Carousel",
+      "Description": "Photo carousel used on the home page",
       "Icon": "fa fa-cog",
       "Id": "79502f8a-289f-4816-8e54-fa047e536766",
       "Properties": [
@@ -146,8 +146,8 @@
           "value": ""
         }
       ],
-      "SelectedView": "NCI-Photos-Carousel",
-      "AvailableViews": [],
+      "SelectedView": "NCI Photos Carousel",
+      "AvailableViews": ["NCI Photos Carousel"],
       "HiddenFields": []
     }
   ],

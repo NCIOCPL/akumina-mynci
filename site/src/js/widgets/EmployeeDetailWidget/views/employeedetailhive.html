@@ -25,255 +25,118 @@
 {{else}}
 <div class="ia-profile fs-js-profile ia-widget-wrapper">
     <div class="row ia-profile-details">
-        <div class="col-lg-12">
-            <!-- March 18 - unused code for profile_avatar from employeedetailhive_new
-             <img
+        <div class="col-lg-8">
+            <div class="profile_avatar ia-profile-avatar" data-edit="{{CanChangeBackground}}">
+                {{#if backgroundimage}}
+                    <img
                         class="ak-thumbnail-image"
-                        data-src="backgroundImage"
+                        data-src="backgroundImage" 
                         src="{{ThumbnailImage 'large' backgroundimage}}"
                     />
-            -->
-            <div class="profile_avatar ia-profile-avatar" data-edit="{{CanChangeBackground}}" {{#if backgroundimage}} style="background-image: url('{{backgroundimage}}');background-repeat: no-repeat; background-size: cover;"
-                {{/if}}>
+                {{/if}}
                 <a href="#">
                     <img id="ed-photo" class="avatar round" src="{{pictureurl}}"
                         alt="Profile picture of {{givenname}} {{surname}}">
                 </a>
                 {{#if CanEditData}}
-                <button type="button" name="" class="btn-edit-profile ia-btn-edit-profile ia-button-small ia-button-secondary">
-                    <i class="fa-light fa-pencil" aria-hidden="true"></i>{{translate "fs.employeedetail.editprofile"}}
-                </button>
+                    <button type="button" name="" class="btn-edit-profile ia-btn-edit-profile ia-button-small ia-button-secondary">
+                        <i class="fa-light fa-pencil" aria-hidden="true"></i>{{translate "fs.employeedetail.editprofile"}}
+                    </button>
                 {{/if}}
             </div>
             <div class="profile_info ia-profile-detail-info">
                 <div class="ia-profile-detail-name">
-                    <h1 class="title">{{givenname}} {{surname}} [{{graph.customfieldstring6}}]</h1>
-                    {{#if jobtitle}}
-                    <div class="ia-key-value">
-                        <div class="ia-value">{{jobtitle}}</div>
+                    <div>
+                        <h1 class="title">{{givenname}} {{surname}}</h1>
+                        {{#if jobtitle}}
+                        <div class="ia-key-value">
+                            <div class="ia-value">{{jobtitle}}</div>
+                        </div>
+                        {{/if}}
                     </div>
-                    {{/if}}
+                    <div class="ia-profile-button-container">
+                        <div id="recognition-submission-widget"></div>
+                        {{#if mail}}
+                        <a class="ia-button-small ia-button-secondary teams" href="mailto: {{mail}}"
+                        target="_blank">
+                            <i class="fa-regular fa-envelope" aria-hidden="true"></i>
+                            Email
+                        </a>
+                        {{/if}}
+                        {{#unless CanEditData}}
+                        <a class="ia-button-small ia-button-secondary ia-button-msteams teams" href="https://teams.microsoft.com/l/chat/0/0?users={{mail}}"
+                        target="_blank">
+                            Message
+                        </a>
+                        {{/unless}}
+                    </div>
                 </div>
-                <br />
+
                 <div class="ia-profile-detail-others-info">
-
-                    
-
-                    {{#if mail}}
-                    <div class="ia-key-value">
-                        <label class="ia-key">{{translate "NCI.profile.email"}}:</label>
-                        <div class="ia-value">
-                            <a href="mailto: {{mail}}"><span id="ed-mail">{{mail}}</span></a>
-                        </div>
-                    </div>
-                    <br />
-                    
-                    
-                    {{/if}}
-                    <div class="ia-key-value">
-                        <label class="ia-key">{{translate "NCI.profile.phone"}}:</label>
-                        <div class="ia-value">
-                            <a href="tel: {{mobilephone}}"><span id="ed-mobile">{{formatPhone graph.customfieldstring5}}</span></a>
-                        </div>
-                    </div>
-                    <br />
-
-
-                    {{#if graph.officelocation}}
-                    <div class="ia-key-value">
-                        <label class="ia-key">{{translate "NCI.profile.location"}}:</label>
-                        <div class="ia-value ia-location">{{formatAddress graph.officelocation}}</div>
-                    </div>
-                    <br />
-                    {{/if}}
-
-
-                    <!-- {{#if graph.customfieldstring6}}
-                    <div class="ia-key-value">
-                        <label class="ia-key">{{translate "NCI.profile.classification"}}:</label>
-                        <div class="ia-value">{{graph.customfieldstring6}}</div>
-                    </div>
-                    {{/if}} -->
-
-
                     {{#if office}}
                     <div class="ia-key-value">
-                        <!-- March 18 - code from employeedetailhive_new for office
-                        <label class="ia-key"><i class="fa-regular fa-location-dot"></i></label>
-                        <div class="ia-value">{{office}}</div> -->
-                        <label class="ia-key">{{translate "NCI.profile.organization"}}:</label>
-                        <div class="ia-value org-container">
-                            <div class="ia-value branch-name">{{graph.customfieldstring4}}</div>
-                            <div class="ia-value dept-tree">{{OrganizationSpaces office}}</div>
-                        </div>
+                        <label class="ia-key">{{translate "peoplelist.location"}}</label>
+                        <div class="ia-value">{{office}}</div>
                     </div>
                     {{/if}}
-
-                    <!-- March 18 - currently unused code from employeedetailhive_new
-                    Department
                     {{#if department}}
                     <div class="ia-key-value">
-                        <label class="ia-key"><i class="fa-regular fa-location-dot"></i></label>
+                        <label class="ia-key">{{translate "peoplelist.department"}}</label>
                         <div class="ia-value">{{department}}</div>
-                    </div> 
+                    </div>
                     {{/if}}
-                    
-                    Birthday
-                    <label class="ia-key"><i class="fa-regular fa-cake-candles"></i></label>
-                        <span id="ed-birthday" data-month="{{birthdaymonth}}"
-                                data-date="{{birthdaydate}}">{{displaybirthday}}</span>
-
-                    Fax
-                    <label class="ia-key"><i class="fa-regular fa-fax"></i></label>
+                    {{#if birthdaydate}}
+                    <div class="ia-key-value">
+                        <label class="ia-key">{{translate "peoplelist.birthday"}}</label>
+                        <div class="ia-value">
+                            <span id="ed-birthday" data-month="{{birthdaymonth}}"
+                                  data-date="{{birthdaydate}}">{{displaybirthday}}</span>
+                        </div>
+                    </div>
+                    {{/if}}
+                    {{#if fax}}
+                    <div class="ia-key-value">
+                        <label class="ia-key">{{translate "peoplelist.fax"}}</label>
                         <div class="ia-value"><span id="ed-fax">{{fax}}</span></div>
-
-                    CellPhone
-                    label class="ia-key"><i class="fa-regular fa-mobile"></i></label>
+                    </div>
+                    {{/if}}
+                    {{#if cellphone}}
+                    <div class="ia-key-value">
+                        <label class="ia-key">{{translate "peoplelist.cellphone"}}</label>
                         <div class="ia-value">
                             <a href="tel: {{mobilephone}}"><span id="ed-mobile">{{cellphone}}</span></a>
-                    -->
-
-                    
-                </div>
-                <div class="ia-profile-button-container">
-                    {{#if mail}}
-                    <a class="ia-button-small ia-button-secondary teams" href="mailto: {{mail}}"
-                    target="_blank">
-                        <i class="fa-regular fa-envelope" aria-hidden="true"></i>
-                        Email
-                    </a>
+                        </div>
+                    </div>
                     {{/if}}
-                    {{#unless CanEditData}}
-                    <a class="ia-button-small ia-button-secondary ia-button-msteams teams" href="https://teams.microsoft.com/l/chat/0/0?users={{mail}}"
-                    target="_blank">
-                        Message
-                    </a>
-                    {{/unless}}
                 </div>
+
             </div>
             <div class="ia-profile-information">
-                <div class="ia-about-me">
-                    {{#if CanEditData}}
-                    <div id="aboutMeContainer" class="ia-about-me-content">
+                <div  rel="Recognition Employee Detail Widget" class="ak-widget fs-js-recognition-employee-detail-instance" id="3ebc1880-7cb6-4da0-80ec-fd7e540e473d"></div>
+                <div class="ia-about-me ia-card">
+                    <div class="ia-about-me-content">
                         <h2 class="h3">
                             {{translate "peoplelist.aboutme"}}
                         </h2>
                         <div class="empContent">
                             <p id="ed-aboutme">{{{aboutme}}}</p>
                         </div>
-                        <div class="ia-hide fs-js-empty-about">{{translate "peoplelist.editprofileadd"}} {{translate "peoplelist.youraboutme"}} </div>
+                        <div class="ia-hide" style="padding-bottom: 12px;">{{translate "peoplelist.editprofileadd"}} {{translate "peoplelist.youraboutme"}} </div>
                     </div>
-                    {{else}}
-                    {{#if aboutme}}
-                    <div id="aboutMeContainer" class="ia-about-me-content">
-                        <h2 class="h3">
-                            {{translate "peoplelist.aboutme"}}
-                        </h2>
-                        <div class="empContent">
-                            <p id="ed-aboutme">{{{aboutme}}}</p>
-                        </div>
-                    </div>
-                    {{else}}
-                    <div class="about-me-section__empty"></div>
-                    {{/if}}
-                    {{/if}}
-
-                    {{#if CanEditData}}
-                    <div id='certificationsContainer' class="ia-about-me-content ia-profile-background-info">
-                        <h2 class="h3">
-                            {{translate "peoplelist.certifications"}}
-                        </h2>
-                        {{#if certificationsItems.length}}
-                        <ul>
-                            {{#certificationsItems}}
-                            <li>{{this}}</li>
-                            {{/certificationsItems}}
-                        </ul>
-                        {{else}}
-                        <div class="fs-js-empty-certs">
-                            {{translate "peoplelist.editprofileadd"}} {{translate "peoplelist.yourcertifications"}}
-                        </div>
-                        {{/if}}
-                    </div>
-                    {{else}}
-                    {{#if certificationsItems.length}}
-                    <div id='certificationsContainer' class="ia-about-me-content ia-profile-background-info">
-                        <h2 class="h3">
-                            {{translate "peoplelist.certifications"}}
-                        </h2>
-                        <ul>
-                            {{#certificationsItems}}
-                            <li>{{this}}</li>
-                            {{/certificationsItems}}
-                        </ul>
-                    </div>
-                    {{else}}
-                    <div class="certifications-section__empty"></div>
-                    {{/if}}
-                    {{/if}}
-
-                    {{#if CanEditData}}
-                    <div id='techskillsContainer' class="ia-about-me-content ia-profile-background-info">
-                        <h2 class="h3">
-                            {{translate "peoplelist.techskills"}}
-                        </h2>
-                        {{#if skillsItems.length}}
-                        <ul>
-                            {{#skillsItems}}
-                            <li>{{this}}</li>
-                            {{/skillsItems}}
-                        </ul>
-                        {{else}}
-                        <div class="fs-js-empty-skills">
-                            {{translate "peoplelist.editprofileadd"}} {{translate "peoplelist.yourtechskills"}}
-                        </div>
-                        {{/if}}
-                    </div>
-                    {{else}}
-                    {{#if skillsItems.length}}
-                    <div id='techskillsContainer' class="ia-about-me-content ia-profile-background-info">
-                        <h2 class="h3">
-                            {{translate "peoplelist.techskills"}}
-                        </h2>
-                        <ul>
-                            {{#skillsItems}}
-                            <li>{{this}}</li>
-                            {{/skillsItems}}
-                        </ul>
-                    </div>
-                    {{else}}
-                    <div class="techSkills-section__empty"></div>
-                    {{/if}}
-                    {{/if}}
-
-                    {{#if CanEditData}}
-                    <div id="hobbiesContent" class="ia-about-me-content">
+                    <div class="ia-about-me-content">
                         <h2 class="h3">
                             {{translate "peoplelist.hobbies"}}
                         </h2>
                         <div class="empContent">
                             <p id="ed-hobbies">{{{hobbies}}}</p>
                         </div>
-                        <div class="ia-hide fs-js-empty-hobbies" style="padding-bottom: 12px;">{{translate "peoplelist.editprofileadd"}} {{translate "peoplelist.yourhobbies"}} </div>
+                        <div class="ia-hide" style="padding-bottom: 12px;">{{translate "peoplelist.editprofileadd"}} {{translate "peoplelist.yourhobbies"}} </div>
                     </div>
-                    {{else}}
-                    {{#if hobbies}}
-                    <div id="hobbiesContent" class="ia-about-me-content">
-                        <h2 class="h3">
-                            {{translate "peoplelist.hobbies"}}
-                        </h2>
-                        <div class="empContent">
-                            <p id="ed-hobbies">{{{hobbies}}}</p>
-                        </div>
-                    </div>
-                    {{else}}
-                    <div class="hobbies-section__empty"></div>
-                    {{/if}}
-                    {{/if}}
                 </div>
             </div>
         </div>
-        <!-- <div class="col-lg-4">
+        <div class="col-lg-4">
+            <div  rel="Award Employee Detail Widget" class="ak-widget fs-js-award-employee-detail-instance" id="371f5109-0ebe-4679-a2e7-670ab20e2267"></div>
             <div class="ia-card ia-profile-card">
                 <div id='certificationsContainer' class="ia-profile-background-info">
                     <h2 class="h3">
@@ -324,7 +187,7 @@
                     {{/if}}
                 </div>
             </div>
-            <div class="fs-profile-background fs-profile-chart">
+            <!--<div class="fs-profile-background fs-profile-chart">
                 <h2 class="h3">
                     {{translate "peoplelist.manager"}}
                 </h2>
@@ -335,14 +198,12 @@
                 {{else}}
                 <p>{{translate "peoplelist.nomanagerfound"}}</p>
                 {{/if}}
-            </div> 
+            </div>-->
             <div rel="MyOrgTreeWidget-Hive" class="ak-widget fs-js-my-org-instance" id="9cb54975-0b16-4a88-9c73-d608c41e4554"></div>
-        </div> -->
+        </div>
     </div>
 </div>
 {{/if}}
-
-
 <!-- modal popup -->
 <div class="mfp-hide" id="divProfileEdit">
     <div class="ia-modal ia-modal-medium ia-profile-detail-modal">
@@ -351,8 +212,7 @@
             <a  href="javascript:void(0)" class="ia-modal-close fs-modal-close"><i class="fa fa-times" aria-label="{{translate 'fs.common.closemodal'}}"></i></a>
         </header>
         <section class="ia-modal-content fs-js-profile-detail-modal-content">
-            <!-- March 18 - added .ia-error div from employeedetailhive_new
-            <div id="fs-js-profile-validation-error" class="ia-message ia-error"></div> -->
+            <div id="fs-js-profile-validation-error" class="ia-message ia-error"></div>
             <div class="ia-form-row ia-bg-img-row">
                 {{#if CanChangeBackground}}
                 <label id="backgroundlabel">{{translate "fs.employeedetail.background_image_profile_card"}}</label>
@@ -365,12 +225,13 @@
                                    value="image description" />
                         </div>
                         <div>
-                            <!-- March 18 - employeedetailhive_new has the following for the img tag:
-                             class="ak-thumbnail-image"
-                             data-src={{Image}}
-                             src="{{ThumbnailImage 'medium' Image}}"
-                            -->
-                            <img class="ak-thumbnail-image" src="{{Image}}" data-spimage="{{SpImageUrl}}" alt="{{translate 'fs.employeedetail.selectBackgroundImageProfileCard'}}" />
+                            <img 
+                                class="ak-thumbnail-image"
+                                data-src={{Image}} 
+                                src="{{ThumbnailImage 'medium' Image}}" 
+                                data-spimage="{{SpImageUrl}}" 
+                                alt="{{translate 'fs.employeedetail.selectBackgroundImageProfileCard'}}" 
+                            />
                         </div>
                     </a>
                     {{/Items}}
@@ -387,7 +248,7 @@
                         {{/if}}
                     </div>
                 </div>
-                <!-- <div class="ia-form-row col-md-6">
+                <div class="ia-form-row col-md-6">
                     <label>{{translate "fs.employeedetail.fax"}}</label>
                     <div class="ia-value">
                         {{#if CanChangeFax}}
@@ -396,7 +257,7 @@
                         <input type="text" id="FaxEdit" disabled />
                         {{/if}}
                     </div>
-                </div> -->
+                </div>
                 <div class="ia-bootstrap-input-button col-md-6">
                     <label>{{translate "peoplelist.certifications"}}</label>
                     <div class="ia-value ia-btn-text">
@@ -466,12 +327,12 @@
                     </div>
                 </div>
             </div>
-            <!-- <div class="ia-form-row">
+            <div class="ia-form-row">
                 <label>{{translate "peoplelist.birthday"}}</label>
                 <div class="ia-value ia-multiple">
                     {{#if CanChangeBirthday}}
                     <select type="text" id="BirthdayEditMonth" style="width: 200px">
-                        {{birthdaymonth}}
+                        <!-- {{birthdaymonth}} -->
                         <option value="00"></option>
                         <option value="01">{{translate "calendar.january"}}</option>
                         <option value="02">{{translate "calendar.february"}}</option>
@@ -487,13 +348,13 @@
                         <option value="12">{{translate "calendar.december"}}</option>
                     </select>
                     <select type="text" id="BirthdayEditDate" style="width: 72px">
-                        {{birthdaydate}}
+                        <!-- {{birthdaydate}} -->
                     </select>
                     {{else}}
                     <input type="text" id="BirthdayDisplay" disabled />
                     {{/if}}
                 </div>
-            </div> -->
+            </div>
             <p>
                 <em>{{translate "fs.employeedetail.helptext"}}</em>
             </p>

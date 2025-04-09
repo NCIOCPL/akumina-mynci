@@ -1,54 +1,58 @@
 {
-    "Name": "Event List",
-    "Id": "02977861-291b-4b77-96f9-4403a793b558",
-    "Type": "GenericPage",
-    "List": "GenericPages_AK",
-    "AdditionalSelectColumns": "",
-    "Url": "eventlist.aspx",
-    "Personas": [
-        "All"
-    ],
-    "PageDefinition": {
-        "Containers": [
-            {
-                "id": "container1",
-                "layoutid": "2 Column Large Right",
-                "zones": [
-                    {
-                        "id": "zone1",
-                        "widgets": [
-                            {
-                                "Title": "Left Navigation Indicator",
-                                "WidgetInstanceId": "550ddab9-9020-4b13-8672-7adc3fa375fd",
-                                "Name": "NCILeftNavWidget",
-                                "Icon": "fa fa-cog",
-                                "Description": "Reflects the current position in the nav hierarchy.",
-                                "Options": "",
-                                "DisplayOrder": "0",
-                                "Grid": "",
-                                "Properties": []
-                            }
-                        ]
-                    },
-                    {
-                        "id": "zone2",
-                        "widgets": [
-                            {
-                                "Title": "NCI Events Listing",
-                                "WidgetInstanceId": "32c7b77c-9816-4175-81ee-74552b78ad16",
-                                "Name": "EventsWidget",
-                                "Icon": "fa fa-cog",
-                                "Description": "Provides a listing of NCI events.",
-                                "Options": "",
-                                "DisplayOrder": "0",
-                                "Grid": "",
-                                "Properties": []
-                            }
-                        ]
-                    }
-                ]
-            }
-       ]    
-    },
-    "IsLegacyMode": false
+  "Name": "Event List",
+  "Id": "02977861-291b-4b77-96f9-4403a793b558",
+  "Type": "GenericPage",
+  "List": "GenericPages_AK",
+  "AdditionalSelectColumns": "",
+  "Url": "eventlist.aspx",
+  "Personas": ["All"],
+  "PageDefinition": {
+    "Containers": [
+      {
+        "id": "container1",
+        "layoutid": "1 Column",
+        "zones": [
+          {
+            "id": "zone1",
+            "widgets": [
+              {
+                "Title": "NCI Edit Warning",
+                "WidgetInstanceId": "0deef6c6-f852-4365-bc25-bb3dc4db6d2d",
+                "Name": "TextBlockWidget",
+                "Icon": "fa fa-cog",
+                "Description": "Displays a warning not to edit certain pages.",
+                "Options": "",
+                "DisplayOrder": "1",
+                "Grid": "",
+                "Properties": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "container2",
+        "layoutid": "1 Column",
+        "zones": [
+          {
+            "id": "zone1",
+            "widgets": [
+              {
+                "Title": "NCI Events Listing",
+                "WidgetInstanceId": "32c7b77c-9816-4175-81ee-74552b78ad16",
+                "Name": "EventsWidget",
+                "Icon": "fa fa-cog",
+                "Description": "Provides a listing of NCI events.",
+                "Options": "",
+                "DisplayOrder": "0",
+                "Grid": "",
+                "Properties": []
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "IsLegacyMode": false
 }

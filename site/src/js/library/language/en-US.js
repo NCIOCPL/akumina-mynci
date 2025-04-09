@@ -3003,6 +3003,7 @@ window.lang = {
       title: 'News & Updates',
       nonewsfound: 'No News Found',
       featured: 'Featured',
+      readtime: '{{ReadTime}} min read',
       readingtime: 'min read',
       viewall: 'View All News & Updates',
       viewallglobalnews: 'View All Global News',

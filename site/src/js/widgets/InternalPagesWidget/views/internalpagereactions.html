@@ -1,0 +1,53 @@
+<div class="ia-card ia-widget-wrapper">
+    {{#if HasContent}}
+    <div class="ia-card-header">
+        <div class="color-category date">
+            {{akdateformat PublicationDate 'shortmonth'}} {{akdateformat PublicationDate 'dateandyear'}}
+            <h2 class="h3">{{{Title}}}</h2>
+        </div>
+        {{#if DisplayLikes}}
+        <div class="ia-reactionsaggregate-container">
+            <div rel="Detail Aggregate stub instance" class="ak-widget" id="30ac9008-07fb-0671-984e-b4376f9a4815"></div>
+        </div>
+        {{/if}}
+    </div>
+    
+    <div class="ak-item row" ak-item="{{ID}}" ak-newstitle="{{Title}}">
+        {{#if ImageUrl}}
+        <div class="col-md-7">
+            {{{Body}}}
+        </div>
+        <div class="col-md-5">
+            <div class="jumpaf imag-container">
+                <img src="{{ImageUrl}}" class="imag restrictHeight" alt="{{#if ImageAlt}}{{ImageAlt}}{{else}}{{translate 'common.noimagedescription'}}{{/if}}">
+            </div>
+        </div>
+        {{else}}
+        <div class="col-md-12">
+            {{{Body}}}
+        </div>
+        {{/if}}
+    </div>
+
+    {{#if ContentRelatedLinks}}
+    <h2 class="h3">{{translate "fs.internalpageswidget.related_links"}}</h2>
+    {{{ContentRelatedLinks}}}
+    {{/if}}
+
+    <div class="d-flex justify-content-end align-items-center mt-md-0 mt-3 social-tab">
+        {{#if DisplayLikes}}
+        <div class="ia-reactionsdetail-container pe-3">
+            <div rel="ActivityReactionsWidget stub instance" class="ak-widget" id="30ac9008-07fb-0671-984e-b4376f9a4814"></div>
+        </div>
+        {{/if}}
+        {{#if DisplayShare}}
+        <a href="#" class="share-button shareButton ia-button-primary ia-button-w-icon">
+            <i class="fa fa-share-alt" aria-hidden="true"></i>
+            <span class="clickText">{{translate "common.share"}}</span>
+        </a>
+        {{/if}}
+    </div>
+    {{else}}
+    <p>{{translate "fs.newsdetailwidget.noarticlefound"}}</p>
+    {{/if}}
+</div>
