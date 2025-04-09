@@ -287,7 +287,9 @@ React.createElement(
                                                     Item.ReadingTime != null && React.createElement(
                                                         "span",
                                                         null,
-                                                        Item.ReadingTimeText
+                                                        Item.ReadingTime,
+                                                        "\xA0",
+                                                        Akumina.Digispace.Language.TryGetText("fs.newswidget.readingtime")
                                                     )
                                                 )
                                             )
