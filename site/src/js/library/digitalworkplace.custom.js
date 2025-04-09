@@ -1,4 +1,4 @@
-import { blogDetailWidget_helper } from './modules/BlogDetailWidget.js';
+import { blogDetailWidget_callbacks } from './modules/callbacks/BlogDetailWidget.js';
 import { employeeDetailWidget_helper } from './modules/EmployeeDetailWidget.js';
 import { latestMediaWidget_helper } from './modules/LatestMediaWidget.js';
 import { newsDetailWidget_helper } from './modules/NewsDetailWidget.js';
@@ -99,7 +99,7 @@ Akumina.Digispace.AppPart.Eventing.Subscribe(
   window.On_Page_Loaded
 );
 
-blogDetailWidget_helper();
+blogDetailWidget_callbacks();
 employeeDetailWidget_helper();
 latestMediaWidget_helper();
 newsDetailWidget_helper();
