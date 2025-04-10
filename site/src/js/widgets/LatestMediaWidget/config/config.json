@@ -135,7 +135,7 @@
         },
         {
           "name": "uicallbackmethod",
-          "value": "NCI_LatestMediaPhotos"
+          "value": "LatestMediaWidget_data_loadPhotos"
         },
         {
           "name": "sitecollectionurl",
