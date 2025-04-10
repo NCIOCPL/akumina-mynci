@@ -70,5 +70,4 @@
 		</Data>
 	</list>
 	<list name="LatestPhotos_NCI" contentType="AkuminaLanguage,Item,AkuminaImageGallery" noCrawl="FALSE" />
-	<list name="TipOfTheWeek_NCI" contentType="AkuminaSearch,AkuminaPersona,AkuminaArticle,NCIAkuminaArticle" noCrawl="FALSE" />
 </lists>
