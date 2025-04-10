@@ -1,7 +1,7 @@
-export function newsDetailWidget_helper() {
+export function newsDetailWidget_callbacks() {
   // Rename in future
   // NewsDetailWidget_ui
-  window.NCINewsDetailUICallback = function (widget, props) {
+  window.newsDetail_ui_prepSlider = function (widget, props) {
     var profInfo1 = $('#profInfoLink1');
     var profInfo2 = $('#profInfoLink2');
     var profPhoto1 = $('#profPhotoLink2');
@@ -19,7 +19,7 @@ export function newsDetailWidget_helper() {
 
   // Rename in future
   // NewsDetailWidget_data
-  window.NewsDetailContactCallback = function (data) {
+  window.newsDetail_data_addContactInfo = function (data) {
     var profInfo1 = $('#profInfoLink1');
     var profInfo2 = $('#profInfoLink2');
     var profPhoto1 = $('#profPhotoLink2');
