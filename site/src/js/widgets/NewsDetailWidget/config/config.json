@@ -66,11 +66,11 @@
         },
         {
           "name": "callbackmethod",
-          "value": "NewsDetailContactCallback"
+          "value": "newsDetail_data_addContactInfo"
         },        
         {
           "name": "uicallbackmethod",
-          "value": "NCINewsDetailUICallback"
+          "value": "newsDetail_ui_prepSlider"
         },        
         {
           "name": "usereactionslegacyview",
