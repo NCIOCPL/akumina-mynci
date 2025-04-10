@@ -1,8 +1,9 @@
 import { blogDetailWidget_callbacks } from './modules/callbacks/BlogDetailWidget.js';
 import { employeeDetailWidget_handlebars } from './modules/handlebars/EmployeeDetailWidget.js';
-import { latestMediaWidget_helper } from './modules/LatestMediaWidget.js';
 import { newsDetailWidget_callbacks } from './modules/callbacks/NewsDetailWidget.js';
 import { peopleDirectoryWidget_callbacks } from './modules/callbacks/PeopleDirectoryWidget.js';
+import { latestMediaWidget_handlebars } from './modules/handlebars/LatestMediaWidget.js';
+import { latestMediaWidget_callbacks } from './modules/handlebars/LatestMediaWidget.js';
 
 // Remove in future
 // window.NCIAddDebuggerBreak = function (arg1, arg2, arg3, arg4, arg5) {
@@ -83,6 +84,7 @@ Akumina.Digispace.AppPart.Eventing.Subscribe(
 
 blogDetailWidget_callbacks();
 employeeDetailWidget_handlebars();
-latestMediaWidget_helper();
 newsDetailWidget_callbacks();
 peopleDirectoryWidget_callbacks();
+latestMediaWidget_handlebars();
+latestMediaWidget_callbacks();
