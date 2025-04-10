@@ -1,5 +1,4 @@
-export function employeeDetailWidget_helper() {
-
+export function employeeDetailWidget_handlebars() {
   // Adds spaces around forward slashes
   Handlebars.registerHelper('OrganizationSpaces', function (organization) {
     if (typeof organization == 'string') {
