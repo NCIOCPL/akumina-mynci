@@ -1,7 +1,8 @@
 import { blogDetailWidget_callbacks } from './modules/callbacks/BlogDetailWidget.js';
-import { employeeDetailWidget_handlebars } from './modules/handlebars/EmployeeDetailWidget.js';
-import { latestMediaWidget_helper } from './modules/LatestMediaWidget.js';
-import { newsDetailWidget_callbacks } from './modules/callbacks/NewsDetailWidget.js';
+import { employeeDetailWidget_helper } from './modules/EmployeeDetailWidget.js';
+import { latestMediaWidget_handlebars } from './modules/handlebars/LatestMediaWidget.js';
+import { latestMediaWidget_callbacks } from './modules/handlebars/LatestMediaWidget.js';
+import { newsDetailWidget_helper } from './modules/NewsDetailWidget.js';
 import { peopleDirectoryWidget_helper } from './modules/PeopleDirectoryWidget.js';
 
 // Remove in future
@@ -82,7 +83,8 @@ Akumina.Digispace.AppPart.Eventing.Subscribe(
 );
 
 blogDetailWidget_callbacks();
-employeeDetailWidget_handlebars();
-latestMediaWidget_helper();
-newsDetailWidget_callbacks();
+employeeDetailWidget_helper();
+latestMediaWidget_handlebars();
+latestMediaWidget_callbacks();
+newsDetailWidget_helper();
 peopleDirectoryWidget_helper();
