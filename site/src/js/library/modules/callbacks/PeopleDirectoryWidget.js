@@ -1,7 +1,8 @@
-import { FireWhen } from "./helpers/FireWhen";
+import { FireWhen } from "../helpers/FireWhen";
 
-export function peopleDirectoryWidget_helper() {
-  var PushPeopleContainerUnderTab = function () {
+export function peopleDirectoryWidget_callbacks() {
+
+  window.tab_html_prepOrgTabs = function (control, properties) {
     if ($('.ia-people-results').length == 1) {
       $('.ia-people-results')
         .clone(true)
@@ -27,13 +28,9 @@ export function peopleDirectoryWidget_helper() {
     }
   };
 
-  window.NCITABOrganizationDirectory = function (control, properties) {
-    PushPeopleContainerUnderTab();
-  };
-
   var NCIDescriptionProcessed = '';
   var NCIFlatDepartmentstree = [];
-  window.NCIGenericItemPropcallback = function (prop) {
+  window.genericItem_data_setOrgDescription = function (prop) {
     prop.idOrTitle = NCIDescriptionProcessed || '';
     var selectedNodes = $('#filtertreenav').jstree('get_selected');
     if (selectedNodes.length === 0 || typeof selectedNodes[0] === 'object') {
@@ -50,7 +47,7 @@ export function peopleDirectoryWidget_helper() {
     return prop;
   };
 
-  window.NCIGenericSearchPropcallback = function (request) {
+  window.genericSearchList_query_setOrgSearch = function (request) {
     request.searchTerm = $('.jstree-clicked').text();
     request.defaultQueryText = `*  (SPSiteURL:${
       Akumina.Digispace.SiteContext.SiteAbsoluteUrl
@@ -62,7 +59,7 @@ export function peopleDirectoryWidget_helper() {
     return request.defaultQueryText;
   };
 
-  window.OrganizationDirectorySearchResultsCallBack = function (data) {
+  window.genericSearchList_data_searchOrgs = function (data) {
     data.SearchTerm =
       $('.jstree-clicked').length > 0 ? $('.jstree-clicked').text() : '';
     return data;
@@ -71,7 +68,7 @@ export function peopleDirectoryWidget_helper() {
   var NCITreeNavSelected = '';
 
   //OrganizationDirectoryPage
-  window.LoadOrganizationDirectoryTreeFilter = function () {
+  window.peopleDirectory_html_loadOrgs = function () {
     var organizationtermsetid =
       _configContextInfo.hasOwnProperty('organizationdirectorytermsetid') &&
       !Akumina.AddIn.Utilities.IsNullOrEmpty(
@@ -280,7 +277,7 @@ export function peopleDirectoryWidget_helper() {
     );
   };
   //OrganizationDirectoryPage
-  window.NCIDirectoryOrgCallBackUI = function () {
+  window.peopleDirectory_ui_addOrgDirTabs = function () {
     FireWhen(
       'AddTabsUnderOrgWidget',
       function () {
@@ -294,67 +291,69 @@ export function peopleDirectoryWidget_helper() {
           $('#organizationdirectorytabwidget')
         );
         $('.ia-tab-widget-container').show();
-        window.NCITABOrganizationDirectory();
+        window.tab_html_prepOrgTabs();
       },
       200
     );
   };
 
-  FireWhen(
-    'LoadTabWidget',
-    function () {
-      return (
-        $('.ia-people-results').length > 0 &&
-        $('#ak-tabwidget-tabs-PeopleTab').length > 0
-      );
-    },
-    function () {
-      $('.ui-tabs-anchor').bind('click', function () {
-        var tabDescription = $(this).text().trim();
-        switch (tabDescription) {
-          case 'People':
-            // Call this function to simulate the click
-            //Akumina.Digispace.AppPart.Eventing.Publish("/peopledirectory/search/", "facets");
-            var lastProcessed = $(this).attr('loaded') || '';
-            if (
-              lastProcessed == '' ||
-              NCIDescriptionProcessed != lastProcessed
-            ) {
-              $(this).attr('loaded', NCIDescriptionProcessed);
-              FireWhen(
-                'PeopleTabReady',
-                function () {
-                  return $('#ak-tabwidget-tabs-PeopleTab').hasClass(
-                    'ia-tab-active-link'
-                  );
-                },
-                function () {
-                  simulateClickOnSelectedNode();
-                },
-                200
+  window.peopleDirectory_html_loadTabs = function () {
+    FireWhen(
+      'LoadTabWidget',
+      function () {
+        return (
+          $('.ia-people-results').length > 0 &&
+          $('#ak-tabwidget-tabs-PeopleTab').length > 0
+        );
+      },
+      function () {
+        $('.ui-tabs-anchor').bind('click', function () {
+          var tabDescription = $(this).text().trim();
+          switch (tabDescription) {
+            case 'People':
+              // Call this function to simulate the click
+              //Akumina.Digispace.AppPart.Eventing.Publish("/peopledirectory/search/", "facets");
+              var lastProcessed = $(this).attr('loaded') || '';
+              if (
+                lastProcessed == '' ||
+                NCIDescriptionProcessed != lastProcessed
+              ) {
+                $(this).attr('loaded', NCIDescriptionProcessed);
+                FireWhen(
+                  'PeopleTabReady',
+                  function () {
+                    return $('#ak-tabwidget-tabs-PeopleTab').hasClass(
+                      'ia-tab-active-link'
+                    );
+                  },
+                  function () {
+                    simulateClickOnSelectedNode();
+                  },
+                  200
+                );
+              }
+              break;
+            case 'Content':
+              var id = $('.ak-tabwidget-tabs-container li:first').attr(
+                'aria-controls'
               );
-            }
-            break;
-          case 'Content':
-            var id = $('.ak-tabwidget-tabs-container li:first').attr(
-              'aria-controls'
-            );
-            Akumina.Digispace.AppPart.Eventing.Publish(
-              '/genericsearchlist/search/',
-              { term: `${NCITreeNavSelected}` }
-            );
-            break;
-          case 'Overview':
-            var id = $('.ak-tabwidget-tabs-container li:first').attr(
-              'aria-controls'
-            );
-            RenderChildWidgets(`#${id}`);
-            break;
-        }
-      });
-    },
-    200
-  );
+              Akumina.Digispace.AppPart.Eventing.Publish(
+                '/genericsearchlist/search/',
+                { term: `${NCITreeNavSelected}` }
+              );
+              break;
+            case 'Overview':
+              var id = $('.ak-tabwidget-tabs-container li:first').attr(
+                'aria-controls'
+              );
+              RenderChildWidgets(`#${id}`);
+              break;
+          }
+        });
+      },
+      200
+    );
+  }
 
   // Simulate click on the current folder selected
   function simulateClickOnSelectedNode() {
