@@ -2,7 +2,7 @@ import { blogDetailWidget_callbacks } from './modules/callbacks/BlogDetailWidget
 import { employeeDetailWidget_handlebars } from './modules/handlebars/EmployeeDetailWidget.js';
 import { latestMediaWidget_helper } from './modules/LatestMediaWidget.js';
 import { newsDetailWidget_callbacks } from './modules/callbacks/NewsDetailWidget.js';
-import { peopleDirectoryWidget_helper } from './modules/PeopleDirectoryWidget.js';
+import { peopleDirectoryWidget_callbacks } from './modules/callbacks/PeopleDirectoryWidget.js';
 
 // Remove in future
 // window.NCIAddDebuggerBreak = function (arg1, arg2, arg3, arg4, arg5) {
@@ -85,4 +85,4 @@ blogDetailWidget_callbacks();
 employeeDetailWidget_handlebars();
 latestMediaWidget_helper();
 newsDetailWidget_callbacks();
-peopleDirectoryWidget_helper();
+peopleDirectoryWidget_callbacks();
