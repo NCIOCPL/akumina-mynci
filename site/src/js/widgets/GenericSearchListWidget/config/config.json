@@ -220,7 +220,7 @@
         },
         {
           "name": "callbackmethod",
-          "value": "OrganizationDirectorySearchResultsCallBack"
+          "value": "genericSearchList_data_searchOrgs"
         },
         {
           "name": "cacheinterval",
@@ -246,7 +246,7 @@
         },
         {
           "name": "querycallbackmethod",
-          "value": "NCIGenericSearchPropcallback"          
+          "value": "genericSearchList_query_setOrgSearch"          
         }
       ]
     }
