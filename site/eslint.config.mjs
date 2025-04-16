@@ -22,6 +22,9 @@ export default [
         AkHeadlessUrl: 'readonly' // Akumina
       },
     },
+    rules: {
+      'no-unused-vars': ["error", { "argsIgnorePattern": "^_" }],
+    },
     // There are some libraries available to the scripts that are not imported.
     // Defining them here to avoid global errors.
   },

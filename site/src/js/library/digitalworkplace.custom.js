@@ -3,7 +3,7 @@ import { employeeDetailWidget_handlebars } from './modules/handlebars/EmployeeDe
 import { newsDetailWidget_callbacks } from './modules/callbacks/NewsDetailWidget.js';
 import { peopleDirectoryWidget_callbacks } from './modules/callbacks/PeopleDirectoryWidget.js';
 import { latestMediaWidget_handlebars } from './modules/handlebars/LatestMediaWidget.js';
-import { latestMediaWidget_callbacks } from './modules/handlebars/LatestMediaWidget.js';
+import { latestMediaWidget_callbacks } from './modules/callbacks/LatestMediaWidget.js';
 
 // Remove in future
 // window.NCIAddDebuggerBreak = function (arg1, arg2, arg3, arg4, arg5) {

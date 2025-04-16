@@ -1,5 +1,5 @@
 export function latestMediaWidget_handlebars() {
-  Handlebars.registerHelper('ThumbnailImage', function (image, options) {
+  Handlebars.registerHelper('ThumbnailImage', function (image, _options) {
     if (
       image != null &&
       image.toLowerCase().indexOf('akumina%20library') == -1
@@ -21,7 +21,7 @@ export function latestMediaWidget_handlebars() {
   // Used with the Latest Media Widget / ncifeaturedphotos.html view
   Handlebars.registerHelper(
     'MediumThumbnailImage',
-    function (image, exclusion, options) {
+    function (image, _exclusion, _options) {
       if (
         image != null &&
         image.toLowerCase().indexOf('akumina%20library') == -1
