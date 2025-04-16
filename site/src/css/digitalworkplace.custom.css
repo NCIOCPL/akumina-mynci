@@ -108,7 +108,7 @@ body{
     mask-size: cover;
     display: block;
     content: '';
-    position: absolutex;
+    position: absolute;
     height: 100%;
     width: 100%;
 }
@@ -389,7 +389,7 @@ body{
 }
 
 .leadership-slw .ia-slw-thumbails-lists.ia-card {
-    height: "500px";
+    height: 500px;
     overflow-y: auto;
 }
 
@@ -564,7 +564,6 @@ and Important Events (Upcoming Events)
 }
 
 .featured-photos-widget .slick-dots button {
-    background-color: none;
     border: 1px solid black;
     border-radius: 1000px;
     height: 10px;
@@ -783,7 +782,7 @@ and Important Events (Upcoming Events)
 .ak-theme-ncitheme .ia-tab-widget-container .ui-widget-header .ui-state-active a, 
 .ak-theme-ncitheme .ia-tab-widget-container .fs-tab-item.ia-tab-active a{
     font-weight: 600;
-    font-size: clamp(25px, 25px, 25px);
+    font-size: clamp(25px, 25px, 25px); /* eslint-disable-line css/no-invalid-properties */
     padding-bottom: calc(var(--fs-gutter-space) / 3);
 }
 
@@ -917,7 +916,6 @@ and Important Events (Upcoming Events)
 
 .expanded-fields-contacts .ia-article-author-status {
     display: -webkit-box;
-    display: -ms-flexbox;
     display: flex;
     
     -webkit-box-align: center;
@@ -948,7 +946,7 @@ and Important Events (Upcoming Events)
 
 /* Tab item is Overview, People, and Content tabs */
 #organizationdirectorytabwidget .ia-tab-item a {
-	font-size: clamp(25px, 3vw, 36px) !important;
+	font-size: clamp(25px, 3vw, 36px) !important; /* eslint-disable-line css/no-invalid-properties */
 }
 
 

@@ -2,7 +2,7 @@ import { FireWhen } from "../helpers/FireWhen";
 
 export function peopleDirectoryWidget_callbacks() {
 
-  window.tab_html_prepOrgTabs = function (control, properties) {
+  window.tab_html_prepOrgTabs = function (_control, _properties) {
     if ($('.ia-people-results').length == 1) {
       $('.ia-people-results')
         .clone(true)
@@ -51,11 +51,11 @@ export function peopleDirectoryWidget_callbacks() {
     request.searchTerm = $('.jstree-clicked').text();
     request.defaultQueryText = `*  (SPSiteURL:${
       Akumina.Digispace.SiteContext.SiteAbsoluteUrl
-    } (((FileExtension:zip OR FileExtension:txt OR FileExtension:doc OR FileExtension:docx OR FileExtension:xls OR FileExtension:xlsx OR FileExtension:ppt OR FileExtension:pptx OR FileExtension:pdf)(IsDocument:\"True\")) OR (contentclass:\"STS_ListItem\" Path:\"${
+    } (((FileExtension:zip OR FileExtension:txt OR FileExtension:doc OR FileExtension:docx OR FileExtension:xls OR FileExtension:xlsx OR FileExtension:ppt OR FileExtension:pptx OR FileExtension:pdf)(IsDocument:"True")) OR (contentclass:"STS_ListItem" Path:"${
       Akumina.Digispace.SiteContext.SiteAbsoluteUrl
-    }/Lists/*\" AkLanguageId:1033))) 	DEPARTMENTS:\"${$(
+    }/Lists/*" AkLanguageId:1033))) 	DEPARTMENTS:"${$(
       '.jstree-clicked'
-    ).text()}\"`;
+    ).text()}"`;
     return request.defaultQueryText;
   };
 
@@ -70,7 +70,7 @@ export function peopleDirectoryWidget_callbacks() {
   //OrganizationDirectoryPage
   window.peopleDirectory_html_loadOrgs = function () {
     var organizationtermsetid =
-      _configContextInfo.hasOwnProperty('organizationdirectorytermsetid') &&
+      Object.prototype.hasOwnProperty.call(_configContextInfo, 'organizationdirectorytermsetid') &&
       !Akumina.AddIn.Utilities.IsNullOrEmpty(
         _configContextInfo.organizationdirectorytermsetid
       )
@@ -114,12 +114,6 @@ export function peopleDirectoryWidget_callbacks() {
             $(this).attr('title', description);
           });
         });
-        //bindfiltertrigger();
-        var truncateTimmer = setInterval(function () {
-          if (!$('.jstree-anchor').hasClass('truncate')) {
-            $('.jstree-anchor').addClass('truncate');
-          }
-        }, 100);
       },
       200
     );
@@ -159,7 +153,7 @@ export function peopleDirectoryWidget_callbacks() {
       else if (
         $('.ak-tabwidget-tabs-container li:first').hasClass('ia-tab-active')
       ) {
-        var customAttr = data.node.original.customAttr;
+        customAttr = data.node.original.customAttr;
         if (!Akumina.AddIn.Utilities.IsNullOrEmpty(customAttr)) {
           description = customAttr;
         }
@@ -214,7 +208,7 @@ export function peopleDirectoryWidget_callbacks() {
     // Load jsTree script and initialize
     $.getScript(
       'https://cdnjs.cloudflare.com/ajax/libs/jstree/3.3.12/jstree.min.js',
-      async function (data, textStatus, jqxhr) {
+      async function (_data, _textStatus, _jqxhr) {
         var deliveryUrl =
           Akumina.Digispace.ConfigurationContext.RemoteListSiteUrl;
         var termsetId = _configContextInfo.organizationdirectorytermsetid;
@@ -247,7 +241,7 @@ export function peopleDirectoryWidget_callbacks() {
             //Workaround to fix issue related to nested items not loading correctly
 
             //NCI-202 - Links to Organization
-            $('#filtertreenav').on('ready.jstree', function (e, data) {
+            $('#filtertreenav').on('ready.jstree', function (_e, _data) {
               $('#filtertreenav').jstree('open_all');
               $('#filtertreenav').jstree('close_all');
 
@@ -266,10 +260,10 @@ export function peopleDirectoryWidget_callbacks() {
               }
             });
           },
-          error: function (xhr, ajaxOptions, thrownError) {
-            console.log('error getting termset ->' + termsetid);
+          error: function (_xhr, _ajaxOptions, _thrownError) {
+            console.log('error getting termset ->' + termsetId);
             $('#organizationdirectorytabwidget').html(
-              'error getting termset ->' + termsetid
+              'error getting termset ->' + termsetId
             );
           },
         });
@@ -343,7 +337,7 @@ export function peopleDirectoryWidget_callbacks() {
               );
               break;
             case 'Overview':
-              var id = $('.ak-tabwidget-tabs-container li:first').attr(
+              id = $('.ak-tabwidget-tabs-container li:first').attr(
                 'aria-controls'
               );
               RenderChildWidgets(`#${id}`);

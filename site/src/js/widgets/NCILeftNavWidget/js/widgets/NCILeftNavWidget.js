@@ -1,4 +1,4 @@
-var NCILeftNavWidget = function () {
+export function NCILeftNavWidget() {
   var _caseSensitiveUrlMatching = false;
   var _cur = this;
   var _cacheKeyForNavData = null;
@@ -84,7 +84,7 @@ var NCILeftNavWidget = function () {
               newReturnArrayWithChildren =
                 firstArrayPart.concat(childNodeArray);
               if (resultSetIdx < currentResultSet.length - 1) {
-                var lastArrayPart = returnData.slice(resultSetIdx + 1);
+                lastArrayPart = returnData.slice(resultSetIdx + 1);
                 lastArrayPart.forEach((addElement) => {
                   newReturnArrayWithChildren.push(addElement);
                 });
@@ -113,7 +113,7 @@ var NCILeftNavWidget = function () {
       spRequest.isRoot = true;
       spRequest.listName = _navList;
       spRequest.skipPersonaFiltering = true;
-      spRequest.viewXml = `<View><Query><Where><Eq><FieldRef Name=\"Active\" /><Value Type=\"Boolean\">1</Value></Eq></Where></Query></View>`;
+      spRequest.viewXml = `<View><Query><Where><Eq><FieldRef Name="Active" /><Value Type="Boolean">1</Value></Eq></Where></Query></View>`;
       var legacyMode = true;
       var spCaller = new Akumina.Digispace.Data.DataFactory(legacyMode);
       spCaller.GetList(spRequest).then(
@@ -157,7 +157,6 @@ var NCILeftNavWidget = function () {
 
   this.GetCacheInterval = function () {
     var validCacheInterval =
-      typeof (_cur.properties.CacheInterval != 'undefined') &&
       _cur.properties.CacheInterval != null &&
       !isNaN(_cur.properties.CacheInterval);
 
@@ -199,7 +198,7 @@ var NCILeftNavWidget = function () {
     _cur.properties = _cur.SetDefaultsProperties(properties);
     _cur.properties.EditMode = Akumina.AddIn.Utilities.getEditMode();
     _cacheKeyForNavData = _cur.GetCacheKey('NavigationData');
-    _cacheKeyForPageLists = _cur.GetCacheKey('ListsWithPages');
+    // _cacheKeyForPageLists = _cur.GetCacheKey('ListsWithPages');
     _cur.Prerender();
   };
 
@@ -302,4 +301,4 @@ var NCILeftNavWidget = function () {
   };
 };
 
-module.exports = NCILeftNavWidget;
+//module.exports = NCILeftNavWidget;
