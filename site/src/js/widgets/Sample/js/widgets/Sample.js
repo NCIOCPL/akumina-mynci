@@ -1,4 +1,4 @@
-var Sample = function () {
+export function Sample() {
   var _cur = this;
   this.GetPropertyValue = function (requestIn, key, defaultValue) {
     var propertyValue = '';
@@ -94,4 +94,4 @@ var Sample = function () {
   };
 };
 
-module.exports = Sample;
+//module.exports = Sample;

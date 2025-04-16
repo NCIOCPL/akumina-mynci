@@ -1,7 +1,7 @@
 export function newsDetailWidget_callbacks() {
   // Rename in future
   // NewsDetailWidget_ui
-  window.newsDetail_ui_prepSlider = function (widget, props) {
+  window.newsDetail_ui_prepSlider = function (_widget, _props) {
     var profInfo1 = $('#profInfoLink1');
     var profInfo2 = $('#profInfoLink2');
     var profPhoto1 = $('#profPhotoLink2');
