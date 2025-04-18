@@ -21,7 +21,7 @@ class FileMergeWebpackPlugin {
       this.files
         .filter((file) => fs.existsSync(file))
         .forEach((file) => fileBuffers.push(fs.readFileSync(file)));
-      
+
       const dir = path.dirname(this.destination);
       fs.mkdirSync(dir, { recursive: true });
       fs.writeFileSync(this.destination, Buffer.concat(fileBuffers), {
@@ -158,7 +158,9 @@ module.exports = function () {
 
   // Add the main JS configuration + other file copies
   webpackConfigs.push(
+    // This packs a set of code that needs to happen before the page loads and thus needs a separate configuration
     {
+      name: 'BeforePageLoad',
       entry: {
         beforePageLoad: './src/js/library/BeforePageLoad.js',
       },
@@ -183,7 +185,10 @@ module.exports = function () {
           }
         : {},
     },
+    // This packs the main digitalworkplace.custom.js file and anything in it that executes at runtime
     {
+      name: 'DigitalWorkplaceCustom',
+      dependencies: ['BeforePageLoad'],
       entry: './src/js/library/digitalworkplace.custom.js',
       output: {
         filename: 'digitalworkplace.custom.js',
@@ -208,6 +213,7 @@ module.exports = function () {
           }
         : {},
       plugins: [
+        // This combines the generated JS files together into one since that's all Akumina gives us
         new FileMergeWebpackPlugin({
           destination:
             'build/sitedefinitions/Client/CDNAssets/js/digitalworkplace.custom.js',
