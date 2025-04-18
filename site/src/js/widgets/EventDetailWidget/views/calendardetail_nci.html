@@ -65,12 +65,11 @@
               <div>
                   <div class="ia-article-author-status">
                       <div class="ia-article-author-img ia-user-teams-presence-container">
-                          <div class="contact-profile-image">
-                            <div id="profPhotoLink1"></div>
+                          <div class="contact-profile-image nci-profile-photo-link" data-email-id="{{NCIContactPerson1_UserName}}">
                           </div>
                       </div>
                       <div>
-                        <a id="profInfoLink1" class="ia-author-name fs-js-publisher" href="" target="_blank">{{NCIContactPerson1_Title}}</a>
+                        <a class="ia-author-name fs-js-publisher nci-profile-info-link" href="" target="_blank" data-email-id="{{NCIContactPerson1_UserName}}">{{NCIContactPerson1_Title}}</a>
                       </div>
                   </div>
                   
@@ -81,12 +80,11 @@
 
                   <div class="ia-article-author-status">
                       <div class="ia-article-author-img ia-user-teams-presence-container">
-                          <div class="contact-profile-image">
-                            <div id="profPhotoLink2"></div>
+                          <div class="contact-profile-image nci-profile-photo-link" data-email-id="{{NCIContactPerson2_UserName}}">
                           </div>
                       </div>
                       <div>
-                        <a id="profInfoLink2" class="ia-author-name fs-js-publisher" href="" target="_blank">{{NCIContactPerson2_Title}}</a>
+                        <a class="ia-author-name fs-js-publisher nci-profile-info-link" href="" target="_blank" data-email-id="{{NCIContactPerson2_UserName}}">{{NCIContactPerson2_Title}}</a>
                       </div>
                   </div>
                   
@@ -103,15 +101,6 @@
               {{/each}}
           </div>
         {{/if}} 
-
-        <script>
-            $(document).ready(function() {
-                GetNCIProfileInfoUrl("{{NCIContactPerson1_EMail}}", "#profInfoLink1");
-                GetNCIProfileInfoUrl("{{NCIContactPerson2_EMail}}", "#profInfoLink2");
-                GetNCIProfilePictureUrl("{{NCIContactPerson1_EMail}}", "#profPhotoLink1");
-                GetNCIProfilePictureUrl("{{NCIContactPerson2_EMail}}", "#profPhotoLink2");   
-            })();
-        </script>
         {{!-- END #AKUMINA --}}
         <div class="ia-chip-collection">
         {{#each Categories}}
