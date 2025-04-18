@@ -13,10 +13,5 @@ export function employeeDetailWidget_handlebars() {
     // Replace all occurrences of $ with a line break
     return new Handlebars.SafeString(text.replace(/\$/g, '<br>'));
   });
-
-  // Hides +1 in phone number
-  Handlebars.registerHelper('formatPhone', function (phone) {
-    return phone.replace('+1 ', '');
-  });
   
 }
