@@ -4,6 +4,7 @@ import { newsDetailWidget_callbacks } from './modules/callbacks/NewsDetailWidget
 import { peopleDirectoryWidget_callbacks } from './modules/callbacks/PeopleDirectoryWidget.js';
 import { employeeDetailWidget_handlebars } from './modules/handlebars/EmployeeDetailWidget.js';
 import { latestMediaWidget_handlebars } from './modules/handlebars/LatestMediaWidget.js';
+import { utilityFunctions_handlebars } from './modules/handlebars/UtilityFunctions.js';
 
 window.GetNCIProfileInfoUrl = function (targetId) {
   var emailUpn = $(targetId).attr('data-manager');
@@ -80,6 +81,7 @@ Akumina.Digispace.AppPart.Eventing.Subscribe(
 // Run our handlebars functions for templates to make use of
 employeeDetailWidget_handlebars();
 latestMediaWidget_handlebars();
+utilityFunctions_handlebars();
 
 // Akumina requires that widget callbacks be on the window object: https://akumina.github.io/docs/Akumina-Widget-Callbacks
 // Otherwise we would package them into a library in webpack to keep the global namespace clean
@@ -89,3 +91,4 @@ Object.assign(window, blogDetailWidget_callbacks);
 Object.assign(window, latestMediaWidget_callbacks);
 Object.assign(window, newsDetailWidget_callbacks);
 Object.assign(window, peopleDirectoryWidget_callbacks);
+
