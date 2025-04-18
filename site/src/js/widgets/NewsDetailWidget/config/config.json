@@ -31,7 +31,7 @@
         },
         {
           "name": "selectfields",
-          "value": "ID,Created,Title,Body,Featured,Image,Video,Modified,Publish_x0020_Date,Region,Departments,NCIOrgOwner,Tags,ReadTime,ContentTypeId,FriendlyUrl,Archive_x0020_Date,Share_x0020_URL,Shareable,Summary,Thumbnail_x0020_URL,Publisher/ID,Publisher/EMail,Publisher/Title,Author/ID,Author/EMail,Author/Title,NCIContactPerson1/ID,NCIContactPerson1/Title,NCIContactPerson1/EMail,NCIContactPerson2/ID,NCIContactPerson2/Title,NCIContactPerson2/EMail,Departments"
+          "value": "ID,Created,Title,Body,Featured,Image,Video,Modified,Publish_x0020_Date,Region,Departments,NCIOrgOwner,Tags,ReadTime,ContentTypeId,FriendlyUrl,Archive_x0020_Date,Share_x0020_URL,Shareable,Summary,Thumbnail_x0020_URL,Publisher/ID,Publisher/EMail,Publisher/Title,Author/ID,Author/EMail,Author/Title,NCIContactPerson1/ID,NCIContactPerson1/Title,NCIContactPerson1/UserName,NCIContactPerson2/ID,NCIContactPerson2/Title,NCIContactPerson2/UserName,Departments"
         },
         {
           "name": "expandfields",
@@ -66,11 +66,11 @@
         },
         {
           "name": "callbackmethod",
-          "value": "newsDetail_data_addContactInfo"
+          "value": ""
         },        
         {
           "name": "uicallbackmethod",
-          "value": "newsDetail_ui_prepSlider"
+          "value": "newsDetail_ui_prepContacts"
         },        
         {
           "name": "usereactionslegacyview",

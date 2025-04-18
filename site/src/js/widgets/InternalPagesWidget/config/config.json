@@ -31,7 +31,7 @@
         },
         {
           "name": "selectfields",
-          "value": "ID,Title,Image,Publish_x0020_Date,Body,Archive_x0020_Date,RelatedLinks,Thumbnail_x0020_URL,Departments,NCIOrgOwner,NCIContactPerson1/ID,NCIContactPerson1/Title,NCIContactPerson1/EMail,NCIContactPerson2/ID,NCIContactPerson2/Title,NCIContactPerson2/EMail"
+          "value": "ID,Title,Image,Publish_x0020_Date,Body,Archive_x0020_Date,RelatedLinks,Thumbnail_x0020_URL,Departments,NCIOrgOwner,NCIContactPerson1/ID,NCIContactPerson1/Title,NCIContactPerson1/UserName,NCIContactPerson2/ID,NCIContactPerson2/Title,NCIContactPerson2/UserName"
         },
         {
           "name": "expandfields",
@@ -51,7 +51,7 @@
         },
         {
           "name": "uicallbackmethod",
-          "value": ""
+          "value": "internalPages_ui_prepContacts"
         },
         {
           "name": "isasynccallback",

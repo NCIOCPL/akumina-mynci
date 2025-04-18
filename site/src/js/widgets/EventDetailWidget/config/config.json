@@ -31,7 +31,7 @@
         },
         {
           "name": "selectfields",
-          "value": "BannerUrl,Body,Category,Created,Departments,Description,Duration,EndDate,EventDate,fAllDayEvent,EventTitle,Featured,fRecurrence,FreeBusy,FriendlyUrl,ID,Geolocation,Location,Meeting_x0020_URL,NCIContactPerson1/EMail,NCIContactPerson1/GUID,NCIContactPerson1/ID,NCIContactPerson1/Title,NCIContactPerson2/EMail,NCIContactPerson2/GUID,NCIContactPerson2/ID,NCIContactPerson2/Title,NCIDeadline,NCIExternalLink,NCILeftNavView,NCIOrgOwner,RecurrenceData,Region,StaticUrl,Tags,Thumbnail_x0020_URL,Title,XMLTZone,"
+          "value": "BannerUrl,Body,Category,Created,Departments,Description,Duration,EndDate,EventDate,fAllDayEvent,EventTitle,Featured,fRecurrence,FreeBusy,FriendlyUrl,ID,Geolocation,Location,Meeting_x0020_URL,NCIContactPerson1/UserName,NCIContactPerson1/GUID,NCIContactPerson1/ID,NCIContactPerson1/Title,NCIContactPerson2/UserName,NCIContactPerson2/GUID,NCIContactPerson2/ID,NCIContactPerson2/Title,NCIDeadline,NCIExternalLink,NCILeftNavView,NCIOrgOwner,RecurrenceData,Region,StaticUrl,Tags,Thumbnail_x0020_URL,Title,XMLTZone,"
         },
         {
           "name": "expandfields",
@@ -70,7 +70,7 @@
         },
         {
           "name": "uicallbackmethod",
-          "value": ""
+          "value": "eventDetail_ui_prepContacts"
         }
       ],
       "SelectedView": "NCI Calendar Detail",
