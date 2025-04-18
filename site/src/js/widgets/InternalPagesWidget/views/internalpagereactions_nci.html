@@ -23,6 +23,7 @@
         <div class="col-md-7">
             {{{Body}}}
             {{!-- BEGIN #AKUMINA - Add NCI Contacts --}}
+            {{!-- This was never properly formatted, so commenting out for the moment
             <div class="internal-display-contacts expanded-fields-contacts" style="display: none; {{#if NCIContactPerson1_ID}} display: block;{{/if}} {{#if NCIContactPerson2_ID}} display: block;{{/if}}">
                 <h3>{{translate "customfields.contacts"}}:</h3>
 
@@ -32,12 +33,11 @@
                     <div>
                         <div class="ia-article-author-status">
                             <div class="ia-article-author-img ia-user-teams-presence-container">
-                                <div class="contact-profile-image">
-                                  <div id="profPhotoLink1"></div>
+                                <div class="contact-profile-image nci-profile-photo-link" data-email-id="{{NCIContactPerson1_UserName}}">
                                 </div>
                             </div>
                             <div>
-                                <a id="profInfoLink1" class="ia-author-name fs-js-publisher" href="" target="_blank">{{NCIContactPerson1_Title}}</a>
+                                <a class="ia-author-name fs-js-publisher nci-profile-info-link" href="" target="_blank" data-email-id="{{NCIContactPerson1_UserName}}">{{NCIContactPerson1_Title}}</a>
                             </div>
                         </div>
                         
@@ -48,12 +48,11 @@
 
                         <div class="ia-article-author-status">
                             <div class="ia-article-author-img ia-user-teams-presence-container">
-                                <div class="contact-profile-image">
-                                    <div id="profPhotoLink2"></div>
+                                <div class="contact-profile-image nci-profile-photo-link" data-email-id="{{NCIContactPerson2_UserName}}">
                                 </div>
                             </div>
                             <div>
-                                <a id="profInfoLink2" class="ia-author-name fs-js-publisher" href="" target="_blank">{{NCIContactPerson2_Title}}</a>
+                                <a class="ia-author-name fs-js-publisher nci-profile-info-link" href="" target="_blank" data-email-id="{{NCIContactPerson2_UserName}}">{{NCIContactPerson2_Title}}</a>
                             </div>
                         </div>
                         
@@ -70,16 +69,7 @@
                 {{/each}}
             </div>
             {{/if}} 
-
-
-            <script>
-                $(document).ready(function() {
-                    GetNCIProfileInfoUrl("{{NCIContactPerson1_EMail}}", "#profInfoLink1");
-                    GetNCIProfileInfoUrl("{{NCIContactPerson2_EMail}}", "#profInfoLink2");
-                    GetNCIProfilePictureUrl("{{NCIContactPerson1_EMail}}", "#profPhotoLink1");
-                    GetNCIProfilePictureUrl("{{NCIContactPerson2_EMail}}", "#profPhotoLink2");   
-                })();
-            </script>
+            --}}
             {{!-- END #AKUMINA --}}
         </div>
         <div class="col-md-5">
@@ -90,6 +80,55 @@
         {{else}}
         <div class="col-md-12">
             {{{Body}}}
+            {{!-- This was never properly formatted, so commenting out for the moment
+            {{!-- BEGIN #AKUMINA - Add NCI Contacts --}}
+            <div class="internal-display-contacts expanded-fields-contacts" style="display: none; {{#if NCIContactPerson1_ID}} display: block;{{/if}} {{#if NCIContactPerson2_ID}} display: block;{{/if}}">
+                <h3>{{translate "customfields.contacts"}}:</h3>
+
+                <!-- Inline photo and detail link JS methods are located in digitalworkplace.custom.js -->
+                <div class="contact-box">
+                    {{#if NCIContactPerson1_ID}}
+                    <div>
+                        <div class="ia-article-author-status">
+                            <div class="ia-article-author-img ia-user-teams-presence-container">
+                                <div class="contact-profile-image nci-profile-photo-link" data-email-id="{{NCIContactPerson1_UserName}}">
+                                </div>
+                            </div>
+                            <div>
+                                <a class="ia-author-name fs-js-publisher nci-profile-info-link" href="" target="_blank" data-email-id="{{NCIContactPerson1_UserName}}">{{NCIContactPerson1_Title}}</a>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    {{/if}} 
+                    {{#if NCIContactPerson2_ID}}
+                    <div>
+
+                        <div class="ia-article-author-status">
+                            <div class="ia-article-author-img ia-user-teams-presence-container">
+                                <div class="contact-profile-image nci-profile-photo-link" data-email-id="{{NCIContactPerson2_UserName}}">
+                                </div>
+                            </div>
+                            <div>
+                                <a class="ia-author-name fs-js-publisher nci-profile-info-link" href="" target="_blank" data-email-id="{{NCIContactPerson2_UserName}}">{{NCIContactPerson2_Title}}</a>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    {{/if}} 
+                </div>
+            </div>
+
+            {{#if NCIOrgOwner}}
+            <div class="internal-display-organization expanded-fields-organization">
+                <h3>{{translate "customfields.NCIOrgOwner"}}:</h3>
+                {{#each NCIOrgOwner}}
+                    <div>{{{this.Label}}}</div>
+                {{/each}}
+            </div>
+            {{/if}} 
+            --}}
+            {{!-- END #AKUMINA --}}
         </div>
         {{/if}}
     </div>

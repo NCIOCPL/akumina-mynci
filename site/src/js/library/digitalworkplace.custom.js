@@ -1,34 +1,11 @@
 import { blogDetailWidget_callbacks } from './modules/callbacks/BlogDetailWidget.js';
+import { eventDetailWidget_callbacks } from './modules/callbacks/EventDetailWidget.js'
+import { internalPagesWidget_callbacks } from './modules/callbacks/InternalPagesWidget.js'
 import { latestMediaWidget_callbacks } from './modules/callbacks/LatestMediaWidget.js';
 import { newsDetailWidget_callbacks } from './modules/callbacks/NewsDetailWidget.js';
 import { peopleDirectoryWidget_callbacks } from './modules/callbacks/PeopleDirectoryWidget.js';
 import { employeeDetailWidget_handlebars } from './modules/handlebars/EmployeeDetailWidget.js';
 import { latestMediaWidget_handlebars } from './modules/handlebars/LatestMediaWidget.js';
-
-window.GetNCIProfileInfoUrl = function (targetId) {
-  var emailUpn = $(targetId).attr('data-manager');
-  if (typeof emailUpn == 'string') {
-    Akumina.Digispace.Utilities.GetEmployeeDetailUrl(emailUpn).then(
-      (newUrl) => {
-        var pathPart = newUrl.substring(
-          newUrl.toLowerCase().lastIndexOf('/sitepages')
-        );
-        var completeUrl = AkHeadlessUrl + '/#' + pathPart;
-        $(targetId).attr('href', completeUrl);
-      }
-    );
-  }
-};
-
-// Used in NewsDetail, CalendarDetail, and InternalPages
-window.GetNCIProfilePictureUrl = function (targetId) {
-  var emailUpn = $(targetId).attr('data-manager');
-  if (typeof emailUpn == 'string') {
-    var newUrl = Akumina.Digispace.Utilities.GetUserPictureUrl(emailUpn);
-    newUrl = 'url(' + newUrl + ')';
-    $(targetId).css('background-image', newUrl);
-  }
-};
 
 window.Client = typeof window.Client === 'object' ? window.Client : {};
 
@@ -86,6 +63,8 @@ latestMediaWidget_handlebars();
 
 // Assign all keys under each object to the window object
 Object.assign(window, blogDetailWidget_callbacks);
+Object.assign(window, eventDetailWidget_callbacks);
+Object.assign(window, internalPagesWidget_callbacks);
 Object.assign(window, latestMediaWidget_callbacks);
 Object.assign(window, newsDetailWidget_callbacks);
 Object.assign(window, peopleDirectoryWidget_callbacks);
