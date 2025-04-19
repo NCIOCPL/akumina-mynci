@@ -1,5 +1,5 @@
 name: Deploy Site
-run-name: Deploy Site - CDN${{ inputs.deploy-widgets && ', Widgets' || '' }}${{ inputs.deploy-pages && ', Pages' || '' }}${{ inputs.deploy-lists && ', Lists' || '' }}
+run-name: Deploy Site - CDN${{ inputs.deploy-widgets && ', Widget' || '' }}${{ (inputs.deploy-widgets && inputs.single-widget) && format(' {0}', inputs.single-widget) || 's' }}${{ inputs.deploy-pages && ', Pages' || '' }}${{ inputs.deploy-lists && ', Lists' || '' }}
 on:
   workflow_dispatch:
     inputs:
@@ -9,6 +9,10 @@ on:
         description: Pack and deploy widgets
         type: boolean
         default: false
+      single-widget:
+        description: Deploy single widget
+        type: string
+        required: false
       deploy-pages:
         description: Deploy pages
         type: boolean
@@ -77,7 +81,7 @@ jobs:
       - name: Package widgets
         if: inputs.deploy-widgets
         # npm run package -- --tokenMap "${{ steps.tokens.outputs.WIDGET_TOKEN_STRING }}" 
-        run: npm run package
+        run: npm run package ${{ inputs.single-widget }}
 
       ########## Build ##########
 
@@ -111,8 +115,6 @@ jobs:
           envdir: build
 
       ########## Deploy Widgets ##########
-
-        #run: npm run package ${{ inputs.widget_name }} -- --tokenMap ${{ inputs.token_map }}
 
       # Set the deployment type
       - uses: "./.github/workflows/composite/deployment_type"
