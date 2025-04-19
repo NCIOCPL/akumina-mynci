@@ -15,7 +15,7 @@
       },
       {
         "Name": "Events Home Page",
-        "Path": "/{AssetLibraryName}/DigitalWorkPlace/Content/Templates/eventswidget/eventshomepage.html",
+        "Path": "/{AssetLibraryName}/DigitalWorkPlace/Content/Templates/eventswidget/eventshomepage_nci.html",
         "Id": "d63c4378-68e0-48e2-8a7c-f39765f3e985"
       }
     ],

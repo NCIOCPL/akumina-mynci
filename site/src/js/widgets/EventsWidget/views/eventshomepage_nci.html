@@ -1,0 +1,257 @@
+React.createElement(
+    "div",
+    { className: "ia-events" },
+    ConfigurationErrorMessage ? React.createElement(
+        "span",
+        null,
+        ConfigurationErrorMessage
+    ) : React.createElement(
+        React.Fragment,
+        null,
+        React.createElement(
+            "div",
+            { className: "ia-grid-utility-container" },
+            React.createElement(
+                "div",
+                { className: "ia-grid-utility-left-col" },
+                React.createElement(
+                    "div",
+                    { className: "ia-list-action" },
+                    SearchCriteria && SearchCriteria.length > 0 && React.createElement(
+                        React.Fragment,
+                        null,
+                        React.createElement(
+                            "div",
+                            { className: "ia-filter-selector" },
+                            React.createElement(
+                                "span",
+                                { className: "ia-filter-text" },
+                                Akumina.Digispace.Language.TryGetText("fs.eventswidget.filterby"),
+                                ":"
+                            ),
+                            SearchCriteria.map(radiofilter => {
+                                return React.createElement(
+                                    React.Fragment,
+                                    null,
+                                    React.createElement(
+                                        "a",
+                                        { className: "ia-filter-option " + (radiofilter.IsSelected ? " fs-js-active" : ""), role: "button", onClick: () => SearchBasedOnSelectedCriteria(null, radiofilter, true) },
+                                        radiofilter.Name
+                                    ),
+                                    radiofilter.Value == EnumFilteringCriteria.UserInterest && React.createElement(
+                                        "button",
+                                        { className: "ia-filter-option ia-button-icon ia-group-button-icon " + (radiofilter.IsSelected ? " fs-js-active" : ""), onClick: () => OpenEditPreferencesPopup() },
+                                        React.createElement("i", { className: "fa-regular fa-sliders", title: Akumina.Digispace.Language.TryGetText("fs.common.changepreferences") })
+                                    )
+                                );
+                            })
+                        )
+                    ),
+                    React.createElement("div", { rel: "Search Refiner", "class": "ak-widget fs-js-search-refiner-widget", id: "398d1678-60dd-4758-a8df-e8b1b4464a4a" })
+                )
+            ),
+            React.createElement(
+                "div",
+                { className: "ia-grid-utility-right-col" },
+                React.createElement(
+                    "div",
+                    { className: "text-lg-end" },
+                    React.createElement(
+                        "a",
+                        { className: "ia-button " + (Akumina.Digispace.ConfigurationContext.IsSPAMode ? " ak-spalink" : ""), href: Akumina.Digispace.Utilities.CreatePageLink(Akumina.Digispace.SiteContext.WebAbsoluteUrl + "/sitepages/eventlist.aspx") },
+                        Akumina.Digispace.Language.TryGetText("fs.eventswidget.viewallevents")
+                    )
+                )
+            )
+        ),
+        IsFetching ? React.createElement(
+            "div",
+            { className: "ia-loading-state" },
+            React.createElement(
+                "div",
+                { className: "ia-skeleton-wrapper" },
+                React.createElement(
+                    "div",
+                    { className: "ia-skeleton-col" },
+                    React.createElement("div", { className: "ia-skeleton-media" }),
+                    React.createElement("div", { className: "ia-skeleton-heading" }),
+                    React.createElement(
+                        "div",
+                        { className: "ia-skeleton-body" },
+                        React.createElement("div", { className: "ia-skeleton-text" }),
+                        React.createElement("div", { className: "ia-skeleton-text" }),
+                        React.createElement("div", { className: "ia-skeleton-text" }),
+                        React.createElement("div", { className: "ia-skeleton-text" })
+                    )
+                ),
+                React.createElement(
+                    "div",
+                    { className: "ia-skeleton-col" },
+                    React.createElement("div", { className: "ia-skeleton-media" }),
+                    React.createElement("div", { className: "ia-skeleton-heading" }),
+                    React.createElement(
+                        "div",
+                        { className: "ia-skeleton-body" },
+                        React.createElement("div", { className: "ia-skeleton-text" }),
+                        React.createElement("div", { className: "ia-skeleton-text" }),
+                        React.createElement("div", { className: "ia-skeleton-text" }),
+                        React.createElement("div", { className: "ia-skeleton-text" })
+                    )
+                ),
+                React.createElement(
+                    "div",
+                    { className: "ia-skeleton-col" },
+                    React.createElement("div", { className: "ia-skeleton-media" }),
+                    React.createElement("div", { className: "ia-skeleton-heading" }),
+                    React.createElement(
+                        "div",
+                        { className: "ia-skeleton-body" },
+                        React.createElement("div", { className: "ia-skeleton-text" }),
+                        React.createElement("div", { className: "ia-skeleton-text" }),
+                        React.createElement("div", { className: "ia-skeleton-text" }),
+                        React.createElement("div", { className: "ia-skeleton-text" })
+                    )
+                ),
+                React.createElement(
+                    "div",
+                    { className: "ia-skeleton-col" },
+                    React.createElement("div", { className: "ia-skeleton-media" }),
+                    React.createElement("div", { className: "ia-skeleton-heading" }),
+                    React.createElement(
+                        "div",
+                        { className: "ia-skeleton-body" },
+                        React.createElement("div", { className: "ia-skeleton-text" }),
+                        React.createElement("div", { className: "ia-skeleton-text" }),
+                        React.createElement("div", { className: "ia-skeleton-text" }),
+                        React.createElement("div", { className: "ia-skeleton-text" })
+                    )
+                )
+            )
+        ) : React.createElement(
+            React.Fragment,
+            null,
+            HasEvents ? React.createElement(
+                "div",
+                { className: "row" },
+                Events.map((event, index) => {
+                    return React.createElement(
+                        "div",
+                        { "ak-item": event.EventItemIdentifier, "data-webid": event.WebId, "data-siteid": event.SiteId, className: "col-lg-4 col-sm-6 col-xl-3 ak-item" },
+                        React.createElement(
+                            "div",
+                            { className: "ia-card ia-card-event" + (event.Featured ? " ia-featured" : "") },
+                            event.IsOneDayEvent && React.createElement(
+                                "div",
+                                { className: "ia-event-date" },
+                                event.DisplayDate
+                            ),
+                            React.createElement(
+                                "div",
+                                { className: "ia-event-day" },
+                                event.DisplayDayRange
+                            ),
+                            event.Featured && React.createElement(
+                                "div",
+                                { className: "ia-featured-tag" },
+                                Akumina.Digispace.Language.TryGetText("fs.eventswidget.featured")
+                            ),
+                            React.createElement(
+                                "div",
+                                { className: "ia-event-title" },
+                                React.createElement(
+                                    "a",
+                                    { className: Akumina.Digispace.ConfigurationContext.IsSPAMode ? "ak-spalink" : "", href: event.Url },
+                                    event.Title
+                                )
+                            ),
+                            event.Categories && React.createElement(
+                                "div",
+                                { className: "ia-tag-collection" },
+                                event.Categories.map(category => React.createElement(
+                                    "span",
+                                    { className: "ia-tag" },
+                                    "#",
+                                    category
+                                )),
+                                event.OtherTags && React.createElement(
+                                    React.Fragment,
+                                    null,
+                                    React.createElement(
+                                        "a",
+                                        { href: "javascript:void(0);", className: "ia-tag", id: "fs-js-tag-" + event.UniqueId + "-" + index, onMouseOver: e => ShowOtherTags(e.target.id), onFocus: e => ShowOtherTags(e.target.id) },
+                                        "+",
+                                        event.OtherTags.length
+                                    ),
+                                    React.createElement(
+                                        "div",
+                                        { id: "othertags-content-fs-js-tag-" + event.UniqueId + "-" + index, className: "ia-tippy-content-wrapper", style: { display: "none" } },
+                                        event.OtherTags.map(otherTags => React.createElement(
+                                            "div",
+                                            { className: "ia-tippy-content" },
+                                            "#",
+                                            otherTags
+                                        ))
+                                    )
+                                )
+                            ),
+                            React.createElement(
+                                "div",
+                                { className: "ia-event-list-footer" },
+                                React.createElement(
+                                    "div",
+                                    { className: "ia-event-datetime-location" },
+                                    React.createElement(
+                                        "div",
+                                        { className: "ia-event-date-time" },
+                                        React.createElement(
+                                            "p",
+                                            null,
+                                            event.DisplayDateRange,
+                                            " "
+                                        ),
+                                        React.createElement(
+                                            "p",
+                                            null,
+                                            event.Duration
+                                        )
+                                    )
+                                ),
+                                (event.MeetingUrl || event.Location) && React.createElement(
+                                    "div",
+                                    { className: "ia-event-datetime-location ia-event-location" },
+                                    event.MeetingUrl ? React.createElement(
+                                        "a",
+                                        { target: "_blank", href: event.MeetingUrl },
+                                        Akumina.Digispace.Language.TryGetText("fs.eventswidget.jointeamsmeeting")
+                                    ) : React.createElement(
+                                        "span",
+                                        null,
+                                        event.Location
+                                    )
+                                ),
+                                React.createElement(
+                                    "div",
+                                    { className: "ia-event-calander-icon" },
+                                    React.createElement(
+                                        "a",
+                                        { "data-id": event.EventItemIdentifier, "data-url": event.Url, className: "ia-event-detail-ics", href: event.DownloadIcsOccurenceUrl, title: "Add to calendar", role: "button" },
+                                        React.createElement("i", { className: "fa-light fa-calendar-circle-plus" })
+                                    ),
+                                    event.EventRecurrence && React.createElement(
+                                        "a",
+                                        { "data-id": event.EventItemIdentifier, "data-url": event.Url, className: "ia-event-detail-ics-series", role: "button", href: event.DownloadIcsSeriesUrl, title: "Add series to calendar" },
+                                        React.createElement("i", { className: "fa-light fa-calendar-arrow-down" })
+                                    )
+                                )
+                            )
+                        )
+                    );
+                })
+            ) : React.createElement(
+                "p",
+                null,
+                Akumina.Digispace.Language.TryGetText("fs.eventswidget.noeventsfound")
+            )
+        )
+    )
+);
