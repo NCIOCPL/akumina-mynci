@@ -40,7 +40,7 @@
               {
                 "Title": "NCI Photo Gallery",
                 "WidgetInstanceId": "f31efa69-63c7-49e9-a643-86519b48425e",
-                "Name": "PhotoGallery",
+                "Name": "MediaWidget",
                 "Icon": "fa fa-cog",
                 "Description": "Displays images in gallery format.",
                 "Options": "",
