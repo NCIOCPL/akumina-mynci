@@ -30,7 +30,7 @@
                 "value": [
                     {
                         "Title": "fs.mediawidget.images",
-                        "Query": "ContentType:AkuminaImages OR ContentType:AkuminaImageGallery",
+                        "Query": "ContentType:AkuminaImages",
                         "ContentTypeId": "0x010102001E45BA94E91D6143997277C99F1858A4"
                     }
                 ]
