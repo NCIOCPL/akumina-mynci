@@ -3413,6 +3413,7 @@ window.lang = {
     OrgDirectory: {
       NIHOrgName: 'Organization Name',
       NIHOUName: 'Office Name',
+      noresultsfound: 'Navigate the menu on the left to further explore people within this organization.',
     },
     blogswidget: {
       title: 'Staff Spotlight',
