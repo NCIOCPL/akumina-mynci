@@ -151,7 +151,7 @@ const peopleDirectory_html_loadOrgs = function () {
         $(`.ia-checkbox-wrapper [value="${description}"]`).click();
       } else {
         $('.ia-people-results').html(
-          Akumina.Digispace.Language.TryGetText('peoplelist.noresultsfound')
+          Akumina.Digispace.Language.TryGetText('NCI.OrgDirectory.noresultsfound')
         );
       }
     }
