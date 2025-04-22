@@ -20,8 +20,8 @@
     },
     "Instances": [
       {
-        "Name": "Employee Details",
-        "Description": "Displays details about an NCI employee",
+        "Name": "NCI Employee Details",
+        "Description": "Displays details about an NCI employee sourced from NED",
         "Icon": "fa fa-cog",
         "Id": "5e6c080d-810e-43bb-8862-eb2a20ce03ec",
         "Properties": [
@@ -99,7 +99,7 @@
           }
         ],
         "SelectedView": "NCI Employee Detail",
-        "AvailableViews": [],
+        "AvailableViews": ["NCI Employee Detail"],
         "HiddenFields": []
       }
     ],

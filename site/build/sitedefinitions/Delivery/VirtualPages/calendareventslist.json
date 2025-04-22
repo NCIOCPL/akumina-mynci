@@ -1,10 +1,10 @@
 {
-  "Name": "Tip of the Week",
-  "Id": "92eb6df7-b4b1-4173-9223-d9b27a8ffb92",
+  "Name": "Event Listing Page",
+  "Id": "8e5be073-a3da-9b64-140e-f68741d2cfb2",
   "Type": "GenericPage",
   "List": "GenericPages_AK",
   "AdditionalSelectColumns": "",
-  "Url": "tipoftheweek.aspx",
+  "Url": "calendareventslist.aspx",
   "Personas": ["All"],
   "PageDefinition": {
     "Containers": [
@@ -38,11 +38,11 @@
             "id": "zone1",
             "widgets": [
               {
-                "Title": "Tip of the Week List",
-                "WidgetInstanceId": "62d4da7c-afc3-4b8f-b1d7-8a9f735c3ae4",
-                "Name": "NewsDetailWidget",
+                "Title": "NCI Events Listing",
+                "WidgetInstanceId": "67dd79b9-57da-4fc5-af9b-8737cf41c3e8",
+                "Name": "EventsWidget",
                 "Icon": "fa fa-cog",
-                "Description": "Displays news items marked as tip-of-the-week.",
+                "Description": "Provides a listing of NCI events.",
                 "Options": "",
                 "DisplayOrder": "0",
                 "Grid": "",

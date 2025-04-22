@@ -6,51 +6,36 @@ React.createElement(
         { className: "ia-loading-state" },
         React.createElement(
             "div",
-            { "class": "ia-skeleton-wrapper ia-skeleton-2-col mb-5" },
-            React.createElement(
-                "div",
-                { "class": "ia-skeleton-col" },
-                React.createElement("div", { "class": "ia-skeleton-media ia-skeleton-media-h-100" })
-            ),
-            React.createElement(
-                "div",
-                { "class": "ia-skeleton-col" },
-                React.createElement(
-                    "div",
-                    { "class": "ia-skeleton-body" },
-                    React.createElement("div", { "class": "ia-skeleton-text" })
-                ),
-                React.createElement("div", { "class": "ia-skeleton-heading" }),
-                React.createElement("div", { "class": "ia-skeleton-heading" }),
-                React.createElement(
-                    "div",
-                    { "class": "ia-skeleton-body" },
-                    React.createElement("div", { "class": "ia-skeleton-text" }),
-                    React.createElement("div", { "class": "ia-skeleton-text" }),
-                    React.createElement("div", { "class": "ia-skeleton-text" }),
-                    React.createElement("div", { "class": "ia-skeleton-text" })
-                )
-            )
-        ),
-        React.createElement(
-            "div",
             { "class": "ia-skeleton-wrapper ia-skeleton-1-col" },
             React.createElement(
                 "div",
                 { "class": "ia-skeleton-col" },
+                React.createElement("div", { "class": "ia-skeleton-heading" }),
+                React.createElement("div", { "class": "ia-skeleton-heading" }),
                 React.createElement(
                     "div",
                     { "class": "ia-skeleton-body" },
+                    React.createElement("div", { "class": "ia-skeleton-text" }),
+                    React.createElement("div", { "class": "ia-skeleton-text" }),
+                    React.createElement("div", { "class": "ia-skeleton-text" }),
+                    React.createElement("div", { "class": "ia-skeleton-text" }),
+                    React.createElement("div", { "class": "ia-skeleton-text" }),
+                    React.createElement("div", { "class": "ia-skeleton-text" }),
                     React.createElement("div", { "class": "ia-skeleton-text" }),
                     React.createElement("div", { "class": "ia-skeleton-text" }),
                     React.createElement("div", { "class": "ia-skeleton-text" }),
                     React.createElement("div", { "class": "ia-skeleton-text" })
                 ),
                 React.createElement("div", { "class": "ia-skeleton-heading" }),
-                React.createElement("div", { "class": "ia-skeleton-heading" }),
                 React.createElement(
                     "div",
                     { "class": "ia-skeleton-body" },
+                    React.createElement("div", { "class": "ia-skeleton-text" }),
+                    React.createElement("div", { "class": "ia-skeleton-text" }),
+                    React.createElement("div", { "class": "ia-skeleton-text" }),
+                    React.createElement("div", { "class": "ia-skeleton-text" }),
+                    React.createElement("div", { "class": "ia-skeleton-text" }),
+                    React.createElement("div", { "class": "ia-skeleton-text" }),
                     React.createElement("div", { "class": "ia-skeleton-text" }),
                     React.createElement("div", { "class": "ia-skeleton-text" }),
                     React.createElement("div", { "class": "ia-skeleton-text" }),
@@ -74,7 +59,16 @@ React.createElement(
                         "div",
                         { className: "ia-article-header-left" },
                         newsarticle.videoplayer
-                    ) : React.createElement("div", { className: "ia-article-header-left", style: { backgroundImage: `url(${newsarticle.image.url})` } })
+                    ) : React.createElement(
+                        "div",
+                        { className: "ia-article-header-left" },
+                        React.createElement("img", {
+                            "class": "ak-thumbnail-image",
+                            "data-src": newsarticle.image.url,
+                            src: Akumina.Digispace.Utilities.GetThumbnailImage('large', newsarticle.image.url),
+                            alt: ""
+                        })
+                    )
                 ),
                 React.createElement(
                     "div",
@@ -134,7 +128,7 @@ React.createElement(
                                         React.createElement(
                                             "div",
                                             { className: "ia-tag ia-article-tag" },
-                                            (newsarticle.publisheddate ? newsarticle.publisheddate + " | " : "") + newsarticle.readingtime + " " + Akumina.Digispace.Language.TryGetText("fs.newswidget.readingtime")
+                                            (newsarticle.publisheddate ? newsarticle.publisheddate + " | " : "") + newsarticle.readtimetext
                                         )
                                     )
                                 ),
@@ -143,14 +137,20 @@ React.createElement(
                                     { className: "ia-social-info-top-icon social-tab" },
                                     React.createElement(
                                         "a",
-                                        { href: "javascript:void(0)", role: "button", className: "ia-share-buttons fs-share-email share-button shareButton", "aria-label": Akumina.Digispace.Language.TryGetText("fs.common.shareemail"), title: Akumina.Digispace.Language.TryGetText("fs.common.shareemail") },
+                                        { href: "javascript:void(0)", className: "ia-share-buttons fs-share-email share-button shareButton", "aria-label": Akumina.Digispace.Language.TryGetText("fs.common.shareemail"), title: Akumina.Digispace.Language.TryGetText("fs.common.shareemail") },
                                         React.createElement("i", { className: "fa-regular fa-envelope", "aria-hidden": "true" })
                                     ),
-                                    newsarticle.shareable && React.createElement(
-                                        React.Fragment,
-                                        null,
-                                        React.createElement("a", { href: "javascript:void(0)", className: "ia-share-buttons ak-twitter ia-twitter", "aria-label": Akumina.Digispace.Language.TryGetText("fs.common.sharemstwitter"), title: Akumina.Digispace.Language.TryGetText("fs.common.sharemstwitter") })
-                                    )
+                                    React.createElement(
+                                        "div",
+                                        { className: "ia-share-ms-teams-fake" },
+                                        React.createElement("a", { href: "javascript:void(0)", className: "ia-share-buttons ia-share-ms-teams", "aria-hidden": "true" }),
+                                        React.createElement("div", { className: "teams-share-button",
+                                            "data-href": window.location.href,
+                                            "data-icon-px-size": "40",
+                                            "data-msg-text": newsarticle.title, title: Akumina.Digispace.Language.TryGetText("fs.common.sharemsteams"), role: "button", tabindex: "0", "aria-label": Akumina.Digispace.Language.TryGetText("fs.common.sharemsteams") })
+                                    ),
+                                    React.createElement("a", { href: "javascript:void(0)", className: "fs-js-sharetoyammer ia-share-buttons ia-share-yammer", "aria-label": Akumina.Digispace.Language.TryGetText("fs.common.shareyammer"), title: Akumina.Digispace.Language.TryGetText("fs.common.shareyammer") }),
+                                    newsarticle.shareable && React.createElement("a", { href: "javascript:void(0)", className: "ia-share-buttons ak-twitter ia-twitter", "aria-label": Akumina.Digispace.Language.TryGetText("fs.common.sharemstwitter"), title: Akumina.Digispace.Language.TryGetText("fs.common.sharemstwitter") })
                                 )
                             ),
                             React.createElement(
@@ -166,7 +166,7 @@ React.createElement(
                                     ),
                                     React.createElement(
                                         "div",
-                                        { className: "ia-social-info-bottom-icon ia-available-reacted" },
+                                        { className: "ia-social-info-bottom-icon ia-available-reactions" },
                                         newsarticle.reactionstats
                                     )
                                 ),
@@ -201,11 +201,20 @@ React.createElement(
                 React.createElement(
                     "div",
                     { className: "col-md-8 ia-article-section-left" },
-                    newsarticle.videoplayer && newsarticle.image.url && React.createElement("div", { className: "ia-article-img", style: { backgroundImage: `url(${newsarticle.image.url})` } }),
-                    React.createElement(
+                    newsarticle.videoplayer && newsarticle.image.url && React.createElement(
                         "div",
-                        { className: "ia-article-summary" },
-                        newsarticle.SPSummary
+                        { className: "ia-article-img" },
+                        React.createElement("img", {
+                            className: "ak-thumbnail-image",
+                            "data-src": newsarticle.image.url,
+                            src: Akumina.Digispace.Utilities.GetThumbnailImage('large', newsarticle.image.url),
+                            alt: ""
+                        })
+                    ),
+                    React.createElement(
+                        "p",
+                        null,
+                        newsarticle.summary
                     ),
                     React.createElement(
                         "div",
@@ -245,153 +254,13 @@ React.createElement(
                 React.createElement(
                     "div",
                     { className: "col-md-4" },
-                                      
-                    
-
-
-                    
-                    (newsarticle.NCIContactPerson1 || newsarticle.NCIContactPerson2) ? React.createElement(
-                        "div",
-                        {className: "newsdetail-display-contacts expanded-fields-contacts"},
-                        React.createElement(
-                            "h3",
-                            null,
-                            Akumina.Digispace.Language.TryGetText("customfields.contacts")
-                        ),
-                        React.createElement(
-                            "div",
-                            {className: "contact-box"},
-
-
-
-
-                            newsarticle.NCIContactPerson1 ? React.createElement(
-                                "div",
-                                null,
-                                React.createElement(
-                                        "div",
-                                        {className: "ia-article-author-status" },
-                                        React.createElement(
-                                            "div",
-                                            {className: "ia-article-author-img ia-user-teams-presence-container" },
-                                            React.createElement(
-                                                "div",
-                                                { className: "contact-profile-image" },
-                                                React.createElement(
-                                                    "div",
-                                                    { 
-                                                        "id" : "profPhotoLink1",
-                                                        "data-email-id": newsarticle.NCIContactPerson1.Email
-                                                    },
-                                                    ""
-                                                )
-                                            )
-                                        ),
-                                        React.createElement(
-                                            "div",
-                                            null,
-                                            React.createElement(
-                                                "a",
-                                                { 
-                                                    "id": "profInfoLink1",
-                                                    className: "ia-article-author-status", 
-                                                    "target": "_blank",
-                                                    "data-email-id": newsarticle.NCIContactPerson1.Email,
-                                                    href: ""
-                                                },
-                                                newsarticle.NCIContactPerson1.Title
-                                            )
-
-                                        )
-
-                                )
-                            ):null,
-
-
-                            newsarticle.NCIContactPerson2 ? React.createElement(
-                                "div",
-                                null,
-                                React.createElement(
-                                        "div",
-                                        {className: "ia-article-author-status" },
-                                        React.createElement(
-                                            "div",
-                                            {className: "ia-article-author-img ia-user-teams-presence-container" },
-                                            React.createElement(
-                                                "div",
-                                                { className: "contact-profile-image" },
-                                                React.createElement(
-                                                    "div",
-                                                    { 
-                                                        "id" : "profPhotoLink2",
-                                                        "data-email-id": newsarticle.NCIContactPerson2.Email
-                                                    },
-                                                    ""
-                                                )
-                                            )
-                                        ),
-                                        React.createElement(
-                                            "div",
-                                            null,
-                                            React.createElement(
-                                                "a",
-                                                { 
-                                                    "id": "profInfoLink2",
-                                                    className: "ia-article-author-status", 
-                                                    "target": "_blank",
-                                                    "data-email-id": newsarticle.NCIContactPerson2.Email,
-                                                    href: ""
-                                                },
-                                                newsarticle.NCIContactPerson2.Title
-                                            )
-
-                                        )
-
-                                )
-                            ):null,
-
-
-
-
-                            
-                        ),
-                        React.createElement("hr")
-                    ) : null,    
-
-                    newsarticle.NCIOrgOwner ? React.createElement(
-                        "div",
-                        {className: "newsdetail-display-organization expanded-fields-organization"},
-                        React.createElement(
-                            "h3",
-                            null,
-                            Akumina.Digispace.Language.TryGetText("customfields.manager")
-                        ),
-                        React.createElement(
-                            "div",
-                            null,
-                            newsarticle.NCIOrgOwner.map(DepItem => {
-                                return React.createElement(
-                                    "div",
-                                    null,
-                                    DepItem.Label
-                                )
-                            })
-                        ),
-                        React.createElement("hr")
-                    ) : null,
-
-
-
-
-                    
-
-                    React.createElement("div", { rel: "Related News", className: "ak-widget fs-js-newsdetail-child fs-js-related-news-widget ia-article-section-right", id: "f2c97edb-20c4-5bf0-1f0b-a80cce325b58" })
+                    React.createElement("div", { rel: "Related Blogs", className: "ak-widget fs-js-newsdetail-child fs-js-related-news-widget ia-article-section-right", id: "0eb2fc50-03ca-4f3d-8352-cb3a0ab4c82c" })
                 )
             )
         )
     ) : React.createElement(
         "div",
-        { className: "ia-card" },
+        { className: "ia-card ia-widget-padding-inline" },
         Akumina.Digispace.Language.TryGetText("fs.newsdetailwidget.noarticlefound")
     )
 );

@@ -1,0 +1,155 @@
+React.createElement(
+    "div",
+    null,
+    !IsFetching && React.createElement(
+        React.Fragment,
+        null,
+        React.createElement(
+            "h2",
+            null,
+            Title
+        ),
+        SearchCriteria && React.createElement(
+            React.Fragment,
+            null,
+            EnableInterests && React.createElement("button", { onClick: () => OpenEditPreferencesPopup() }),
+            SearchCriteria.map(radiofilter => {
+                return React.createElement(
+                    "a",
+                    { role: "button", onClick: () => SearchBasedOnSelectedCriteria(false, undefined, radiofilter, true) },
+                    radiofilter.Name
+                );
+            })
+        ),
+        SearchRefiners && EnableRefiners && React.createElement(
+            React.Fragment,
+            null,
+            SearchRefiners.map(refiner => {
+                return refiner.Values && refiner.Values.length > 0 && React.createElement(
+                    "select",
+                    { value: refiner.SelectedValue,
+                        onChange: () => FilterNewsFromRefiners(event, refiner) },
+                    refiner.Values.map(value => React.createElement(
+                        "option",
+                        { selected: refiner.SelectedValue == value, value: value },
+                        value
+                    ))
+                );
+            })
+        ),
+        React.createElement(
+            "a",
+            { className: Akumina.Digispace.ConfigurationContext.IsSPAMode ? "ak-spalink" : "", href: Akumina.Digispace.Utilities.CreatePageLink(Akumina.Digispace.SiteContext.WebAbsoluteUrl + "#/sitepages/newslist.aspx") },
+            Akumina.Digispace.Language.TryGetText("fs.newswidget.viewall")
+        ),
+        HasNews ? React.createElement(
+            React.Fragment,
+            null,
+            NewsItems.map(Item => {
+                return React.createElement(
+                    "ul",
+                    null,
+                    React.createElement(
+                        "li",
+                        null,
+                        React.createElement("img", { src: Item.DisplayDefaultImage ? DefaultImageSrc : Item.ThumbnailUrl ? Item.ThumbnailUrl : Item.ImageUrl, alt: "" })
+                    ),
+                    React.createElement(
+                        "li",
+                        null,
+                        Item.VideoUrl && React.createElement(
+                            "video",
+                            { width: "100%", controls: true, id: "fs-video-play" },
+                            React.createElement("source", { src: Item.VideoUrl, type: "video/mp4" })
+                        )
+                    ),
+                    Item.Featured && React.createElement(
+                        "li",
+                        null,
+                        " ",
+                        Akumina.Digispace.Language.TryGetText("fs.newswidget.featured")
+                    ),
+                    React.createElement(
+                        "li",
+                        null,
+                        Item.Categories && Item.Categories.map(category => React.createElement(
+                            "span",
+                            null,
+                            "#",
+                            category
+                        ))
+                    ),
+                    React.createElement(
+                        "li",
+                        null,
+                        React.createElement(
+                            "a",
+                            { className: Akumina.Digispace.ConfigurationContext.IsSPAMode ? "ak-spalink" : "", href: Item.FriendlyUrl },
+                            Item.Title
+                        )
+                    ),
+                    Item.Publisher && Item.Publisher.ProfilePicture && React.createElement(
+                        "li",
+                        null,
+                        React.createElement("img", { alt: Item.Publisher.Name, src: Item.Publisher.ProfilePicture })
+                    ),
+                    Item.Publisher && Item.Publisher.Name && React.createElement(
+                        "li",
+                        null,
+                        React.createElement(
+                            "div",
+                            { onClick: () => HandlePublisherClick(event, Item.Publisher.Email) },
+                            React.createElement(
+                                "a",
+                                { href: "javascript:void(0);" },
+                                "@",
+                                Item.Publisher.Name
+                            )
+                        )
+                    ),
+                    Item.PublishedDate && React.createElement(
+                        "li",
+                        null,
+                        Item.PublishedDate.format(Akumina.Digispace.SiteContext.DateFormat.monthdatelongyear)
+                    ),
+                    React.createElement(
+                        "li",
+                        null,
+                        Item.ReadingTime,
+                        "\xA0",
+                        Akumina.Digispace.Language.TryGetText("fs.newswidget.readingtime")
+                    ),
+                    React.createElement(
+                        "li",
+                        null,
+                        Item.ViewsCount
+                    ),
+                    React.createElement(
+                        "li",
+                        null,
+                        Item.Reactions && Item.Reactions.length > 0 && Item.Reactions.map(reaction => React.createElement(
+                            "div",
+                            { title: reaction.Label },
+                            reaction.Count
+                        )),
+                        " "
+                    ),
+                    React.createElement(
+                        "li",
+                        null,
+                        Item.CommentsCount
+                    )
+                );
+            })
+        ) : IsFetching ? null : React.createElement(
+            "p",
+            null,
+            Akumina.Digispace.Language.TryGetText("fs.newswidget.nonewsfound")
+        ),
+        DisplayShowMoreButton && !IsFetching && React.createElement(
+            "button",
+            { onClick: () => ShowMore() },
+            Akumina.Digispace.Language.TryGetText("fs.newswidget.showmore")
+        )
+    )
+);

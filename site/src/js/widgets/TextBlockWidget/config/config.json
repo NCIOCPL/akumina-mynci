@@ -20,14 +20,14 @@
       }
     },
     "Instances": [{
-      "Name": "Tip of the Week Header",
-      "Description": "",
+      "Name": "NCI Edit Warning",
+      "Description": "Displays a warning not to edit certain pages",
       "Icon": "fa fa-cog",
       "Id": "0deef6c6-f852-4365-bc25-bb3dc4db6d2d",
       "Properties": [
         {
           "name": "content",
-          "value": "<h1 class=\"ia-page-title\">Tip of the Week</h1>"
+          "value": "[{\"languageId\":1033,\"text\":\"<div id=\\\"nci-edit-warning\\\">This page is maintained in code. If you edit it your changes will be lost next time the code is deployed. Contact the ODDC team with questions.</div>\"}]"
         },        
         {
           "name": "callbackmethod",

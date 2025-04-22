@@ -9,8 +9,8 @@
     "Properties": [],
     "Views": [
       {
-        "Name": "nci-internal",
-        "Path": "/{AssetLibraryName}/DigitalWorkPlace/Content/Templates/internalpageswidget/nci-internal.html",
+        "Name": "NCI Internal Page",
+        "Path": "/{AssetLibraryName}/DigitalWorkPlace/Content/Templates/internalpageswidget/internalpagereactions_nci.html",
         "Id": "836970a4-93bf-476d-8f5e-2303f68475c5"
       }
     ],
@@ -20,8 +20,8 @@
   },
   "Instances": [
     {
-      "Name": "Internal Pages Widget",
-      "Description": "Displays internal pages",
+      "Name": "NCI Internal Pages Widget",
+      "Description": "NCI customized display of internal pages",
       "Icon": "fa fa-cog",
       "Id": "72933d2f-1d5d-4133-a51d-9ebb5cecd7b9",
       "Properties": [
@@ -86,8 +86,8 @@
           "value": "GenericItemWidget"
         }
       ],
-      "SelectedView": "nci-internal",
-      "AvailableViews": [],
+      "SelectedView": "NCI Internal Page",
+      "AvailableViews": ["NCI Internal Page"],
       "HiddenFields": []
     }
   ],
