@@ -11,11 +11,15 @@
             <h1 class="h2">{{{Title}}}</h1>
             {{!-- END #146 --}}
         </div>
+        {{!-- BEGIN #147 - Remove social reactions --}}
+        {{!--
         {{#if DisplayLikes}}
         <div class="ia-reactionsaggregate-container">
             <div rel="Detail Aggregate stub instance" class="ak-widget" id="30ac9008-07fb-0671-984e-b4376f9a4815"></div>
         </div>
         {{/if}}
+        --}}
+        {{!-- End #147 --}}
     </div>
     
     <div class="ak-item row" ak-item="{{ID}}" ak-newstitle="{{Title}}">
@@ -139,11 +143,15 @@
     {{/if}}
 
     <div class="d-flex justify-content-end align-items-center mt-md-0 mt-3 social-tab">
+        {{!-- BEGIN #147 - Remove social reactions --}}
+        {{!--
         {{#if DisplayLikes}}
         <div class="ia-reactionsdetail-container pe-3">
             <div rel="ActivityReactionsWidget stub instance" class="ak-widget" id="30ac9008-07fb-0671-984e-b4376f9a4814"></div>
         </div>
         {{/if}}
+        --}}
+        {{!-- END #147 --}}
         {{#if DisplayShare}}
         <a href="#" class="share-button shareButton ia-button-primary ia-button-w-icon">
             <i class="fa fa-share-alt" aria-hidden="true"></i>
