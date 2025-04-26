@@ -21,15 +21,31 @@ on:
         description: Deploy lists (TBD)
         type: boolean
         default: false
+  merge_group:
+  # Will only run gate check on pull erquest
+  pull_request:
 
 jobs:
+  gate:
+    name: Queue Gate Check
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request'
+    steps:
+      - run: echo "This is just a gate check to satisfy the required check"
+
   deploy:
     name: Deploy
     runs-on: windows-latest
-    environment: ${{inputs.environment}}
+    if: github.event_name == 'merge_group' || github.event_name == 'workflow_dispatch'
+    environment: ${{ github.event_name == 'merge_group' && 'Pre-Prod' || inputs.environment }}
     defaults:
       run:
         working-directory: site
+    env:
+      ENVIRONMENT: ${{ github.event_name == 'merge_group' && 'Pre-Prod' || inputs.environment }}
+      DEPLOY_WIDGETS: ${{ github.event_name == 'merge_group' && 'true' || inputs.deploy-widgets }}
+      DEPLOY_PAGES: ${{ github.event_name == 'merge_group' && 'true' || inputs.deploy-pages }}
+      DEPLOY_LISTS: ${{ github.event_name == 'merge_group' && 'true' || inputs.deploy-lists }}
 
     steps:
       ########## Preparation ##########
@@ -47,7 +63,7 @@ jobs:
       # Also we want to do this across widgets and pages (local widgets).
       - name: Update tokens
         id: tokens
-        if: inputs.deploy-widgets || inputs.deploy-pages
+        if: env.DEPLOY_WIDGETS || env.DEPLOY_PAGES
         shell: pwsh
         env:
           WIDGET_TOKENS: ${{ vars.WIDGET_TOKENS }}
@@ -79,7 +95,7 @@ jobs:
 
       # Package the widgets (must run before build)
       - name: Package widgets
-        if: inputs.deploy-widgets
+        if: env.DEPLOY_WIDGETS
         # npm run package -- --tokenMap "${{ steps.tokens.outputs.WIDGET_TOKEN_STRING }}" 
         run: npm run package ${{ inputs.single-widget }}
 
@@ -87,7 +103,7 @@ jobs:
 
       # Runs webpack to copy the source to the build folder
       - name: Build
-        run: npm run build${{ inputs.environment == 'Prod' && '-prod-ci' || ''}}
+        run: npm run build${{ env.ENVIRONMENT == 'Prod' && '-prod-ci' || ''}}
 
       ########## Deploy CDN Assets ##########
 
@@ -100,7 +116,7 @@ jobs:
 
       # Runs akumina-widget-builder with the cdnpackage option to prep widgets for deployment
       - name: Package widgets for CDN
-        if: inputs.deploy-widgets
+        if: env.DEPLOY_WIDGETS
         run: npm run cdnpackage
 
       # Runs site deployer
@@ -118,13 +134,13 @@ jobs:
 
       # Set the deployment type
       - uses: "./.github/workflows/composite/deployment_type"
-        if: inputs.deploy-widgets
+        if: env.DEPLOY_WIDGETS
         with:
           deployment_type: "widgets"
 
       # Runs site deployer
       - name: Deploy widgets
-        if: inputs.deploy-widgets
+        if: env.DEPLOY_WIDGETS
         run: npm run deploy
         env:
           assetdirectory: Client
@@ -145,13 +161,13 @@ jobs:
 
       # Set the deployment type
       - uses: "./.github/workflows/composite/deployment_type"
-        if: inputs.deploy-pages
+        if: env.DEPLOY_PAGES
         with:
           deployment_type: "virtualpages,updatepagecache"
 
       # Runs site deployer
       - name: Deploy pages
-        if: inputs.deploy-pages
+        if: env.DEPLOY_PAGES
         run: npm run deploy
         env:
           assetdirectory: Delivery
@@ -177,3 +193,11 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           path: site/build
+
+  qa:
+    name: QA Approval
+    runs-on: ubuntu-latest
+    environment: QA
+    steps:
+      - name: approval
+        run: echo "Hello World!"

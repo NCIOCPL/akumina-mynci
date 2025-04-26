@@ -3,6 +3,7 @@ name: OCPL Configuration Management Standards Check
 on:
   pull_request:
     types: [opened, reopened, synchronize, ready_for_review]
+  merge_group:
 
 jobs:
   commitlint_remote:
