@@ -13,15 +13,18 @@ const tab_html_prepOrgTabs = function (_control, _properties) {
       var profiles = $('.ia-profile-container.ia-card');
       // divide by 2 for hidden profile containers and - 10 to account for new containers just added
       var offset = $(profiles[profiles.length / 2 - 10]);
-      // to get last container's position
-      offset = offset.offset();
-      // to scroll to that spot
-      $('html, body').stop().animate(
-        {
-          scrollTop: offset.top,
-        },
-        100
-      );
+      // #151: Sometimes the offset isn't set and we don't want the JS to crash out then
+      if (offset.length && offset.offset()) {
+        // to get last container's position
+        offset = offset.offset();
+        // to scroll to that spot
+        $('html, body').stop().animate(
+          {
+            scrollTop: offset.top,
+          },
+          100
+        );
+      }
     }
   }
 };
