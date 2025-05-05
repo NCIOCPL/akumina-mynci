@@ -44,7 +44,7 @@
         },
         {
           "name": "selectfields",
-          "value": "ListID,ListItemID,PublishDate,ImageOWSURLH,Title,owstaxidmetadataalltagsinfo,PublisherOWSUSER,ThumbnailURLOWSURLH,ServerRedirectedURL,VideoOWSURLH,ReadTimeOWSNMBR,WebId,SiteId,OriginalPath,SPWebUrl"
+          "value": "ListID,ListItemID,PublishDate,ImageOWSURLH,Title,owstaxidmetadataalltagsinfo,PublisherOWSUSER,ThumbnailURLOWSURLH,ServerRedirectedURL,VideoOWSURLH,ReadTimeOWSNMBR,WebId,SiteId,OriginalPath,SPWebUrl,SPSummary"
         },
         {
           "name": "searchacrosssites",
@@ -158,7 +158,7 @@
         },
         {
           "name": "selectfields",
-          "value": "ListID,ListItemID,PublishDate,ImageOWSURLH,Title,owstaxidmetadataalltagsinfo,FeaturedOWSBOOL,PublisherOWSUSER,ThumbnailURLOWSURLH,ServerRedirectedURL,VideoOWSURLH,ReadTimeOWSNMBR,WebId,SiteId,OriginalPath,SPWebUrl"
+          "value": "ListID,ListItemID,PublishDate,ImageOWSURLH,Title,owstaxidmetadataalltagsinfo,FeaturedOWSBOOL,PublisherOWSUSER,ThumbnailURLOWSURLH,ServerRedirectedURL,VideoOWSURLH,ReadTimeOWSNMBR,WebId,SiteId,OriginalPath,SPWebUrl,SPSummary"
         },
         {
           "name": "searchacrosssites",

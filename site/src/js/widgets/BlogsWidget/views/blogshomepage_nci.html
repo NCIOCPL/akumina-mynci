@@ -1,7 +1,7 @@
 React.createElement(
     "div",
     /* BEGIN #AKUMINA - NCI Styling */
-    { id: "HomeNewsEventsTabs", className: "ia-news-list nci-tabs-news" },
+    { id: "HomeNewsEventsTabs", className: "ia-news-list nci-tabs-news staff-spotlight-home" },
     /* END #AKUMINA */
     ConfigurationErrorMessage ? React.createElement(
         "span",
@@ -267,6 +267,13 @@ React.createElement(
                                             Item.Title
                                         )
                                     ),
+                                    /* BEGIN #203 - Add Summary */
+                                    React.createElement(
+                                        "div",
+                                        { className: "ia-staff-spotlight-description" },
+                                        Item.SPSummary
+                                    ),
+                                    /* END #203 */
                                     React.createElement(
                                         "div",
                                         { className: "ia-card-footer" },
