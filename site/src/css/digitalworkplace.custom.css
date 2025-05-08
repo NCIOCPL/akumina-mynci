@@ -66,7 +66,7 @@ body{
 }
 
 #HomeNewsEventsTabs .ia-card .ia-card-footer .ia-post-by {
-	display: none !important;
+	display: none; /* removed !important */
 }
 
 .ia-tab-widget-container.nci-tabs .ia-tab-item a:after {
@@ -747,9 +747,8 @@ and Important Events (Upcoming Events)
     position: unset;
 }
 
-#HomeNewsEventsTabs.ia-news-list.ia-widget-wrapper.custom-event-list .ia-masanory-grid .ia-card,
 #HomeNewsEventsTabs.ia-news-list.nci-tabs-news .ia-masanory-grid .ia-card {
-	height: 430px;
+	height: 350px;
 }
 
 #HomeNewsEventsTabs.ia-news-list.nci-tabs-news .blog-header {
@@ -759,6 +758,46 @@ and Important Events (Upcoming Events)
 #HomeNewsEventsTabs.ia-news-list.nci-tabs-news .ia-masanory-grid-view-toggle {
 	margin-right: 0;
 	margin-left: auto;
+}
+
+#HomeNewsEventsTabs:has(.ia-list-view) .ia-card .ia-card-footer .ia-post-by {
+    display: unset; /* displays the posted by date */
+    margin-top: 16px; /* adds margin to the top of posted by date */
+}
+
+#HomeNewsEventsTabs:has(.ia-list-view) .ia-card .ia-card-footer .ia-post-by .ia-posted-by-details {
+    margin-left: 0px; /* shifts posted by date to be in line with other text on card */
+}
+
+.staff-spotlight-listing .ia-masanory-grid .ia-grid-card.ak-item .ia-card .ia-card-image,
+.staff-spotlight-home .ia-masanory-grid .ia-grid-card.ak-item .ia-card .ia-card-image {
+    clip-path: none; /* removes diagonal white space on images */
+}
+
+.staff-spotlight-listing .ia-masanory-grid .ia-grid-card.ak-item .ia-card .ia-card-content .ia-tag-title a,
+.staff-spotlight-home .ia-masanory-grid .ia-grid-card.ak-item .ia-card .ia-card-content .ia-tag-title a {
+    color: var(--fs-card-link-color); /* updates card link color to #004971 */
+}
+
+.staff-spotlight-listing .ia-masanory-grid .ia-grid-card.ak-item .ia-card .ia-card-content .ia-tag-title,
+.staff-spotlight-home .ia-masanory-grid .ia-grid-card.ak-item .ia-card .ia-card-content .ia-tag-title {
+    font-size: 18px; /* updates tag title font size */
+}
+
+#HomeNewsEventsTabs .ia-card .ia-staff-spotlight-description {
+    display: none; /* does not display summary for card view */
+}
+
+#HomeNewsEventsTabs:has(.ia-list-view) .ia-card .ia-staff-spotlight-description {
+    display: unset; /* displays summary for list view */
+    color: var(--fs-text-color);
+    font-size: 16px;
+    /* hides excess text for list view descriptions */
+    overflow: hidden;
+    word-break: break-word;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
 }
 
 /* WCAG fix - touches both Homepage and Listing page */
@@ -776,6 +815,10 @@ and Important Events (Upcoming Events)
     border: none !important;
 }
 
+#HomeNewsEventsTabs.ia-news-list.ia-widget-wrapper.custom-event-list .ia-masanory-grid .ia-card {
+	height: 430px;
+}
+
 /* Staff Spotlight Page*/
 .ak-theme-ncitheme .ia-tab-widget-container .ui-state-active a, 
 .ak-theme-ncitheme .ia-tab-widget-container .ui-widget-content .ui-state-active a, 
@@ -784,6 +827,14 @@ and Important Events (Upcoming Events)
     font-weight: 600;
     font-size: clamp(25px, 25px, 25px); /* eslint-disable-line css/no-invalid-properties */
     padding-bottom: calc(var(--fs-gutter-space) / 3);
+}
+
+.staff-spotlight-listing .ia-masanory-grid:not(.ia-list-view) .ia-grid-card.ak-item .ia-card .ia-card-image {
+    height: 350px; /* fixes card image height */
+}
+
+.staff-spotlight-listing .ia-masanory-grid:not(.ia-list-view) .ia-grid-card.ak-item .ia-card .ia-card-content .ia-tag-title {
+    -webkit-line-clamp: 2; /* tag title only displays 2 or less lines */
 }
 
 

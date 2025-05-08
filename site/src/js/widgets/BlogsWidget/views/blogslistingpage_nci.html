@@ -1,7 +1,7 @@
 React.createElement(
     "div",
     /* BEGIN #AKUMINA - NCI Styling */
-    { id: "HomeNewsEventsTabs", className: "ia-news-list ia-widget-wrapper custom-event-list" },
+    { id: "HomeNewsEventsTabs", className: "ia-news-list ia-widget-wrapper custom-event-list staff-spotlight-listing" },
     /* END #AKUMINA */
     React.createElement(
         "h2",
@@ -248,6 +248,13 @@ React.createElement(
                                             Item.Title
                                         )
                                     ),
+                                    /* BEGIN #203 - Add Summary */
+                                    React.createElement(
+                                        "div",
+                                        { className: "ia-staff-spotlight-description" },
+                                        Item.SPSummary
+                                    ),
+                                    /* END #203 */
                                     React.createElement(
                                         "div",
                                         { className: "ia-card-footer" },
