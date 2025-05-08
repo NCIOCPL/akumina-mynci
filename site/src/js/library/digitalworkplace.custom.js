@@ -1,70 +1,12 @@
-import { blogDetailWidget_helper } from './modules/BlogDetailWidget.js';
-import { employeeDetailWidget_helper } from './modules/EmployeeDetailWidget.js';
-import { latestMediaWidget_helper } from './modules/LatestMediaWidget.js';
-import { newsDetailWidget_helper } from './modules/NewsDetailWidget.js';
-import { peopleDirectoryWidget_helper } from './modules/PeopleDirectoryWidget.js';
-
-// Is this used?
-Handlebars.registerHelper(
-  'SearchProperty',
-  function (itemCells, prop, options) {
-    for (var i = 0; i < itemCells.length; i++)
-      if (prop.toLowerCase() == itemCells[i].Name.toLowerCase())
-        return itemCells[i].Value;
-    return '';
-  }
-);
-
-window.FireWhen = function (id, condition, callback, testInterval) {
-  if (condition == null) {
-    return;
-  }
-  var conditionMet = condition();
-  if (conditionMet) {
-    clearTimeout(window[id]);
-    Akumina.AddIn.Logger.WriteInfoLog('FireWhen:conditionMet:' + id);
-    callback.apply(this, Array.prototype.slice.call(arguments, 4));
-  } else {
-    clearTimeout(window[id]);
-    window[id] = window.setTimeout(
-      function (args) {
-        window.FireWhen.apply(this, args);
-      },
-      testInterval,
-      arguments
-    );
-  }
-};
-
-// Remove in future
-// window.NCIAddDebuggerBreak = function (arg1, arg2, arg3, arg4, arg5) {
-//     debugger;
-// }
-
-window.GetNCIProfileInfoUrl = function (targetId) {
-  var emailUpn = $(targetId).attr('data-manager');
-  if (typeof emailUpn == 'string') {
-    Akumina.Digispace.Utilities.GetEmployeeDetailUrl(emailUpn).then(
-      (newUrl) => {
-        var pathPart = newUrl.substring(
-          newUrl.toLowerCase().lastIndexOf('/sitepages')
-        );
-        var completeUrl = AkHeadlessUrl + '/#' + pathPart;
-        $(targetId).attr('href', completeUrl);
-      }
-    );
-  }
-};
-
-// Used in NewsDetail, CalendarDetail, and InternalPages
-window.GetNCIProfilePictureUrl = function (targetId) {
-  var emailUpn = $(targetId).attr('data-manager');
-  if (typeof emailUpn == 'string') {
-    var newUrl = Akumina.Digispace.Utilities.GetUserPictureUrl(emailUpn);
-    newUrl = 'url(' + newUrl + ')';
-    $(targetId).css('background-image', newUrl);
-  }
-};
+import { blogDetailWidget_callbacks } from './modules/callbacks/BlogDetailWidget.js';
+import { eventDetailWidget_callbacks } from './modules/callbacks/EventDetailWidget.js'
+import { internalPagesWidget_callbacks } from './modules/callbacks/InternalPagesWidget.js'
+import { latestMediaWidget_callbacks } from './modules/callbacks/LatestMediaWidget.js';
+import { newsDetailWidget_callbacks } from './modules/callbacks/NewsDetailWidget.js';
+import { peopleDirectoryWidget_callbacks } from './modules/callbacks/PeopleDirectoryWidget.js';
+import { employeeDetailWidget_handlebars } from './modules/handlebars/EmployeeDetailWidget.js';
+import { latestMediaWidget_handlebars } from './modules/handlebars/LatestMediaWidget.js';
+import { utilityFunctions_handlebars } from './modules/handlebars/UtilityFunctions.js';
 
 window.Client = typeof window.Client === 'object' ? window.Client : {};
 
@@ -73,24 +15,6 @@ var script = document.createElement('script');
 script.setAttribute('async', 'async');
 if (_configContextInfo['adobe-analytics-tracker'] != null) {
   script.setAttribute('src', _configContextInfo['adobe-analytics-tracker']);
-  document.head.prepend(script);
-} else if (window.location.host == 'mynci-preprod.cancer.gov') {
-  script.setAttribute(
-    'src',
-    'https://assets.adobedtm.com/6a4249cd0a2c/cbc52400d29b/launch-54f3716fa1f1-development.min.js'
-  );
-  document.head.prepend(script);
-} else if (window.location.host == 'mynci.cancer.gov') {
-  script.setAttribute(
-    'src',
-    'https://assets.adobedtm.com/6a4249cd0a2c/cbc52400d29b/launch-8c72e1b653fe.min.js'
-  );
-  document.head.prepend(script);
-} else {
-  script.setAttribute(
-    'src',
-    'https://assets.adobedtm.com/6a4249cd0a2c/cbc52400d29b/launch-54f3716fa1f1-development.min.js'
-  );
   document.head.prepend(script);
 }
 
@@ -131,8 +55,19 @@ Akumina.Digispace.AppPart.Eventing.Subscribe(
   window.On_Page_Loaded
 );
 
-blogDetailWidget_helper();
-employeeDetailWidget_helper();
-latestMediaWidget_helper();
-newsDetailWidget_helper();
-peopleDirectoryWidget_helper();
+// Run our handlebars functions for templates to make use of
+employeeDetailWidget_handlebars();
+latestMediaWidget_handlebars();
+utilityFunctions_handlebars();
+
+// Akumina requires that widget callbacks be on the window object: https://akumina.github.io/docs/Akumina-Widget-Callbacks
+// Otherwise we would package them into a library in webpack to keep the global namespace clean
+
+// Assign all keys under each object to the window object
+Object.assign(window, blogDetailWidget_callbacks);
+Object.assign(window, eventDetailWidget_callbacks);
+Object.assign(window, internalPagesWidget_callbacks);
+Object.assign(window, latestMediaWidget_callbacks);
+Object.assign(window, newsDetailWidget_callbacks);
+Object.assign(window, peopleDirectoryWidget_callbacks);
+

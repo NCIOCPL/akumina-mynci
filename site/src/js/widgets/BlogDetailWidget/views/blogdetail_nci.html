@@ -180,6 +180,9 @@ React.createElement(
                                         newsarticle.shareable && React.createElement("a", { href: "javascript:void(0)", className: "ia-share-buttons ak-twitter ia-twitter", "aria-label": Akumina.Digispace.Language.TryGetText("fs.common.sharemstwitter"), title: Akumina.Digispace.Language.TryGetText("fs.common.sharemstwitter") })
                                     )
                                 ),
+
+                                /* BEGIN #147 - Remove ability to like pages (+ older remove social elements) */
+                                /*
                                 React.createElement(
                                     "div",
                                     { className: "ia-social-info-bottom" },
@@ -196,8 +199,6 @@ React.createElement(
                                             { className: "ia-social-info-bottom-icon ia-available-reactions" },
                                             newsarticle.reactionstats
                                         )
-                                        /* BEGIN #AKUMINA - Remove social elements */
-                                        /*
                                         ),
                                         React.createElement(
                                             "div",
@@ -213,10 +214,10 @@ React.createElement(
                                                 { "class": "ia-social-right-icon", title: Akumina.Digispace.Language.TryGetText("fs.common.numberofcomments") },
                                                 React.createElement("i", { "class": "fa-regular fa-comment", "aria-hidden": "true" }),
                                                 newsarticle.commentscount
-                                        */
-                                        /* END #AKUMINA */
                                     )
                                 )
+                                */
+                               /* END #147 */
                             )
                         )
                     )

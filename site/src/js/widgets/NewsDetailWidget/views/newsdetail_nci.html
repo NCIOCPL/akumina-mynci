@@ -148,7 +148,7 @@ React.createElement(
                                         React.createElement(
                                             "div",
                                             { className: "ia-tag ia-article-tag" },
-                                            (newsarticle.publisheddate ? newsarticle.publisheddate + " | " : "") + newsarticle.readingtime + " " + Akumina.Digispace.Language.TryGetText("fs.newswidget.readingtime")
+                                            (newsarticle.publisheddate ? newsarticle.publisheddate + " | " : "") + newsarticle.readtimetext
                                         )
                                     )
                                 ),
@@ -186,6 +186,8 @@ React.createElement(
                                     )
                                 )
                             ),
+                            /* BEGIN #147 - Remove ability to like pages (+ older remove social elements) */
+                            /*
                             React.createElement(
                                 "div",
                                 { className: "ia-social-info-bottom" },
@@ -220,6 +222,8 @@ React.createElement(
                                     )
                                 )
                             )
+                            */
+                            /* END #147 */
                         )
                     )
                 )
@@ -315,15 +319,10 @@ React.createElement(
                                             {className: "ia-article-author-img ia-user-teams-presence-container" },
                                             React.createElement(
                                                 "div",
-                                                { className: "contact-profile-image" },
-                                                React.createElement(
-                                                    "div",
-                                                    { 
-                                                        "id" : "profPhotoLink1",
-                                                        "data-email-id": newsarticle.NCIContactPerson1.Email
-                                                    },
-                                                    ""
-                                                )
+                                                { 
+                                                    className: "contact-profile-image nci-profile-photo-link",
+                                                    "data-email-id": newsarticle.NCIContactPerson1.UserName
+                                                }
                                             )
                                         ),
                                         React.createElement(
@@ -332,10 +331,9 @@ React.createElement(
                                             React.createElement(
                                                 "a",
                                                 { 
-                                                    "id": "profInfoLink1",
-                                                    className: "ia-article-author-status", 
+                                                    className: "ia-article-author-status nci-profile-info-link", 
                                                     "target": "_blank",
-                                                    "data-email-id": newsarticle.NCIContactPerson1.Email,
+                                                    "data-email-id": newsarticle.NCIContactPerson1.UserName,
                                                     href: ""
                                                 },
                                                 newsarticle.NCIContactPerson1.Title
@@ -356,15 +354,10 @@ React.createElement(
                                             {className: "ia-article-author-img ia-user-teams-presence-container" },
                                             React.createElement(
                                                 "div",
-                                                { className: "contact-profile-image" },
-                                                React.createElement(
-                                                    "div",
-                                                    { 
-                                                        "id" : "profPhotoLink2",
-                                                        "data-email-id": newsarticle.NCIContactPerson2.Email
-                                                    },
-                                                    ""
-                                                )
+                                                {
+                                                    className: "contact-profile-image nci-profile-photo-link",
+                                                    "data-email-id": newsarticle.NCIContactPerson2.UserName
+                                                 }
                                             )
                                         ),
                                         React.createElement(
@@ -373,10 +366,9 @@ React.createElement(
                                             React.createElement(
                                                 "a",
                                                 { 
-                                                    "id": "profInfoLink2",
-                                                    className: "ia-article-author-status", 
+                                                    className: "ia-article-author-status nci-profile-info-link", 
                                                     "target": "_blank",
-                                                    "data-email-id": newsarticle.NCIContactPerson2.Email,
+                                                    "data-email-id": newsarticle.NCIContactPerson2.UserName,
                                                     href: ""
                                                 },
                                                 newsarticle.NCIContactPerson2.Title

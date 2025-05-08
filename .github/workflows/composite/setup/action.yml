@@ -1,5 +1,11 @@
 name: "Setup"
 description: "Setup an Akumina deployment environment"
+inputs:
+  version:
+    description: SiteDeployer version to install
+    type: string
+    required: false
+    default: '6.0.2301.1508'
 
 runs:
   using: "composite"
@@ -17,14 +23,26 @@ runs:
       shell: pwsh
       run: npm ci
 
+    - name: Cache SiteDeployer
+      id: cache-sitedeployer
+      uses: actions/cache@v4
+      with:
+        path: C:/Users/runneradmin/AppData/Local/Temp/sd.zip
+        key: ${{ inputs.version }}
+
+    - name: Download Akumina SiteDeployer
+      if: ${{ steps.cache-sitedeployer.outputs.cache-hit != 'true' }}
+      working-directory: site
+      shell: pwsh
+      run: |
+          Invoke-WebRequest -Uri "https://github.com/akumina/SiteDeployer/releases/download/${{ inputs.version }}/${{ inputs.version }}-Akumina.SiteDeployer.zip" -OutFile "C:\Users\runneradmin\AppData\Local\Temp\sd.zip"
+
     - name: Install Akumina SiteDeployer
       working-directory: site
       shell: pwsh
       run: |
-          Invoke-WebRequest -Uri "https://github.com/akumina/SiteDeployer/releases/download/6.0.2301.1508/6.0.2301.1508-Akumina.SiteDeployer.zip" -OutFile "sd.zip"
           $ExtractPath = "tools"
           if (-not (Test-Path -Path $ExtractPath)) {
               New-Item -ItemType Directory -Path $ExtractPath | Out-Null
           }
-          Expand-Archive -Path "sd.zip" -DestinationPath $ExtractPath -Force
-          Remove-Item -Path "sd.zip"
+          Expand-Archive -Path "C:\Users\runneradmin\AppData\Local\Temp\sd.zip" -DestinationPath $ExtractPath -Force

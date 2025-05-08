@@ -31,7 +31,7 @@
         "Properties": [
           {
             "name": "propcallbackmethod",
-            "value": "NCIGenericItemPropcallback"          
+            "value": "genericItem_data_setOrgDescription"          
           }
         ]
       }
